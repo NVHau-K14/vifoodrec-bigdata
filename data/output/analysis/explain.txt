@@ -68,7 +68,7 @@ AdaptiveSparkPlan (80)
                                                 :     +- Exchange (51)
                                                 :        +- * HashAggregate (50)
                                                 :           +- * Filter (49)
-                                                :              +- TableCacheQueryStage (48), Statistics(sizeInBytes=2016.1 MiB, rowCount=2.32E+7)
+                                                :              +- TableCacheQueryStage (48), Statistics(sizeInBytes=2014.1 MiB, rowCount=2.31E+7)
                                                 :                 +- InMemoryTableScan (46)
                                                 :                       +- InMemoryRelation (47)
                                                 :                             +- AdaptiveSparkPlan (23)
@@ -99,7 +99,7 @@ AdaptiveSparkPlan (80)
                                                 +- BroadcastQueryStage (59), Statistics(sizeInBytes=32.0 MiB, rowCount=5.50E+3)
                                                    +- BroadcastExchange (58)
                                                       +- * Filter (57)
-                                                         +- TableCacheQueryStage (56), Statistics(sizeInBytes=522.3 KiB, rowCount=5.50E+3)
+                                                         +- TableCacheQueryStage (56), Statistics(sizeInBytes=522.2 KiB, rowCount=5.50E+3)
                                                             +- InMemoryTableScan (54)
                                                                   +- InMemoryRelation (55)
                                                                         +- * Project (32)
@@ -260,7 +260,7 @@ Results [3]: [user_id#98, food_id#99, event_type#100]
 
 (26) Exchange
 Input [3]: [user_id#98, food_id#99, event_type#100]
-Arguments: hashpartitioning(user_id#98, food_id#99, event_type#100, 8), ENSURE_REQUIREMENTS, [plan_id=76735]
+Arguments: hashpartitioning(user_id#98, food_id#99, event_type#100, 8), ENSURE_REQUIREMENTS, [plan_id=76355]
 
 (27) HashAggregate
 Input [3]: [user_id#98, food_id#99, event_type#100]
@@ -295,7 +295,7 @@ Condition : isnotnull(food_id#0)
 
 (34) BroadcastExchange
 Input [2]: [food_id#0, dish_category#7]
-Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=76738]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=76358]
 
 (35) BroadcastHashJoin
 Left keys [1]: [food_id#99]
@@ -309,44 +309,44 @@ Input [4]: [food_id#99, event_type#100, food_id#0, dish_category#7]
 
 (37) Expand
 Input [2]: [event_type#100, dish_category#7]
-Arguments: [[event_type#100, dish_category#7, 0], [event_type#100, null, 1]], [event_type#100, dish_category#43159, spark_grouping_id#43158L]
+Arguments: [[event_type#100, dish_category#7, 0], [event_type#100, null, 1]], [event_type#100, dish_category#43160, spark_grouping_id#43159L]
 
 (38) Project
-Output [6]: [dish_category#43159, spark_grouping_id#43158L, (event_type#100 = view) AS _common_expr_30#43603, (event_type#100 = favorite) AS _common_expr_31#43604, (event_type#100 = cook) AS _common_expr_32#43605, (event_type#100 = rate) AS _common_expr_33#43606]
-Input [3]: [event_type#100, dish_category#43159, spark_grouping_id#43158L]
+Output [6]: [dish_category#43160, spark_grouping_id#43159L, (event_type#100 = view) AS _common_expr_30#43604, (event_type#100 = favorite) AS _common_expr_31#43605, (event_type#100 = cook) AS _common_expr_32#43606, (event_type#100 = rate) AS _common_expr_33#43607]
+Input [3]: [event_type#100, dish_category#43160, spark_grouping_id#43159L]
 
 (39) HashAggregate
-Input [6]: [dish_category#43159, spark_grouping_id#43158L, _common_expr_30#43603, _common_expr_31#43604, _common_expr_32#43605, _common_expr_33#43606]
-Keys [2]: [dish_category#43159, spark_grouping_id#43158L]
-Functions [4]: [partial_count(if (NOT _common_expr_30#43603) null else _common_expr_30#43603), partial_count(if (NOT _common_expr_31#43604) null else _common_expr_31#43604), partial_count(if (NOT _common_expr_32#43605) null else _common_expr_32#43605), partial_count(if (NOT _common_expr_33#43606) null else _common_expr_33#43606)]
-Aggregate Attributes [4]: [count#43802L, count#43803L, count#43804L, count#43805L]
-Results [6]: [dish_category#43159, spark_grouping_id#43158L, count#43806L, count#43807L, count#43808L, count#43809L]
+Input [6]: [dish_category#43160, spark_grouping_id#43159L, _common_expr_30#43604, _common_expr_31#43605, _common_expr_32#43606, _common_expr_33#43607]
+Keys [2]: [dish_category#43160, spark_grouping_id#43159L]
+Functions [4]: [partial_count(if (NOT _common_expr_30#43604) null else _common_expr_30#43604), partial_count(if (NOT _common_expr_31#43605) null else _common_expr_31#43605), partial_count(if (NOT _common_expr_32#43606) null else _common_expr_32#43606), partial_count(if (NOT _common_expr_33#43607) null else _common_expr_33#43607)]
+Aggregate Attributes [4]: [count#43803L, count#43804L, count#43805L, count#43806L]
+Results [6]: [dish_category#43160, spark_grouping_id#43159L, count#43807L, count#43808L, count#43809L, count#43810L]
 
 (40) Exchange
-Input [6]: [dish_category#43159, spark_grouping_id#43158L, count#43806L, count#43807L, count#43808L, count#43809L]
-Arguments: hashpartitioning(dish_category#43159, spark_grouping_id#43158L, 8), ENSURE_REQUIREMENTS, [plan_id=76745]
+Input [6]: [dish_category#43160, spark_grouping_id#43159L, count#43807L, count#43808L, count#43809L, count#43810L]
+Arguments: hashpartitioning(dish_category#43160, spark_grouping_id#43159L, 8), ENSURE_REQUIREMENTS, [plan_id=76365]
 
 (41) HashAggregate
-Input [6]: [dish_category#43159, spark_grouping_id#43158L, count#43806L, count#43807L, count#43808L, count#43809L]
-Keys [2]: [dish_category#43159, spark_grouping_id#43158L]
-Functions [4]: [count(if (NOT _common_expr_30#43603) null else _common_expr_30#43603), count(if (NOT _common_expr_31#43604) null else _common_expr_31#43604), count(if (NOT _common_expr_32#43605) null else _common_expr_32#43605), count(if (NOT _common_expr_33#43606) null else _common_expr_33#43606)]
-Aggregate Attributes [4]: [count(if (NOT _common_expr_30#43603) null else _common_expr_30#43603)#43153L, count(if (NOT _common_expr_31#43604) null else _common_expr_31#43604)#43154L, count(if (NOT _common_expr_32#43605) null else _common_expr_32#43605)#43155L, count(if (NOT _common_expr_33#43606) null else _common_expr_33#43606)#43156L]
-Results [5]: [dish_category#43159, count(if (NOT _common_expr_30#43603) null else _common_expr_30#43603)#43153L AS view_pairs#43102L, count(if (NOT _common_expr_31#43604) null else _common_expr_31#43604)#43154L AS favorite_pairs#43103L, count(if (NOT _common_expr_32#43605) null else _common_expr_32#43605)#43155L AS cook_pairs#43104L, count(if (NOT _common_expr_33#43606) null else _common_expr_33#43606)#43156L AS rate_pairs#43105L]
+Input [6]: [dish_category#43160, spark_grouping_id#43159L, count#43807L, count#43808L, count#43809L, count#43810L]
+Keys [2]: [dish_category#43160, spark_grouping_id#43159L]
+Functions [4]: [count(if (NOT _common_expr_30#43604) null else _common_expr_30#43604), count(if (NOT _common_expr_31#43605) null else _common_expr_31#43605), count(if (NOT _common_expr_32#43606) null else _common_expr_32#43606), count(if (NOT _common_expr_33#43607) null else _common_expr_33#43607)]
+Aggregate Attributes [4]: [count(if (NOT _common_expr_30#43604) null else _common_expr_30#43604)#43154L, count(if (NOT _common_expr_31#43605) null else _common_expr_31#43605)#43155L, count(if (NOT _common_expr_32#43606) null else _common_expr_32#43606)#43156L, count(if (NOT _common_expr_33#43607) null else _common_expr_33#43607)#43157L]
+Results [5]: [dish_category#43160, count(if (NOT _common_expr_30#43604) null else _common_expr_30#43604)#43154L AS view_pairs#43103L, count(if (NOT _common_expr_31#43605) null else _common_expr_31#43605)#43155L AS favorite_pairs#43104L, count(if (NOT _common_expr_32#43606) null else _common_expr_32#43606)#43156L AS cook_pairs#43105L, count(if (NOT _common_expr_33#43607) null else _common_expr_33#43607)#43157L AS rate_pairs#43106L]
 
 (42) Exchange
-Input [5]: [dish_category#43159, view_pairs#43102L, favorite_pairs#43103L, cook_pairs#43104L, rate_pairs#43105L]
-Arguments: hashpartitioning(coalesce(dish_category#43159, ), isnull(dish_category#43159), 8), ENSURE_REQUIREMENTS, [plan_id=76751]
+Input [5]: [dish_category#43160, view_pairs#43103L, favorite_pairs#43104L, cook_pairs#43105L, rate_pairs#43106L]
+Arguments: hashpartitioning(coalesce(dish_category#43160, ), isnull(dish_category#43160), 8), ENSURE_REQUIREMENTS, [plan_id=76371]
 
 (43) Sort
-Input [5]: [dish_category#43159, view_pairs#43102L, favorite_pairs#43103L, cook_pairs#43104L, rate_pairs#43105L]
-Arguments: [coalesce(dish_category#43159, ) ASC NULLS FIRST, isnull(dish_category#43159) ASC NULLS FIRST], false, 0
+Input [5]: [dish_category#43160, view_pairs#43103L, favorite_pairs#43104L, cook_pairs#43105L, rate_pairs#43106L]
+Arguments: [coalesce(dish_category#43160, ) ASC NULLS FIRST, isnull(dish_category#43160) ASC NULLS FIRST], false, 0
 
 (44) InMemoryTableScan
-Output [6]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43135]
-Arguments: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43135]
+Output [6]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43136]
+Arguments: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43136]
 
 (45) InMemoryRelation
-Arguments: [food_id#43112, month#43118, region#43123, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_name#43129, dish_category#43135, dish_type_fixed#43136, main_protein#43132, main_method#43134, is_spicy#43138, is_quick#43141, is_vegetarian#43137, season#43142], StorageLevel(disk, memory, deserialized, 1 replicas)
+Arguments: [food_id#43113, month#43119, region#43124, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_name#43130, dish_category#43136, dish_type_fixed#43137, main_protein#43133, main_method#43135, is_spicy#43139, is_quick#43142, is_vegetarian#43138, season#43143], StorageLevel(disk, memory, deserialized, 1 replicas)
 
 (46) InMemoryTableScan
 Output [5]: [food_id#99, event_type#100, rating#104, month#105, region#92]
@@ -402,7 +402,7 @@ Condition : isnotnull(food_id#0)
 
 (58) BroadcastExchange
 Input [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
-Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=796]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=810]
 
 (59) BroadcastQueryStage
 Output [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
@@ -467,47 +467,47 @@ Output [17]: [food_id#99, month#105, region#92, views#1221L, favorites#1222L, co
 Arguments: isFinalPlan=true
 
 (72) Expand
-Input [6]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43135]
-Arguments: [[views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43135, 0], [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, null, 1]], [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43162, spark_grouping_id#43161L]
+Input [6]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43136]
+Arguments: [[views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43136, 0], [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, null, 1]], [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43163, spark_grouping_id#43162L]
 
 (73) HashAggregate
-Input [7]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43162, spark_grouping_id#43161L]
-Keys [2]: [dish_category#43162, spark_grouping_id#43161L]
+Input [7]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43163, spark_grouping_id#43162L]
+Keys [2]: [dish_category#43163, spark_grouping_id#43162L]
 Functions [5]: [partial_sum(views#1221L), partial_sum(favorites#1222L), partial_sum(cooks#1223L), partial_sum(rates#1224L), partial_sum(rating_sum#1225)]
-Aggregate Attributes [5]: [sum#43810L, sum#43811L, sum#43812L, sum#43813L, sum#43814]
-Results [7]: [dish_category#43162, spark_grouping_id#43161L, sum#43815L, sum#43816L, sum#43817L, sum#43818L, sum#43819]
+Aggregate Attributes [5]: [sum#43811L, sum#43812L, sum#43813L, sum#43814L, sum#43815]
+Results [7]: [dish_category#43163, spark_grouping_id#43162L, sum#43816L, sum#43817L, sum#43818L, sum#43819L, sum#43820]
 
 (74) Exchange
-Input [7]: [dish_category#43162, spark_grouping_id#43161L, sum#43815L, sum#43816L, sum#43817L, sum#43818L, sum#43819]
-Arguments: hashpartitioning(dish_category#43162, spark_grouping_id#43161L, 8), ENSURE_REQUIREMENTS, [plan_id=76747]
+Input [7]: [dish_category#43163, spark_grouping_id#43162L, sum#43816L, sum#43817L, sum#43818L, sum#43819L, sum#43820]
+Arguments: hashpartitioning(dish_category#43163, spark_grouping_id#43162L, 8), ENSURE_REQUIREMENTS, [plan_id=76367]
 
 (75) HashAggregate
-Input [7]: [dish_category#43162, spark_grouping_id#43161L, sum#43815L, sum#43816L, sum#43817L, sum#43818L, sum#43819]
-Keys [2]: [dish_category#43162, spark_grouping_id#43161L]
+Input [7]: [dish_category#43163, spark_grouping_id#43162L, sum#43816L, sum#43817L, sum#43818L, sum#43819L, sum#43820]
+Keys [2]: [dish_category#43163, spark_grouping_id#43162L]
 Functions [5]: [sum(views#1221L), sum(favorites#1222L), sum(cooks#1223L), sum(rates#1224L), sum(rating_sum#1225)]
-Aggregate Attributes [5]: [sum(views#1221L)#43144L, sum(favorites#1222L)#43145L, sum(cooks#1223L)#43146L, sum(rates#1224L)#43147L, sum(rating_sum#1225)#43148]
-Results [6]: [dish_category#43162, sum(views#1221L)#43144L AS view_events#43106L, sum(favorites#1222L)#43145L AS favorite_events#43107L, sum(cooks#1223L)#43146L AS cook_events#43108L, sum(rates#1224L)#43147L AS rate_events#43109L, round((sum(rating_sum#1225)#43148 / cast(sum(rates#1224L)#43147L as double)), 3) AS avg_rating#43110]
+Aggregate Attributes [5]: [sum(views#1221L)#43145L, sum(favorites#1222L)#43146L, sum(cooks#1223L)#43147L, sum(rates#1224L)#43148L, sum(rating_sum#1225)#43149]
+Results [6]: [dish_category#43163, sum(views#1221L)#43145L AS view_events#43107L, sum(favorites#1222L)#43146L AS favorite_events#43108L, sum(cooks#1223L)#43147L AS cook_events#43109L, sum(rates#1224L)#43148L AS rate_events#43110L, round((sum(rating_sum#1225)#43149 / cast(sum(rates#1224L)#43148L as double)), 3) AS avg_rating#43111]
 
 (76) Exchange
-Input [6]: [dish_category#43162, view_events#43106L, favorite_events#43107L, cook_events#43108L, rate_events#43109L, avg_rating#43110]
-Arguments: hashpartitioning(coalesce(dish_category#43162, ), isnull(dish_category#43162), 8), ENSURE_REQUIREMENTS, [plan_id=76752]
+Input [6]: [dish_category#43163, view_events#43107L, favorite_events#43108L, cook_events#43109L, rate_events#43110L, avg_rating#43111]
+Arguments: hashpartitioning(coalesce(dish_category#43163, ), isnull(dish_category#43163), 8), ENSURE_REQUIREMENTS, [plan_id=76372]
 
 (77) Sort
-Input [6]: [dish_category#43162, view_events#43106L, favorite_events#43107L, cook_events#43108L, rate_events#43109L, avg_rating#43110]
-Arguments: [coalesce(dish_category#43162, ) ASC NULLS FIRST, isnull(dish_category#43162) ASC NULLS FIRST], false, 0
+Input [6]: [dish_category#43163, view_events#43107L, favorite_events#43108L, cook_events#43109L, rate_events#43110L, avg_rating#43111]
+Arguments: [coalesce(dish_category#43163, ) ASC NULLS FIRST, isnull(dish_category#43163) ASC NULLS FIRST], false, 0
 
 (78) SortMergeJoin
-Left keys [2]: [coalesce(dish_category#43159, ), isnull(dish_category#43159)]
-Right keys [2]: [coalesce(dish_category#43162, ), isnull(dish_category#43162)]
+Left keys [2]: [coalesce(dish_category#43160, ), isnull(dish_category#43160)]
+Right keys [2]: [coalesce(dish_category#43163, ), isnull(dish_category#43163)]
 Join type: Inner
 Join condition: None
 
 (79) Project
-Output [13]: [coalesce(dish_category#43159, Tất cả) AS dish_category#43098, view_events#43106L, favorite_events#43107L, cook_events#43108L, rate_events#43109L, view_pairs#43102L, favorite_pairs#43103L, cook_pairs#43104L, rate_pairs#43105L, round((cast((favorite_pairs#43103L * 100) as double) / cast(view_pairs#43102L as double)), 2) AS favorite_per_view_pct#43099, round((cast((cook_pairs#43104L * 100) as double) / cast(view_pairs#43102L as double)), 2) AS cook_per_view_pct#43100, round((cast((rate_pairs#43105L * 100) as double) / cast(cook_pairs#43104L as double)), 2) AS rate_per_cook_pct#43101, avg_rating#43110]
-Input [11]: [dish_category#43159, view_pairs#43102L, favorite_pairs#43103L, cook_pairs#43104L, rate_pairs#43105L, dish_category#43162, view_events#43106L, favorite_events#43107L, cook_events#43108L, rate_events#43109L, avg_rating#43110]
+Output [13]: [coalesce(dish_category#43160, Tất cả) AS dish_category#43099, view_events#43107L, favorite_events#43108L, cook_events#43109L, rate_events#43110L, view_pairs#43103L, favorite_pairs#43104L, cook_pairs#43105L, rate_pairs#43106L, round((cast((favorite_pairs#43104L * 100) as double) / cast(view_pairs#43103L as double)), 2) AS favorite_per_view_pct#43100, round((cast((cook_pairs#43105L * 100) as double) / cast(view_pairs#43103L as double)), 2) AS cook_per_view_pct#43101, round((cast((rate_pairs#43106L * 100) as double) / cast(cook_pairs#43105L as double)), 2) AS rate_per_cook_pct#43102, avg_rating#43111]
+Input [11]: [dish_category#43160, view_pairs#43103L, favorite_pairs#43104L, cook_pairs#43105L, rate_pairs#43106L, dish_category#43163, view_events#43107L, favorite_events#43108L, cook_events#43109L, rate_events#43110L, avg_rating#43111]
 
 (80) AdaptiveSparkPlan
-Output [13]: [dish_category#43098, view_events#43106L, favorite_events#43107L, cook_events#43108L, rate_events#43109L, view_pairs#43102L, favorite_pairs#43103L, cook_pairs#43104L, rate_pairs#43105L, favorite_per_view_pct#43099, cook_per_view_pct#43100, rate_per_cook_pct#43101, avg_rating#43110]
+Output [13]: [dish_category#43099, view_events#43107L, favorite_events#43108L, cook_events#43109L, rate_events#43110L, view_pairs#43103L, favorite_pairs#43104L, cook_pairs#43105L, rate_pairs#43106L, favorite_per_view_pct#43100, cook_per_view_pct#43101, rate_per_cook_pct#43102, avg_rating#43111]
 Arguments: isFinalPlan=false
 
 
@@ -543,22 +543,22 @@ Input [3]: [food_id#99, event_type#100, month#105]
 Input [1]: [food_id#99]
 Keys [1]: [food_id#99]
 Functions [1]: [partial_count(1)]
-Aggregate Attributes [1]: [count#43830L]
-Results [2]: [food_id#99, count#43831L]
+Aggregate Attributes [1]: [count#43831L]
+Results [2]: [food_id#99, count#43832L]
 
 (5) Exchange
-Input [2]: [food_id#99, count#43831L]
-Arguments: hashpartitioning(food_id#99, 8), ENSURE_REQUIREMENTS, [plan_id=76772]
+Input [2]: [food_id#99, count#43832L]
+Arguments: hashpartitioning(food_id#99, 8), ENSURE_REQUIREMENTS, [plan_id=76392]
 
 (6) HashAggregate
-Input [2]: [food_id#99, count#43831L]
+Input [2]: [food_id#99, count#43832L]
 Keys [1]: [food_id#99]
 Functions [1]: [count(1)]
-Aggregate Attributes [1]: [count(1)#43829L]
-Results [2]: [food_id#99, count(1)#43829L AS count#43820L]
+Aggregate Attributes [1]: [count(1)#43830L]
+Results [2]: [food_id#99, count(1)#43830L AS count#43821L]
 
 (7) AdaptiveSparkPlan
-Output [2]: [food_id#99, count#43820L]
+Output [2]: [food_id#99, count#43821L]
 Arguments: isFinalPlan=false
 
 

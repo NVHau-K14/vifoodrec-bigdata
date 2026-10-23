@@ -6,6 +6,7 @@
     "latent_w": 0.7,
     "zipf": 0.45,
     "quality_sel": 0.3,
+    "quality_clip": 2.5,
     "temp": 1.0,
     "sessions_median": 95,
     "sessions_sigma": 0.75,

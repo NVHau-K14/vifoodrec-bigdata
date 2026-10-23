@@ -1,448 +1,448 @@
 [
  {
   "dish_pct": 1,
-  "views_cum_pct": 14.02,
-  "cooks_cum_pct": 24.84
+  "views_cum_pct": 14.07,
+  "cooks_cum_pct": 25.11
  },
  {
   "dish_pct": 2,
-  "views_cum_pct": 20.01,
-  "cooks_cum_pct": 34.33
+  "views_cum_pct": 19.94,
+  "cooks_cum_pct": 34.37
  },
  {
   "dish_pct": 3,
-  "views_cum_pct": 24.59,
-  "cooks_cum_pct": 40.99
+  "views_cum_pct": 24.51,
+  "cooks_cum_pct": 40.92
  },
  {
   "dish_pct": 4,
-  "views_cum_pct": 28.37,
-  "cooks_cum_pct": 45.94
+  "views_cum_pct": 28.28,
+  "cooks_cum_pct": 45.83
  },
  {
   "dish_pct": 5,
-  "views_cum_pct": 31.66,
-  "cooks_cum_pct": 49.88
+  "views_cum_pct": 31.57,
+  "cooks_cum_pct": 49.78
  },
  {
   "dish_pct": 6,
-  "views_cum_pct": 34.61,
-  "cooks_cum_pct": 53.12
+  "views_cum_pct": 34.51,
+  "cooks_cum_pct": 53.07
  },
  {
   "dish_pct": 7,
-  "views_cum_pct": 37.25,
-  "cooks_cum_pct": 55.9
+  "views_cum_pct": 37.16,
+  "cooks_cum_pct": 55.82
  },
  {
   "dish_pct": 8,
-  "views_cum_pct": 39.69,
-  "cooks_cum_pct": 58.34
+  "views_cum_pct": 39.59,
+  "cooks_cum_pct": 58.26
  },
  {
   "dish_pct": 9,
-  "views_cum_pct": 41.95,
-  "cooks_cum_pct": 60.55
+  "views_cum_pct": 41.85,
+  "cooks_cum_pct": 60.48
  },
  {
   "dish_pct": 10,
-  "views_cum_pct": 44.07,
-  "cooks_cum_pct": 62.59
+  "views_cum_pct": 43.97,
+  "cooks_cum_pct": 62.53
  },
  {
   "dish_pct": 11,
-  "views_cum_pct": 46.05,
-  "cooks_cum_pct": 64.46
+  "views_cum_pct": 45.97,
+  "cooks_cum_pct": 64.39
  },
  {
   "dish_pct": 12,
-  "views_cum_pct": 47.91,
-  "cooks_cum_pct": 66.17
+  "views_cum_pct": 47.83,
+  "cooks_cum_pct": 66.1
  },
  {
   "dish_pct": 13,
-  "views_cum_pct": 49.66,
-  "cooks_cum_pct": 67.76
+  "views_cum_pct": 49.59,
+  "cooks_cum_pct": 67.71
  },
  {
   "dish_pct": 14,
-  "views_cum_pct": 51.33,
-  "cooks_cum_pct": 69.25
+  "views_cum_pct": 51.26,
+  "cooks_cum_pct": 69.21
  },
  {
   "dish_pct": 15,
-  "views_cum_pct": 52.91,
-  "cooks_cum_pct": 70.64
+  "views_cum_pct": 52.84,
+  "cooks_cum_pct": 70.6
  },
  {
   "dish_pct": 16,
-  "views_cum_pct": 54.43,
-  "cooks_cum_pct": 71.94
+  "views_cum_pct": 54.36,
+  "cooks_cum_pct": 71.91
  },
  {
   "dish_pct": 17,
-  "views_cum_pct": 55.9,
-  "cooks_cum_pct": 73.17
+  "views_cum_pct": 55.83,
+  "cooks_cum_pct": 73.15
  },
  {
   "dish_pct": 18,
-  "views_cum_pct": 57.31,
-  "cooks_cum_pct": 74.35
+  "views_cum_pct": 57.24,
+  "cooks_cum_pct": 74.32
  },
  {
   "dish_pct": 19,
-  "views_cum_pct": 58.66,
-  "cooks_cum_pct": 75.46
+  "views_cum_pct": 58.59,
+  "cooks_cum_pct": 75.43
  },
  {
   "dish_pct": 20,
-  "views_cum_pct": 59.96,
-  "cooks_cum_pct": 76.51
+  "views_cum_pct": 59.89,
+  "cooks_cum_pct": 76.47
  },
  {
   "dish_pct": 21,
-  "views_cum_pct": 61.22,
-  "cooks_cum_pct": 77.52
+  "views_cum_pct": 61.15,
+  "cooks_cum_pct": 77.47
  },
  {
   "dish_pct": 22,
-  "views_cum_pct": 62.43,
-  "cooks_cum_pct": 78.48
+  "views_cum_pct": 62.36,
+  "cooks_cum_pct": 78.42
  },
  {
   "dish_pct": 23,
-  "views_cum_pct": 63.59,
-  "cooks_cum_pct": 79.39
+  "views_cum_pct": 63.52,
+  "cooks_cum_pct": 79.33
  },
  {
   "dish_pct": 24,
-  "views_cum_pct": 64.7,
-  "cooks_cum_pct": 80.26
+  "views_cum_pct": 64.64,
+  "cooks_cum_pct": 80.2
  },
  {
   "dish_pct": 25,
-  "views_cum_pct": 65.77,
-  "cooks_cum_pct": 81.1
+  "views_cum_pct": 65.71,
+  "cooks_cum_pct": 81.03
  },
  {
   "dish_pct": 26,
-  "views_cum_pct": 66.81,
-  "cooks_cum_pct": 81.9
+  "views_cum_pct": 66.75,
+  "cooks_cum_pct": 81.82
  },
  {
   "dish_pct": 27,
-  "views_cum_pct": 67.82,
-  "cooks_cum_pct": 82.66
+  "views_cum_pct": 67.76,
+  "cooks_cum_pct": 82.59
  },
  {
   "dish_pct": 28,
-  "views_cum_pct": 68.8,
-  "cooks_cum_pct": 83.39
+  "views_cum_pct": 68.74,
+  "cooks_cum_pct": 83.32
  },
  {
   "dish_pct": 29,
-  "views_cum_pct": 69.74,
-  "cooks_cum_pct": 84.09
+  "views_cum_pct": 69.69,
+  "cooks_cum_pct": 84.01
  },
  {
   "dish_pct": 30,
-  "views_cum_pct": 70.67,
-  "cooks_cum_pct": 84.75
+  "views_cum_pct": 70.61,
+  "cooks_cum_pct": 84.66
  },
  {
   "dish_pct": 31,
-  "views_cum_pct": 71.57,
-  "cooks_cum_pct": 85.39
+  "views_cum_pct": 71.51,
+  "cooks_cum_pct": 85.3
  },
  {
   "dish_pct": 32,
-  "views_cum_pct": 72.44,
-  "cooks_cum_pct": 85.99
+  "views_cum_pct": 72.38,
+  "cooks_cum_pct": 85.9
  },
  {
   "dish_pct": 33,
-  "views_cum_pct": 73.28,
-  "cooks_cum_pct": 86.58
+  "views_cum_pct": 73.23,
+  "cooks_cum_pct": 86.49
  },
  {
   "dish_pct": 34,
-  "views_cum_pct": 74.1,
-  "cooks_cum_pct": 87.13
+  "views_cum_pct": 74.05,
+  "cooks_cum_pct": 87.05
  },
  {
   "dish_pct": 35,
-  "views_cum_pct": 74.89,
-  "cooks_cum_pct": 87.66
+  "views_cum_pct": 74.84,
+  "cooks_cum_pct": 87.58
  },
  {
   "dish_pct": 36,
-  "views_cum_pct": 75.66,
-  "cooks_cum_pct": 88.17
+  "views_cum_pct": 75.62,
+  "cooks_cum_pct": 88.1
  },
  {
   "dish_pct": 37,
-  "views_cum_pct": 76.42,
-  "cooks_cum_pct": 88.66
+  "views_cum_pct": 76.37,
+  "cooks_cum_pct": 88.59
  },
  {
   "dish_pct": 38,
-  "views_cum_pct": 77.15,
-  "cooks_cum_pct": 89.12
+  "views_cum_pct": 77.11,
+  "cooks_cum_pct": 89.06
  },
  {
   "dish_pct": 39,
-  "views_cum_pct": 77.87,
-  "cooks_cum_pct": 89.57
+  "views_cum_pct": 77.82,
+  "cooks_cum_pct": 89.51
  },
  {
   "dish_pct": 40,
-  "views_cum_pct": 78.57,
-  "cooks_cum_pct": 90.01
+  "views_cum_pct": 78.52,
+  "cooks_cum_pct": 89.94
  },
  {
   "dish_pct": 41,
-  "views_cum_pct": 79.25,
-  "cooks_cum_pct": 90.43
+  "views_cum_pct": 79.2,
+  "cooks_cum_pct": 90.36
  },
  {
   "dish_pct": 42,
-  "views_cum_pct": 79.91,
-  "cooks_cum_pct": 90.83
+  "views_cum_pct": 79.86,
+  "cooks_cum_pct": 90.76
  },
  {
   "dish_pct": 43,
-  "views_cum_pct": 80.55,
-  "cooks_cum_pct": 91.21
+  "views_cum_pct": 80.51,
+  "cooks_cum_pct": 91.15
  },
  {
   "dish_pct": 44,
-  "views_cum_pct": 81.18,
-  "cooks_cum_pct": 91.58
+  "views_cum_pct": 81.14,
+  "cooks_cum_pct": 91.52
  },
  {
   "dish_pct": 45,
-  "views_cum_pct": 81.79,
-  "cooks_cum_pct": 91.94
+  "views_cum_pct": 81.75,
+  "cooks_cum_pct": 91.88
  },
  {
   "dish_pct": 46,
-  "views_cum_pct": 82.39,
-  "cooks_cum_pct": 92.28
+  "views_cum_pct": 82.36,
+  "cooks_cum_pct": 92.22
  },
  {
   "dish_pct": 47,
-  "views_cum_pct": 82.98,
-  "cooks_cum_pct": 92.61
+  "views_cum_pct": 82.94,
+  "cooks_cum_pct": 92.56
  },
  {
   "dish_pct": 48,
-  "views_cum_pct": 83.56,
-  "cooks_cum_pct": 92.93
+  "views_cum_pct": 83.52,
+  "cooks_cum_pct": 92.88
  },
  {
   "dish_pct": 49,
-  "views_cum_pct": 84.12,
-  "cooks_cum_pct": 93.24
+  "views_cum_pct": 84.08,
+  "cooks_cum_pct": 93.19
  },
  {
   "dish_pct": 50,
-  "views_cum_pct": 84.67,
-  "cooks_cum_pct": 93.54
+  "views_cum_pct": 84.63,
+  "cooks_cum_pct": 93.48
  },
  {
   "dish_pct": 51,
-  "views_cum_pct": 85.2,
-  "cooks_cum_pct": 93.82
+  "views_cum_pct": 85.16,
+  "cooks_cum_pct": 93.77
  },
  {
   "dish_pct": 52,
-  "views_cum_pct": 85.72,
-  "cooks_cum_pct": 94.1
+  "views_cum_pct": 85.69,
+  "cooks_cum_pct": 94.05
  },
  {
   "dish_pct": 53,
-  "views_cum_pct": 86.24,
-  "cooks_cum_pct": 94.37
+  "views_cum_pct": 86.21,
+  "cooks_cum_pct": 94.32
  },
  {
   "dish_pct": 54,
-  "views_cum_pct": 86.74,
-  "cooks_cum_pct": 94.63
+  "views_cum_pct": 86.71,
+  "cooks_cum_pct": 94.58
  },
  {
   "dish_pct": 55,
-  "views_cum_pct": 87.23,
-  "cooks_cum_pct": 94.88
+  "views_cum_pct": 87.2,
+  "cooks_cum_pct": 94.84
  },
  {
   "dish_pct": 56,
-  "views_cum_pct": 87.72,
-  "cooks_cum_pct": 95.13
+  "views_cum_pct": 87.69,
+  "cooks_cum_pct": 95.08
  },
  {
   "dish_pct": 57,
-  "views_cum_pct": 88.19,
-  "cooks_cum_pct": 95.36
+  "views_cum_pct": 88.16,
+  "cooks_cum_pct": 95.32
  },
  {
   "dish_pct": 58,
-  "views_cum_pct": 88.65,
-  "cooks_cum_pct": 95.59
+  "views_cum_pct": 88.62,
+  "cooks_cum_pct": 95.55
  },
  {
   "dish_pct": 59,
-  "views_cum_pct": 89.1,
-  "cooks_cum_pct": 95.81
+  "views_cum_pct": 89.08,
+  "cooks_cum_pct": 95.77
  },
  {
   "dish_pct": 60,
-  "views_cum_pct": 89.54,
-  "cooks_cum_pct": 96.02
+  "views_cum_pct": 89.52,
+  "cooks_cum_pct": 95.99
  },
  {
   "dish_pct": 61,
-  "views_cum_pct": 89.97,
-  "cooks_cum_pct": 96.23
+  "views_cum_pct": 89.95,
+  "cooks_cum_pct": 96.19
  },
  {
   "dish_pct": 62,
-  "views_cum_pct": 90.39,
-  "cooks_cum_pct": 96.43
+  "views_cum_pct": 90.37,
+  "cooks_cum_pct": 96.39
  },
  {
   "dish_pct": 63,
-  "views_cum_pct": 90.8,
-  "cooks_cum_pct": 96.62
+  "views_cum_pct": 90.78,
+  "cooks_cum_pct": 96.58
  },
  {
   "dish_pct": 64,
-  "views_cum_pct": 91.2,
-  "cooks_cum_pct": 96.8
+  "views_cum_pct": 91.18,
+  "cooks_cum_pct": 96.77
  },
  {
   "dish_pct": 65,
-  "views_cum_pct": 91.59,
-  "cooks_cum_pct": 96.98
+  "views_cum_pct": 91.57,
+  "cooks_cum_pct": 96.94
  },
  {
   "dish_pct": 66,
-  "views_cum_pct": 91.98,
-  "cooks_cum_pct": 97.14
+  "views_cum_pct": 91.95,
+  "cooks_cum_pct": 97.12
  },
  {
   "dish_pct": 67,
-  "views_cum_pct": 92.35,
-  "cooks_cum_pct": 97.31
+  "views_cum_pct": 92.32,
+  "cooks_cum_pct": 97.28
  },
  {
   "dish_pct": 68,
-  "views_cum_pct": 92.71,
-  "cooks_cum_pct": 97.46
+  "views_cum_pct": 92.69,
+  "cooks_cum_pct": 97.44
  },
  {
   "dish_pct": 69,
-  "views_cum_pct": 93.06,
-  "cooks_cum_pct": 97.61
+  "views_cum_pct": 93.04,
+  "cooks_cum_pct": 97.59
  },
  {
   "dish_pct": 70,
-  "views_cum_pct": 93.41,
-  "cooks_cum_pct": 97.76
+  "views_cum_pct": 93.39,
+  "cooks_cum_pct": 97.74
  },
  {
   "dish_pct": 71,
-  "views_cum_pct": 93.74,
-  "cooks_cum_pct": 97.9
+  "views_cum_pct": 93.72,
+  "cooks_cum_pct": 97.88
  },
  {
   "dish_pct": 72,
-  "views_cum_pct": 94.07,
-  "cooks_cum_pct": 98.03
+  "views_cum_pct": 94.05,
+  "cooks_cum_pct": 98.01
  },
  {
   "dish_pct": 73,
-  "views_cum_pct": 94.38,
-  "cooks_cum_pct": 98.16
+  "views_cum_pct": 94.36,
+  "cooks_cum_pct": 98.15
  },
  {
   "dish_pct": 74,
-  "views_cum_pct": 94.69,
-  "cooks_cum_pct": 98.28
+  "views_cum_pct": 94.67,
+  "cooks_cum_pct": 98.27
  },
  {
   "dish_pct": 75,
-  "views_cum_pct": 94.99,
-  "cooks_cum_pct": 98.41
+  "views_cum_pct": 94.98,
+  "cooks_cum_pct": 98.39
  },
  {
   "dish_pct": 76,
-  "views_cum_pct": 95.29,
-  "cooks_cum_pct": 98.52
+  "views_cum_pct": 95.27,
+  "cooks_cum_pct": 98.51
  },
  {
   "dish_pct": 77,
-  "views_cum_pct": 95.57,
-  "cooks_cum_pct": 98.63
+  "views_cum_pct": 95.56,
+  "cooks_cum_pct": 98.62
  },
  {
   "dish_pct": 78,
-  "views_cum_pct": 95.85,
-  "cooks_cum_pct": 98.73
+  "views_cum_pct": 95.84,
+  "cooks_cum_pct": 98.72
  },
  {
   "dish_pct": 79,
-  "views_cum_pct": 96.12,
+  "views_cum_pct": 96.11,
   "cooks_cum_pct": 98.83
  },
  {
   "dish_pct": 80,
-  "views_cum_pct": 96.39,
-  "cooks_cum_pct": 98.93
+  "views_cum_pct": 96.38,
+  "cooks_cum_pct": 98.92
  },
  {
   "dish_pct": 81,
-  "views_cum_pct": 96.65,
+  "views_cum_pct": 96.64,
   "cooks_cum_pct": 99.02
  },
  {
   "dish_pct": 82,
-  "views_cum_pct": 96.9,
-  "cooks_cum_pct": 99.11
+  "views_cum_pct": 96.89,
+  "cooks_cum_pct": 99.1
  },
  {
   "dish_pct": 83,
-  "views_cum_pct": 97.15,
+  "views_cum_pct": 97.13,
   "cooks_cum_pct": 99.19
  },
  {
   "dish_pct": 84,
-  "views_cum_pct": 97.38,
+  "views_cum_pct": 97.37,
   "cooks_cum_pct": 99.27
  },
  {
   "dish_pct": 85,
-  "views_cum_pct": 97.61,
+  "views_cum_pct": 97.6,
   "cooks_cum_pct": 99.35
  },
  {
   "dish_pct": 86,
-  "views_cum_pct": 97.83,
+  "views_cum_pct": 97.82,
   "cooks_cum_pct": 99.42
  },
  {
   "dish_pct": 87,
-  "views_cum_pct": 98.04,
+  "views_cum_pct": 98.03,
   "cooks_cum_pct": 99.49
  },
  {
   "dish_pct": 88,
-  "views_cum_pct": 98.25,
-  "cooks_cum_pct": 99.56
+  "views_cum_pct": 98.24,
+  "cooks_cum_pct": 99.55
  },
  {
   "dish_pct": 89,
   "views_cum_pct": 98.44,
-  "cooks_cum_pct": 99.62
+  "cooks_cum_pct": 99.61
  },
  {
   "dish_pct": 90,
@@ -451,7 +451,7 @@
  },
  {
   "dish_pct": 91,
-  "views_cum_pct": 98.82,
+  "views_cum_pct": 98.81,
   "cooks_cum_pct": 99.72
  },
  {
@@ -461,13 +461,13 @@
  },
  {
   "dish_pct": 93,
-  "views_cum_pct": 99.16,
-  "cooks_cum_pct": 99.82
+  "views_cum_pct": 99.15,
+  "cooks_cum_pct": 99.81
  },
  {
   "dish_pct": 94,
-  "views_cum_pct": 99.32,
-  "cooks_cum_pct": 99.86
+  "views_cum_pct": 99.31,
+  "cooks_cum_pct": 99.85
  },
  {
   "dish_pct": 95,
@@ -476,7 +476,7 @@
  },
  {
   "dish_pct": 96,
-  "views_cum_pct": 99.6,
+  "views_cum_pct": 99.59,
   "cooks_cum_pct": 99.92
  },
  {

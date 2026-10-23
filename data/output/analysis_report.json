@@ -1,8 +1,8 @@
 {
   "inputs": {
     "events_path": "hdfs://namenode:8020/data/events/events",
-    "events": 23164109,
-    "events_before_join_users": 23164109,
+    "events": 23141780,
+    "events_before_join_users": 23141780,
     "dishes": 5499,
     "active_users": 49815,
     "months": [
@@ -20,284 +20,284 @@
       "2026-09"
     ],
     "events_by_type": {
-      "cook": 2371657,
-      "view": 18627223,
-      "rate": 768718,
-      "favorite": 1396511
+      "cook": 2366696,
+      "view": 18621619,
+      "rate": 762895,
+      "favorite": 1390570
     },
     "check_cube_cook_total": true,
     "check_monthly_total": true,
-    "cube_cook_rows": 280948,
-    "monthly_rows": 197899,
+    "cube_cook_rows": 281499,
+    "monthly_rows": 197896,
     "cache_mb_desc": [
-      237.5,
-      10.2,
+      237.1,
+      10.3,
       8.6,
       0.2
     ]
   },
   "heatmap_top_cook_cells": [
-    "CN 17h: 66554",
-    "CN 18h: 65649",
-    "CN 19h: 65644",
-    "T7 17h: 61511",
-    "T7 19h: 61451"
+    "CN 17h: 66153",
+    "CN 18h: 65818",
+    "CN 19h: 65107",
+    "T7 17h: 61512",
+    "T7 19h: 61279"
   ],
   "cooks_by_dow": {
-    "T2": 277206,
-    "T3": 254867,
-    "T4": 258579,
-    "T5": 266912,
-    "T6": 279537,
-    "T7": 496560,
-    "CN": 537996
+    "T2": 276735,
+    "T3": 254282,
+    "T4": 257851,
+    "T5": 265956,
+    "T6": 279218,
+    "T7": 495581,
+    "CN": 537073
   },
   "season_share_pct_all_regions": {
     "tết": {
-      "2025-10": 3.33,
-      "2025-11": 3.37,
-      "2025-12": 3.45,
-      "2026-01": 5.94,
-      "2026-02": 18.55,
-      "2026-03": 3.61,
-      "2026-04": 3.39,
-      "2026-05": 3.02,
-      "2026-06": 3.02,
-      "2026-07": 3.2,
-      "2026-08": 3.09,
-      "2026-09": 3.45
+      "2025-10": 3.47,
+      "2025-11": 3.47,
+      "2025-12": 3.56,
+      "2026-01": 6.07,
+      "2026-02": 18.93,
+      "2026-03": 3.77,
+      "2026-04": 3.54,
+      "2026-05": 3.09,
+      "2026-06": 3.08,
+      "2026-07": 3.34,
+      "2026-08": 3.21,
+      "2026-09": 3.59
     },
     "lạnh": {
-      "2025-10": 5.49,
-      "2025-11": 11.12,
-      "2025-12": 14.92,
-      "2026-01": 14.12,
-      "2026-02": 7.01,
-      "2026-03": 5.09,
-      "2026-04": 4.31,
-      "2026-05": 3.33,
-      "2026-06": 3.15,
-      "2026-07": 4.24,
-      "2026-08": 4.18,
-      "2026-09": 5.68
+      "2025-10": 5.39,
+      "2025-11": 11.01,
+      "2025-12": 14.89,
+      "2026-01": 13.98,
+      "2026-02": 6.89,
+      "2026-03": 4.98,
+      "2026-04": 4.24,
+      "2026-05": 3.23,
+      "2026-06": 3.1,
+      "2026-07": 4.23,
+      "2026-08": 4.16,
+      "2026-09": 5.57
     },
     "nóng": {
-      "2025-10": 15.58,
-      "2025-11": 11.95,
-      "2025-12": 8.86,
-      "2026-01": 9.24,
-      "2026-02": 11.76,
-      "2026-03": 21.69,
-      "2026-04": 25.07,
-      "2026-05": 30.17,
-      "2026-06": 30.8,
-      "2026-07": 24.05,
-      "2026-08": 23.9,
-      "2026-09": 16.16
+      "2025-10": 16.2,
+      "2025-11": 12.4,
+      "2025-12": 9.13,
+      "2026-01": 9.58,
+      "2026-02": 12.13,
+      "2026-03": 22.27,
+      "2026-04": 25.5,
+      "2026-05": 30.67,
+      "2026-06": 31.3,
+      "2026-07": 24.54,
+      "2026-08": 24.44,
+      "2026-09": 16.72
     }
   },
   "top3_dish_by_slot": {
     "khuya": [
       "Tôm Nướng Muối Tiêu Xiên Que",
       "Canh hào thanh mát",
-      "Bánh Tráng Nướng Chảo"
+      "Bánh Mì Papparoti"
     ],
     "sáng": [
       "Canh hào thanh mát",
-      "Chè Thạch Sữa Chua",
-      "Mì Quảng xào lươn"
+      "Mì Quảng xào lươn",
+      "Bánh Mì Papparoti"
     ],
     "trưa": [
       "Canh hào thanh mát",
       "Bầu xào giò thủ",
-      "Cải Thìa Xào Tỏi"
+      "Salad Rau Củ Luộc"
     ],
     "tối": [
       "Canh hào thanh mát",
       "Bầu xào giò thủ",
-      "Cải Thìa Xào Tỏi"
+      "Salad Rau Củ Luộc"
     ]
   },
   "top3_signature_dish_by_slot": {
     "khuya": [
-      "Khô Gà Lá Chanh #1339 (lift 12.354)",
-      "Khô Gà Lá Chanh #2690 (lift 12.281)",
-      "Nấm Đùi Gà Xiên Nướng #1889 (lift 12.244)"
+      "Khô Bò Cay Ngon #4367 (lift 12.201)",
+      "Bò Nướng Xiên #5227 (lift 12.164)",
+      "Bánh Tráng Nướng Chảo #4065 (lift 12.045)"
     ],
     "sáng": [
-      "Cà Phê Sầu Riêng #1644 (lift 4.293)",
-      "Nước Ép Cóc Bằng Máy Xay Sinh Tố #5338 (lift 4.131)",
-      "Sinh Tố Chuối Cacao #5193 (lift 4.113)"
+      "Cà Phê Sầu Riêng #1644 (lift 4.338)",
+      "Sinh Tố Dứa Và Cà Rốt #5107 (lift 4.08)",
+      "Nước Ép Cóc Bằng Máy Xay Sinh Tố #5338 (lift 4.077)"
     ],
     "trưa": [
-      "Canh sườn nha đam #18 (lift 1.368)",
-      "Súp Bí Đỏ Nướng #3756 (lift 1.365)",
-      "Canh bông bí nấm kim châm #304 (lift 1.355)"
+      "Canh Rau Củ Ngũ Sắc #1935 (lift 1.344)",
+      "Canh Rau Má Thịt Bằm #3448 (lift 1.342)",
+      "Súp Dưa Leo #4377 (lift 1.341)"
     ],
     "tối": [
-      "Lẩu nghêu sò ốc hến #303 (lift 1.426)",
-      "Lẩu cá ngát kim chi #169 (lift 1.369)",
-      "Lẩu ghẹ kim chi #240 (lift 1.346)"
+      "Lẩu nghêu sò ốc hến #303 (lift 1.433)",
+      "Lẩu Mắm Miền Tây #1545 (lift 1.359)",
+      "Lẩu ghẹ kim chi #240 (lift 1.331)"
     ]
   },
   "top_category_by_slot_cook_pct": {
-    "khuya": "bánh 26.54%",
-    "sáng": "món chính 24.64%",
-    "trưa": "món chính 49.43%",
-    "tối": "món chính 47.52%"
+    "khuya": "bánh 26.87%",
+    "sáng": "món chính 24.4%",
+    "trưa": "món chính 48.81%",
+    "tối": "món chính 46.93%"
   },
   "lift_highlights": {
     "age_group=18-24": [
-      "main_method=pha/xay: lift 2.054 (5.07% vs 2.47%)",
-      "dish_category=đồ uống: lift 2.047 (5.21% vs 2.54%)",
-      "dish_category=chè/tráng miệng: lift 1.807 (6.24% vs 3.45%)"
+      "main_method=pha/xay: lift 2.041 (5.07% vs 2.49%)",
+      "dish_category=đồ uống: lift 2.035 (5.22% vs 2.56%)",
+      "dish_category=chè/tráng miệng: lift 1.828 (5.81% vs 3.18%)"
     ],
     "age_group=25-34": [
-      "dish_category=cơm/xôi/cháo: lift 1.194 (4.3% vs 3.6%)",
-      "main_protein=trứng: lift 1.194 (3.23% vs 2.71%)",
-      "dish_category=gỏi/salad: lift 1.185 (9.63% vs 8.13%)"
+      "main_protein=trứng: lift 1.194 (3.3% vs 2.77%)",
+      "dish_category=cơm/xôi/cháo: lift 1.186 (4.4% vs 3.71%)",
+      "dish_category=gỏi/salad: lift 1.183 (9.54% vs 8.07%)"
     ],
     "age_group=35-44": [
-      "main_method=kho/rim: lift 1.217 (11.54% vs 9.48%)",
-      "dish_category=món chính: lift 1.14 (49.24% vs 43.19%)",
-      "main_protein=heo: lift 1.123 (14.01% vs 12.47%)"
+      "main_method=kho/rim: lift 1.219 (11.73% vs 9.62%)",
+      "dish_category=món chính: lift 1.143 (48.74% vs 42.65%)",
+      "main_protein=heo: lift 1.125 (13.82% vs 12.28%)"
     ],
     "age_group=45+": [
-      "dish_category=canh/súp: lift 1.351 (29.55% vs 21.87%)",
-      "main_method=kho/rim: lift 1.304 (12.36% vs 9.48%)",
-      "main_protein=đậu hũ/chay: lift 1.276 (30.38% vs 23.81%)"
+      "dish_category=canh/súp: lift 1.339 (30.28% vs 22.62%)",
+      "main_protein=đậu hũ/chay: lift 1.325 (25.74% vs 19.43%)",
+      "main_method=kho/rim: lift 1.312 (12.62% vs 9.62%)"
     ],
     "day_type=cuối tuần": [
-      "dish_category=lẩu: lift 1.541 (3.3% vs 2.14%)",
-      "dish_category=bún/phở/mì/miến: lift 1.159 (6.44% vs 5.55%)",
-      "main_method=nướng: lift 1.135 (12.58% vs 11.08%)"
+      "dish_category=lẩu: lift 1.55 (3.21% vs 2.07%)",
+      "dish_category=bún/phở/mì/miến: lift 1.162 (6.4% vs 5.51%)",
+      "main_method=nướng: lift 1.138 (12.66% vs 11.13%)"
     ],
     "day_type=ngày thường": [
-      "is_quick=true: lift 1.138 (55.72% vs 48.96%)",
-      "dish_category=đồ uống: lift 1.105 (2.81% vs 2.54%)",
-      "main_method=pha/xay: lift 1.104 (2.72% vs 2.47%)"
+      "is_quick=true: lift 1.138 (56.45% vs 49.62%)",
+      "dish_category=đồ uống: lift 1.111 (2.85% vs 2.56%)",
+      "main_method=pha/xay: lift 1.11 (2.76% vs 2.49%)"
     ],
     "meal_slot=khuya": [
-      "dish_category=chè/tráng miệng: lift 3.96 (13.68% vs 3.45%)",
-      "main_method=nướng: lift 3.464 (38.38% vs 11.08%)",
-      "dish_category=bánh: lift 3.258 (26.54% vs 8.14%)"
+      "dish_category=chè/tráng miệng: lift 4.012 (12.75% vs 3.18%)",
+      "main_method=nướng: lift 3.473 (38.64% vs 11.13%)",
+      "dish_category=bánh: lift 3.26 (26.87% vs 8.24%)"
     ],
     "meal_slot=sáng": [
-      "main_method=pha/xay: lift 3.86 (9.53% vs 2.47%)",
-      "dish_category=đồ uống: lift 3.846 (9.79% vs 2.54%)",
-      "dish_category=bánh: lift 2.805 (22.85% vs 8.14%)"
+      "main_method=pha/xay: lift 3.834 (9.53% vs 2.49%)",
+      "dish_category=đồ uống: lift 3.823 (9.8% vs 2.56%)",
+      "dish_category=bánh: lift 2.816 (23.21% vs 8.24%)"
     ],
     "meal_slot=trưa": [
-      "dish_category=canh/súp: lift 1.252 (27.37% vs 21.87%)",
-      "dish_category=gỏi/salad: lift 1.151 (9.36% vs 8.13%)",
-      "dish_category=món chính: lift 1.144 (49.43% vs 43.19%)"
+      "dish_category=canh/súp: lift 1.245 (28.16% vs 22.62%)",
+      "dish_category=gỏi/salad: lift 1.148 (9.26% vs 8.07%)",
+      "dish_category=món chính: lift 1.144 (48.81% vs 42.65%)"
     ],
     "meal_slot=tối": [
-      "dish_category=lẩu: lift 1.34 (2.87% vs 2.14%)",
-      "dish_category=canh/súp: lift 1.152 (25.19% vs 21.87%)",
-      "dish_category=món chính: lift 1.1 (47.52% vs 43.19%)"
+      "dish_category=lẩu: lift 1.331 (2.75% vs 2.07%)",
+      "dish_category=canh/súp: lift 1.15 (26.01% vs 22.62%)",
+      "dish_category=món chính: lift 1.1 (46.93% vs 42.65%)"
     ],
     "region=Bắc": [
-      "main_method=luộc: lift 1.15 (4.83% vs 4.2%)",
-      "main_protein=bò: lift 1.06 (3.58% vs 3.37%)",
-      "main_method=xào: lift 1.05 (14.32% vs 13.64%)"
+      "main_method=luộc: lift 1.145 (4.92% vs 4.29%)",
+      "main_protein=bò: lift 1.059 (3.61% vs 3.41%)",
+      "main_protein=đậu hũ/chay: lift 1.057 (20.53% vs 19.43%)"
     ],
     "region=Nam": [
-      "dish_category=chè/tráng miệng: lift 1.102 (3.81% vs 3.45%)",
-      "main_protein=không: lift 1.101 (14.33% vs 13.01%)",
-      "dish_category=bánh: lift 1.064 (8.66% vs 8.14%)"
+      "dish_category=chè/tráng miệng: lift 1.104 (3.51% vs 3.18%)",
+      "main_protein=không: lift 1.104 (14.29% vs 12.95%)",
+      "dish_category=bánh: lift 1.069 (8.81% vs 8.24%)"
     ],
     "region=Trung": [
-      "is_spicy=true: lift 1.351 (35.74% vs 26.46%)",
-      "dish_category=lẩu: lift 1.181 (2.53% vs 2.14%)",
-      "main_protein=bò: lift 1.078 (3.64% vs 3.37%)"
+      "is_spicy=true: lift 1.347 (36.96% vs 27.45%)",
+      "dish_category=lẩu: lift 1.174 (2.43% vs 2.07%)",
+      "dish_category=bún/phở/mì/miến: lift 1.076 (5.93% vs 5.51%)"
     ]
   },
   "funnel_pairs_all": {
     "dish_category": "Tất cả",
-    "view_events": 18627223,
-    "favorite_events": 1396511,
-    "cook_events": 2371657,
-    "rate_events": 768718,
-    "view_pairs": 12112581,
-    "favorite_pairs": 1396511,
-    "cook_pairs": 1706733,
-    "rate_pairs": 768718,
-    "favorite_per_view_pct": 11.53,
-    "cook_per_view_pct": 14.09,
-    "rate_per_cook_pct": 45.04,
-    "avg_rating": 3.787
+    "view_events": 18621619,
+    "favorite_events": 1390570,
+    "cook_events": 2366696,
+    "rate_events": 762895,
+    "view_pairs": 12096158,
+    "favorite_pairs": 1390570,
+    "cook_pairs": 1694105,
+    "rate_pairs": 762895,
+    "favorite_per_view_pct": 11.5,
+    "cook_per_view_pct": 14.01,
+    "rate_per_cook_pct": 45.03,
+    "avg_rating": 3.78
   },
   "funnel_users": {
     "users": 49815,
     "viewed": 49815,
-    "favorited": 48931,
+    "favorited": 48922,
     "cooked": 49325,
-    "rated": 47078,
+    "rated": 47095,
     "viewed_pct": 100.0,
-    "favorited_pct": 98.23,
+    "favorited_pct": 98.21,
     "cooked_pct": 99.02,
-    "rated_pct": 94.51
+    "rated_pct": 94.54
   },
   "main_method_catalog_vs_cooked": [
-    "hầm/nấu: 20.39% mon -> 30.74% luot nau (lift 1.508)",
-    "xào: 12.22% mon -> 13.64% luot nau (lift 1.116)",
-    "nướng: 12.71% mon -> 11.08% luot nau (lift 0.872)",
-    "chiên: 19.57% mon -> 10.84% luot nau (lift 0.554)",
-    "kho/rim: 7.87% mon -> 9.48% luot nau (lift 1.205)",
-    "trộn/gỏi: 6.64% mon -> 9.02% luot nau (lift 1.358)",
-    "hấp: 7.84% mon -> 5.67% luot nau (lift 0.723)",
-    "luộc: 4.09% mon -> 4.2% luot nau (lift 1.027)",
-    "khác: 4.58% mon -> 2.87% luot nau (lift 0.627)",
-    "pha/xay: 4.09% mon -> 2.47% luot nau (lift 0.604)"
+    "hầm/nấu: 20.39% mon -> 31.02% luot nau (lift 1.521)",
+    "xào: 12.22% mon -> 13.25% luot nau (lift 1.084)",
+    "nướng: 12.71% mon -> 11.13% luot nau (lift 0.876)",
+    "chiên: 19.57% mon -> 10.45% luot nau (lift 0.534)",
+    "kho/rim: 7.87% mon -> 9.62% luot nau (lift 1.222)",
+    "trộn/gỏi: 6.64% mon -> 8.98% luot nau (lift 1.352)",
+    "hấp: 7.84% mon -> 5.81% luot nau (lift 0.741)",
+    "luộc: 4.09% mon -> 4.29% luot nau (lift 1.049)",
+    "khác: 4.58% mon -> 2.96% luot nau (lift 0.646)",
+    "pha/xay: 4.09% mon -> 2.49% luot nau (lift 0.609)"
   ],
   "n_distinct_ingredients": 4538,
   "top10_ingredients_not_seasoning": [
-    "cà rốt (681 mon, 436709 luot nau)",
-    "hành lá (1057 mon, 433484 luot nau)",
-    "tỏi (634 mon, 253198 luot nau)",
-    "cà chua (407 mon, 252371 luot nau)",
-    "ớt (508 mon, 241558 luot nau)",
-    "hành tây (638 mon, 198035 luot nau)",
-    "trứng gà (760 mon, 197969 luot nau)",
-    "ngò rí (415 mon, 196990 luot nau)",
-    "hành tím (511 mon, 188786 luot nau)",
-    "nấm kim châm (92 mon, 168098 luot nau)"
+    "cà rốt (681 mon, 459500 luot nau)",
+    "hành lá (1057 mon, 438289 luot nau)",
+    "cà chua (407 mon, 249392 luot nau)",
+    "tỏi (634 mon, 247195 luot nau)",
+    "ớt (508 mon, 238223 luot nau)",
+    "trứng gà (760 mon, 199394 luot nau)",
+    "hành tây (638 mon, 191538 luot nau)",
+    "ngò rí (415 mon, 188668 luot nau)",
+    "nấm kim châm (92 mon, 187667 luot nau)",
+    "hành tím (511 mon, 187561 luot nau)"
   ],
   "rating": {
-    "mean": 3.787,
-    "std": 1.076
+    "mean": 3.78,
+    "std": 1.071
   },
   "cook_sessions_2plus_dishes_pct": {
-    "Tất cả": 15.24,
+    "Tất cả": 15.04,
     "khuya": 0,
     "sáng": 0,
-    "trưa": 21.68,
-    "tối": 19.46
+    "trưa": 21.37,
+    "tối": 19.22
   },
-  "repeat_cook_pct_all": 19.89,
+  "repeat_cook_pct_all": 19.92,
   "times_cooked_same_dish": {
-    "1": 1367213,
-    "2": 208450,
-    "3": 67937,
-    "4": 27689,
-    "5": 35444
+    "1": 1356576,
+    "2": 206796,
+    "3": 67234,
+    "4": 27625,
+    "5": 35874
   },
   "long_tail": {
-    "gini_views": 0.5503,
-    "gini_cooks": 0.7322,
-    "top1pct_dishes_cook_share_pct": 24.84,
-    "top10pct_dishes_cook_share_pct": 62.59,
-    "top20pct_dishes_cook_share_pct": 76.51,
+    "gini_views": 0.5496,
+    "gini_cooks": 0.7315,
+    "top1pct_dishes_cook_share_pct": 25.11,
+    "top10pct_dishes_cook_share_pct": 62.53,
+    "top20pct_dishes_cook_share_pct": 76.47,
     "dishes_never_viewed": 0,
-    "dishes_never_cooked": 2
+    "dishes_never_cooked": 1
   },
   "note": "Dữ liệu hành vi là MÔ PHỎNG (bước 04). Kết quả kiểm chứng pipeline tìm lại được quy luật đã cài, không phải phát hiện về người dùng thật. Số liệu tính trên toàn bộ 12 tháng.",
   "tables": {
     "heatmap_hour_dow": 168,
     "trend_month_category": 120,
     "season_month": 192,
-    "top_dish_by_slot": 78,
+    "top_dish_by_slot": 77,
     "lift_by_group": 507,
     "funnel_by_category": 11,
     "dish_stats": 5499,
@@ -310,15 +310,15 @@
     "long_tail_curve": 100
   },
   "timings_s": {
-    "load_cache": 29.3,
-    "cubes": 12.2,
-    "time": 11.3,
-    "groups": 15.3,
-    "funnel": 16.1,
-    "dishes": 4.6,
-    "behavior": 14.6,
+    "load_cache": 30.1,
+    "cubes": 14.7,
+    "time": 9.7,
+    "groups": 16.1,
+    "funnel": 17.7,
+    "dishes": 4.4,
+    "behavior": 13.3,
     "explain": 0.1
   },
-  "total_seconds": 103.6,
+  "total_seconds": 106.3,
   "mode": "cluster"
 }

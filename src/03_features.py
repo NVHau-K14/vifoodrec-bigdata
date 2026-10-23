@@ -50,12 +50,15 @@ CONFUSING = [
     (r"mỡ hành", "hành phi"),
     (r"ớt (?:chuông|đà lạt|ngọt)", "ớt chuông"),
     (r"bánh tráng", "bánhtráng"),     # banh trang la vo cuon, khong phai mon banh
+    # "hào" (= hàu) la hai san, nhung "dầu hào" la gia vi va "su hào" la rau -> doi truoc khi khop
+    (r"dầu hào", "gia vị"),
+    (r"su hào", "rau"),
 ]
 
 # ---- Nhom dam (thu tu = uu tien khi hoa vi tri) ----
 PROTEINS = [
     ("hải sản", ["tôm", "mực", "cua", "ghẹ", "nghêu", "ngao", "sò", "sò điệp", "cồi sò", "hàu",
-                 "ốc", "hến", "bạch tuộc", "hải sâm", "tôm hùm", "sứa", "trai", "điệp", "tép",
+                 "hào", "ốc", "hến", "bạch tuộc", "hải sâm", "tôm hùm", "sứa", "trai", "điệp", "tép",
                  "ruốc", "hải sản", "surimi", "thanh cua", "chem chép", "vẹm", "ngán", "sò lông", "sò huyết",
                  "bề bề", "tôm tít", "ghẹ biển", "cù kỳ", "sá sùng", "bào ngư"]),
     ("cá", ["cá", "lươn", "cá hồi", "cá ngừ", "chả cá", "cá viên", "khô cá", "cá khô"]),

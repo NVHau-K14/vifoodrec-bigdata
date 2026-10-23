@@ -13,8 +13,8 @@
   "main_protein": {
     "không": 1471,
     "heo": 878,
-    "hải sản": 825,
-    "đậu hũ/chay": 540,
+    "hải sản": 826,
+    "đậu hũ/chay": 539,
     "cá": 475,
     "gà": 428,
     "bò": 283,
@@ -70,8 +70,8 @@
     "True": 911
   },
   "is_quick": {
-    "False": 3862,
-    "True": 1637
+    "False": 3861,
+    "True": 1638
   },
   "season": {
     "không": 4306,
@@ -86,8 +86,8 @@
     "ăn vặt": 1692
   },
   "quick_by_source": {
-    "mnmn|False": 813,
-    "mnmn|True": 395,
+    "mnmn|False": 812,
+    "mnmn|True": 396,
     "cooky|False": 3049,
     "cooky|True": 1242
   }

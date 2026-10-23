@@ -4,179 +4,179 @@
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 23819,
-  "share_pct": 5.21,
-  "overall_pct": 2.54,
-  "lift": 2.047
+  "cooks": 23817,
+  "share_pct": 5.22,
+  "overall_pct": 2.56,
+  "lift": 2.035
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 28547,
-  "share_pct": 6.24,
-  "overall_pct": 3.45,
-  "lift": 1.807
+  "cooks": 26528,
+  "share_pct": 5.81,
+  "overall_pct": 3.18,
+  "lift": 1.828
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 59494,
-  "share_pct": 13.01,
-  "overall_pct": 8.13,
-  "lift": 1.601
+  "cooks": 59239,
+  "share_pct": 12.98,
+  "overall_pct": 8.07,
+  "lift": 1.609
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 10022,
-  "share_pct": 2.19,
-  "overall_pct": 1.38,
-  "lift": 1.593
+  "cooks": 10218,
+  "share_pct": 2.24,
+  "overall_pct": 1.39,
+  "lift": 1.605
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 54970,
-  "share_pct": 12.02,
-  "overall_pct": 8.14,
-  "lift": 1.476
+  "cooks": 55856,
+  "share_pct": 12.23,
+  "overall_pct": 8.24,
+  "lift": 1.485
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 19252,
-  "share_pct": 4.21,
-  "overall_pct": 3.6,
-  "lift": 1.17
+  "cooks": 19700,
+  "share_pct": 4.32,
+  "overall_pct": 3.71,
+  "lift": 1.162
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 11117,
-  "share_pct": 2.43,
-  "overall_pct": 2.14,
-  "lift": 1.134
+  "cooks": 10704,
+  "share_pct": 2.34,
+  "overall_pct": 2.07,
+  "lift": 1.133
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 23359,
-  "share_pct": 5.11,
-  "overall_pct": 5.55,
-  "lift": 0.92
+  "cooks": 23183,
+  "share_pct": 5.08,
+  "overall_pct": 5.51,
+  "lift": 0.922
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 158831,
-  "share_pct": 34.74,
-  "overall_pct": 43.19,
-  "lift": 0.804
+  "cooks": 155820,
+  "share_pct": 34.13,
+  "overall_pct": 42.65,
+  "lift": 0.8
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 67835,
-  "share_pct": 14.84,
-  "overall_pct": 21.87,
-  "lift": 0.678
+  "cooks": 71466,
+  "share_pct": 15.65,
+  "overall_pct": 22.62,
+  "lift": 0.692
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 23819,
-  "share_pct": 5.21,
-  "overall_pct": 2.54,
-  "lift": 2.047
+  "cooks": 23817,
+  "share_pct": 5.22,
+  "overall_pct": 2.56,
+  "lift": 2.035
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 77411,
-  "share_pct": 16.93,
-  "overall_pct": 10.46,
-  "lift": 1.618
+  "cooks": 76788,
+  "share_pct": 16.82,
+  "overall_pct": 10.38,
+  "lift": 1.62
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 249304,
-  "share_pct": 54.52,
-  "overall_pct": 60.21,
-  "lift": 0.906
+  "cooks": 250270,
+  "share_pct": 54.82,
+  "overall_pct": 60.55,
+  "lift": 0.905
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 106712,
-  "share_pct": 23.34,
-  "overall_pct": 26.78,
-  "lift": 0.871
+  "cooks": 105656,
+  "share_pct": 23.14,
+  "overall_pct": 26.5,
+  "lift": 0.873
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 247760,
-  "share_pct": 54.19,
-  "overall_pct": 48.96,
-  "lift": 1.107
+  "cooks": 250538,
+  "share_pct": 54.88,
+  "overall_pct": 49.62,
+  "lift": 1.106
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 209486,
-  "share_pct": 45.81,
-  "overall_pct": 51.04,
-  "lift": 0.898
+  "cooks": 205993,
+  "share_pct": 45.12,
+  "overall_pct": 50.38,
+  "lift": 0.896
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 347401,
-  "share_pct": 75.98,
-  "overall_pct": 73.54,
-  "lift": 1.033
+  "cooks": 342725,
+  "share_pct": 75.07,
+  "overall_pct": 72.55,
+  "lift": 1.035
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 109845,
-  "share_pct": 24.02,
-  "overall_pct": 26.46,
+  "cooks": 113806,
+  "share_pct": 24.93,
+  "overall_pct": 27.45,
   "lift": 0.908
  },
  {
@@ -184,49 +184,49 @@
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 23177,
+  "cooks": 23156,
   "share_pct": 5.07,
-  "overall_pct": 2.47,
-  "lift": 2.054
+  "overall_pct": 2.49,
+  "lift": 2.041
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 64011,
+  "cooks": 63896,
   "share_pct": 14.0,
-  "overall_pct": 9.02,
-  "lift": 1.552
+  "overall_pct": 8.98,
+  "lift": 1.558
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 17547,
-  "share_pct": 3.84,
-  "overall_pct": 2.87,
-  "lift": 1.339
+  "cooks": 18270,
+  "share_pct": 4.0,
+  "overall_pct": 2.96,
+  "lift": 1.353
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 64244,
-  "share_pct": 14.05,
-  "overall_pct": 11.08,
-  "lift": 1.268
+  "cooks": 64437,
+  "share_pct": 14.11,
+  "overall_pct": 11.13,
+  "lift": 1.269
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 22418,
-  "share_pct": 4.9,
-  "overall_pct": 4.2,
+  "cooks": 22864,
+  "share_pct": 5.01,
+  "overall_pct": 4.29,
   "lift": 1.167
  },
  {
@@ -234,39 +234,39 @@
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 27305,
-  "share_pct": 5.97,
-  "overall_pct": 5.67,
-  "lift": 1.052
+  "cooks": 27607,
+  "share_pct": 6.05,
+  "overall_pct": 5.81,
+  "lift": 1.04
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 48611,
-  "share_pct": 10.63,
-  "overall_pct": 10.84,
-  "lift": 0.981
+  "cooks": 47428,
+  "share_pct": 10.39,
+  "overall_pct": 10.45,
+  "lift": 0.994
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 116618,
-  "share_pct": 25.5,
-  "overall_pct": 30.74,
-  "lift": 0.83
+  "cooks": 116912,
+  "share_pct": 25.61,
+  "overall_pct": 31.02,
+  "lift": 0.826
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 47843,
-  "share_pct": 10.46,
-  "overall_pct": 13.64,
+  "cooks": 46420,
+  "share_pct": 10.17,
+  "overall_pct": 13.25,
   "lift": 0.767
  },
  {
@@ -274,19 +274,19 @@
   "group_value": "18-24",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 25472,
-  "share_pct": 5.57,
-  "overall_pct": 9.48,
-  "lift": 0.588
+  "cooks": 25541,
+  "share_pct": 5.59,
+  "overall_pct": 9.62,
+  "lift": 0.581
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 101230,
-  "share_pct": 22.14,
-  "overall_pct": 13.01,
+  "cooks": 100605,
+  "share_pct": 22.04,
+  "overall_pct": 12.95,
   "lift": 1.702
  },
  {
@@ -294,39 +294,39 @@
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 16185,
-  "share_pct": 3.54,
-  "overall_pct": 2.71,
-  "lift": 1.308
+  "cooks": 16378,
+  "share_pct": 3.59,
+  "overall_pct": 2.77,
+  "lift": 1.297
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 55511,
-  "share_pct": 12.14,
-  "overall_pct": 10.26,
-  "lift": 1.183
+  "cooks": 55669,
+  "share_pct": 12.19,
+  "overall_pct": 10.24,
+  "lift": 1.191
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 28673,
-  "share_pct": 6.27,
-  "overall_pct": 5.45,
-  "lift": 1.152
+  "cooks": 28792,
+  "share_pct": 6.31,
+  "overall_pct": 5.55,
+  "lift": 1.137
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 16240,
-  "share_pct": 3.55,
-  "overall_pct": 3.37,
+  "cooks": 16378,
+  "share_pct": 3.59,
+  "overall_pct": 3.41,
   "lift": 1.053
  },
  {
@@ -334,109 +334,109 @@
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 79709,
-  "share_pct": 17.43,
-  "overall_pct": 17.45,
-  "lift": 0.999
+  "cooks": 96786,
+  "share_pct": 21.2,
+  "overall_pct": 21.9,
+  "lift": 0.968
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 1501,
-  "share_pct": 0.33,
+  "cooks": 1456,
+  "share_pct": 0.32,
   "overall_pct": 0.42,
-  "lift": 0.774
+  "lift": 0.764
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 36094,
-  "share_pct": 7.89,
-  "overall_pct": 10.52,
-  "lift": 0.75
+  "cooks": 35995,
+  "share_pct": 7.88,
+  "overall_pct": 10.53,
+  "lift": 0.749
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 42188,
-  "share_pct": 9.23,
-  "overall_pct": 12.47,
-  "lift": 0.74
+  "cooks": 41595,
+  "share_pct": 9.11,
+  "overall_pct": 12.28,
+  "lift": 0.742
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 78270,
-  "share_pct": 17.12,
-  "overall_pct": 23.81,
-  "lift": 0.719
+  "cooks": 61231,
+  "share_pct": 13.41,
+  "overall_pct": 19.43,
+  "lift": 0.69
  },
  {
   "group_type": "age_group",
   "group_value": "18-24",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 1645,
+  "cooks": 1646,
   "share_pct": 0.36,
-  "overall_pct": 0.53,
-  "lift": 0.676
+  "overall_pct": 0.54,
+  "lift": 0.671
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 34643,
-  "share_pct": 4.3,
-  "overall_pct": 3.6,
-  "lift": 1.194
+  "cooks": 35441,
+  "share_pct": 4.4,
+  "overall_pct": 3.71,
+  "lift": 1.186
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 77651,
-  "share_pct": 9.63,
-  "overall_pct": 8.13,
-  "lift": 1.185
+  "cooks": 76771,
+  "share_pct": 9.54,
+  "overall_pct": 8.07,
+  "lift": 1.183
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 19790,
-  "share_pct": 2.46,
-  "overall_pct": 2.14,
-  "lift": 1.146
+  "cooks": 19111,
+  "share_pct": 2.37,
+  "overall_pct": 2.07,
+  "lift": 1.148
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 47632,
-  "share_pct": 5.91,
-  "overall_pct": 5.55,
-  "lift": 1.064
+  "cooks": 46915,
+  "share_pct": 5.83,
+  "overall_pct": 5.51,
+  "lift": 1.059
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 69409,
-  "share_pct": 8.61,
-  "overall_pct": 8.14,
+  "cooks": 70106,
+  "share_pct": 8.71,
+  "overall_pct": 8.24,
   "lift": 1.057
  },
  {
@@ -444,69 +444,69 @@
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 21014,
-  "share_pct": 2.61,
-  "overall_pct": 2.54,
-  "lift": 1.024
+  "cooks": 21362,
+  "share_pct": 2.65,
+  "overall_pct": 2.56,
+  "lift": 1.036
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 11260,
-  "share_pct": 1.4,
-  "overall_pct": 1.38,
-  "lift": 1.015
+  "cooks": 11364,
+  "share_pct": 1.41,
+  "overall_pct": 1.39,
+  "lift": 1.013
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 27536,
-  "share_pct": 3.42,
-  "overall_pct": 3.45,
-  "lift": 0.989
+  "cooks": 25328,
+  "share_pct": 3.15,
+  "overall_pct": 3.18,
+  "lift": 0.99
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 336313,
-  "share_pct": 41.72,
-  "overall_pct": 43.19,
-  "lift": 0.966
+  "cooks": 331169,
+  "share_pct": 41.15,
+  "overall_pct": 42.65,
+  "lift": 0.965
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 160846,
-  "share_pct": 19.95,
-  "overall_pct": 21.87,
-  "lift": 0.913
+  "cooks": 167138,
+  "share_pct": 20.77,
+  "overall_pct": 22.62,
+  "lift": 0.918
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 21014,
-  "share_pct": 2.61,
-  "overall_pct": 2.54,
-  "lift": 1.024
+  "cooks": 21362,
+  "share_pct": 2.65,
+  "overall_pct": 2.56,
+  "lift": 1.036
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 494868,
-  "share_pct": 61.39,
-  "overall_pct": 60.21,
+  "cooks": 496968,
+  "share_pct": 61.76,
+  "overall_pct": 60.55,
   "lift": 1.02
  },
  {
@@ -514,59 +514,59 @@
   "group_value": "25-34",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 83994,
-  "share_pct": 10.42,
-  "overall_pct": 10.46,
-  "lift": 0.996
+  "cooks": 83466,
+  "share_pct": 10.37,
+  "overall_pct": 10.38,
+  "lift": 0.999
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 206218,
-  "share_pct": 25.58,
-  "overall_pct": 26.78,
-  "lift": 0.955
+  "cooks": 202909,
+  "share_pct": 25.22,
+  "overall_pct": 26.5,
+  "lift": 0.951
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 430583,
-  "share_pct": 53.42,
-  "overall_pct": 48.96,
-  "lift": 1.091
+  "cooks": 435398,
+  "share_pct": 54.11,
+  "overall_pct": 49.62,
+  "lift": 1.09
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 375511,
-  "share_pct": 46.58,
-  "overall_pct": 51.04,
-  "lift": 0.913
+  "cooks": 369307,
+  "share_pct": 45.89,
+  "overall_pct": 50.38,
+  "lift": 0.911
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 219900,
-  "share_pct": 27.28,
-  "overall_pct": 26.46,
-  "lift": 1.031
+  "cooks": 227102,
+  "share_pct": 28.22,
+  "overall_pct": 27.45,
+  "lift": 1.028
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 586194,
-  "share_pct": 72.72,
-  "overall_pct": 73.54,
+  "cooks": 577603,
+  "share_pct": 71.78,
+  "overall_pct": 72.55,
   "lift": 0.989
  },
  {
@@ -574,109 +574,109 @@
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 84826,
-  "share_pct": 10.52,
-  "overall_pct": 9.02,
-  "lift": 1.167
+  "cooks": 84140,
+  "share_pct": 10.46,
+  "overall_pct": 8.98,
+  "lift": 1.164
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 94039,
-  "share_pct": 11.67,
-  "overall_pct": 10.84,
-  "lift": 1.077
+  "cooks": 90956,
+  "share_pct": 11.3,
+  "overall_pct": 10.45,
+  "lift": 1.082
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 92770,
-  "share_pct": 11.51,
-  "overall_pct": 11.08,
+  "cooks": 93008,
+  "share_pct": 11.56,
+  "overall_pct": 11.13,
   "lift": 1.039
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
-  "value": "khác",
-  "cooks": 23868,
-  "share_pct": 2.96,
-  "overall_pct": 2.87,
+  "value": "pha/xay",
+  "cooks": 20665,
+  "share_pct": 2.57,
+  "overall_pct": 2.49,
   "lift": 1.033
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
-  "value": "pha/xay",
-  "cooks": 20351,
-  "share_pct": 2.52,
-  "overall_pct": 2.47,
-  "lift": 1.023
+  "value": "khác",
+  "cooks": 24519,
+  "share_pct": 3.05,
+  "overall_pct": 2.96,
+  "lift": 1.03
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 34571,
-  "share_pct": 4.29,
-  "overall_pct": 4.2,
-  "lift": 1.021
+  "cooks": 35500,
+  "share_pct": 4.41,
+  "overall_pct": 4.29,
+  "lift": 1.028
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 109323,
-  "share_pct": 13.56,
-  "overall_pct": 13.64,
-  "lift": 0.994
+  "cooks": 105490,
+  "share_pct": 13.11,
+  "overall_pct": 13.25,
+  "lift": 0.989
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 44793,
-  "share_pct": 5.56,
-  "overall_pct": 5.67,
-  "lift": 0.979
+  "cooks": 45866,
+  "share_pct": 5.7,
+  "overall_pct": 5.81,
+  "lift": 0.98
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 233984,
-  "share_pct": 29.03,
-  "overall_pct": 30.74,
-  "lift": 0.944
+  "cooks": 236194,
+  "share_pct": 29.35,
+  "overall_pct": 31.02,
+  "lift": 0.946
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 67569,
-  "share_pct": 8.38,
-  "overall_pct": 9.48,
-  "lift": 0.884
+  "cooks": 68367,
+  "share_pct": 8.5,
+  "overall_pct": 9.62,
+  "lift": 0.883
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 26045,
-  "share_pct": 3.23,
-  "overall_pct": 2.71,
+  "cooks": 26575,
+  "share_pct": 3.3,
+  "overall_pct": 2.77,
   "lift": 1.194
  },
  {
@@ -684,89 +684,79 @@
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 47167,
-  "share_pct": 5.85,
-  "overall_pct": 5.45,
-  "lift": 1.075
- },
- {
-  "group_type": "age_group",
-  "group_value": "25-34",
-  "attribute": "main_protein",
-  "value": "thịt khác",
-  "cooks": 3664,
-  "share_pct": 0.45,
-  "overall_pct": 0.42,
-  "lift": 1.072
+  "cooks": 48025,
+  "share_pct": 5.97,
+  "overall_pct": 5.55,
+  "lift": 1.076
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 29123,
+  "cooks": 29081,
   "share_pct": 3.61,
-  "overall_pct": 3.37,
-  "lift": 1.071
+  "overall_pct": 3.41,
+  "lift": 1.061
+ },
+ {
+  "group_type": "age_group",
+  "group_value": "25-34",
+  "attribute": "main_protein",
+  "value": "thịt khác",
+  "cooks": 3562,
+  "share_pct": 0.44,
+  "overall_pct": 0.42,
+  "lift": 1.06
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 147613,
-  "share_pct": 18.31,
-  "overall_pct": 17.45,
-  "lift": 1.049
+  "cooks": 185904,
+  "share_pct": 23.1,
+  "overall_pct": 21.9,
+  "lift": 1.055
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 85999,
-  "share_pct": 10.67,
-  "overall_pct": 10.26,
-  "lift": 1.04
+  "cooks": 85485,
+  "share_pct": 10.62,
+  "overall_pct": 10.24,
+  "lift": 1.037
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 105008,
+  "cooks": 104828,
   "share_pct": 13.03,
-  "overall_pct": 13.01,
-  "lift": 1.001
+  "overall_pct": 12.95,
+  "lift": 1.006
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 96507,
-  "share_pct": 11.97,
-  "overall_pct": 12.47,
-  "lift": 0.96
+  "cooks": 95033,
+  "share_pct": 11.81,
+  "overall_pct": 12.28,
+  "lift": 0.962
  },
  {
   "group_type": "age_group",
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 80189,
-  "share_pct": 9.95,
-  "overall_pct": 10.52,
-  "lift": 0.945
- },
- {
-  "group_type": "age_group",
-  "group_value": "25-34",
-  "attribute": "main_protein",
-  "value": "đậu hũ/chay",
-  "cooks": 180825,
-  "share_pct": 22.43,
-  "overall_pct": 23.81,
+  "cooks": 79839,
+  "share_pct": 9.92,
+  "overall_pct": 10.53,
   "lift": 0.942
  },
  {
@@ -774,119 +764,129 @@
   "group_value": "25-34",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 3954,
+  "cooks": 3972,
   "share_pct": 0.49,
-  "overall_pct": 0.53,
-  "lift": 0.922
+  "overall_pct": 0.54,
+  "lift": 0.918
+ },
+ {
+  "group_type": "age_group",
+  "group_value": "25-34",
+  "attribute": "main_protein",
+  "value": "đậu hũ/chay",
+  "cooks": 142401,
+  "share_pct": 17.7,
+  "overall_pct": 19.43,
+  "lift": 0.911
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 315287,
-  "share_pct": 49.24,
-  "overall_pct": 43.19,
-  "lift": 1.14
+  "cooks": 311157,
+  "share_pct": 48.74,
+  "overall_pct": 42.65,
+  "lift": 1.143
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 151632,
-  "share_pct": 23.68,
-  "overall_pct": 21.87,
-  "lift": 1.083
+  "cooks": 155275,
+  "share_pct": 24.32,
+  "overall_pct": 22.62,
+  "lift": 1.075
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 12319,
-  "share_pct": 1.92,
-  "overall_pct": 2.14,
-  "lift": 0.898
+  "cooks": 11827,
+  "share_pct": 1.85,
+  "overall_pct": 2.07,
+  "lift": 0.895
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 31200,
+  "cooks": 31101,
   "share_pct": 4.87,
-  "overall_pct": 5.55,
-  "lift": 0.878
+  "overall_pct": 5.51,
+  "lift": 0.885
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 7669,
-  "share_pct": 1.2,
-  "overall_pct": 1.38,
-  "lift": 0.87
+  "cooks": 7698,
+  "share_pct": 1.21,
+  "overall_pct": 1.39,
+  "lift": 0.865
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 18783,
-  "share_pct": 2.93,
-  "overall_pct": 3.6,
-  "lift": 0.815
+  "cooks": 19609,
+  "share_pct": 3.07,
+  "overall_pct": 3.71,
+  "lift": 0.827
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 40835,
-  "share_pct": 6.38,
-  "overall_pct": 8.14,
-  "lift": 0.783
+  "cooks": 40927,
+  "share_pct": 6.41,
+  "overall_pct": 8.24,
+  "lift": 0.778
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 15733,
-  "share_pct": 2.46,
-  "overall_pct": 3.45,
-  "lift": 0.711
+  "cooks": 14307,
+  "share_pct": 2.24,
+  "overall_pct": 3.18,
+  "lift": 0.705
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 36385,
-  "share_pct": 5.68,
-  "overall_pct": 8.13,
-  "lift": 0.699
+  "cooks": 36140,
+  "share_pct": 5.66,
+  "overall_pct": 8.07,
+  "lift": 0.702
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 10458,
+  "cooks": 10375,
   "share_pct": 1.63,
-  "overall_pct": 2.54,
-  "lift": 0.642
+  "overall_pct": 2.56,
+  "lift": 0.634
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 400314,
-  "share_pct": 62.52,
-  "overall_pct": 60.21,
+  "cooks": 401197,
+  "share_pct": 62.84,
+  "overall_pct": 60.55,
   "lift": 1.038
  },
  {
@@ -894,69 +894,69 @@
   "group_value": "35-44",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 177133,
-  "share_pct": 27.66,
-  "overall_pct": 26.78,
-  "lift": 1.033
+  "cooks": 175109,
+  "share_pct": 27.43,
+  "overall_pct": 26.5,
+  "lift": 1.035
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 52396,
-  "share_pct": 8.18,
-  "overall_pct": 10.46,
-  "lift": 0.782
+  "cooks": 51735,
+  "share_pct": 8.1,
+  "overall_pct": 10.38,
+  "lift": 0.78
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 10458,
+  "cooks": 10375,
   "share_pct": 1.63,
-  "overall_pct": 2.54,
-  "lift": 0.642
+  "overall_pct": 2.56,
+  "lift": 0.634
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 340496,
-  "share_pct": 53.18,
-  "overall_pct": 51.04,
-  "lift": 1.042
+  "cooks": 336289,
+  "share_pct": 52.68,
+  "overall_pct": 50.38,
+  "lift": 1.046
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 299805,
-  "share_pct": 46.82,
-  "overall_pct": 48.96,
-  "lift": 0.956
+  "cooks": 302127,
+  "share_pct": 47.32,
+  "overall_pct": 49.62,
+  "lift": 0.954
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 176536,
-  "share_pct": 27.57,
-  "overall_pct": 26.46,
-  "lift": 1.042
+  "cooks": 182028,
+  "share_pct": 28.51,
+  "overall_pct": 27.45,
+  "lift": 1.039
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 463765,
-  "share_pct": 72.43,
-  "overall_pct": 73.54,
+  "cooks": 456388,
+  "share_pct": 71.49,
+  "overall_pct": 72.55,
   "lift": 0.985
  },
  {
@@ -964,249 +964,249 @@
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 73874,
-  "share_pct": 11.54,
-  "overall_pct": 9.48,
-  "lift": 1.217
+  "cooks": 74887,
+  "share_pct": 11.73,
+  "overall_pct": 9.62,
+  "lift": 1.219
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 95879,
-  "share_pct": 14.97,
-  "overall_pct": 13.64,
-  "lift": 1.098
+  "cooks": 92855,
+  "share_pct": 14.54,
+  "overall_pct": 13.25,
+  "lift": 1.097
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 201628,
-  "share_pct": 31.49,
-  "overall_pct": 30.74,
-  "lift": 1.024
+  "cooks": 203135,
+  "share_pct": 31.82,
+  "overall_pct": 31.02,
+  "lift": 1.026
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 70570,
-  "share_pct": 11.02,
-  "overall_pct": 10.84,
-  "lift": 1.017
+  "cooks": 67571,
+  "share_pct": 10.58,
+  "overall_pct": 10.45,
+  "lift": 1.013
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 36028,
-  "share_pct": 5.63,
-  "overall_pct": 5.67,
-  "lift": 0.992
+  "cooks": 36868,
+  "share_pct": 5.77,
+  "overall_pct": 5.81,
+  "lift": 0.993
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 26108,
-  "share_pct": 4.08,
-  "overall_pct": 4.2,
-  "lift": 0.971
+  "cooks": 26396,
+  "share_pct": 4.13,
+  "overall_pct": 4.29,
+  "lift": 0.963
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 67584,
-  "share_pct": 10.56,
-  "overall_pct": 11.08,
-  "lift": 0.953
+  "cooks": 67822,
+  "share_pct": 10.62,
+  "overall_pct": 11.13,
+  "lift": 0.955
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 16684,
-  "share_pct": 2.61,
-  "overall_pct": 2.87,
-  "lift": 0.909
+  "cooks": 17061,
+  "share_pct": 2.67,
+  "overall_pct": 2.96,
+  "lift": 0.903
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 41886,
-  "share_pct": 6.54,
-  "overall_pct": 9.02,
-  "lift": 0.725
+  "cooks": 41812,
+  "share_pct": 6.55,
+  "overall_pct": 8.98,
+  "lift": 0.729
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 10060,
+  "cooks": 10009,
   "share_pct": 1.57,
-  "overall_pct": 2.47,
-  "lift": 0.637
+  "overall_pct": 2.49,
+  "lift": 0.631
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 3984,
-  "share_pct": 0.62,
-  "overall_pct": 0.53,
-  "lift": 1.169
+  "cooks": 3996,
+  "share_pct": 0.63,
+  "overall_pct": 0.54,
+  "lift": 1.164
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 3090,
-  "share_pct": 0.48,
+  "cooks": 3101,
+  "share_pct": 0.49,
   "overall_pct": 0.42,
-  "lift": 1.138
+  "lift": 1.163
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 89691,
-  "share_pct": 14.01,
-  "overall_pct": 12.47,
-  "lift": 1.123
+  "cooks": 88250,
+  "share_pct": 13.82,
+  "overall_pct": 12.28,
+  "lift": 1.125
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 74012,
-  "share_pct": 11.56,
-  "overall_pct": 10.52,
-  "lift": 1.098
+  "cooks": 74164,
+  "share_pct": 11.62,
+  "overall_pct": 10.53,
+  "lift": 1.103
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 163333,
-  "share_pct": 25.51,
-  "overall_pct": 23.81,
-  "lift": 1.071
+  "cooks": 135883,
+  "share_pct": 21.28,
+  "overall_pct": 19.43,
+  "lift": 1.096
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 21499,
-  "share_pct": 3.36,
-  "overall_pct": 3.37,
-  "lift": 0.996
- },
- {
-  "group_type": "age_group",
-  "group_value": "35-44",
-  "attribute": "main_protein",
-  "value": "hải sản",
-  "cooks": 111148,
-  "share_pct": 17.36,
-  "overall_pct": 17.45,
+  "cooks": 21626,
+  "share_pct": 3.39,
+  "overall_pct": 3.41,
   "lift": 0.995
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
+  "value": "hải sản",
+  "cooks": 138264,
+  "share_pct": 21.66,
+  "overall_pct": 21.9,
+  "lift": 0.989
+ },
+ {
+  "group_type": "age_group",
+  "group_value": "35-44",
+  "attribute": "main_protein",
   "value": "gà",
-  "cooks": 33475,
-  "share_pct": 5.23,
-  "overall_pct": 5.45,
-  "lift": 0.96
+  "cooks": 34034,
+  "share_pct": 5.33,
+  "overall_pct": 5.55,
+  "lift": 0.961
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 62077,
-  "share_pct": 9.69,
-  "overall_pct": 10.26,
-  "lift": 0.945
+  "cooks": 61552,
+  "share_pct": 9.64,
+  "overall_pct": 10.24,
+  "lift": 0.941
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 15138,
-  "share_pct": 2.36,
-  "overall_pct": 2.71,
-  "lift": 0.873
+  "cooks": 15436,
+  "share_pct": 2.42,
+  "overall_pct": 2.77,
+  "lift": 0.874
  },
  {
   "group_type": "age_group",
   "group_value": "35-44",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 62854,
-  "share_pct": 9.82,
-  "overall_pct": 13.01,
-  "lift": 0.755
+  "cooks": 62110,
+  "share_pct": 9.73,
+  "overall_pct": 12.95,
+  "lift": 0.751
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 138291,
-  "share_pct": 29.55,
-  "overall_pct": 21.87,
-  "lift": 1.351
+  "cooks": 141402,
+  "share_pct": 30.28,
+  "overall_pct": 22.62,
+  "lift": 1.339
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 29466,
-  "share_pct": 6.3,
-  "overall_pct": 5.55,
-  "lift": 1.134
+  "cooks": 29116,
+  "share_pct": 6.23,
+  "overall_pct": 5.51,
+  "lift": 1.132
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 213962,
-  "share_pct": 45.72,
-  "overall_pct": 43.19,
-  "lift": 1.058
+  "cooks": 211313,
+  "share_pct": 45.24,
+  "overall_pct": 42.65,
+  "lift": 1.061
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 7601,
-  "share_pct": 1.62,
-  "overall_pct": 2.14,
+  "cooks": 7324,
+  "share_pct": 1.57,
+  "overall_pct": 2.07,
   "lift": 0.758
  },
  {
@@ -1214,79 +1214,79 @@
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 12656,
-  "share_pct": 2.7,
-  "overall_pct": 3.6,
-  "lift": 0.752
+  "cooks": 13108,
+  "share_pct": 2.81,
+  "overall_pct": 3.71,
+  "lift": 0.756
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 27956,
-  "share_pct": 5.97,
-  "overall_pct": 8.14,
-  "lift": 0.733
+  "cooks": 28141,
+  "share_pct": 6.03,
+  "overall_pct": 8.24,
+  "lift": 0.731
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 10117,
-  "share_pct": 2.16,
-  "overall_pct": 3.45,
-  "lift": 0.626
+  "cooks": 9054,
+  "share_pct": 1.94,
+  "overall_pct": 3.18,
+  "lift": 0.61
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 3689,
-  "share_pct": 0.79,
-  "overall_pct": 1.38,
-  "lift": 0.573
+  "cooks": 3716,
+  "share_pct": 0.8,
+  "overall_pct": 1.39,
+  "lift": 0.571
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 19211,
-  "share_pct": 4.1,
-  "overall_pct": 8.13,
-  "lift": 0.505
+  "cooks": 18753,
+  "share_pct": 4.02,
+  "overall_pct": 8.07,
+  "lift": 0.498
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 5067,
-  "share_pct": 1.08,
-  "overall_pct": 2.54,
-  "lift": 0.425
+  "cooks": 5117,
+  "share_pct": 1.1,
+  "overall_pct": 2.56,
+  "lift": 0.427
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 145088,
-  "share_pct": 31.0,
-  "overall_pct": 26.78,
-  "lift": 1.158
+  "cooks": 143611,
+  "share_pct": 30.75,
+  "overall_pct": 26.5,
+  "lift": 1.16
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 283524,
-  "share_pct": 60.58,
-  "overall_pct": 60.21,
+  "cooks": 284544,
+  "share_pct": 60.92,
+  "overall_pct": 60.55,
   "lift": 1.006
  },
  {
@@ -1294,29 +1294,29 @@
   "group_value": "45+",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 34337,
-  "share_pct": 7.34,
-  "overall_pct": 10.46,
-  "lift": 0.701
+  "cooks": 33772,
+  "share_pct": 7.23,
+  "overall_pct": 10.38,
+  "lift": 0.696
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 5067,
-  "share_pct": 1.08,
-  "overall_pct": 2.54,
-  "lift": 0.425
+  "cooks": 5117,
+  "share_pct": 1.1,
+  "overall_pct": 2.56,
+  "lift": 0.427
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 284955,
-  "share_pct": 60.89,
-  "overall_pct": 51.04,
+  "cooks": 280672,
+  "share_pct": 60.1,
+  "overall_pct": 50.38,
   "lift": 1.193
  },
  {
@@ -1324,89 +1324,89 @@
   "group_value": "45+",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 183061,
-  "share_pct": 39.11,
-  "overall_pct": 48.96,
-  "lift": 0.799
+  "cooks": 186372,
+  "share_pct": 39.9,
+  "overall_pct": 49.62,
+  "lift": 0.804
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 346750,
-  "share_pct": 74.09,
-  "overall_pct": 73.54,
-  "lift": 1.007
+  "cooks": 340341,
+  "share_pct": 72.87,
+  "overall_pct": 72.55,
+  "lift": 1.004
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 121266,
-  "share_pct": 25.91,
-  "overall_pct": 26.46,
-  "lift": 0.979
+  "cooks": 126703,
+  "share_pct": 27.13,
+  "overall_pct": 27.45,
+  "lift": 0.988
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 57864,
-  "share_pct": 12.36,
-  "overall_pct": 9.48,
-  "lift": 1.304
+  "cooks": 58951,
+  "share_pct": 12.62,
+  "overall_pct": 9.62,
+  "lift": 1.312
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 176766,
-  "share_pct": 37.77,
-  "overall_pct": 30.74,
-  "lift": 1.229
+  "cooks": 177841,
+  "share_pct": 38.08,
+  "overall_pct": 31.02,
+  "lift": 1.228
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 70460,
-  "share_pct": 15.06,
-  "overall_pct": 13.64,
-  "lift": 1.104
+  "cooks": 68911,
+  "share_pct": 14.75,
+  "overall_pct": 13.25,
+  "lift": 1.113
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 26458,
-  "share_pct": 5.65,
-  "overall_pct": 5.67,
-  "lift": 0.996
+  "cooks": 27272,
+  "share_pct": 5.84,
+  "overall_pct": 5.81,
+  "lift": 1.004
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 43777,
-  "share_pct": 9.35,
-  "overall_pct": 10.84,
-  "lift": 0.863
+  "cooks": 41321,
+  "share_pct": 8.85,
+  "overall_pct": 10.45,
+  "lift": 0.847
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 16501,
-  "share_pct": 3.53,
-  "overall_pct": 4.2,
+  "cooks": 16840,
+  "share_pct": 3.61,
+  "overall_pct": 4.29,
   "lift": 0.84
  },
  {
@@ -1414,69 +1414,69 @@
   "group_value": "45+",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 9886,
-  "share_pct": 2.11,
-  "overall_pct": 2.87,
-  "lift": 0.737
- },
- {
-  "group_type": "age_group",
-  "group_value": "45+",
-  "attribute": "main_method",
-  "value": "nướng",
-  "cooks": 38175,
-  "share_pct": 8.16,
-  "overall_pct": 11.08,
+  "cooks": 10168,
+  "share_pct": 2.18,
+  "overall_pct": 2.96,
   "lift": 0.736
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
+  "value": "nướng",
+  "cooks": 38039,
+  "share_pct": 8.14,
+  "overall_pct": 11.13,
+  "lift": 0.732
+ },
+ {
+  "group_type": "age_group",
+  "group_value": "45+",
+  "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 23179,
-  "share_pct": 4.95,
-  "overall_pct": 9.02,
-  "lift": 0.549
+  "cooks": 22703,
+  "share_pct": 4.86,
+  "overall_pct": 8.98,
+  "lift": 0.541
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 4950,
-  "share_pct": 1.06,
-  "overall_pct": 2.47,
-  "lift": 0.429
+  "cooks": 4998,
+  "share_pct": 1.07,
+  "overall_pct": 2.49,
+  "lift": 0.431
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 142194,
-  "share_pct": 30.38,
-  "overall_pct": 23.81,
-  "lift": 1.276
+  "cooks": 120226,
+  "share_pct": 25.74,
+  "overall_pct": 19.43,
+  "lift": 1.325
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 3040,
-  "share_pct": 0.65,
-  "overall_pct": 0.53,
-  "lift": 1.22
+  "cooks": 3109,
+  "share_pct": 0.67,
+  "overall_pct": 0.54,
+  "lift": 1.238
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 59280,
+  "cooks": 59193,
   "share_pct": 12.67,
-  "overall_pct": 10.52,
+  "overall_pct": 10.53,
   "lift": 1.204
  },
  {
@@ -1484,509 +1484,509 @@
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 67355,
-  "share_pct": 14.39,
-  "overall_pct": 12.47,
-  "lift": 1.154
+  "cooks": 65808,
+  "share_pct": 14.09,
+  "overall_pct": 12.28,
+  "lift": 1.147
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 75437,
-  "share_pct": 16.12,
-  "overall_pct": 17.45,
-  "lift": 0.924
+  "cooks": 97307,
+  "share_pct": 20.83,
+  "overall_pct": 21.9,
+  "lift": 0.951
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 1804,
-  "share_pct": 0.39,
+  "cooks": 1767,
+  "share_pct": 0.38,
   "overall_pct": 0.42,
-  "lift": 0.909
+  "lift": 0.906
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 13115,
-  "share_pct": 2.8,
-  "overall_pct": 3.37,
-  "lift": 0.831
+  "cooks": 13521,
+  "share_pct": 2.9,
+  "overall_pct": 3.41,
+  "lift": 0.85
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 39720,
-  "share_pct": 8.49,
-  "overall_pct": 10.26,
-  "lift": 0.827
+  "cooks": 39686,
+  "share_pct": 8.5,
+  "overall_pct": 10.24,
+  "lift": 0.83
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 19836,
-  "share_pct": 4.24,
-  "overall_pct": 5.45,
-  "lift": 0.778
+  "cooks": 20470,
+  "share_pct": 4.38,
+  "overall_pct": 5.55,
+  "lift": 0.79
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 39404,
-  "share_pct": 8.42,
-  "overall_pct": 13.01,
-  "lift": 0.647
+  "cooks": 38889,
+  "share_pct": 8.33,
+  "overall_pct": 12.95,
+  "lift": 0.643
  },
  {
   "group_type": "age_group",
   "group_value": "45+",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 6831,
-  "share_pct": 1.46,
-  "overall_pct": 2.71,
-  "lift": 0.539
+  "cooks": 7068,
+  "share_pct": 1.51,
+  "overall_pct": 2.77,
+  "lift": 0.547
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 34159,
-  "share_pct": 3.3,
-  "overall_pct": 2.14,
-  "lift": 1.541
+  "cooks": 33126,
+  "share_pct": 3.21,
+  "overall_pct": 2.07,
+  "lift": 1.55
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 66584,
-  "share_pct": 6.44,
-  "overall_pct": 5.55,
-  "lift": 1.159
+  "cooks": 66047,
+  "share_pct": 6.4,
+  "overall_pct": 5.51,
+  "lift": 1.162
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 93030,
-  "share_pct": 8.99,
-  "overall_pct": 8.14,
-  "lift": 1.104
+  "cooks": 94092,
+  "share_pct": 9.11,
+  "overall_pct": 8.24,
+  "lift": 1.106
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 14472,
-  "share_pct": 1.4,
-  "overall_pct": 1.38,
-  "lift": 1.016
+  "cooks": 14671,
+  "share_pct": 1.42,
+  "overall_pct": 1.39,
+  "lift": 1.019
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 36999,
-  "share_pct": 3.58,
-  "overall_pct": 3.6,
-  "lift": 0.994
+  "cooks": 38181,
+  "share_pct": 3.7,
+  "overall_pct": 3.71,
+  "lift": 0.996
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 437423,
-  "share_pct": 42.28,
-  "overall_pct": 43.19,
-  "lift": 0.979
+  "cooks": 432907,
+  "share_pct": 41.92,
+  "overall_pct": 42.65,
+  "lift": 0.983
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 82014,
-  "share_pct": 7.93,
-  "overall_pct": 8.13,
-  "lift": 0.975
+  "cooks": 81303,
+  "share_pct": 7.87,
+  "overall_pct": 8.07,
+  "lift": 0.976
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 34378,
-  "share_pct": 3.32,
-  "overall_pct": 3.45,
-  "lift": 0.962
+  "cooks": 31690,
+  "share_pct": 3.07,
+  "overall_pct": 3.18,
+  "lift": 0.966
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 212730,
-  "share_pct": 20.56,
-  "overall_pct": 21.87,
-  "lift": 0.94
+  "cooks": 217954,
+  "share_pct": 21.11,
+  "overall_pct": 22.62,
+  "lift": 0.933
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 22767,
+  "cooks": 22683,
   "share_pct": 2.2,
-  "overall_pct": 2.54,
-  "lift": 0.865
+  "overall_pct": 2.56,
+  "lift": 0.857
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 111434,
-  "share_pct": 10.77,
-  "overall_pct": 10.46,
-  "lift": 1.029
+  "cooks": 110727,
+  "share_pct": 10.72,
+  "overall_pct": 10.38,
+  "lift": 1.033
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 635903,
-  "share_pct": 61.47,
-  "overall_pct": 60.21,
-  "lift": 1.021
+  "cooks": 637615,
+  "share_pct": 61.75,
+  "overall_pct": 60.55,
+  "lift": 1.02
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 264452,
-  "share_pct": 25.56,
-  "overall_pct": 26.78,
-  "lift": 0.954
+  "cooks": 261629,
+  "share_pct": 25.34,
+  "overall_pct": 26.5,
+  "lift": 0.956
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 22767,
+  "cooks": 22683,
   "share_pct": 2.2,
-  "overall_pct": 2.54,
-  "lift": 0.865
+  "overall_pct": 2.56,
+  "lift": 0.857
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 618443,
-  "share_pct": 59.78,
-  "overall_pct": 51.04,
-  "lift": 1.171
+  "cooks": 611352,
+  "share_pct": 59.2,
+  "overall_pct": 50.38,
+  "lift": 1.175
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 416113,
-  "share_pct": 40.22,
-  "overall_pct": 48.96,
-  "lift": 0.821
+  "cooks": 421302,
+  "share_pct": 40.8,
+  "overall_pct": 49.62,
+  "lift": 0.822
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 282573,
-  "share_pct": 27.31,
-  "overall_pct": 26.46,
-  "lift": 1.032
+  "cooks": 290536,
+  "share_pct": 28.13,
+  "overall_pct": 27.45,
+  "lift": 1.025
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 751983,
-  "share_pct": 72.69,
-  "overall_pct": 73.54,
-  "lift": 0.988
+  "cooks": 742118,
+  "share_pct": 71.87,
+  "overall_pct": 72.55,
+  "lift": 0.991
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 130148,
-  "share_pct": 12.58,
-  "overall_pct": 11.08,
-  "lift": 1.135
+  "cooks": 130740,
+  "share_pct": 12.66,
+  "overall_pct": 11.13,
+  "lift": 1.138
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 61490,
-  "share_pct": 5.94,
-  "overall_pct": 5.67,
-  "lift": 1.047
+  "cooks": 63188,
+  "share_pct": 6.12,
+  "overall_pct": 5.81,
+  "lift": 1.052
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 45265,
-  "share_pct": 4.38,
-  "overall_pct": 4.2,
-  "lift": 1.042
+  "cooks": 46229,
+  "share_pct": 4.48,
+  "overall_pct": 4.29,
+  "lift": 1.043
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 319310,
-  "share_pct": 30.86,
-  "overall_pct": 30.74,
-  "lift": 1.004
- },
- {
-  "group_type": "day_type",
-  "group_value": "cuối tuần",
-  "attribute": "main_method",
-  "value": "trộn/gỏi",
-  "cooks": 91184,
-  "share_pct": 8.81,
-  "overall_pct": 9.02,
-  "lift": 0.977
+  "cooks": 319698,
+  "share_pct": 30.96,
+  "overall_pct": 31.02,
+  "lift": 0.998
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 137221,
-  "share_pct": 13.26,
-  "overall_pct": 13.64,
-  "lift": 0.972
+  "cooks": 133797,
+  "share_pct": 12.96,
+  "overall_pct": 13.25,
+  "lift": 0.978
+ },
+ {
+  "group_type": "day_type",
+  "group_value": "cuối tuần",
+  "attribute": "main_method",
+  "value": "trộn/gỏi",
+  "cooks": 90673,
+  "share_pct": 8.78,
+  "overall_pct": 8.98,
+  "lift": 0.978
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 94854,
-  "share_pct": 9.17,
-  "overall_pct": 9.48,
-  "lift": 0.967
+  "cooks": 96227,
+  "share_pct": 9.32,
+  "overall_pct": 9.62,
+  "lift": 0.968
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 106125,
-  "share_pct": 10.26,
-  "overall_pct": 10.84,
-  "lift": 0.947
+  "cooks": 102242,
+  "share_pct": 9.9,
+  "overall_pct": 10.45,
+  "lift": 0.948
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 26842,
-  "share_pct": 2.59,
-  "overall_pct": 2.87,
-  "lift": 0.905
+  "cooks": 27848,
+  "share_pct": 2.7,
+  "overall_pct": 2.96,
+  "lift": 0.912
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 22117,
-  "share_pct": 2.14,
-  "overall_pct": 2.47,
-  "lift": 0.866
+  "cooks": 22012,
+  "share_pct": 2.13,
+  "overall_pct": 2.49,
+  "lift": 0.858
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 5232,
-  "share_pct": 0.51,
+  "cooks": 5129,
+  "share_pct": 0.5,
   "overall_pct": 0.42,
-  "lift": 1.192
+  "lift": 1.189
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 38868,
-  "share_pct": 3.76,
-  "overall_pct": 3.37,
-  "lift": 1.114
+  "cooks": 38953,
+  "share_pct": 3.77,
+  "overall_pct": 3.41,
+  "lift": 1.108
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 61077,
-  "share_pct": 5.9,
-  "overall_pct": 5.45,
-  "lift": 1.084
+  "cooks": 62171,
+  "share_pct": 6.02,
+  "overall_pct": 5.55,
+  "lift": 1.085
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 5971,
+  "cooks": 5993,
   "share_pct": 0.58,
-  "overall_pct": 0.53,
-  "lift": 1.084
- },
- {
-  "group_type": "day_type",
-  "group_value": "cuối tuần",
-  "attribute": "main_protein",
-  "value": "hải sản",
-  "cooks": 187575,
-  "share_pct": 18.13,
-  "overall_pct": 17.45,
-  "lift": 1.039
+  "overall_pct": 0.54,
+  "lift": 1.08
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 111472,
-  "share_pct": 10.77,
-  "overall_pct": 10.52,
-  "lift": 1.024
+  "cooks": 111655,
+  "share_pct": 10.81,
+  "overall_pct": 10.53,
+  "lift": 1.027
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 131797,
-  "share_pct": 12.74,
-  "overall_pct": 12.47,
-  "lift": 1.022
+  "cooks": 129193,
+  "share_pct": 12.51,
+  "overall_pct": 12.28,
+  "lift": 1.019
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 134201,
-  "share_pct": 12.97,
-  "overall_pct": 13.01,
-  "lift": 0.997
+  "cooks": 133410,
+  "share_pct": 12.92,
+  "overall_pct": 12.95,
+  "lift": 0.998
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
-  "value": "trứng",
-  "cooks": 27148,
-  "share_pct": 2.62,
-  "overall_pct": 2.71,
-  "lift": 0.969
+  "value": "hải sản",
+  "cooks": 223495,
+  "share_pct": 21.64,
+  "overall_pct": 21.9,
+  "lift": 0.988
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 233830,
-  "share_pct": 22.6,
-  "overall_pct": 23.81,
-  "lift": 0.949
+  "cooks": 197184,
+  "share_pct": 19.09,
+  "overall_pct": 19.43,
+  "lift": 0.983
+ },
+ {
+  "group_type": "day_type",
+  "group_value": "cuối tuần",
+  "attribute": "main_protein",
+  "value": "trứng",
+  "cooks": 27738,
+  "share_pct": 2.69,
+  "overall_pct": 2.77,
+  "lift": 0.971
  },
  {
   "group_type": "day_type",
   "group_value": "cuối tuần",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 97385,
-  "share_pct": 9.41,
-  "overall_pct": 10.26,
-  "lift": 0.918
+  "cooks": 97733,
+  "share_pct": 9.46,
+  "overall_pct": 10.24,
+  "lift": 0.924
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 37591,
-  "share_pct": 2.81,
-  "overall_pct": 2.54,
-  "lift": 1.105
+  "cooks": 37988,
+  "share_pct": 2.85,
+  "overall_pct": 2.56,
+  "lift": 1.111
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 305874,
-  "share_pct": 22.88,
-  "overall_pct": 21.87,
-  "lift": 1.046
+  "cooks": 317327,
+  "share_pct": 23.79,
+  "overall_pct": 22.62,
+  "lift": 1.052
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 47555,
-  "share_pct": 3.56,
-  "overall_pct": 3.45,
-  "lift": 1.029
+  "cooks": 43527,
+  "share_pct": 3.26,
+  "overall_pct": 3.18,
+  "lift": 1.027
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 110727,
-  "share_pct": 8.28,
-  "overall_pct": 8.13,
+  "cooks": 109600,
+  "share_pct": 8.22,
+  "overall_pct": 8.07,
   "lift": 1.019
  },
  {
@@ -1994,109 +1994,109 @@
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 586970,
-  "share_pct": 43.9,
-  "overall_pct": 43.19,
-  "lift": 1.016
+  "cooks": 576552,
+  "share_pct": 43.22,
+  "overall_pct": 42.65,
+  "lift": 1.013
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 48335,
-  "share_pct": 3.61,
-  "overall_pct": 3.6,
-  "lift": 1.005
+  "cooks": 49677,
+  "share_pct": 3.72,
+  "overall_pct": 3.71,
+  "lift": 1.003
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 18168,
-  "share_pct": 1.36,
-  "overall_pct": 1.38,
-  "lift": 0.987
+  "cooks": 18325,
+  "share_pct": 1.37,
+  "overall_pct": 1.39,
+  "lift": 0.985
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 100140,
-  "share_pct": 7.49,
-  "overall_pct": 8.14,
-  "lift": 0.92
+  "cooks": 100938,
+  "share_pct": 7.57,
+  "overall_pct": 8.24,
+  "lift": 0.918
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 65073,
-  "share_pct": 4.87,
-  "overall_pct": 5.55,
-  "lift": 0.877
+  "cooks": 64268,
+  "share_pct": 4.82,
+  "overall_pct": 5.51,
+  "lift": 0.875
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 16668,
-  "share_pct": 1.25,
-  "overall_pct": 2.14,
-  "lift": 0.582
+  "cooks": 15840,
+  "share_pct": 1.19,
+  "overall_pct": 2.07,
+  "lift": 0.574
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 37591,
-  "share_pct": 2.81,
-  "overall_pct": 2.54,
-  "lift": 1.105
+  "cooks": 37988,
+  "share_pct": 2.85,
+  "overall_pct": 2.56,
+  "lift": 1.111
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 370699,
-  "share_pct": 27.72,
-  "overall_pct": 26.78,
-  "lift": 1.035
+  "cooks": 365656,
+  "share_pct": 27.41,
+  "overall_pct": 26.5,
+  "lift": 1.034
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 792107,
-  "share_pct": 59.24,
-  "overall_pct": 60.21,
-  "lift": 0.984
+  "cooks": 795364,
+  "share_pct": 59.62,
+  "overall_pct": 60.55,
+  "lift": 0.985
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 136704,
-  "share_pct": 10.22,
-  "overall_pct": 10.46,
-  "lift": 0.977
+  "cooks": 135034,
+  "share_pct": 10.12,
+  "overall_pct": 10.38,
+  "lift": 0.975
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 745096,
-  "share_pct": 55.72,
-  "overall_pct": 48.96,
+  "cooks": 753133,
+  "share_pct": 56.45,
+  "overall_pct": 49.62,
   "lift": 1.138
  },
  {
@@ -2104,59 +2104,59 @@
   "group_value": "ngày thường",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 592005,
-  "share_pct": 44.28,
-  "overall_pct": 51.04,
-  "lift": 0.867
+  "cooks": 580909,
+  "share_pct": 43.55,
+  "overall_pct": 50.38,
+  "lift": 0.864
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 992127,
-  "share_pct": 74.2,
-  "overall_pct": 73.54,
-  "lift": 1.009
+  "cooks": 974939,
+  "share_pct": 73.08,
+  "overall_pct": 72.55,
+  "lift": 1.007
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 344974,
-  "share_pct": 25.8,
-  "overall_pct": 26.46,
-  "lift": 0.975
+  "cooks": 359103,
+  "share_pct": 26.92,
+  "overall_pct": 27.45,
+  "lift": 0.981
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 36421,
-  "share_pct": 2.72,
-  "overall_pct": 2.47,
-  "lift": 1.104
+  "cooks": 36816,
+  "share_pct": 2.76,
+  "overall_pct": 2.49,
+  "lift": 1.11
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 41143,
-  "share_pct": 3.08,
-  "overall_pct": 2.87,
-  "lift": 1.073
+  "cooks": 42170,
+  "share_pct": 3.16,
+  "overall_pct": 2.96,
+  "lift": 1.068
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 150872,
-  "share_pct": 11.28,
-  "overall_pct": 10.84,
+  "cooks": 145034,
+  "share_pct": 10.87,
+  "overall_pct": 10.45,
   "lift": 1.041
  },
  {
@@ -2164,109 +2164,119 @@
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 129925,
-  "share_pct": 9.72,
-  "overall_pct": 9.48,
-  "lift": 1.025
+  "cooks": 131519,
+  "share_pct": 9.86,
+  "overall_pct": 9.62,
+  "lift": 1.024
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 186284,
-  "share_pct": 13.93,
-  "overall_pct": 13.64,
-  "lift": 1.021
+  "cooks": 179879,
+  "share_pct": 13.48,
+  "overall_pct": 13.25,
+  "lift": 1.017
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 122718,
-  "share_pct": 9.18,
-  "overall_pct": 9.02,
-  "lift": 1.018
+  "cooks": 121878,
+  "share_pct": 9.14,
+  "overall_pct": 8.98,
+  "lift": 1.017
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 409686,
-  "share_pct": 30.64,
-  "overall_pct": 30.74,
-  "lift": 0.997
+  "cooks": 414384,
+  "share_pct": 31.06,
+  "overall_pct": 31.02,
+  "lift": 1.001
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 54333,
-  "share_pct": 4.06,
-  "overall_pct": 4.2,
-  "lift": 0.968
+  "cooks": 55371,
+  "share_pct": 4.15,
+  "overall_pct": 4.29,
+  "lift": 0.967
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 73094,
-  "share_pct": 5.47,
-  "overall_pct": 5.67,
-  "lift": 0.963
+  "cooks": 74425,
+  "share_pct": 5.58,
+  "overall_pct": 5.81,
+  "lift": 0.959
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 132625,
-  "share_pct": 9.92,
-  "overall_pct": 11.08,
-  "lift": 0.895
+  "cooks": 132566,
+  "share_pct": 9.94,
+  "overall_pct": 11.13,
+  "lift": 0.893
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 145922,
-  "share_pct": 10.91,
-  "overall_pct": 10.26,
-  "lift": 1.064
- },
- {
-  "group_type": "day_type",
-  "group_value": "ngày thường",
-  "attribute": "main_protein",
-  "value": "đậu hũ/chay",
-  "cooks": 330792,
-  "share_pct": 24.74,
-  "overall_pct": 23.81,
-  "lift": 1.039
+  "cooks": 144659,
+  "share_pct": 10.84,
+  "overall_pct": 10.24,
+  "lift": 1.059
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 37051,
-  "share_pct": 2.77,
-  "overall_pct": 2.71,
-  "lift": 1.024
+  "cooks": 37719,
+  "share_pct": 2.83,
+  "overall_pct": 2.77,
+  "lift": 1.022
+ },
+ {
+  "group_type": "day_type",
+  "group_value": "ngày thường",
+  "attribute": "main_protein",
+  "value": "đậu hũ/chay",
+  "cooks": 262557,
+  "share_pct": 19.68,
+  "overall_pct": 19.43,
+  "lift": 1.013
+ },
+ {
+  "group_type": "day_type",
+  "group_value": "ngày thường",
+  "attribute": "main_protein",
+  "value": "hải sản",
+  "cooks": 294766,
+  "share_pct": 22.1,
+  "overall_pct": 21.9,
+  "lift": 1.009
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 174295,
-  "share_pct": 13.04,
-  "overall_pct": 13.01,
+  "cooks": 173022,
+  "share_pct": 12.97,
+  "overall_pct": 12.95,
   "lift": 1.002
  },
  {
@@ -2274,209 +2284,199 @@
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 163944,
-  "share_pct": 12.26,
-  "overall_pct": 12.47,
-  "lift": 0.983
+  "cooks": 161493,
+  "share_pct": 12.11,
+  "overall_pct": 12.28,
+  "lift": 0.986
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 138103,
-  "share_pct": 10.33,
-  "overall_pct": 10.52,
-  "lift": 0.981
- },
- {
-  "group_type": "day_type",
-  "group_value": "ngày thường",
-  "attribute": "main_protein",
-  "value": "hải sản",
-  "cooks": 226332,
-  "share_pct": 16.93,
-  "overall_pct": 17.45,
-  "lift": 0.97
- },
- {
-  "group_type": "day_type",
-  "group_value": "ngày thường",
-  "attribute": "main_protein",
-  "value": "gà",
-  "cooks": 68074,
-  "share_pct": 5.09,
-  "overall_pct": 5.45,
-  "lift": 0.935
+  "cooks": 137536,
+  "share_pct": 10.31,
+  "overall_pct": 10.53,
+  "lift": 0.979
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 6652,
+  "cooks": 6730,
   "share_pct": 0.5,
-  "overall_pct": 0.53,
-  "lift": 0.935
+  "overall_pct": 0.54,
+  "lift": 0.938
+ },
+ {
+  "group_type": "day_type",
+  "group_value": "ngày thường",
+  "attribute": "main_protein",
+  "value": "gà",
+  "cooks": 69150,
+  "share_pct": 5.18,
+  "overall_pct": 5.55,
+  "lift": 0.934
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 41109,
-  "share_pct": 3.07,
-  "overall_pct": 3.37,
-  "lift": 0.912
+  "cooks": 41653,
+  "share_pct": 3.12,
+  "overall_pct": 3.41,
+  "lift": 0.917
  },
  {
   "group_type": "day_type",
   "group_value": "ngày thường",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 4827,
+  "cooks": 4757,
   "share_pct": 0.36,
   "overall_pct": 0.42,
-  "lift": 0.851
+  "lift": 0.854
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 19956,
-  "share_pct": 13.75,
-  "overall_pct": 1.38,
-  "lift": 9.991
+  "cooks": 20046,
+  "share_pct": 13.81,
+  "overall_pct": 1.39,
+  "lift": 9.907
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 19854,
-  "share_pct": 13.68,
-  "overall_pct": 3.45,
-  "lift": 3.96
+  "cooks": 18504,
+  "share_pct": 12.75,
+  "overall_pct": 3.18,
+  "lift": 4.012
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 38513,
-  "share_pct": 26.54,
-  "overall_pct": 8.14,
-  "lift": 3.258
+  "cooks": 38992,
+  "share_pct": 26.87,
+  "overall_pct": 8.24,
+  "lift": 3.26
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 11403,
-  "share_pct": 7.86,
-  "overall_pct": 2.54,
-  "lift": 3.087
+  "cooks": 11578,
+  "share_pct": 7.98,
+  "overall_pct": 2.56,
+  "lift": 3.112
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 5991,
-  "share_pct": 4.13,
-  "overall_pct": 2.14,
-  "lift": 1.926
+  "cooks": 5972,
+  "share_pct": 4.11,
+  "overall_pct": 2.07,
+  "lift": 1.989
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 31563,
-  "share_pct": 21.75,
-  "overall_pct": 43.19,
-  "lift": 0.504
+  "cooks": 31140,
+  "share_pct": 21.46,
+  "overall_pct": 42.65,
+  "lift": 0.503
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 5923,
-  "share_pct": 4.08,
-  "overall_pct": 8.13,
-  "lift": 0.502
+  "cooks": 5798,
+  "share_pct": 3.99,
+  "overall_pct": 8.07,
+  "lift": 0.495
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 2295,
-  "share_pct": 1.58,
-  "overall_pct": 3.6,
-  "lift": 0.44
+  "cooks": 2362,
+  "share_pct": 1.63,
+  "overall_pct": 3.71,
+  "lift": 0.438
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 3155,
-  "share_pct": 2.17,
-  "overall_pct": 5.55,
-  "lift": 0.392
+  "cooks": 3165,
+  "share_pct": 2.18,
+  "overall_pct": 5.51,
+  "lift": 0.396
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 6475,
-  "share_pct": 4.46,
-  "overall_pct": 21.87,
-  "lift": 0.204
+  "cooks": 7577,
+  "share_pct": 5.22,
+  "overall_pct": 22.62,
+  "lift": 0.231
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 11403,
-  "share_pct": 7.86,
-  "overall_pct": 2.54,
-  "lift": 3.087
+  "cooks": 11578,
+  "share_pct": 7.98,
+  "overall_pct": 2.56,
+  "lift": 3.112
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 45020,
-  "share_pct": 31.02,
-  "overall_pct": 10.46,
-  "lift": 2.965
+  "cooks": 44346,
+  "share_pct": 30.56,
+  "overall_pct": 10.38,
+  "lift": 2.942
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 72314,
-  "share_pct": 49.83,
-  "overall_pct": 60.21,
-  "lift": 0.828
+  "cooks": 72992,
+  "share_pct": 50.29,
+  "overall_pct": 60.55,
+  "lift": 0.831
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 16391,
-  "share_pct": 11.29,
-  "overall_pct": 26.78,
+  "cooks": 16218,
+  "share_pct": 11.17,
+  "overall_pct": 26.5,
   "lift": 0.422
  },
  {
@@ -2484,9 +2484,9 @@
   "group_value": "khuya",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 78326,
-  "share_pct": 53.97,
-  "overall_pct": 51.04,
+  "cooks": 77301,
+  "share_pct": 53.26,
+  "overall_pct": 50.38,
   "lift": 1.057
  },
  {
@@ -2494,379 +2494,379 @@
   "group_value": "khuya",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 66802,
-  "share_pct": 46.03,
-  "overall_pct": 48.96,
-  "lift": 0.94
+  "cooks": 67833,
+  "share_pct": 46.74,
+  "overall_pct": 49.62,
+  "lift": 0.942
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 108131,
-  "share_pct": 74.51,
-  "overall_pct": 73.54,
-  "lift": 1.013
+  "cooks": 107571,
+  "share_pct": 74.12,
+  "overall_pct": 72.55,
+  "lift": 1.022
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 36997,
-  "share_pct": 25.49,
-  "overall_pct": 26.46,
-  "lift": 0.963
+  "cooks": 37563,
+  "share_pct": 25.88,
+  "overall_pct": 27.45,
+  "lift": 0.943
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 55707,
-  "share_pct": 38.38,
-  "overall_pct": 11.08,
-  "lift": 3.464
+  "cooks": 56083,
+  "share_pct": 38.64,
+  "overall_pct": 11.13,
+  "lift": 3.473
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 11015,
-  "share_pct": 7.59,
-  "overall_pct": 2.47,
-  "lift": 3.075
+  "cooks": 11165,
+  "share_pct": 7.69,
+  "overall_pct": 2.49,
+  "lift": 3.095
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 6115,
-  "share_pct": 4.21,
-  "overall_pct": 2.87,
-  "lift": 1.47
+  "cooks": 6288,
+  "share_pct": 4.33,
+  "overall_pct": 2.96,
+  "lift": 1.464
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 12737,
-  "share_pct": 8.78,
-  "overall_pct": 10.84,
-  "lift": 0.81
+  "cooks": 12625,
+  "share_pct": 8.7,
+  "overall_pct": 10.45,
+  "lift": 0.833
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 6452,
-  "share_pct": 4.45,
-  "overall_pct": 5.67,
-  "lift": 0.783
+  "cooks": 6678,
+  "share_pct": 4.6,
+  "overall_pct": 5.81,
+  "lift": 0.791
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 4534,
-  "share_pct": 3.12,
-  "overall_pct": 4.2,
-  "lift": 0.744
+  "cooks": 4682,
+  "share_pct": 3.23,
+  "overall_pct": 4.29,
+  "lift": 0.751
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 25774,
-  "share_pct": 17.76,
-  "overall_pct": 30.74,
-  "lift": 0.578
+  "cooks": 25226,
+  "share_pct": 17.38,
+  "overall_pct": 31.02,
+  "lift": 0.56
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 7006,
-  "share_pct": 4.83,
-  "overall_pct": 9.02,
-  "lift": 0.535
+  "cooks": 6903,
+  "share_pct": 4.76,
+  "overall_pct": 8.98,
+  "lift": 0.53
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 7011,
-  "share_pct": 4.83,
-  "overall_pct": 9.48,
-  "lift": 0.51
+  "cooks": 7035,
+  "share_pct": 4.85,
+  "overall_pct": 9.62,
+  "lift": 0.504
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 8777,
-  "share_pct": 6.05,
-  "overall_pct": 13.64,
-  "lift": 0.443
+  "cooks": 8449,
+  "share_pct": 5.82,
+  "overall_pct": 13.25,
+  "lift": 0.439
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 56423,
-  "share_pct": 38.88,
-  "overall_pct": 13.01,
-  "lift": 2.989
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "khuya",
-  "attribute": "main_protein",
-  "value": "hải sản",
-  "cooks": 32976,
-  "share_pct": 22.72,
-  "overall_pct": 17.45,
-  "lift": 1.302
+  "cooks": 55924,
+  "share_pct": 38.53,
+  "overall_pct": 12.95,
+  "lift": 2.976
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 794,
-  "share_pct": 0.55,
+  "cooks": 751,
+  "share_pct": 0.52,
   "overall_pct": 0.42,
-  "lift": 1.29
+  "lift": 1.239
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 5665,
-  "share_pct": 3.9,
-  "overall_pct": 3.37,
-  "lift": 1.158
+  "cooks": 5714,
+  "share_pct": 3.94,
+  "overall_pct": 3.41,
+  "lift": 1.156
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "khuya",
+  "attribute": "main_protein",
+  "value": "hải sản",
+  "cooks": 36246,
+  "share_pct": 24.97,
+  "overall_pct": 21.9,
+  "lift": 1.14
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 5995,
-  "share_pct": 4.13,
-  "overall_pct": 5.45,
-  "lift": 0.759
+  "cooks": 6060,
+  "share_pct": 4.18,
+  "overall_pct": 5.55,
+  "lift": 0.753
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 2945,
-  "share_pct": 2.03,
-  "overall_pct": 2.71,
-  "lift": 0.75
+  "cooks": 2852,
+  "share_pct": 1.97,
+  "overall_pct": 2.77,
+  "lift": 0.711
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 12360,
-  "share_pct": 8.52,
-  "overall_pct": 12.47,
-  "lift": 0.683
+  "cooks": 12255,
+  "share_pct": 8.44,
+  "overall_pct": 12.28,
+  "lift": 0.687
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 452,
-  "share_pct": 0.31,
-  "overall_pct": 0.53,
-  "lift": 0.585
+  "cooks": 437,
+  "share_pct": 0.3,
+  "overall_pct": 0.54,
+  "lift": 0.56
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 7674,
-  "share_pct": 5.29,
-  "overall_pct": 10.26,
-  "lift": 0.515
+  "cooks": 7565,
+  "share_pct": 5.21,
+  "overall_pct": 10.24,
+  "lift": 0.509
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 7003,
-  "share_pct": 4.83,
-  "overall_pct": 10.52,
-  "lift": 0.459
+  "cooks": 6994,
+  "share_pct": 4.82,
+  "overall_pct": 10.53,
+  "lift": 0.458
  },
  {
   "group_type": "meal_slot",
   "group_value": "khuya",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 12841,
-  "share_pct": 8.85,
-  "overall_pct": 23.81,
-  "lift": 0.372
+  "cooks": 10336,
+  "share_pct": 7.12,
+  "overall_pct": 19.43,
+  "lift": 0.367
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 33694,
-  "share_pct": 9.79,
-  "overall_pct": 2.54,
-  "lift": 3.846
+  "cooks": 33735,
+  "share_pct": 9.8,
+  "overall_pct": 2.56,
+  "lift": 3.823
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 78650,
-  "share_pct": 22.85,
-  "overall_pct": 8.14,
-  "lift": 2.805
+  "cooks": 79884,
+  "share_pct": 23.21,
+  "overall_pct": 8.24,
+  "lift": 2.816
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 53233,
-  "share_pct": 15.47,
-  "overall_pct": 5.55,
-  "lift": 2.786
+  "cooks": 53161,
+  "share_pct": 15.44,
+  "overall_pct": 5.51,
+  "lift": 2.805
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 19888,
-  "share_pct": 5.78,
-  "overall_pct": 3.45,
-  "lift": 1.672
+  "cooks": 17367,
+  "share_pct": 5.05,
+  "overall_pct": 3.18,
+  "lift": 1.588
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 18875,
-  "share_pct": 5.48,
-  "overall_pct": 3.6,
-  "lift": 1.524
+  "cooks": 19355,
+  "share_pct": 5.62,
+  "overall_pct": 3.71,
+  "lift": 1.515
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 23223,
-  "share_pct": 6.75,
-  "overall_pct": 8.13,
-  "lift": 0.83
+  "cooks": 23173,
+  "share_pct": 6.73,
+  "overall_pct": 8.07,
+  "lift": 0.835
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 5809,
-  "share_pct": 1.69,
-  "overall_pct": 2.14,
-  "lift": 0.787
+  "cooks": 5775,
+  "share_pct": 1.68,
+  "overall_pct": 2.07,
+  "lift": 0.811
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 3517,
-  "share_pct": 1.02,
-  "overall_pct": 1.38,
-  "lift": 0.742
+  "cooks": 3536,
+  "share_pct": 1.03,
+  "overall_pct": 1.39,
+  "lift": 0.737
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 84829,
-  "share_pct": 24.64,
-  "overall_pct": 43.19,
-  "lift": 0.571
+  "cooks": 83982,
+  "share_pct": 24.4,
+  "overall_pct": 42.65,
+  "lift": 0.572
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 22489,
-  "share_pct": 6.53,
-  "overall_pct": 21.87,
-  "lift": 0.299
+  "cooks": 24239,
+  "share_pct": 7.04,
+  "overall_pct": 22.62,
+  "lift": 0.311
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 33694,
-  "share_pct": 9.79,
-  "overall_pct": 2.54,
-  "lift": 3.846
+  "cooks": 33735,
+  "share_pct": 9.8,
+  "overall_pct": 2.56,
+  "lift": 3.823
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 75657,
-  "share_pct": 21.98,
-  "overall_pct": 10.46,
-  "lift": 2.101
+  "cooks": 74787,
+  "share_pct": 21.73,
+  "overall_pct": 10.38,
+  "lift": 2.092
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 166385,
-  "share_pct": 48.34,
-  "overall_pct": 60.21,
-  "lift": 0.803
+  "cooks": 167865,
+  "share_pct": 48.77,
+  "overall_pct": 60.55,
+  "lift": 0.805
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 68471,
-  "share_pct": 19.89,
-  "overall_pct": 26.78,
+  "cooks": 67820,
+  "share_pct": 19.7,
+  "overall_pct": 26.5,
   "lift": 0.743
  },
  {
@@ -2874,279 +2874,279 @@
   "group_value": "sáng",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 189368,
-  "share_pct": 55.02,
-  "overall_pct": 51.04,
-  "lift": 1.078
+  "cooks": 189335,
+  "share_pct": 55.01,
+  "overall_pct": 50.38,
+  "lift": 1.092
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 154839,
-  "share_pct": 44.98,
-  "overall_pct": 48.96,
-  "lift": 0.919
+  "cooks": 154872,
+  "share_pct": 44.99,
+  "overall_pct": 49.62,
+  "lift": 0.907
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 275212,
-  "share_pct": 79.96,
-  "overall_pct": 73.54,
-  "lift": 1.087
+  "cooks": 272825,
+  "share_pct": 79.26,
+  "overall_pct": 72.55,
+  "lift": 1.093
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 68995,
-  "share_pct": 20.04,
-  "overall_pct": 26.46,
-  "lift": 0.758
+  "cooks": 71382,
+  "share_pct": 20.74,
+  "overall_pct": 27.45,
+  "lift": 0.756
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 32793,
+  "cooks": 32802,
   "share_pct": 9.53,
-  "overall_pct": 2.47,
-  "lift": 3.86
+  "overall_pct": 2.49,
+  "lift": 3.834
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 27819,
-  "share_pct": 8.08,
-  "overall_pct": 5.67,
-  "lift": 1.424
+  "cooks": 29341,
+  "share_pct": 8.52,
+  "overall_pct": 5.81,
+  "lift": 1.466
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 49300,
-  "share_pct": 14.32,
-  "overall_pct": 11.08,
-  "lift": 1.293
+  "cooks": 49625,
+  "share_pct": 14.42,
+  "overall_pct": 11.13,
+  "lift": 1.296
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 11929,
-  "share_pct": 3.47,
-  "overall_pct": 2.87,
-  "lift": 1.209
+  "cooks": 12427,
+  "share_pct": 3.61,
+  "overall_pct": 2.96,
+  "lift": 1.22
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 17182,
-  "share_pct": 4.99,
-  "overall_pct": 4.2,
-  "lift": 1.189
+  "cooks": 17519,
+  "share_pct": 5.09,
+  "overall_pct": 4.29,
+  "lift": 1.186
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 38350,
-  "share_pct": 11.14,
-  "overall_pct": 10.84,
-  "lift": 1.028
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "sáng",
-  "attribute": "main_method",
-  "value": "trộn/gỏi",
-  "cooks": 28712,
-  "share_pct": 8.34,
-  "overall_pct": 9.02,
-  "lift": 0.925
+  "cooks": 37435,
+  "share_pct": 10.88,
+  "overall_pct": 10.45,
+  "lift": 1.041
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 42983,
+  "cooks": 42989,
   "share_pct": 12.49,
-  "overall_pct": 13.64,
-  "lift": 0.915
+  "overall_pct": 13.25,
+  "lift": 0.942
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "sáng",
+  "attribute": "main_method",
+  "value": "trộn/gỏi",
+  "cooks": 28827,
+  "share_pct": 8.37,
+  "overall_pct": 8.98,
+  "lift": 0.933
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 22696,
-  "share_pct": 6.59,
-  "overall_pct": 9.48,
-  "lift": 0.696
+  "cooks": 22705,
+  "share_pct": 6.6,
+  "overall_pct": 9.62,
+  "lift": 0.685
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 72443,
-  "share_pct": 21.05,
-  "overall_pct": 30.74,
-  "lift": 0.685
+  "cooks": 70537,
+  "share_pct": 20.49,
+  "overall_pct": 31.02,
+  "lift": 0.661
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 109351,
-  "share_pct": 31.77,
-  "overall_pct": 13.01,
-  "lift": 2.442
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "sáng",
-  "attribute": "main_protein",
-  "value": "trứng",
-  "cooks": 10015,
-  "share_pct": 2.91,
-  "overall_pct": 2.71,
-  "lift": 1.075
+  "cooks": 108522,
+  "share_pct": 31.53,
+  "overall_pct": 12.95,
+  "lift": 2.435
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 12426,
-  "share_pct": 3.61,
-  "overall_pct": 3.37,
-  "lift": 1.071
+  "cooks": 12491,
+  "share_pct": 3.63,
+  "overall_pct": 3.41,
+  "lift": 1.065
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "sáng",
+  "attribute": "main_protein",
+  "value": "trứng",
+  "cooks": 10064,
+  "share_pct": 2.92,
+  "overall_pct": 2.77,
+  "lift": 1.057
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 19356,
-  "share_pct": 5.62,
-  "overall_pct": 5.45,
-  "lift": 1.033
+  "cooks": 19842,
+  "share_pct": 5.76,
+  "overall_pct": 5.55,
+  "lift": 1.039
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 1807,
+  "cooks": 1805,
   "share_pct": 0.52,
-  "overall_pct": 0.53,
-  "lift": 0.986
+  "overall_pct": 0.54,
+  "lift": 0.975
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 51679,
-  "share_pct": 15.01,
-  "overall_pct": 17.45,
-  "lift": 0.86
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "sáng",
-  "attribute": "main_protein",
-  "value": "thịt khác",
-  "cooks": 1136,
-  "share_pct": 0.33,
-  "overall_pct": 0.42,
-  "lift": 0.778
+  "cooks": 58867,
+  "share_pct": 17.1,
+  "overall_pct": 21.9,
+  "lift": 0.781
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 27252,
-  "share_pct": 7.92,
-  "overall_pct": 10.26,
-  "lift": 0.772
+  "cooks": 27377,
+  "share_pct": 7.95,
+  "overall_pct": 10.24,
+  "lift": 0.777
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "sáng",
+  "attribute": "main_protein",
+  "value": "thịt khác",
+  "cooks": 1094,
+  "share_pct": 0.32,
+  "overall_pct": 0.42,
+  "lift": 0.761
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 32018,
-  "share_pct": 9.3,
-  "overall_pct": 12.47,
-  "lift": 0.746
+  "cooks": 31676,
+  "share_pct": 9.2,
+  "overall_pct": 12.28,
+  "lift": 0.749
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 25057,
-  "share_pct": 7.28,
-  "overall_pct": 10.52,
-  "lift": 0.692
+  "cooks": 25529,
+  "share_pct": 7.42,
+  "overall_pct": 10.53,
+  "lift": 0.704
  },
  {
   "group_type": "meal_slot",
   "group_value": "sáng",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 54110,
-  "share_pct": 15.72,
-  "overall_pct": 23.81,
-  "lift": 0.66
+  "cooks": 46940,
+  "share_pct": 13.64,
+  "overall_pct": 19.43,
+  "lift": 0.702
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 193922,
-  "share_pct": 27.37,
-  "overall_pct": 21.87,
-  "lift": 1.252
+  "cooks": 198945,
+  "share_pct": 28.16,
+  "overall_pct": 22.62,
+  "lift": 1.245
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 66290,
-  "share_pct": 9.36,
-  "overall_pct": 8.13,
-  "lift": 1.151
+  "cooks": 65440,
+  "share_pct": 9.26,
+  "overall_pct": 8.07,
+  "lift": 1.148
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 350237,
-  "share_pct": 49.43,
-  "overall_pct": 43.19,
+  "cooks": 344807,
+  "share_pct": 48.81,
+  "overall_pct": 42.65,
   "lift": 1.144
  },
  {
@@ -3154,49 +3154,49 @@
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 30124,
-  "share_pct": 4.25,
-  "overall_pct": 5.55,
-  "lift": 0.766
+  "cooks": 29379,
+  "share_pct": 4.16,
+  "overall_pct": 5.51,
+  "lift": 0.755
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 18437,
-  "share_pct": 2.6,
-  "overall_pct": 3.6,
-  "lift": 0.723
+  "cooks": 19022,
+  "share_pct": 2.69,
+  "overall_pct": 3.71,
+  "lift": 0.725
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 15680,
-  "share_pct": 2.21,
-  "overall_pct": 3.45,
-  "lift": 0.641
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "trưa",
-  "attribute": "dish_category",
-  "value": "lẩu",
-  "cooks": 5315,
-  "share_pct": 0.75,
-  "overall_pct": 2.14,
-  "lift": 0.35
+  "cooks": 14731,
+  "share_pct": 2.09,
+  "overall_pct": 3.18,
+  "lift": 0.656
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 19677,
-  "share_pct": 2.78,
-  "overall_pct": 8.14,
+  "cooks": 20230,
+  "share_pct": 2.86,
+  "overall_pct": 8.24,
+  "lift": 0.348
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "trưa",
+  "attribute": "dish_category",
+  "value": "lẩu",
+  "cooks": 4977,
+  "share_pct": 0.7,
+  "overall_pct": 2.07,
   "lift": 0.341
  },
  {
@@ -3204,9 +3204,9 @@
   "group_value": "trưa",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 3286,
-  "share_pct": 0.46,
-  "overall_pct": 1.38,
+  "cooks": 3320,
+  "share_pct": 0.47,
+  "overall_pct": 1.39,
   "lift": 0.337
  },
  {
@@ -3216,38 +3216,38 @@
   "value": "đồ uống",
   "cooks": 5539,
   "share_pct": 0.78,
-  "overall_pct": 2.54,
-  "lift": 0.307
+  "overall_pct": 2.56,
+  "lift": 0.306
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 212472,
-  "share_pct": 29.99,
-  "overall_pct": 26.78,
-  "lift": 1.12
+  "cooks": 210315,
+  "share_pct": 29.77,
+  "overall_pct": 26.5,
+  "lift": 1.123
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 445621,
-  "share_pct": 62.9,
-  "overall_pct": 60.21,
-  "lift": 1.045
+  "cooks": 446076,
+  "share_pct": 63.15,
+  "overall_pct": 60.55,
+  "lift": 1.043
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 44875,
-  "share_pct": 6.33,
-  "overall_pct": 10.46,
-  "lift": 0.605
+  "cooks": 44460,
+  "share_pct": 6.29,
+  "overall_pct": 10.38,
+  "lift": 0.606
  },
  {
   "group_type": "meal_slot",
@@ -3256,137 +3256,137 @@
   "value": "Đồ uống",
   "cooks": 5539,
   "share_pct": 0.78,
-  "overall_pct": 2.54,
-  "lift": 0.307
+  "overall_pct": 2.56,
+  "lift": 0.306
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 366721,
-  "share_pct": 51.76,
-  "overall_pct": 51.04,
-  "lift": 1.014
+  "cooks": 360335,
+  "share_pct": 51.01,
+  "overall_pct": 50.38,
+  "lift": 1.013
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 341786,
-  "share_pct": 48.24,
-  "overall_pct": 48.96,
-  "lift": 0.985
+  "cooks": 346055,
+  "share_pct": 48.99,
+  "overall_pct": 49.62,
+  "lift": 0.987
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 193475,
-  "share_pct": 27.31,
-  "overall_pct": 26.46,
-  "lift": 1.032
+  "cooks": 200763,
+  "share_pct": 28.42,
+  "overall_pct": 27.45,
+  "lift": 1.035
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 515032,
-  "share_pct": 72.69,
-  "overall_pct": 73.54,
-  "lift": 0.988
+  "cooks": 505627,
+  "share_pct": 71.58,
+  "overall_pct": 72.55,
+  "lift": 0.987
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 76344,
-  "share_pct": 10.78,
-  "overall_pct": 9.48,
-  "lift": 1.137
+  "cooks": 77436,
+  "share_pct": 10.96,
+  "overall_pct": 9.62,
+  "lift": 1.139
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 71868,
-  "share_pct": 10.14,
-  "overall_pct": 9.02,
-  "lift": 1.125
+  "cooks": 71049,
+  "share_pct": 10.06,
+  "overall_pct": 8.98,
+  "lift": 1.12
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 237532,
-  "share_pct": 33.53,
-  "overall_pct": 30.74,
-  "lift": 1.091
+  "cooks": 240204,
+  "share_pct": 34.0,
+  "overall_pct": 31.02,
+  "lift": 1.096
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 102796,
-  "share_pct": 14.51,
-  "overall_pct": 13.64,
-  "lift": 1.064
+  "cooks": 99036,
+  "share_pct": 14.02,
+  "overall_pct": 13.25,
+  "lift": 1.058
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 31056,
-  "share_pct": 4.38,
-  "overall_pct": 4.2,
-  "lift": 1.044
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "trưa",
-  "attribute": "main_method",
-  "value": "chiên",
-  "cooks": 70341,
-  "share_pct": 9.93,
-  "overall_pct": 10.84,
-  "lift": 0.916
+  "cooks": 31336,
+  "share_pct": 4.44,
+  "overall_pct": 4.29,
+  "lift": 1.033
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 36745,
-  "share_pct": 5.19,
-  "overall_pct": 5.67,
-  "lift": 0.914
+  "cooks": 37643,
+  "share_pct": 5.33,
+  "overall_pct": 5.81,
+  "lift": 0.916
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "trưa",
+  "attribute": "main_method",
+  "value": "chiên",
+  "cooks": 67171,
+  "share_pct": 9.51,
+  "overall_pct": 10.45,
+  "lift": 0.91
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 17748,
-  "share_pct": 2.5,
-  "overall_pct": 2.87,
-  "lift": 0.874
+  "cooks": 18380,
+  "share_pct": 2.6,
+  "overall_pct": 2.96,
+  "lift": 0.879
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 58735,
-  "share_pct": 8.29,
-  "overall_pct": 11.08,
+  "cooks": 58752,
+  "share_pct": 8.32,
+  "overall_pct": 11.13,
   "lift": 0.748
  },
  {
@@ -3394,119 +3394,119 @@
   "group_value": "trưa",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 5342,
-  "share_pct": 0.75,
-  "overall_pct": 2.47,
-  "lift": 0.305
+  "cooks": 5383,
+  "share_pct": 0.76,
+  "overall_pct": 2.49,
+  "lift": 0.307
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 191029,
-  "share_pct": 26.96,
-  "overall_pct": 23.81,
-  "lift": 1.133
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "trưa",
-  "attribute": "main_protein",
-  "value": "cá",
-  "cooks": 83549,
-  "share_pct": 11.79,
-  "overall_pct": 10.52,
-  "lift": 1.121
+  "cooks": 155063,
+  "share_pct": 21.95,
+  "overall_pct": 19.43,
+  "lift": 1.13
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 81241,
-  "share_pct": 11.47,
-  "overall_pct": 10.26,
-  "lift": 1.118
+  "cooks": 80973,
+  "share_pct": 11.46,
+  "overall_pct": 10.24,
+  "lift": 1.119
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
-  "value": "heo",
-  "cooks": 94618,
-  "share_pct": 13.35,
-  "overall_pct": 12.47,
-  "lift": 1.071
+  "value": "cá",
+  "cooks": 82937,
+  "share_pct": 11.74,
+  "overall_pct": 10.53,
+  "lift": 1.115
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 4028,
-  "share_pct": 0.57,
-  "overall_pct": 0.53,
-  "lift": 1.068
+  "cooks": 4105,
+  "share_pct": 0.58,
+  "overall_pct": 0.54,
+  "lift": 1.081
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "trưa",
+  "attribute": "main_protein",
+  "value": "heo",
+  "cooks": 92873,
+  "share_pct": 13.15,
+  "overall_pct": 12.28,
+  "lift": 1.07
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 41026,
-  "share_pct": 5.79,
-  "overall_pct": 5.45,
-  "lift": 1.063
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "trưa",
-  "attribute": "main_protein",
-  "value": "bò",
-  "cooks": 23331,
-  "share_pct": 3.29,
-  "overall_pct": 3.37,
-  "lift": 0.977
+  "cooks": 41584,
+  "share_pct": 5.89,
+  "overall_pct": 5.55,
+  "lift": 1.061
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 119336,
-  "share_pct": 16.84,
-  "overall_pct": 17.45,
-  "lift": 0.965
+  "cooks": 155200,
+  "share_pct": 21.97,
+  "overall_pct": 21.9,
+  "lift": 1.003
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "trưa",
+  "attribute": "main_protein",
+  "value": "bò",
+  "cooks": 23379,
+  "share_pct": 3.31,
+  "overall_pct": 3.41,
+  "lift": 0.972
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 2805,
-  "share_pct": 0.4,
+  "cooks": 2749,
+  "share_pct": 0.39,
   "overall_pct": 0.42,
-  "lift": 0.933
+  "lift": 0.932
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 17130,
-  "share_pct": 2.42,
-  "overall_pct": 2.71,
-  "lift": 0.893
+  "cooks": 17528,
+  "share_pct": 2.48,
+  "overall_pct": 2.77,
+  "lift": 0.897
  },
  {
   "group_type": "meal_slot",
   "group_value": "trưa",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 50414,
-  "share_pct": 7.12,
-  "overall_pct": 13.01,
+  "cooks": 49999,
+  "share_pct": 7.08,
+  "overall_pct": 12.95,
   "lift": 0.547
  },
  {
@@ -3514,29 +3514,29 @@
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 33712,
-  "share_pct": 2.87,
-  "overall_pct": 2.14,
-  "lift": 1.34
+  "cooks": 32242,
+  "share_pct": 2.75,
+  "overall_pct": 2.07,
+  "lift": 1.331
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 295718,
-  "share_pct": 25.19,
-  "overall_pct": 21.87,
-  "lift": 1.152
+  "cooks": 304520,
+  "share_pct": 26.01,
+  "overall_pct": 22.62,
+  "lift": 1.15
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 557764,
-  "share_pct": 47.52,
-  "overall_pct": 43.19,
+  "cooks": 549530,
+  "share_pct": 46.93,
+  "overall_pct": 42.65,
   "lift": 1.1
  },
  {
@@ -3544,89 +3544,89 @@
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 45727,
-  "share_pct": 3.9,
-  "overall_pct": 3.6,
-  "lift": 1.083
+  "cooks": 47119,
+  "share_pct": 4.02,
+  "overall_pct": 3.71,
+  "lift": 1.084
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 97305,
-  "share_pct": 8.29,
-  "overall_pct": 8.13,
-  "lift": 1.02
+  "cooks": 96492,
+  "share_pct": 8.24,
+  "overall_pct": 8.07,
+  "lift": 1.022
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 45145,
-  "share_pct": 3.85,
-  "overall_pct": 5.55,
-  "lift": 0.693
+  "cooks": 44610,
+  "share_pct": 3.81,
+  "overall_pct": 5.51,
+  "lift": 0.692
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 26511,
-  "share_pct": 2.26,
-  "overall_pct": 3.45,
-  "lift": 0.654
+  "cooks": 24615,
+  "share_pct": 2.1,
+  "overall_pct": 3.18,
+  "lift": 0.661
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 56330,
-  "share_pct": 4.8,
-  "overall_pct": 8.14,
-  "lift": 0.589
+  "cooks": 55924,
+  "share_pct": 4.78,
+  "overall_pct": 8.24,
+  "lift": 0.58
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 5881,
-  "share_pct": 0.5,
-  "overall_pct": 1.38,
-  "lift": 0.364
+  "cooks": 6094,
+  "share_pct": 0.52,
+  "overall_pct": 1.39,
+  "lift": 0.373
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 9722,
-  "share_pct": 0.83,
-  "overall_pct": 2.54,
-  "lift": 0.325
+  "cooks": 9819,
+  "share_pct": 0.84,
+  "overall_pct": 2.56,
+  "lift": 0.327
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 337817,
-  "share_pct": 28.78,
-  "overall_pct": 26.78,
-  "lift": 1.075
+  "cooks": 332932,
+  "share_pct": 28.43,
+  "overall_pct": 26.5,
+  "lift": 1.073
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 743690,
-  "share_pct": 63.36,
-  "overall_pct": 60.21,
+  "cooks": 746046,
+  "share_pct": 63.71,
+  "overall_pct": 60.55,
   "lift": 1.052
  },
  {
@@ -3634,249 +3634,249 @@
   "group_value": "tối",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 82586,
-  "share_pct": 7.04,
-  "overall_pct": 10.46,
-  "lift": 0.672
+  "cooks": 82168,
+  "share_pct": 7.02,
+  "overall_pct": 10.38,
+  "lift": 0.676
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 9722,
-  "share_pct": 0.83,
-  "overall_pct": 2.54,
-  "lift": 0.325
+  "cooks": 9819,
+  "share_pct": 0.84,
+  "overall_pct": 2.56,
+  "lift": 0.327
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 597782,
-  "share_pct": 50.93,
-  "overall_pct": 48.96,
-  "lift": 1.04
+  "cooks": 605675,
+  "share_pct": 51.72,
+  "overall_pct": 49.62,
+  "lift": 1.042
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 576033,
-  "share_pct": 49.07,
-  "overall_pct": 51.04,
-  "lift": 0.962
+  "cooks": 565290,
+  "share_pct": 48.28,
+  "overall_pct": 50.38,
+  "lift": 0.958
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 328080,
-  "share_pct": 27.95,
-  "overall_pct": 26.46,
-  "lift": 1.056
+  "cooks": 339931,
+  "share_pct": 29.03,
+  "overall_pct": 27.45,
+  "lift": 1.058
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 845735,
-  "share_pct": 72.05,
-  "overall_pct": 73.54,
-  "lift": 0.98
+  "cooks": 831034,
+  "share_pct": 70.97,
+  "overall_pct": 72.55,
+  "lift": 0.978
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 393247,
-  "share_pct": 33.5,
-  "overall_pct": 30.74,
-  "lift": 1.09
+  "cooks": 398115,
+  "share_pct": 34.0,
+  "overall_pct": 31.02,
+  "lift": 1.096
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 118728,
-  "share_pct": 10.11,
-  "overall_pct": 9.48,
-  "lift": 1.067
+  "cooks": 120570,
+  "share_pct": 10.3,
+  "overall_pct": 9.62,
+  "lift": 1.07
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 135569,
-  "share_pct": 11.55,
-  "overall_pct": 10.84,
-  "lift": 1.066
+  "cooks": 130045,
+  "share_pct": 11.11,
+  "overall_pct": 10.45,
+  "lift": 1.063
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 168949,
-  "share_pct": 14.39,
-  "overall_pct": 13.64,
-  "lift": 1.055
+  "cooks": 163202,
+  "share_pct": 13.94,
+  "overall_pct": 13.25,
+  "lift": 1.052
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 106316,
-  "share_pct": 9.06,
-  "overall_pct": 9.02,
-  "lift": 1.004
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "tối",
-  "attribute": "main_method",
-  "value": "khác",
-  "cooks": 32193,
-  "share_pct": 2.74,
-  "overall_pct": 2.87,
-  "lift": 0.957
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "tối",
-  "attribute": "main_method",
-  "value": "hấp",
-  "cooks": 63568,
-  "share_pct": 5.42,
-  "overall_pct": 5.67,
-  "lift": 0.954
+  "cooks": 105772,
+  "share_pct": 9.03,
+  "overall_pct": 8.98,
+  "lift": 1.006
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 46826,
-  "share_pct": 3.99,
-  "overall_pct": 4.2,
+  "cooks": 48063,
+  "share_pct": 4.1,
+  "overall_pct": 4.29,
+  "lift": 0.956
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "tối",
+  "attribute": "main_method",
+  "value": "khác",
+  "cooks": 32923,
+  "share_pct": 2.81,
+  "overall_pct": 2.96,
   "lift": 0.95
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
+  "value": "hấp",
+  "cooks": 63951,
+  "share_pct": 5.46,
+  "overall_pct": 5.81,
+  "lift": 0.939
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "tối",
+  "attribute": "main_method",
   "value": "nướng",
-  "cooks": 99031,
+  "cooks": 98846,
   "share_pct": 8.44,
-  "overall_pct": 11.08,
-  "lift": 0.761
+  "overall_pct": 11.13,
+  "lift": 0.759
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 9388,
-  "share_pct": 0.8,
-  "overall_pct": 2.47,
-  "lift": 0.324
+  "cooks": 9478,
+  "share_pct": 0.81,
+  "overall_pct": 2.49,
+  "lift": 0.326
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 306642,
-  "share_pct": 26.12,
-  "overall_pct": 23.81,
-  "lift": 1.097
+  "cooks": 247402,
+  "share_pct": 21.13,
+  "overall_pct": 19.43,
+  "lift": 1.088
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 133966,
-  "share_pct": 11.41,
-  "overall_pct": 10.52,
+  "cooks": 133731,
+  "share_pct": 11.42,
+  "overall_pct": 10.53,
   "lift": 1.085
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
+  "value": "thịt khác",
+  "cooks": 5292,
+  "share_pct": 0.45,
+  "overall_pct": 0.42,
+  "lift": 1.082
+ },
+ {
+  "group_type": "meal_slot",
+  "group_value": "tối",
+  "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 34109,
-  "share_pct": 2.91,
-  "overall_pct": 2.71,
-  "lift": 1.073
+  "cooks": 35013,
+  "share_pct": 2.99,
+  "overall_pct": 2.77,
+  "lift": 1.081
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 156745,
-  "share_pct": 13.35,
-  "overall_pct": 12.47,
-  "lift": 1.071
- },
- {
-  "group_type": "meal_slot",
-  "group_value": "tối",
-  "attribute": "main_protein",
-  "value": "thịt khác",
-  "cooks": 5324,
-  "share_pct": 0.45,
-  "overall_pct": 0.42,
-  "lift": 1.069
+  "cooks": 153882,
+  "share_pct": 13.14,
+  "overall_pct": 12.28,
+  "lift": 1.07
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 127140,
-  "share_pct": 10.83,
-  "overall_pct": 10.26,
-  "lift": 1.056
+  "cooks": 126477,
+  "share_pct": 10.8,
+  "overall_pct": 10.24,
+  "lift": 1.055
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 209916,
-  "share_pct": 17.88,
-  "overall_pct": 17.45,
-  "lift": 1.025
+  "cooks": 267948,
+  "share_pct": 22.88,
+  "overall_pct": 21.9,
+  "lift": 1.045
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 6336,
+  "cooks": 6376,
   "share_pct": 0.54,
-  "overall_pct": 0.53,
-  "lift": 1.014
+  "overall_pct": 0.54,
+  "lift": 1.013
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 62774,
-  "share_pct": 5.35,
-  "overall_pct": 5.45,
+  "cooks": 63835,
+  "share_pct": 5.45,
+  "overall_pct": 5.55,
   "lift": 0.982
  },
  {
@@ -3884,139 +3884,139 @@
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 38555,
-  "share_pct": 3.28,
-  "overall_pct": 3.37,
-  "lift": 0.974
+  "cooks": 39022,
+  "share_pct": 3.33,
+  "overall_pct": 3.41,
+  "lift": 0.978
  },
  {
   "group_type": "meal_slot",
   "group_value": "tối",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 92308,
+  "cooks": 91987,
   "share_pct": 7.86,
-  "overall_pct": 13.01,
-  "lift": 0.605
+  "overall_pct": 12.95,
+  "lift": 0.607
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 18657,
-  "share_pct": 2.25,
-  "overall_pct": 2.14,
-  "lift": 1.049
+  "cooks": 17866,
+  "share_pct": 2.16,
+  "overall_pct": 2.07,
+  "lift": 1.042
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 185723,
-  "share_pct": 22.37,
-  "overall_pct": 21.87,
-  "lift": 1.023
+  "cooks": 191604,
+  "share_pct": 23.11,
+  "overall_pct": 22.62,
+  "lift": 1.022
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 11564,
-  "share_pct": 1.39,
-  "overall_pct": 1.38,
-  "lift": 1.012
+  "cooks": 11723,
+  "share_pct": 1.41,
+  "overall_pct": 1.39,
+  "lift": 1.014
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 362238,
-  "share_pct": 43.64,
-  "overall_pct": 43.19,
-  "lift": 1.01
- },
- {
-  "group_type": "region",
-  "group_value": "Bắc",
-  "attribute": "dish_category",
-  "value": "cơm/xôi/cháo",
-  "cooks": 29925,
-  "share_pct": 3.6,
-  "overall_pct": 3.6,
-  "lift": 1.002
+  "cooks": 357840,
+  "share_pct": 43.17,
+  "overall_pct": 42.65,
+  "lift": 1.012
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 45968,
-  "share_pct": 5.54,
-  "overall_pct": 5.55,
-  "lift": 0.998
+  "cooks": 45393,
+  "share_pct": 5.48,
+  "overall_pct": 5.51,
+  "lift": 0.995
+ },
+ {
+  "group_type": "region",
+  "group_value": "Bắc",
+  "attribute": "dish_category",
+  "value": "cơm/xôi/cháo",
+  "cooks": 30446,
+  "share_pct": 3.67,
+  "overall_pct": 3.71,
+  "lift": 0.989
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 21057,
-  "share_pct": 2.54,
-  "overall_pct": 2.54,
-  "lift": 0.997
+  "cooks": 20962,
+  "share_pct": 2.53,
+  "overall_pct": 2.56,
+  "lift": 0.986
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 64737,
-  "share_pct": 7.8,
-  "overall_pct": 8.13,
-  "lift": 0.96
+  "cooks": 64422,
+  "share_pct": 7.77,
+  "overall_pct": 8.07,
+  "lift": 0.963
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 64212,
-  "share_pct": 7.74,
-  "overall_pct": 8.14,
-  "lift": 0.95
+  "cooks": 64700,
+  "share_pct": 7.81,
+  "overall_pct": 8.24,
+  "lift": 0.947
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 26042,
-  "share_pct": 3.14,
-  "overall_pct": 3.45,
-  "lift": 0.908
+  "cooks": 23970,
+  "share_pct": 2.89,
+  "overall_pct": 3.18,
+  "lift": 0.91
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 230111,
-  "share_pct": 27.72,
-  "overall_pct": 26.78,
-  "lift": 1.035
+  "cooks": 227684,
+  "share_pct": 27.47,
+  "overall_pct": 26.5,
+  "lift": 1.036
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 500001,
-  "share_pct": 60.23,
-  "overall_pct": 60.21,
+  "cooks": 502017,
+  "share_pct": 60.56,
+  "overall_pct": 60.55,
   "lift": 1.0
  },
  {
@@ -4024,19 +4024,19 @@
   "group_value": "Bắc",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 21057,
-  "share_pct": 2.54,
-  "overall_pct": 2.54,
-  "lift": 0.997
+  "cooks": 20962,
+  "share_pct": 2.53,
+  "overall_pct": 2.56,
+  "lift": 0.986
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 78954,
-  "share_pct": 9.51,
-  "overall_pct": 10.46,
+  "cooks": 78263,
+  "share_pct": 9.44,
+  "overall_pct": 10.38,
   "lift": 0.909
  },
  {
@@ -4044,9 +4044,9 @@
   "group_value": "Bắc",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 412385,
-  "share_pct": 49.68,
-  "overall_pct": 48.96,
+  "cooks": 417419,
+  "share_pct": 50.36,
+  "overall_pct": 49.62,
   "lift": 1.015
  },
  {
@@ -4054,29 +4054,29 @@
   "group_value": "Bắc",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 417738,
-  "share_pct": 50.32,
-  "overall_pct": 51.04,
-  "lift": 0.986
+  "cooks": 411507,
+  "share_pct": 49.64,
+  "overall_pct": 50.38,
+  "lift": 0.985
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 628133,
-  "share_pct": 75.67,
-  "overall_pct": 73.54,
-  "lift": 1.029
+  "cooks": 619635,
+  "share_pct": 74.75,
+  "overall_pct": 72.55,
+  "lift": 1.03
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 201990,
-  "share_pct": 24.33,
-  "overall_pct": 26.46,
+  "cooks": 209291,
+  "share_pct": 25.25,
+  "overall_pct": 27.45,
   "lift": 0.92
  },
  {
@@ -4084,19 +4084,19 @@
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 40078,
-  "share_pct": 4.83,
-  "overall_pct": 4.2,
-  "lift": 1.15
+  "cooks": 40750,
+  "share_pct": 4.92,
+  "overall_pct": 4.29,
+  "lift": 1.145
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 118907,
-  "share_pct": 14.32,
-  "overall_pct": 13.64,
+  "cooks": 115358,
+  "share_pct": 13.92,
+  "overall_pct": 13.25,
   "lift": 1.05
  },
  {
@@ -4104,139 +4104,139 @@
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 256468,
-  "share_pct": 30.9,
-  "overall_pct": 30.74,
-  "lift": 1.005
- },
- {
-  "group_type": "region",
-  "group_value": "Bắc",
-  "attribute": "main_method",
-  "value": "pha/xay",
-  "cooks": 20380,
-  "share_pct": 2.46,
-  "overall_pct": 2.47,
-  "lift": 0.995
+  "cooks": 258763,
+  "share_pct": 31.22,
+  "overall_pct": 31.02,
+  "lift": 1.006
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 89535,
-  "share_pct": 10.79,
-  "overall_pct": 10.84,
-  "lift": 0.995
+  "cooks": 86110,
+  "share_pct": 10.39,
+  "overall_pct": 10.45,
+  "lift": 0.994
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 46603,
-  "share_pct": 5.61,
-  "overall_pct": 5.67,
+  "cooks": 47652,
+  "share_pct": 5.75,
+  "overall_pct": 5.81,
   "lift": 0.989
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_method",
+  "value": "pha/xay",
+  "cooks": 20304,
+  "share_pct": 2.45,
+  "overall_pct": 2.49,
+  "lift": 0.985
+ },
+ {
+  "group_type": "region",
+  "group_value": "Bắc",
+  "attribute": "main_method",
   "value": "nướng",
-  "cooks": 88815,
-  "share_pct": 10.7,
-  "overall_pct": 11.08,
-  "lift": 0.966
+  "cooks": 88935,
+  "share_pct": 10.73,
+  "overall_pct": 11.13,
+  "lift": 0.964
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 71748,
-  "share_pct": 8.64,
-  "overall_pct": 9.02,
-  "lift": 0.958
+  "cooks": 71565,
+  "share_pct": 8.63,
+  "overall_pct": 8.98,
+  "lift": 0.961
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 75230,
-  "share_pct": 9.06,
-  "overall_pct": 9.48,
-  "lift": 0.956
+  "cooks": 76545,
+  "share_pct": 9.23,
+  "overall_pct": 9.62,
+  "lift": 0.96
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 22359,
-  "share_pct": 2.69,
-  "overall_pct": 2.87,
-  "lift": 0.94
+  "cooks": 22944,
+  "share_pct": 2.77,
+  "overall_pct": 2.96,
+  "lift": 0.936
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 29680,
-  "share_pct": 3.58,
-  "overall_pct": 3.37,
-  "lift": 1.06
- },
- {
-  "group_type": "region",
-  "group_value": "Bắc",
-  "attribute": "main_protein",
-  "value": "trứng",
-  "cooks": 23517,
-  "share_pct": 2.83,
-  "overall_pct": 2.71,
-  "lift": 1.047
+  "cooks": 29894,
+  "share_pct": 3.61,
+  "overall_pct": 3.41,
+  "lift": 1.059
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 206635,
-  "share_pct": 24.89,
-  "overall_pct": 23.81,
-  "lift": 1.046
+  "cooks": 170205,
+  "share_pct": 20.53,
+  "overall_pct": 19.43,
+  "lift": 1.057
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 47159,
-  "share_pct": 5.68,
-  "overall_pct": 5.45,
+  "cooks": 47989,
+  "share_pct": 5.79,
+  "overall_pct": 5.55,
   "lift": 1.043
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
+  "value": "trứng",
+  "cooks": 23885,
+  "share_pct": 2.88,
+  "overall_pct": 2.77,
+  "lift": 1.042
+ },
+ {
+  "group_type": "region",
+  "group_value": "Bắc",
+  "attribute": "main_protein",
   "value": "heo",
-  "cooks": 107345,
-  "share_pct": 12.93,
-  "overall_pct": 12.47,
-  "lift": 1.037
+  "cooks": 105985,
+  "share_pct": 12.79,
+  "overall_pct": 12.28,
+  "lift": 1.041
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 85097,
-  "share_pct": 10.25,
-  "overall_pct": 10.26,
+  "cooks": 84828,
+  "share_pct": 10.23,
+  "overall_pct": 10.24,
   "lift": 0.999
  },
  {
@@ -4244,199 +4244,199 @@
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 143674,
-  "share_pct": 17.31,
-  "overall_pct": 17.45,
-  "lift": 0.992
+  "cooks": 179952,
+  "share_pct": 21.71,
+  "overall_pct": 21.9,
+  "lift": 0.991
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 3470,
-  "share_pct": 0.42,
+  "cooks": 3394,
+  "share_pct": 0.41,
   "overall_pct": 0.42,
-  "lift": 0.986
+  "lift": 0.98
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 4293,
+  "cooks": 4303,
   "share_pct": 0.52,
-  "overall_pct": 0.53,
-  "lift": 0.972
+  "overall_pct": 0.54,
+  "lift": 0.966
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 100011,
-  "share_pct": 12.05,
-  "overall_pct": 13.01,
-  "lift": 0.926
+  "cooks": 99225,
+  "share_pct": 11.97,
+  "overall_pct": 12.95,
+  "lift": 0.925
  },
  {
   "group_type": "region",
   "group_value": "Bắc",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 79242,
-  "share_pct": 9.55,
-  "overall_pct": 10.52,
-  "lift": 0.907
+  "cooks": 79266,
+  "share_pct": 9.56,
+  "overall_pct": 10.53,
+  "lift": 0.908
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 40798,
-  "share_pct": 3.81,
-  "overall_pct": 3.45,
-  "lift": 1.102
+  "cooks": 37513,
+  "share_pct": 3.51,
+  "overall_pct": 3.18,
+  "lift": 1.104
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 92817,
-  "share_pct": 8.66,
-  "overall_pct": 8.14,
-  "lift": 1.064
+  "cooks": 94192,
+  "share_pct": 8.81,
+  "overall_pct": 8.24,
+  "lift": 1.069
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 39865,
-  "share_pct": 3.72,
-  "overall_pct": 3.6,
-  "lift": 1.034
+  "cooks": 41437,
+  "share_pct": 3.87,
+  "overall_pct": 3.71,
+  "lift": 1.044
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "gỏi/salad",
-  "cooks": 88423,
-  "share_pct": 8.25,
-  "overall_pct": 8.13,
-  "lift": 1.015
+  "cooks": 87600,
+  "share_pct": 8.19,
+  "overall_pct": 8.07,
+  "lift": 1.016
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 27336,
-  "share_pct": 2.55,
-  "overall_pct": 2.54,
-  "lift": 1.002
+  "cooks": 27581,
+  "share_pct": 2.58,
+  "overall_pct": 2.56,
+  "lift": 1.006
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "món chính",
-  "cooks": 458015,
-  "share_pct": 42.74,
-  "overall_pct": 43.19,
-  "lift": 0.99
+  "cooks": 451230,
+  "share_pct": 42.2,
+  "overall_pct": 42.65,
+  "lift": 0.989
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 231492,
-  "share_pct": 21.6,
-  "overall_pct": 21.87,
-  "lift": 0.988
- },
- {
-  "group_type": "region",
-  "group_value": "Nam",
-  "attribute": "dish_category",
-  "value": "bún/phở/mì/miến",
-  "cooks": 58108,
-  "share_pct": 5.42,
-  "overall_pct": 5.55,
-  "lift": 0.977
+  "cooks": 238399,
+  "share_pct": 22.29,
+  "overall_pct": 22.62,
+  "lift": 0.986
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 14387,
-  "share_pct": 1.34,
-  "overall_pct": 1.38,
+  "cooks": 14548,
+  "share_pct": 1.36,
+  "overall_pct": 1.39,
   "lift": 0.976
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_category",
+  "value": "bún/phở/mì/miến",
+  "cooks": 57168,
+  "share_pct": 5.35,
+  "overall_pct": 5.51,
+  "lift": 0.971
+ },
+ {
+  "group_type": "region",
+  "group_value": "Nam",
+  "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 20274,
-  "share_pct": 1.89,
-  "overall_pct": 2.14,
-  "lift": 0.883
+  "cooks": 19723,
+  "share_pct": 1.84,
+  "overall_pct": 2.07,
+  "lift": 0.891
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 126169,
-  "share_pct": 11.77,
-  "overall_pct": 10.46,
-  "lift": 1.125
+  "cooks": 125270,
+  "share_pct": 11.71,
+  "overall_pct": 10.38,
+  "lift": 1.128
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 27336,
-  "share_pct": 2.55,
-  "overall_pct": 2.54,
-  "lift": 1.002
- },
- {
-  "group_type": "region",
-  "group_value": "Nam",
-  "attribute": "dish_type_fixed",
-  "value": "Món chay",
-  "cooks": 282792,
-  "share_pct": 26.39,
-  "overall_pct": 26.78,
-  "lift": 0.985
+  "cooks": 27581,
+  "share_pct": 2.58,
+  "overall_pct": 2.56,
+  "lift": 1.006
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 635218,
-  "share_pct": 59.28,
-  "overall_pct": 60.21,
+  "cooks": 637646,
+  "share_pct": 59.63,
+  "overall_pct": 60.55,
   "lift": 0.985
+ },
+ {
+  "group_type": "region",
+  "group_value": "Nam",
+  "attribute": "dish_type_fixed",
+  "value": "Món chay",
+  "cooks": 278894,
+  "share_pct": 26.08,
+  "overall_pct": 26.5,
+  "lift": 0.984
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 552114,
-  "share_pct": 51.53,
-  "overall_pct": 51.04,
+  "cooks": 544340,
+  "share_pct": 50.9,
+  "overall_pct": 50.38,
   "lift": 1.01
  },
  {
@@ -4444,339 +4444,339 @@
   "group_value": "Nam",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 519401,
-  "share_pct": 48.47,
-  "overall_pct": 48.96,
-  "lift": 0.99
+  "cooks": 525051,
+  "share_pct": 49.1,
+  "overall_pct": 49.62,
+  "lift": 0.989
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 813925,
-  "share_pct": 75.96,
-  "overall_pct": 73.54,
-  "lift": 1.033
+  "cooks": 802171,
+  "share_pct": 75.01,
+  "overall_pct": 72.55,
+  "lift": 1.034
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 257590,
-  "share_pct": 24.04,
-  "overall_pct": 26.46,
-  "lift": 0.909
+  "cooks": 267220,
+  "share_pct": 24.99,
+  "overall_pct": 27.45,
+  "lift": 0.91
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "khác",
-  "cooks": 31917,
-  "share_pct": 2.98,
-  "overall_pct": 2.87,
-  "lift": 1.039
+  "cooks": 33069,
+  "share_pct": 3.09,
+  "overall_pct": 2.96,
+  "lift": 1.045
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 62804,
-  "share_pct": 5.86,
-  "overall_pct": 5.67,
-  "lift": 1.033
+  "cooks": 64547,
+  "share_pct": 6.04,
+  "overall_pct": 5.81,
+  "lift": 1.038
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "nướng",
-  "cooks": 122484,
-  "share_pct": 11.43,
-  "overall_pct": 11.08,
-  "lift": 1.032
+  "cooks": 123064,
+  "share_pct": 11.51,
+  "overall_pct": 11.13,
+  "lift": 1.034
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 103899,
-  "share_pct": 9.7,
-  "overall_pct": 9.48,
-  "lift": 1.023
+  "cooks": 105086,
+  "share_pct": 9.83,
+  "overall_pct": 9.62,
+  "lift": 1.021
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 98296,
-  "share_pct": 9.17,
-  "overall_pct": 9.02,
-  "lift": 1.017
- },
- {
-  "group_type": "region",
-  "group_value": "Nam",
-  "attribute": "main_method",
-  "value": "hầm/nấu",
-  "cooks": 330587,
-  "share_pct": 30.85,
-  "overall_pct": 30.74,
-  "lift": 1.004
- },
- {
-  "group_type": "region",
-  "group_value": "Nam",
-  "attribute": "main_method",
-  "value": "chiên",
-  "cooks": 116569,
-  "share_pct": 10.88,
-  "overall_pct": 10.84,
-  "lift": 1.004
+  "cooks": 97837,
+  "share_pct": 9.15,
+  "overall_pct": 8.98,
+  "lift": 1.019
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 26497,
-  "share_pct": 2.47,
-  "overall_pct": 2.47,
-  "lift": 1.002
+  "cooks": 26730,
+  "share_pct": 2.5,
+  "overall_pct": 2.49,
+  "lift": 1.006
+ },
+ {
+  "group_type": "region",
+  "group_value": "Nam",
+  "attribute": "main_method",
+  "value": "chiên",
+  "cooks": 112375,
+  "share_pct": 10.51,
+  "overall_pct": 10.45,
+  "lift": 1.006
+ },
+ {
+  "group_type": "region",
+  "group_value": "Nam",
+  "attribute": "main_method",
+  "value": "hầm/nấu",
+  "cooks": 331897,
+  "share_pct": 31.04,
+  "overall_pct": 31.02,
+  "lift": 1.001
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 137814,
-  "share_pct": 12.86,
-  "overall_pct": 13.64,
-  "lift": 0.943
+  "cooks": 133182,
+  "share_pct": 12.45,
+  "overall_pct": 13.25,
+  "lift": 0.94
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 40648,
-  "share_pct": 3.79,
-  "overall_pct": 4.2,
-  "lift": 0.903
+  "cooks": 41604,
+  "share_pct": 3.89,
+  "overall_pct": 4.29,
+  "lift": 0.906
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 153505,
-  "share_pct": 14.33,
-  "overall_pct": 13.01,
-  "lift": 1.101
+  "cooks": 152851,
+  "share_pct": 14.29,
+  "overall_pct": 12.95,
+  "lift": 1.104
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
   "value": "cá",
-  "cooks": 118654,
-  "share_pct": 11.07,
-  "overall_pct": 10.52,
-  "lift": 1.052
+  "cooks": 118211,
+  "share_pct": 11.05,
+  "overall_pct": 10.53,
+  "lift": 1.05
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
   "value": "vịt",
-  "cooks": 5802,
-  "share_pct": 0.54,
-  "overall_pct": 0.53,
-  "lift": 1.017
- },
- {
-  "group_type": "region",
-  "group_value": "Nam",
-  "attribute": "main_protein",
-  "value": "hải sản",
-  "cooks": 187508,
-  "share_pct": 17.5,
-  "overall_pct": 17.45,
-  "lift": 1.003
+  "cooks": 5934,
+  "share_pct": 0.55,
+  "overall_pct": 0.54,
+  "lift": 1.032
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
   "value": "rau củ",
-  "cooks": 108908,
+  "cooks": 108597,
   "share_pct": 10.16,
-  "overall_pct": 10.26,
-  "lift": 0.991
- },
- {
-  "group_type": "region",
-  "group_value": "Nam",
-  "attribute": "main_protein",
-  "value": "heo",
-  "cooks": 130868,
-  "share_pct": 12.21,
-  "overall_pct": 12.47,
-  "lift": 0.979
+  "overall_pct": 10.24,
+  "lift": 0.992
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 28274,
-  "share_pct": 2.64,
-  "overall_pct": 2.71,
-  "lift": 0.975
+  "cooks": 28951,
+  "share_pct": 2.71,
+  "overall_pct": 2.77,
+  "lift": 0.979
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
   "value": "đậu hũ/chay",
-  "cooks": 245038,
-  "share_pct": 22.87,
-  "overall_pct": 23.81,
-  "lift": 0.961
+  "cooks": 203384,
+  "share_pct": 19.02,
+  "overall_pct": 19.43,
+  "lift": 0.979
+ },
+ {
+  "group_type": "region",
+  "group_value": "Nam",
+  "attribute": "main_protein",
+  "value": "hải sản",
+  "cooks": 228763,
+  "share_pct": 21.39,
+  "overall_pct": 21.9,
+  "lift": 0.977
+ },
+ {
+  "group_type": "region",
+  "group_value": "Nam",
+  "attribute": "main_protein",
+  "value": "heo",
+  "cooks": 128322,
+  "share_pct": 12.0,
+  "overall_pct": 12.28,
+  "lift": 0.977
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
   "value": "gà",
-  "cooks": 55639,
-  "share_pct": 5.19,
-  "overall_pct": 5.45,
+  "cooks": 56611,
+  "share_pct": 5.29,
+  "overall_pct": 5.55,
   "lift": 0.954
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
-  "value": "bò",
-  "cooks": 33209,
-  "share_pct": 3.1,
-  "overall_pct": 3.37,
-  "lift": 0.919
+  "value": "thịt khác",
+  "cooks": 4152,
+  "share_pct": 0.39,
+  "overall_pct": 0.42,
+  "lift": 0.929
  },
  {
   "group_type": "region",
   "group_value": "Nam",
   "attribute": "main_protein",
-  "value": "thịt khác",
-  "cooks": 4110,
-  "share_pct": 0.38,
-  "overall_pct": 0.42,
-  "lift": 0.904
+  "value": "bò",
+  "cooks": 33615,
+  "share_pct": 3.14,
+  "overall_pct": 3.41,
+  "lift": 0.923
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "lẩu",
-  "cooks": 11896,
-  "share_pct": 2.53,
-  "overall_pct": 2.14,
-  "lift": 1.181
+  "cooks": 11377,
+  "share_pct": 2.43,
+  "overall_pct": 2.07,
+  "lift": 1.174
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "bún/phở/mì/miến",
-  "cooks": 27581,
-  "share_pct": 5.87,
-  "overall_pct": 5.55,
-  "lift": 1.057
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "dish_category",
-  "value": "gỏi/salad",
-  "cooks": 39581,
-  "share_pct": 8.42,
-  "overall_pct": 8.13,
-  "lift": 1.036
+  "cooks": 27754,
+  "share_pct": 5.93,
+  "overall_pct": 5.51,
+  "lift": 1.076
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "ăn vặt",
-  "cooks": 6689,
-  "share_pct": 1.42,
-  "overall_pct": 1.38,
-  "lift": 1.034
+  "cooks": 6725,
+  "share_pct": 1.44,
+  "overall_pct": 1.39,
+  "lift": 1.03
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
-  "value": "món chính",
-  "cooks": 204140,
-  "share_pct": 43.43,
-  "overall_pct": 43.19,
-  "lift": 1.006
+  "value": "gỏi/salad",
+  "cooks": 38881,
+  "share_pct": 8.3,
+  "overall_pct": 8.07,
+  "lift": 1.029
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "đồ uống",
-  "cooks": 11965,
-  "share_pct": 2.55,
-  "overall_pct": 2.54,
-  "lift": 1.0
+  "cooks": 12128,
+  "share_pct": 2.59,
+  "overall_pct": 2.56,
+  "lift": 1.01
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "dish_category",
+  "value": "món chính",
+  "cooks": 200389,
+  "share_pct": 42.78,
+  "overall_pct": 42.65,
+  "lift": 1.003
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "canh/súp",
-  "cooks": 101389,
-  "share_pct": 21.57,
-  "overall_pct": 21.87,
-  "lift": 0.986
+  "cooks": 105278,
+  "share_pct": 22.48,
+  "overall_pct": 22.62,
+  "lift": 0.994
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "bánh",
-  "cooks": 36141,
-  "share_pct": 7.69,
-  "overall_pct": 8.14,
-  "lift": 0.944
+  "cooks": 36138,
+  "share_pct": 7.72,
+  "overall_pct": 8.24,
+  "lift": 0.936
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "chè/tráng miệng",
-  "cooks": 15093,
-  "share_pct": 3.21,
-  "overall_pct": 3.45,
-  "lift": 0.93
+  "cooks": 13734,
+  "share_pct": 2.93,
+  "overall_pct": 3.18,
+  "lift": 0.923
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_category",
   "value": "cơm/xôi/cháo",
-  "cooks": 15544,
-  "share_pct": 3.31,
-  "overall_pct": 3.6,
+  "cooks": 15975,
+  "share_pct": 3.41,
+  "overall_pct": 3.71,
   "lift": 0.919
  },
  {
@@ -4784,289 +4784,289 @@
   "group_value": "Trung",
   "attribute": "dish_type_fixed",
   "value": "Món mặn",
-  "cooks": 292791,
-  "share_pct": 62.29,
-  "overall_pct": 60.21,
-  "lift": 1.035
+  "cooks": 293316,
+  "share_pct": 62.62,
+  "overall_pct": 60.55,
+  "lift": 1.034
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_type_fixed",
   "value": "Đồ uống",
-  "cooks": 11965,
-  "share_pct": 2.55,
-  "overall_pct": 2.54,
-  "lift": 1.0
+  "cooks": 12128,
+  "share_pct": 2.59,
+  "overall_pct": 2.56,
+  "lift": 1.01
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_type_fixed",
   "value": "Món chay",
-  "cooks": 122248,
-  "share_pct": 26.01,
-  "overall_pct": 26.78,
-  "lift": 0.971
+  "cooks": 120707,
+  "share_pct": 25.77,
+  "overall_pct": 26.5,
+  "lift": 0.972
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "dish_type_fixed",
   "value": "Món ngọt",
-  "cooks": 43015,
-  "share_pct": 9.15,
-  "overall_pct": 10.46,
-  "lift": 0.875
+  "cooks": 42228,
+  "share_pct": 9.02,
+  "overall_pct": 10.38,
+  "lift": 0.868
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "is_quick",
   "value": "false",
-  "cooks": 240596,
-  "share_pct": 51.19,
-  "overall_pct": 51.04,
-  "lift": 1.003
+  "cooks": 236414,
+  "share_pct": 50.47,
+  "overall_pct": 50.38,
+  "lift": 1.002
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "is_quick",
   "value": "true",
-  "cooks": 229423,
-  "share_pct": 48.81,
-  "overall_pct": 48.96,
-  "lift": 0.997
+  "cooks": 231965,
+  "share_pct": 49.53,
+  "overall_pct": 49.62,
+  "lift": 0.998
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "is_spicy",
   "value": "true",
-  "cooks": 167967,
-  "share_pct": 35.74,
-  "overall_pct": 26.46,
-  "lift": 1.351
+  "cooks": 173128,
+  "share_pct": 36.96,
+  "overall_pct": 27.45,
+  "lift": 1.347
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "is_spicy",
   "value": "false",
-  "cooks": 302052,
-  "share_pct": 64.26,
-  "overall_pct": 73.54,
-  "lift": 0.874
+  "cooks": 295251,
+  "share_pct": 63.04,
+  "overall_pct": 72.55,
+  "lift": 0.869
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "xào",
-  "cooks": 66784,
-  "share_pct": 14.21,
-  "overall_pct": 13.64,
-  "lift": 1.042
+  "cooks": 65136,
+  "share_pct": 13.91,
+  "overall_pct": 13.25,
+  "lift": 1.049
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "trộn/gỏi",
-  "cooks": 43858,
-  "share_pct": 9.33,
-  "overall_pct": 9.02,
-  "lift": 1.035
+  "cooks": 43149,
+  "share_pct": 9.21,
+  "overall_pct": 8.98,
+  "lift": 1.026
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "kho/rim",
-  "cooks": 45650,
-  "share_pct": 9.71,
-  "overall_pct": 9.48,
-  "lift": 1.025
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "main_method",
-  "value": "khác",
-  "cooks": 13709,
-  "share_pct": 2.92,
-  "overall_pct": 2.87,
-  "lift": 1.017
+  "cooks": 46115,
+  "share_pct": 9.85,
+  "overall_pct": 9.62,
+  "lift": 1.023
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "pha/xay",
-  "cooks": 11661,
-  "share_pct": 2.48,
-  "overall_pct": 2.47,
-  "lift": 1.005
+  "cooks": 11794,
+  "share_pct": 2.52,
+  "overall_pct": 2.49,
+  "lift": 1.013
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "main_method",
+  "value": "khác",
+  "cooks": 14005,
+  "share_pct": 2.99,
+  "overall_pct": 2.96,
+  "lift": 1.011
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "chiên",
-  "cooks": 50893,
-  "share_pct": 10.83,
-  "overall_pct": 10.84,
-  "lift": 0.999
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "main_method",
-  "value": "nướng",
-  "cooks": 51474,
-  "share_pct": 10.95,
-  "overall_pct": 11.08,
-  "lift": 0.988
+  "cooks": 48791,
+  "share_pct": 10.42,
+  "overall_pct": 10.45,
+  "lift": 0.997
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "hầm/nấu",
-  "cooks": 141941,
-  "share_pct": 30.2,
-  "overall_pct": 30.74,
-  "lift": 0.982
+  "cooks": 143422,
+  "share_pct": 30.62,
+  "overall_pct": 31.02,
+  "lift": 0.987
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "main_method",
+  "value": "nướng",
+  "cooks": 51307,
+  "share_pct": 10.95,
+  "overall_pct": 11.13,
+  "lift": 0.985
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "luộc",
-  "cooks": 18872,
-  "share_pct": 4.02,
-  "overall_pct": 4.2,
-  "lift": 0.956
+  "cooks": 19246,
+  "share_pct": 4.11,
+  "overall_pct": 4.29,
+  "lift": 0.957
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_method",
   "value": "hấp",
-  "cooks": 25177,
-  "share_pct": 5.36,
-  "overall_pct": 5.67,
-  "lift": 0.944
+  "cooks": 25414,
+  "share_pct": 5.43,
+  "overall_pct": 5.81,
+  "lift": 0.933
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_protein",
   "value": "thịt khác",
-  "cooks": 2479,
-  "share_pct": 0.53,
+  "cooks": 2340,
+  "share_pct": 0.5,
   "overall_pct": 0.42,
-  "lift": 1.244
+  "lift": 1.196
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_protein",
   "value": "bò",
-  "cooks": 17088,
-  "share_pct": 3.64,
-  "overall_pct": 3.37,
-  "lift": 1.078
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "main_protein",
-  "value": "cá",
-  "cooks": 51679,
-  "share_pct": 11.0,
-  "overall_pct": 10.52,
-  "lift": 1.045
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "main_protein",
-  "value": "gà",
-  "cooks": 26353,
-  "share_pct": 5.61,
-  "overall_pct": 5.45,
-  "lift": 1.03
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "main_protein",
-  "value": "rau củ",
-  "cooks": 49302,
-  "share_pct": 10.49,
-  "overall_pct": 10.26,
-  "lift": 1.022
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "main_protein",
-  "value": "vịt",
-  "cooks": 2528,
-  "share_pct": 0.54,
-  "overall_pct": 0.53,
-  "lift": 1.011
- },
- {
-  "group_type": "region",
-  "group_value": "Trung",
-  "attribute": "main_protein",
-  "value": "đậu hũ/chay",
-  "cooks": 112949,
-  "share_pct": 24.03,
-  "overall_pct": 23.81,
-  "lift": 1.009
+  "cooks": 17097,
+  "share_pct": 3.65,
+  "overall_pct": 3.41,
+  "lift": 1.072
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_protein",
   "value": "hải sản",
-  "cooks": 82725,
-  "share_pct": 17.6,
-  "overall_pct": 17.45,
-  "lift": 1.008
+  "cooks": 109546,
+  "share_pct": 23.39,
+  "overall_pct": 21.9,
+  "lift": 1.068
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "main_protein",
+  "value": "cá",
+  "cooks": 51714,
+  "share_pct": 11.04,
+  "overall_pct": 10.53,
+  "lift": 1.049
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "main_protein",
+  "value": "gà",
+  "cooks": 26721,
+  "share_pct": 5.7,
+  "overall_pct": 5.55,
+  "lift": 1.028
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "main_protein",
+  "value": "rau củ",
+  "cooks": 48967,
+  "share_pct": 10.45,
+  "overall_pct": 10.24,
+  "lift": 1.021
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "main_protein",
+  "value": "vịt",
+  "cooks": 2486,
+  "share_pct": 0.53,
+  "overall_pct": 0.54,
+  "lift": 0.987
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_protein",
   "value": "heo",
-  "cooks": 57528,
-  "share_pct": 12.24,
-  "overall_pct": 12.47,
-  "lift": 0.982
+  "cooks": 56379,
+  "share_pct": 12.04,
+  "overall_pct": 12.28,
+  "lift": 0.98
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_protein",
   "value": "trứng",
-  "cooks": 12408,
-  "share_pct": 2.64,
-  "overall_pct": 2.71,
-  "lift": 0.975
+  "cooks": 12621,
+  "share_pct": 2.69,
+  "overall_pct": 2.77,
+  "lift": 0.974
+ },
+ {
+  "group_type": "region",
+  "group_value": "Trung",
+  "attribute": "main_protein",
+  "value": "đậu hũ/chay",
+  "cooks": 86152,
+  "share_pct": 18.39,
+  "overall_pct": 19.43,
+  "lift": 0.947
  },
  {
   "group_type": "region",
   "group_value": "Trung",
   "attribute": "main_protein",
   "value": "không",
-  "cooks": 54980,
-  "share_pct": 11.7,
-  "overall_pct": 13.01,
-  "lift": 0.899
+  "cooks": 54356,
+  "share_pct": 11.61,
+  "overall_pct": 12.95,
+  "lift": 0.896
  }
 ]

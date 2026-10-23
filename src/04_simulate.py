@@ -76,6 +76,7 @@ CFG = dict(
     latent_k=8, latent_w=0.7,
     zipf=0.45,             # do doc cua phan phoi pho bien
     quality_sel=0.3,       # mon "ngon" (chat luong an) duoc chon nhieu hon chut
+    quality_clip=2.5,      # kep chat luong vao [-2.5, 2.5] de khong mon nao chiem ap dao
     temp=1.0,              # nhiet do softmax
     sessions_median=95,    # so phien / nam (trung vi) cua 1 user hoat dong ca nam
     sessions_sigma=0.75,
@@ -250,6 +251,8 @@ W_AGE = np.stack([wvec(AGE_W[a]) for a in AGES])
 # Thuoc tinh "an" cua mon (giong nhau cho moi user): chat luong, do pho bien, vector so thich
 rng0 = np.random.default_rng(SEED)
 quality = rng0.normal(0, 1, N_DISH).astype(np.float32)
+# Kep sau khi sinh (khong ton them so ngau nhien -> cac gia tri ngau nhien khac giu nguyen)
+quality = np.clip(quality, -CFG["quality_clip"], CFG["quality_clip"])
 pop_key = 0.6 * quality + 0.8 * rng0.normal(0, 1, N_DISH)
 pop_rank = np.empty(N_DISH, np.int64)
 pop_rank[np.argsort(-pop_key)] = np.arange(1, N_DISH + 1)
