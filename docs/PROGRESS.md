@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **23/10/2026**, sau khi chạy xong bước 04 trên cụm và dựng lại cấu trúc thư mục.
+> Cập nhật lần cuối: **24/10/2026**, sau khi chạy xong bước 05 trên cụm (trước khi sửa lỗi "hào" ở bước 03).
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -12,13 +12,21 @@
 | 02 Làm sạch (clean v2) | ✅ Xong | `foods` 5.499 món (3.996 giữ id cũ, 1.503 món mới id 4001–5503); `ratings_original` 182.556 dòng |
 | 03 Đặc trưng món | ✅ Xong | `dish_features` 5.499 dòng, khớp từng giá trị với lần chạy local. Loại món: mặn 3.448, ngọt 1.236, chay 580, đồ uống 235 |
 | 04 Sinh hành vi | ✅ Xong (100%) | 50.000 user (49.815 có hoạt động); **23.164.109 sự kiện**; Parquet 261MB, CSV 1,38GB; chạy 11,5 phút |
-| 05 Phân tích hành vi | ⏭️ **Tiếp theo** | |
+| 05 Phân tích hành vi | ✅ Xong | `src/05_analysis.py`, 14 bảng trong `/data/results/analysis` (504KB) và JSON trong `data/output/analysis/`; chạy trên cụm 104 giây |
 | 06 Mô hình + đánh giá | ⬜ Chưa | |
 | 07 Xuất MongoDB | ⬜ Chưa | |
 | 08 FastAPI + dashboard | ⬜ Chưa | |
 | Nâng cao: Structured Streaming | ⬜ Chưa | |
 | Đo hiệu năng (1 vs 2 worker, 10/50/100%) | ⬜ Chưa | |
 | Báo cáo Word + slide | ⬜ Chưa | |
+
+### Số liệu bước 05 (bản chạy 24/10, **trước** khi sửa lỗi "hào"; sẽ thay sau khi chạy lại)
+- Kiểm tra: đọc đủ 23.164.109 sự kiện, tổng của hai khối `cube_cook` và `monthly` khớp với bảng gốc. Bảng cơ sở chiếm 237MB trong cache.
+- Phễu theo cặp user–món: 11,5% cặp đã xem được lưu, 14,1% được nấu; 45% cặp đã nấu được chấm. Tỷ lệ user: lưu 98,2%, nấu 99,0%, chấm 94,5%.
+- Thời gian: lượt nấu cuối tuần gần gấp đôi ngày thường, đỉnh là CN 17–19h. Món Tết chiếm 18,6% lượt nấu tháng 2, các tháng khác khoảng 3%.
+- Lift: miền Trung với món cay 1,35; nhóm 18–24 tuổi với đồ uống 2,05; nhóm 45+ với canh/súp 1,35; cuối tuần với lẩu 1,54.
+- Đuôi dài: Gini lượt nấu 0,73; 10% món đầu chiếm 62,6% lượt nấu. "Canh hào thanh mát" chiếm 4,2% lượt nấu, đứng đầu cả 3 bữa.
+- Tỷ lệ nấu lại cùng một món: 19,9% số cặp đã nấu.
 
 ### Số liệu bước 04 (dùng cho bước 05–06)
 - Sự kiện: view 18.627.223 · cook 2.371.657 · favorite 1.396.511 · rate 768.718.
@@ -35,25 +43,20 @@
 - Chạy thử 10% ở local: ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Hoàn tất cấu hình (làm ngay khi mở tab Code):**
-   - chuyển `setup/claude/settings.json` thành `.claude/settings.json`, và `setup/claude/commands/handoff.md` thành `.claude/commands/handoff.md`, rồi xóa thư mục `setup/`. Chat claude.ai không ghi được vào `.claude/`;
-   - chạy `git init`, kiểm tra `git status` để chắc dữ liệu lớn đã bị bỏ qua, rồi commit đầu tiên;
-   - tạo repo GitHub riêng tư và mời Ngọc.
-2. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy vì HDFS đã có dữ liệu.
-3. **Bước 05 `src/05_analysis.py`** (Spark SQL/DataFrame). Phạm vi lấy từ kế hoạch mục 5.1 và các trang dashboard:
-   - món và nhóm món phổ biến theo khung bữa, thứ trong tuần, tháng, mùa;
-   - heatmap giờ × thứ;
-   - khác biệt theo vùng miền và nhóm tuổi;
-   - phễu xem → lưu → nấu → chấm, tỷ lệ chuyển đổi theo nhóm món;
-   - cách chế biến của các món được nấu nhiều; nguyên liệu phổ biến;
-   - kết quả ghi lên HDFS `/data/results/analysis/*` và xuất JSON nhỏ cho dashboard.
+1. **Sửa lỗi "hào" (đang làm ngay sau commit này):**
+   - Ở `03_features.py`, thêm vào `CONFUSING` hai luật "dầu hào" → "gia vị" và "su hào" → "rau", rồi thêm "hào" vào nhóm hải sản.
+   - Ở `04_simulate.py`, kẹp `quality` vào [-2,5; 2,5].
+   - Chạy lại trên cụm theo thứ tự 03 → 04 (100%) → 05, rồi sinh lại bản 10% ở local. Nhớ sao lưu và khôi phục file xuất của bản 100%.
+2. **Tạo repo GitHub riêng tư và mời Ngọc.** Trước khi push, đặt `git config user.name/user.email` (hiện tác giả commit đang là `Admin`).
+3. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy vì HDFS đã có dữ liệu.
 4. Bước 06: baseline (random, popularity), ALS explicit và implicit, content-based (TF-IDF + LSH), FP-Growth, K-means, hybrid.
    Chia theo thời gian: train 10/2025–07/2026, validation 08/2026, test 09/2026.
 
 ## Việc còn treo
 - [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv` (Hậu 50, Ngọc 50), điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo.
 - [ ] Ratings gốc: đã **tạm gác lại**. Cần quyết định có chạy thí nghiệm đối chứng ALS hay không (khoảng 15 phút công, kế hoạch khuyến nghị có).
-- [ ] Ảnh chụp cho báo cáo: `docs/images/` đang trống. Cần chụp Spark UI (các app 02, 03, 04) và HDFS UI (`/data/curated`, `/data/events`).
+- [ ] Ảnh chụp cho báo cáo: `docs/images/` đang trống. Cần chụp Spark UI (các app 02, 03, 04, 05; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`).
+- [ ] Ngọc: dựng notebook biểu đồ từ `data/output/analysis/*.json`, làm nền cho trang "Hành vi ăn uống" của dashboard.
 - [ ] Nhắn giảng viên về việc dùng dữ liệu hành vi mô phỏng (kế hoạch mục 2.2 khuyến nghị). Chưa rõ đã nhắn hay chưa.
 - [ ] Chưa có `mongo-express`, `api` trong `docker-compose.yml` (thêm ở bước 07–08).
 - [ ] `README.md`, `requirements.txt`, `data/sample/`: làm lúc nộp bài.
@@ -74,3 +77,7 @@
   - bước 04, chạy thử 1% và 10% ở local rồi 100% trên cụm;
   - dựng `CLAUDE.md`, `docs/`, `.claude/`;
   - chuyển sang làm việc bằng tab Code của Claude desktop.
+- **23/10 khuya – 24/10:**
+  - chuyển cấu hình vào `.claude/`, `git init` và commit đầu tiên;
+  - viết bước 05, chạy thử trên bản 10% ở local rồi chạy trên cụm;
+  - phát hiện "Canh hào thanh mát" bị gán `main_protein` là "đậu hũ/chay" và chiếm 4,2% lượt nấu, nên phải sửa 03 và 04.

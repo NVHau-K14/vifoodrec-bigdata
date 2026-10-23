@@ -26,7 +26,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 | 02 Làm sạch | `src/02_clean.py` | `/data/raw` | `/data/curated/{foods,ratings_original}` | `clean_report.json` |
 | 03 Đặc trưng món | `src/03_features.py` | `/data/curated/foods` | `/data/features/dish_features` | `features_report.json` |
 | 04 Sinh hành vi | `src/04_simulate.py` | `dish_features` | `/data/events/{events,users,users_truth}` | `simulate_report.json` |
-| 05 Phân tích hành vi | (chưa có) | `/data/events`, `dish_features` | `/data/results/...` | |
+| 05 Phân tích hành vi | `src/05_analysis.py` | `/data/events`, `dish_features`, `foods` | `/data/results/analysis/*` (14 bảng) | `analysis_report.json`, `analysis/*.json` |
 | 06 Mô hình | (chưa có) | ALS, content-based, FP-Growth, K-means, hybrid + đánh giá | | |
 | 07 Xuất MongoDB | (chưa có) | | | |
 | 08 API + dashboard | `api/`, `web/` (trống) | MongoDB | | |
@@ -39,8 +39,8 @@ Bản sao nhỏ để xem trên máy nằm ở `data/processed/`. Report và m�
 docker compose up -d
 # Bước 01 (chỉ khi HDFS trống)
 docker exec namenode bash /home/jovyan/work/scripts/01_ingest.sh
-# Chạy một bước trên cụm (từ máy host)
-docker exec -w /home/jovyan/work jupyter python src/04_simulate.py --scale 0.01
+# Chạy một bước trên cụm (từ máy host). Cần -e PYTHONPATH, xem "Lỗi môi trường đã gặp"
+docker exec -w /home/jovyan/work -e PYTHONPATH=/usr/local/spark/python/lib/py4j-0.10.9.9-src.zip:/usr/local/spark/python jupyter python src/04_simulate.py --scale 0.01
 ```
 Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bước sinh dữ liệu và các bước nặng có thêm `--scale`.
 
@@ -65,3 +65,7 @@ Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bư�
 - `Safe mode is ON` trong khoảng 30 giây đầu sau khi khởi động: đợi rồi chạy lại.
 - PowerShell tự mở rộng dấu `*`: bọc lệnh `hdfs` trong `bash -c "..."`.
 - Container trùng tên với dự án cũ: `docker rm -f <tên>` (dự án cũ đã hủy, không dùng lại).
+- `ModuleNotFoundError: No module named 'pyspark'` khi chạy `docker exec ... python`: PYTHONPATH chỉ được đặt cho
+  tiến trình do Jupyter khởi động (terminal Jupyter thì có). Thêm `-e PYTHONPATH=...` như lệnh mẫu ở trên.
+- Git Bash đổi `/home/jovyan/work` thành đường dẫn Windows (`Cwd must be an absolute path`):
+  đặt `MSYS_NO_PATHCONV=1` trước lệnh `docker exec`, hoặc chạy từ PowerShell.

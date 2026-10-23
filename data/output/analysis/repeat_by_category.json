@@ -1,0 +1,79 @@
+[
+ {
+  "dish_category": "ăn vặt",
+  "cooked_pairs": 20466,
+  "repeat_pairs": 5700,
+  "avg_times": 1.595,
+  "repeat_pct": 27.85
+ },
+ {
+  "dish_category": "lẩu",
+  "cooked_pairs": 33339,
+  "repeat_pairs": 7859,
+  "avg_times": 1.525,
+  "repeat_pct": 23.57
+ },
+ {
+  "dish_category": "canh/súp",
+  "cooked_pairs": 337696,
+  "repeat_pairs": 76089,
+  "avg_times": 1.536,
+  "repeat_pct": 22.53
+ },
+ {
+  "dish_category": "cơm/xôi/cháo",
+  "cooked_pairs": 59523,
+  "repeat_pairs": 13346,
+  "avg_times": 1.434,
+  "repeat_pct": 22.42
+ },
+ {
+  "dish_category": "gỏi/salad",
+  "cooked_pairs": 134921,
+  "repeat_pairs": 28647,
+  "avg_times": 1.429,
+  "repeat_pct": 21.23
+ },
+ {
+  "dish_category": "Tất cả",
+  "cooked_pairs": 1706733,
+  "repeat_pairs": 339520,
+  "avg_times": 1.39,
+  "repeat_pct": 19.89
+ },
+ {
+  "dish_category": "bún/phở/mì/miến",
+  "cooked_pairs": 97172,
+  "repeat_pairs": 18863,
+  "avg_times": 1.355,
+  "repeat_pct": 19.41
+ },
+ {
+  "dish_category": "món chính",
+  "cooked_pairs": 759744,
+  "repeat_pairs": 146016,
+  "avg_times": 1.348,
+  "repeat_pct": 19.22
+ },
+ {
+  "dish_category": "bánh",
+  "cooked_pairs": 148349,
+  "repeat_pairs": 26054,
+  "avg_times": 1.302,
+  "repeat_pct": 17.56
+ },
+ {
+  "dish_category": "chè/tráng miệng",
+  "cooked_pairs": 64524,
+  "repeat_pairs": 10484,
+  "avg_times": 1.27,
+  "repeat_pct": 16.25
+ },
+ {
+  "dish_category": "đồ uống",
+  "cooked_pairs": 50999,
+  "repeat_pairs": 6462,
+  "avg_times": 1.184,
+  "repeat_pct": 12.67
+ }
+]

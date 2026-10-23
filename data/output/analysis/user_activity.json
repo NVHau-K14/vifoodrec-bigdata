@@ -1,0 +1,44 @@
+[
+ {
+  "ord": 0,
+  "cooks_per_user": "0",
+  "users": 490,
+  "avg_events": 11.5,
+  "share_pct": 0.98
+ },
+ {
+  "ord": 1,
+  "cooks_per_user": "1-5",
+  "users": 3835,
+  "avg_events": 45.7,
+  "share_pct": 7.7
+ },
+ {
+  "ord": 2,
+  "cooks_per_user": "6-20",
+  "users": 12844,
+  "avg_events": 160.0,
+  "share_pct": 25.78
+ },
+ {
+  "ord": 3,
+  "cooks_per_user": "21-50",
+  "users": 16865,
+  "avg_events": 367.9,
+  "share_pct": 33.86
+ },
+ {
+  "ord": 4,
+  "cooks_per_user": "51-100",
+  "users": 10206,
+  "avg_events": 694.6,
+  "share_pct": 20.49
+ },
+ {
+  "ord": 5,
+  "cooks_per_user": ">100",
+  "users": 5575,
+  "avg_events": 1369.4,
+  "share_pct": 11.19
+ }
+]

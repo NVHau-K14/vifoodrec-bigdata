@@ -12,7 +12,8 @@ Khi thêm hoặc đổi bảng, cập nhật file này. Kiểu cột ghi theo Sp
 /data/events/users_truth/        persona thật – CHỈ để kiểm chứng (bước 04)
 /data/events/events/month=YYYY-MM/   sự kiện hành vi, 12 partition (bước 04)
 /data/events/events_csv/         bản CSV của events, chỉ để so sánh dung lượng (bước 04 --csv)
-/data/results/                   kết quả phân tích và mô hình (bước 05 trở đi)
+/data/results/analysis/<bảng>/   kết quả phân tích hành vi (bước 05), mỗi bảng 1 file Parquet
+/data/results/                   kết quả mô hình (bước 06 trở đi)
 ```
 Chạy `--local` thì cùng cấu trúc đó nằm trong `data/hdfs_local/`. Các bản sao nhỏ để xem trên máy nằm trong `data/processed/`.
 
@@ -101,6 +102,27 @@ Chạy `--local` thì cùng cấu trúc đó nằm trong `data/hdfs_local/`. Cá
 **Chia dữ liệu cho mô hình:** train từ `2025-10` đến `2026-07`, validation `2026-08`, test `2026-09`.
 Mỗi cặp user–món có tối đa một `favorite` và một `rate`. Một món có thể được `view` và `cook` nhiều lần.
 
+## Kết quả phân tích – `/data/results/analysis/` (bước 05)
+Tính trên **cả 12 tháng**, chỉ để mô tả. Bước 06 không lấy các bảng này làm đặc trưng hay baseline, vì chứa cả tháng validation và test.
+Mỗi bảng có thêm bản JSON cùng tên trong `data/output/analysis/`. Hai bảng lớn chỉ xuất phần đầu: `dish_stats` 100 dòng, `top_ingredients` 200 dòng.
+
+| Bảng | Khóa / cột chính | Nội dung |
+|---|---|---|
+| `heatmap_hour_dow` | `dow_idx` (1 = T2 … 7 = CN), `dow_vn`, `hour`, `views`, `cooks`, `events` | Heatmap giờ × thứ |
+| `trend_month_category` | `month`, `dish_category`, `views`, `cooks`, `cook_share_pct` | Tỷ trọng lượt nấu của từng nhóm món trong tháng |
+| `season_month` | `month`, `region` (thêm `Tất cả`), `season`, `cooks`, `share_pct` | Tỷ trọng món theo nhãn mùa (tết, lạnh, nóng) |
+| `top_dish_by_slot` | `meal_slot`, `rk`, `rk_lift`, `food_id`, `dish_name`, `dish_category`, `cooks`, `share_pct`, `lift`, `image_link` | Mỗi bữa có 2 kiểu xếp hạng: `rk` ≤ 10 là món nấu nhiều nhất, `rk_lift` ≤ 10 là món đặc trưng của bữa (lift cao nhất, chỉ xét 200 món nấu nhiều nhất của bữa) |
+| `lift_by_group` | `group_type` (meal_slot, day_type, region, age_group), `group_value`, `attribute`, `value`, `cooks`, `share_pct`, `overall_pct`, `lift` | Lift = tỷ trọng trong nhóm / tỷ trọng chung (tính theo lượt nấu) |
+| `funnel_by_category` | `dish_category` (thêm `Tất cả`), `*_events`, `*_pairs`, `favorite_per_view_pct`, `cook_per_view_pct`, `rate_per_cook_pct`, `avg_rating` | Phễu đếm theo sự kiện và theo cặp user–món |
+| `dish_stats` | `food_id`, các đặc trưng món, `views`, `favorites`, `cooks`, `rates`, `avg_rating`, `image_link`, `cook_rank` | Số liệu từng món (5.499 dòng) |
+| `catalog_vs_cooked` | `attribute` (main_method, dish_category, main_protein), `value`, `n_dishes`, `cooks`, `catalog_pct`, `cook_pct`, `cooks_per_dish`, `lift` | So tỷ trọng trong danh mục với tỷ trọng lượt nấu |
+| `top_ingredients` | `ingredient`, `n_dishes`, `cooks`, `is_seasoning`, `cook_rank` | Nguyên liệu tính theo số lượt nấu của các món chứa nó |
+| `rating_dist` | `rating`, `count`, `share_pct` | Phân bố điểm chấm |
+| `session_size` | `meal_slot` (thêm `Tất cả`), `size` (1, 2, 3, 4+), `count`, `share_pct` | Số món mỗi phiên nấu ("mâm cơm") |
+| `repeat_by_category` | `dish_category` (thêm `Tất cả`), `cooked_pairs`, `repeat_pairs`, `avg_times`, `repeat_pct` | Tỷ lệ nấu lại cùng một món |
+| `user_activity` | `ord`, `cooks_per_user` (0, 1-5, …, >100), `users`, `avg_events`, `share_pct` | Phân bố mức hoạt động của user |
+| `long_tail_curve` | `dish_pct` 1–100, `views_cum_pct`, `cooks_cum_pct` | Đường tích lũy: x% món phổ biến nhất chiếm bao nhiêu % lượt |
+
 ## File trong `data/output/`
 | File | Nội dung |
 |---|---|
@@ -110,3 +132,6 @@ Mỗi cặp user–món có tối đa một `favorite` và một `rate`. Một m
 | `simulate_report.json` | Số sự kiện, phễu, rating, kiểm tra persona, mùa, dung lượng HDFS |
 | `simulate_config.json` | Toàn bộ tham số và trọng số persona |
 | `events_sample.csv` | Toàn bộ sự kiện của 200 user |
+| `analysis_report.json` | Số liệu chính của bước 05: kiểm tra tổng, phễu theo user, lift nổi bật, đuôi dài, thời gian từng phần |
+| `analysis/*.json` | Bản JSON của các bảng kết quả bước 05 (cho dashboard) |
+| `analysis/explain.txt` | Kế hoạch thực thi của truy vấn phễu và truy vấn lọc theo tháng (dùng cho báo cáo) |
