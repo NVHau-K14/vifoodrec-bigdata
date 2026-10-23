@@ -6,6 +6,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 
 ## Bắt đầu mỗi phiên
 1. Đọc `docs/PROGRESS.md`: trạng thái, việc tiếp theo, việc còn treo. **Không đọc lại toàn bộ dự án.**
+   Đọc thêm `docs/LAST_RUN.md` để biết lần chạy gần nhất và các câu hỏi đang chờ người dùng.
 2. Kiểm tra cụm khi cần chạy job: `docker compose -f docker/docker-compose.yml ps` (đủ 8 container),
    `docker exec namenode hdfs dfs -ls -R /data | head`.
 3. Chỉ mở khi cần: `docs/DECISIONS.md` (vì sao làm vậy), `docs/DATA_DICTIONARY.md` (cột của các bảng),
@@ -59,6 +60,7 @@ Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bư�
 - Dữ liệu hành vi là **mô phỏng**, luôn ghi rõ điều này. Không rút ra kết luận từ dinh dưỡng hay `cooking_time` gốc (số ngẫu nhiên).
 - Có quyết định thiết kế mới thì thêm vào `docs/DECISIONS.md`. Thêm hoặc đổi bảng thì cập nhật `docs/DATA_DICTIONARY.md`.
 - Cuối phiên chạy `/handoff`: cập nhật `docs/PROGRESS.md` và commit.
+- **Mỗi lần làm xong một yêu cầu**, ghi đè `docs/LAST_RUN.md` theo mẫu có sẵn trong file đó (tối đa khoảng 80 dòng, số liệu lấy từ report JSON, không ước lượng). Người dùng đọc file này ở bên chat claude.ai thay vì chụp màn hình, nên mọi câu hỏi cần người dùng trả lời phải nằm trong mục "Cần người dùng quyết định". `/handoff` cũng phải cập nhật file này.
 - Trả lời người dùng bằng tiếng Việt. Tài liệu trong `docs/` viết tiếng Việt có dấu.
 
 ## Lỗi môi trường đã gặp
