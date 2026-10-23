@@ -72,3 +72,5 @@ Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bư�
   tiến trình do Jupyter khởi động (terminal Jupyter thì có). Thêm `-e PYTHONPATH=...` như lệnh mẫu ở trên.
 - Git Bash đổi `/home/jovyan/work` thành đường dẫn Windows (`Cwd must be an absolute path`):
   đặt `MSYS_NO_PATHCONV=1` trước lệnh `docker exec`, hoặc chạy từ PowerShell.
+- `hdfs dfs -cp ... /tmp/x` báo `No such file or directory`: HDFS chưa có `/tmp`. Chạy `hdfs dfs -mkdir -p /tmp/bak` trước.
+- Script thử chạy trong container đọc file trên máy phải ghi `file:///home/jovyan/work/...`. Không có `file://` thì Spark hiểu là đường dẫn HDFS.

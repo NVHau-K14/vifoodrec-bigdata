@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **24/10/2026**, sau khi bật History Server, thêm `zipf_offset = 30` (04) và chạy lại 04 → 05 trên cụm.
+> Cập nhật lần cuối: **24/10/2026**, sau khi chạy lại 03 để chốt mẫu kiểm tra tay theo hash. `dish_features` không đổi.
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -43,15 +43,27 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy vì HDFS đã có dữ liệu.
-2. Bước 06: baseline (random, popularity), ALS explicit và implicit, content-based (TF-IDF + LSH), FP-Growth, K-means, hybrid.
-   Chia theo thời gian: train 10/2025–07/2026, validation 08/2026, test 09/2026.
+1. **Bước 06: THIẾT KẾ TRƯỚC, CHƯA VIẾT CODE.** Ghi bản đề xuất thiết kế vào `docs/LAST_RUN.md` (mục "Đã làm" là bản thiết kế, mục "Cần người dùng quyết định" là các điểm cần chốt). Chat claude.ai sẽ góp ý, sau khi chốt mới viết code. Bản thiết kế phải có:
+   - **Chia file:** ví dụ `src/06_*.py` theo từng nhóm mô hình, phần chung (chia dữ liệu, hàm độ đo) để ở đâu, file nào ghi gì lên `/data/results/models/...`, report JSON nào.
+   - **Chia dữ liệu theo thời gian:** train 10/2025–07/2026, validation 08/2026, test 09/2026. Nêu cách xử lý user hoặc món chỉ có trong validation/test, cách định nghĩa "món liên quan" (relevant) cho độ đo xếp hạng, và có loại món user đã tương tác trong train khỏi danh sách gợi ý hay không.
+   - **Cold-start:** user mới (28% đăng ký trong năm), món ít tương tác; chuyển sang content-based hoặc popularity như thế nào.
+   - **Kỹ thuật Spark và tham số cho từng mô hình:**
+     - baseline random và popularity;
+     - ALS explicit và implicit (trọng số view/favorite/cook, dải rank, regParam, alpha; TrainValidationSplit hay tự dò trên validation);
+     - content-based (tokenizer tiếng Việt, HashingTF/IDF, LSH);
+     - FP-Growth (nguyên liệu, và "mâm cơm" theo session; minSupport, minConfidence);
+     - K-means (đặc trưng user, chọn k bằng Silhouette, ARI so với `users_truth`);
+     - hybrid (trọng số α, β, γ, dò trên validation).
+   - **Bảng độ đo:** RMSE, MAE; P@K, R@K, NDCG@K, MAP@K với K = 5, 10; coverage, diversity, novelty; Silhouette, ARI. Ghi rõ độ đo nào áp cho mô hình nào, đo trên tập nào.
+   - **Thứ tự ưu tiên** và thời gian chạy ước tính trên cụm (4 core, 3GB mỗi worker); việc gì làm ở `--local` 10% trước.
+   - Thí nghiệm đối chứng ALS trên ratings gốc: đưa vào thiết kế như một tùy chọn (D06).
+2. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy vì HDFS đã có dữ liệu.
 
 ## Việc còn treo
-- [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv` (Hậu 50, Ngọc 50), điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo.
+- [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv` (Hậu 50, Ngọc 50), điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
 - [ ] Ratings gốc: đã **tạm gác lại**. Cần quyết định có chạy thí nghiệm đối chứng ALS hay không (khoảng 15 phút công, kế hoạch khuyến nghị có).
 - [ ] Ảnh chụp UI cho báo cáo: **để cuối dự án, làm cùng lúc với đo hiệu năng**. Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
-- [ ] `features_check_sample.csv` vẫn là mẫu cũ (`rand(42)`). Lần chạy 03 tiếp theo sẽ ghi đè bằng mẫu theo hash (100 món khác), xem D11.
+- [x] Chốt mẫu kiểm tra tay theo hash: đã chạy lại 03 trên cụm (24/10).
 - [ ] Repo GitHub và `git config`: tạm chưa làm, theo quyết định của nhóm (tác giả commit đang là `Admin`).
 - [ ] Ngọc: dựng notebook biểu đồ từ `data/output/analysis/*.json`, làm nền cho trang "Hành vi ăn uống" của dashboard.
 - [ ] Nhắn giảng viên về việc dùng dữ liệu hành vi mô phỏng (kế hoạch mục 2.2 khuyến nghị). Chưa rõ đã nhắn hay chưa.
@@ -83,3 +95,4 @@
   - bật Spark History Server (:18080) và event log;
   - thêm `zipf_offset = 30` ở 04 và chạy lại 04 (100%) → 05. Món đứng đầu giảm còn 1,44%, Gini 0,698;
   - mẫu kiểm tra tay chọn theo hash (D11).
+- **24/10 (tiếp):** chạy lại 03 trên cụm để ghi mẫu kiểm tra theo hash. `dish_features` mới giống hệt bản cũ (`exceptAll` ra 0 dòng ở cả hai chiều). Bước 06 sẽ làm theo kiểu thiết kế trước.
