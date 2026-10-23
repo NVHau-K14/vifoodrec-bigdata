@@ -1,0 +1,67 @@
+# ViFoodRec Big Data – hướng dẫn cho AI
+
+Đồ án môn Nhập môn Big Data: **"Phân tích hành vi ăn uống và gợi ý món ăn"**.
+Nhóm: Nguyễn Văn Hậu, Hứa Quách Như Ngọc (chia việc 50/50). Mục tiêu: điểm tối đa.
+Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) và hành vi người dùng **mô phỏng**.
+
+## Bắt đầu mỗi phiên
+1. Đọc `docs/PROGRESS.md`: trạng thái, việc tiếp theo, việc còn treo. **Không đọc lại toàn bộ dự án.**
+2. Kiểm tra cụm khi cần chạy job: `docker compose -f docker/docker-compose.yml ps` (đủ 8 container),
+   `docker exec namenode hdfs dfs -ls -R /data | head`.
+3. Chỉ mở khi cần: `docs/DECISIONS.md` (vì sao làm vậy), `docs/DATA_DICTIONARY.md` (cột của các bảng),
+   `docs/plan/ke_hoach_chi_tiet.md` (phạm vi các bước còn lại), `docs/plan/yeu_cau_giang_vien.md` (rubric).
+
+## Hạ tầng (Docker Desktop + WSL2, Windows 11, RAM 24GB)
+- HDFS: `namenode` (UI http://localhost:9870, RPC `hdfs://namenode:8020`), `datanode1`, `datanode2` (replication 2).
+- Spark 4.2.0 Standalone: `spark-master` (UI :8080), `spark-worker-1/2` (mỗi worker 2 core, 3GB).
+- `jupyter` (http://localhost:8888, token `bigdata`) là driver; Spark UI của job đang chạy ở :4040.
+- `mongodb` (:27017, admin/admin123). FastAPI và web chưa có trong compose.
+- Thư mục dự án được mount vào `/home/jovyan/work` ở jupyter, master, worker và namenode.
+- Dữ liệu HDFS nằm trong Docker volume nên vẫn còn sau khi tắt máy.
+
+## Pipeline
+| Bước | File | Đọc | Ghi (HDFS) | Report |
+|---|---|---|---|---|
+| 01 Nạp | `scripts/01_ingest.sh` | `data/raw/*.csv` | `/data/raw` | – |
+| 02 Làm sạch | `src/02_clean.py` | `/data/raw` | `/data/curated/{foods,ratings_original}` | `clean_report.json` |
+| 03 Đặc trưng món | `src/03_features.py` | `/data/curated/foods` | `/data/features/dish_features` | `features_report.json` |
+| 04 Sinh hành vi | `src/04_simulate.py` | `dish_features` | `/data/events/{events,users,users_truth}` | `simulate_report.json` |
+| 05 Phân tích hành vi | (chưa có) | `/data/events`, `dish_features` | `/data/results/...` | |
+| 06 Mô hình | (chưa có) | ALS, content-based, FP-Growth, K-means, hybrid + đánh giá | | |
+| 07 Xuất MongoDB | (chưa có) | | | |
+| 08 API + dashboard | `api/`, `web/` (trống) | MongoDB | | |
+
+Bản sao nhỏ để xem trên máy nằm ở `data/processed/`. Report và mẫu kiểm tra nằm ở `data/output/`.
+
+## Cách chạy
+```bash
+# Khởi động cụm (PowerShell, trong thư mục docker/)
+docker compose up -d
+# Bước 01 (chỉ khi HDFS trống)
+docker exec namenode bash /home/jovyan/work/scripts/01_ingest.sh
+# Chạy một bước trên cụm (từ máy host)
+docker exec -w /home/jovyan/work jupyter python src/04_simulate.py --scale 0.01
+```
+Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bước sinh dữ liệu và các bước nặng có thêm `--scale`.
+
+## Quy ước code
+- Mọi script dùng `common.py`: `get_spark()`, `Paths`, `export_single()`. Không tự viết lại đường dẫn HDFS.
+- Đặt tên `src/NN_ten.py`, đầu file có docstring ghi Đầu vào, Đầu ra, cách chạy (theo mẫu 02–04).
+- Chú thích trong code viết **không dấu**. Giá trị dữ liệu thì giữ tiếng Việt có dấu (vd `"Món chay"`, `"tối"`).
+- Ưu tiên hàm Spark có sẵn, chỉ dùng UDF Python khi bắt buộc. Seed cố định để chạy lại ra cùng kết quả.
+- Mỗi bước ghi `data/output/<buoc>_report.json` chứa số liệu kiểm tra, để dùng lại cho báo cáo.
+- Dữ liệu lớn (events) chỉ nằm trên HDFS. Ra máy chỉ xuất bảng nhỏ hoặc file mẫu.
+
+## Quy tắc làm việc
+- **Không** sửa `data/raw/`. **Không** chạy `docker compose down -v` hay xóa volume, vì sẽ mất toàn bộ HDFS.
+- Chạy thử `--local` hoặc `--scale 0.01` trước, rồi mới chạy đủ. Sau khi chạy, đọc report để kiểm tra.
+- Tắt kernel các notebook trước khi chạy job. Cụm chỉ có 4 core, notebook đang giữ executor thì job phải xếp hàng chờ.
+- Dữ liệu hành vi là **mô phỏng**, luôn ghi rõ điều này. Không rút ra kết luận từ dinh dưỡng hay `cooking_time` gốc (số ngẫu nhiên).
+- Có quyết định thiết kế mới thì thêm vào `docs/DECISIONS.md`. Thêm hoặc đổi bảng thì cập nhật `docs/DATA_DICTIONARY.md`.
+- Cuối phiên chạy `/handoff`: cập nhật `docs/PROGRESS.md` và commit.
+- Trả lời người dùng bằng tiếng Việt. Tài liệu trong `docs/` viết tiếng Việt có dấu.
+
+## Lỗi môi trường đã gặp
+- `Safe mode is ON` trong khoảng 30 giây đầu sau khi khởi động: đợi rồi chạy lại.
+- PowerShell tự mở rộng dấu `*`: bọc lệnh `hdfs` trong `bash -c "..."`.
+- Container trùng tên với dự án cũ: `docker rm -f <tên>` (dự án cũ đã hủy, không dùng lại).

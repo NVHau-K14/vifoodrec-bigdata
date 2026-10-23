@@ -1,0 +1,216 @@
+{
+  "scale": 1.0,
+  "users": 50000,
+  "active_users": 49815,
+  "dishes": 5499,
+  "period": "2025-10-01 -> 2026-09-30",
+  "seed": 2026,
+  "events": 23164109,
+  "events_by_type": {
+    "cook": 2371657,
+    "view": 18627223,
+    "rate": 768718,
+    "favorite": 1396511
+  },
+  "events_by_month": {
+    "2025-10": 1787278,
+    "2025-11": 1797518,
+    "2025-12": 1835402,
+    "2026-01": 1890777,
+    "2026-02": 1952500,
+    "2026-03": 1925855,
+    "2026-04": 1865968,
+    "2026-05": 2002050,
+    "2026-06": 1921622,
+    "2026-07": 2022090,
+    "2026-08": 2113345,
+    "2026-09": 2049704
+  },
+  "events_by_slot": {
+    "trưa": 6155651,
+    "tối": 10726245,
+    "khuya": 2605109,
+    "sáng": 3677104
+  },
+  "events_by_weekday": {
+    "Sun": 4428070,
+    "Wed": 2839909,
+    "Sat": 4106343,
+    "Thu": 2930193,
+    "Mon": 2996421,
+    "Tue": 2793933,
+    "Fri": 3069240
+  },
+  "events_per_user_p10_p50_p90_p99": [
+    75,
+    336,
+    1000,
+    2227
+  ],
+  "funnel": {
+    "favorite/view %": 7.5,
+    "cook/view %": 12.73,
+    "rate/cook %": 32.41
+  },
+  "rating": {
+    "mean": 3.787,
+    "std": 1.076,
+    "users_rated": 47078,
+    "distribution": {
+      "0.5": 6333,
+      "1.0": 9764,
+      "1.5": 20218,
+      "2.0": 37774,
+      "2.5": 61615,
+      "3.0": 89668,
+      "3.5": 113171,
+      "4.0": 121999,
+      "4.5": 110901,
+      "5.0": 197275
+    }
+  },
+  "user_food_pairs": 12112581,
+  "density_%": 4.4217,
+  "views_share_top1pct_dishes_%": 14.0,
+  "users_active_val_2026-08": 43010,
+  "users_active_test_2026-09": 43688,
+  "cook_sessions_with_2plus_dishes_%": 15.2,
+  "persona_check_cook": {
+    "% mon nau la mon chay (is_vegetarian)": {
+      "hảo ngọt": 52.5,
+      "tập gym": 23.6,
+      "thích cay/nhậu": 13.6,
+      "ăn kiêng": 45.5,
+      "gia đình truyền thống": 29.4,
+      "ăn chay": 100.0,
+      "mê hải sản": 10.5,
+      "bận rộn": 39.4
+    },
+    "% mon nau la hai san": {
+      "hảo ngọt": 7.1,
+      "tập gym": 12.3,
+      "thích cay/nhậu": 29.9,
+      "ăn kiêng": 14.0,
+      "gia đình truyền thống": 12.0,
+      "ăn chay": 0.0,
+      "mê hải sản": 62.6,
+      "bận rộn": 14.4
+    },
+    "% mon nau la mon ngot/do uong": {
+      "hảo ngọt": 65.0,
+      "tập gym": 11.3,
+      "thích cay/nhậu": 6.8,
+      "ăn kiêng": 9.1,
+      "gia đình truyền thống": 4.7,
+      "ăn chay": 8.7,
+      "mê hải sản": 6.9,
+      "bận rộn": 15.8
+    },
+    "% mon nau la mon nhanh": {
+      "hảo ngọt": 45.1,
+      "tập gym": 38.3,
+      "thích cay/nhậu": 38.3,
+      "ăn kiêng": 51.2,
+      "gia đình truyền thống": 42.8,
+      "ăn chay": 51.6,
+      "mê hải sản": 38.0,
+      "bận rộn": 92.3
+    },
+    "% mon nau la mon cay": {
+      "hảo ngọt": 11.1,
+      "tập gym": 25.2,
+      "thích cay/nhậu": 67.2,
+      "ăn kiêng": 25.1,
+      "gia đình truyền thống": 26.8,
+      "ăn chay": 14.1,
+      "mê hải sản": 26.1,
+      "bận rộn": 19.9
+    },
+    "% mon nau la canh/sup": {
+      "hảo ngọt": 7.4,
+      "tập gym": 13.6,
+      "thích cay/nhậu": 15.8,
+      "ăn kiêng": 18.9,
+      "gia đình truyền thống": 35.7,
+      "ăn chay": 18.3,
+      "mê hải sản": 18.1,
+      "bận rộn": 11.9
+    }
+  },
+  "top_category_by_slot_view_%": {
+    "sáng": {
+      "bánh": 26.2,
+      "món chính": 23.1,
+      "bún/phở/mì/miến": 14.1,
+      "đồ uống": 12.1
+    },
+    "trưa": {
+      "món chính": 57.8,
+      "canh/súp": 13.1,
+      "gỏi/salad": 11.5,
+      "bún/phở/mì/miến": 5.9
+    },
+    "tối": {
+      "món chính": 54.6,
+      "canh/súp": 11.6,
+      "gỏi/salad": 10.2,
+      "bánh": 6.1
+    },
+    "khuya": {
+      "bánh": 30.1,
+      "món chính": 19.7,
+      "chè/tráng miệng": 16.9,
+      "đồ uống": 10.9
+    }
+  },
+  "season_check_cook_%": [
+    "2025-10 Bắc: lẩu 1.57 | tết 4.37 | nóng 14.58",
+    "2025-10 Nam: lẩu 1.56 | tết 2.81 | nóng 16.35",
+    "2025-10 Trung: lẩu 1.84 | tết 2.71 | nóng 15.58",
+    "2025-11 Bắc: lẩu 5.13 | tết 4.36 | nóng 8.08",
+    "2025-11 Nam: lẩu 1.75 | tết 2.87 | nóng 16.26",
+    "2025-11 Trung: lẩu 6.02 | tết 2.78 | nóng 8.85",
+    "2025-12 Bắc: lẩu 4.76 | tết 4.65 | nóng 8.05",
+    "2025-12 Nam: lẩu 4.67 | tết 2.86 | nóng 9.62",
+    "2025-12 Trung: lẩu 5.74 | tết 2.68 | nóng 8.54",
+    "2026-01 Bắc: lẩu 4.7 | tết 7.42 | nóng 8.43",
+    "2026-01 Nam: lẩu 4.53 | tết 5.14 | nóng 9.87",
+    "2026-01 Trung: lẩu 5.32 | tết 5.19 | nóng 9.23",
+    "2026-02 Bắc: lẩu 2.47 | tết 22.35 | nóng 9.85",
+    "2026-02 Nam: lẩu 2.2 | tết 16.68 | nóng 13.13",
+    "2026-02 Trung: lẩu 2.63 | tết 16.2 | nóng 11.99",
+    "2026-03 Bắc: lẩu 1.93 | tết 4.97 | nóng 13.52",
+    "2026-03 Nam: lẩu 0.97 | tết 2.71 | nóng 31.46",
+    "2026-03 Trung: lẩu 2.29 | tết 3.17 | nóng 14.59",
+    "2026-04 Bắc: lẩu 1.85 | tết 4.75 | nóng 14.14",
+    "2026-04 Nam: lẩu 0.82 | tết 2.63 | nóng 31.79",
+    "2026-04 Trung: lẩu 1.11 | tết 2.66 | nóng 29.5",
+    "2026-05 Bắc: lẩu 0.97 | tết 3.94 | nóng 28.13",
+    "2026-05 Nam: lẩu 0.83 | tết 2.56 | nóng 31.81",
+    "2026-05 Trung: lẩu 1.11 | tết 2.43 | nóng 30.08",
+    "2026-06 Bắc: lẩu 0.85 | tết 3.98 | nóng 28.65",
+    "2026-06 Nam: lẩu 0.75 | tết 2.48 | nóng 32.53",
+    "2026-06 Trung: lẩu 1.04 | tết 2.54 | nóng 30.68",
+    "2026-07 Bắc: lẩu 0.84 | tết 3.85 | nóng 29.02",
+    "2026-07 Nam: lẩu 1.55 | tết 3.04 | nóng 17.38",
+    "2026-07 Trung: lẩu 0.95 | tết 2.4 | nóng 30.9",
+    "2026-08 Bắc: lẩu 0.84 | tết 3.63 | nóng 29.02",
+    "2026-08 Nam: lẩu 1.61 | tết 2.93 | nóng 17.01",
+    "2026-08 Trung: lẩu 0.92 | tết 2.51 | nóng 30.92",
+    "2026-09 Bắc: lẩu 1.66 | tết 4.54 | nóng 14.81",
+    "2026-09 Nam: lẩu 1.63 | tết 2.9 | nóng 16.97",
+    "2026-09 Trung: lẩu 2.02 | tết 2.76 | nóng 16.72"
+  ],
+  "dish_region_tags": {
+    "không": 5096,
+    "nam": 191,
+    "bắc": 142,
+    "trung": 70
+  },
+  "dish_foreign": 463,
+  "hdfs_bytes_events": 273346421,
+  "hdfs_mb_events": 260.7,
+  "hdfs_mb_events_csv": 1383.5,
+  "generate_write_seconds": 567.6,
+  "total_seconds": 688.3
+}

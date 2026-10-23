@@ -1,0 +1,22 @@
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Du lieu lon hoac tai lai duoc -> khong dua len Git
+# (data/raw tai tu repo ViFoodRec; data/processed va events sinh lai bang src/02-04)
+data/raw/*.csv
+data/processed/
+data/hdfs_local/
+data/output/*.csv
+!data/output/features_check_sample.csv
+# Giu lai: data/output/*.json (report nho, dung cho bao cao)
+
+# Claude Code: cau hinh rieng tung may
+.claude/settings.local.json
+
+# Windows / editor
+Thumbs.db
+desktop.ini
+*.tmp
+~$*

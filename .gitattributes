@@ -1,0 +1,14 @@
+# Script chay trong container Linux -> luon dung LF
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+.env text eol=lf
+*.env text eol=lf
+Dockerfile* text eol=lf
+*.parquet binary
+*.docx binary
+*.png binary
+*.jpg binary

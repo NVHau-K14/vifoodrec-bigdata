@@ -1,0 +1,19 @@
+# Image dung chung cho spark-master, spark-worker va jupyter
+# -> driver va executor cung phien ban Spark 4.2.0 va cung phien ban Python
+FROM quay.io/jupyter/pyspark-notebook:spark-4.2.0
+
+# Thu vien bo sung (pandas, numpy, pyarrow, scikit-learn, matplotlib da co san)
+RUN pip install --no-cache-dir \
+    pymongo \
+    duckdb
+
+# Spark doc HDFS cua cum (khong can khai bao lai trong code)
+USER root
+ENV SPARK_CONF_DIR=/usr/local/spark/conf
+RUN mkdir -p ${SPARK_CONF_DIR} && \
+    printf "spark.hadoop.fs.defaultFS hdfs://namenode:8020\n\
+spark.hadoop.dfs.client.use.datanode.hostname true\n\
+spark.sql.session.timeZone Asia/Ho_Chi_Minh\n" > ${SPARK_CONF_DIR}/spark-defaults.conf
+USER ${NB_UID}
+
+WORKDIR /home/jovyan/work

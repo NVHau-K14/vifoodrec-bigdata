@@ -1,0 +1,6 @@
+# Copy file nay sang C:\Users\<ten_ban>\.wslconfig
+# roi chay "wsl --shutdown" trong PowerShell va mo lai Docker Desktop
+[wsl2]
+memory=18GB
+processors=8
+swap=4GB

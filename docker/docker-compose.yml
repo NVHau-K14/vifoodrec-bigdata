@@ -1,0 +1,173 @@
+# =====================================================================
+#  ViFood Big Data - Cum HDFS + Spark Standalone + Jupyter + MongoDB
+#  Chay tu thu muc docker/:   docker compose up -d --build
+#
+#  Giao dien web:
+#    HDFS NameNode UI : http://localhost:9870
+#    Spark Master UI  : http://localhost:8080
+#    Spark Worker UI  : http://localhost:8081 , http://localhost:8082
+#    Spark Driver UI  : http://localhost:4040  (chi co khi dang chay job)
+#    Jupyter Lab      : http://localhost:8888  (token: bigdata)
+#    MongoDB          : mongodb://admin:admin123@localhost:27017
+# =====================================================================
+
+name: vifood
+
+x-spark-common: &spark-common
+  build:
+    context: .
+    dockerfile: Dockerfile.spark
+  image: vifood-spark:4.2.0
+  networks: [bigdata]
+  volumes:
+    # Mount ca thu muc goc du an vao cung mot duong dan o MOI container Spark,
+    # de driver va executor cung doc/ghi duoc file local (file:///home/jovyan/work/...)
+    - ..:/home/jovyan/work
+
+services:
+  # ---------------------------- HDFS ----------------------------------
+  namenode:
+    image: apache/hadoop:3.3.6
+    container_name: namenode
+    hostname: namenode
+    user: root
+    command: ["hdfs", "namenode"]
+    env_file: hadoop.env
+    environment:
+      # Neu thu muc nay chua ton tai -> tu dong format NameNode o lan chay dau
+      ENSURE_NAMENODE_DIR: /tmp/hadoop-root/dfs/name
+    ports:
+      - "9870:9870"   # Web UI
+      - "8020:8020"   # RPC (Spark doc hdfs://namenode:8020)
+    volumes:
+      - namenode:/tmp/hadoop-root/dfs
+      - ..:/home/jovyan/work          # de dung lenh hdfs dfs -put / -get voi file tren may
+    networks: [bigdata]
+    deploy:
+      resources:
+        limits: { memory: 1536m }
+
+  datanode1:
+    image: apache/hadoop:3.3.6
+    container_name: datanode1
+    hostname: datanode1
+    user: root
+    command: ["hdfs", "datanode"]
+    env_file: hadoop.env
+    volumes:
+      - datanode1:/tmp/hadoop-root/dfs
+    networks: [bigdata]
+    depends_on: [namenode]
+    deploy:
+      resources:
+        limits: { memory: 1g }
+
+  datanode2:
+    image: apache/hadoop:3.3.6
+    container_name: datanode2
+    hostname: datanode2
+    user: root
+    command: ["hdfs", "datanode"]
+    env_file: hadoop.env
+    volumes:
+      - datanode2:/tmp/hadoop-root/dfs
+    networks: [bigdata]
+    depends_on: [namenode]
+    deploy:
+      resources:
+        limits: { memory: 1g }
+
+  # ------------------------ SPARK STANDALONE --------------------------
+  spark-master:
+    <<: *spark-common
+    healthcheck:
+      disable: true
+    container_name: spark-master
+    hostname: spark-master
+    command: >
+      /usr/local/spark/bin/spark-class org.apache.spark.deploy.master.Master
+      --host spark-master --port 7077 --webui-port 8080
+    ports:
+      - "8080:8080"   # Spark Master UI
+      - "7077:7077"
+    deploy:
+      resources:
+        limits: { memory: 1g }
+
+  spark-worker-1:
+    <<: *spark-common
+    healthcheck:
+      disable: true
+    container_name: spark-worker-1
+    hostname: spark-worker-1
+    command: >
+      /usr/local/spark/bin/spark-class org.apache.spark.deploy.worker.Worker
+      spark://spark-master:7077 --cores 2 --memory 3g --webui-port 8081
+      --work-dir /tmp/spark-work
+    ports:
+      - "8081:8081"
+    depends_on: [spark-master]
+    deploy:
+      resources:
+        limits: { memory: 4g }
+
+  spark-worker-2:
+    <<: *spark-common
+    healthcheck:
+      disable: true
+    container_name: spark-worker-2
+    hostname: spark-worker-2
+    command: >
+      /usr/local/spark/bin/spark-class org.apache.spark.deploy.worker.Worker
+      spark://spark-master:7077 --cores 2 --memory 3g --webui-port 8082
+      --work-dir /tmp/spark-work
+    ports:
+      - "8082:8082"
+    depends_on: [spark-master]
+    deploy:
+      resources:
+        limits: { memory: 4g }
+
+  # ------------------------- JUPYTER (DRIVER) -------------------------
+  jupyter:
+    <<: *spark-common
+    container_name: jupyter
+    hostname: jupyter
+    env_file: ../.env
+    environment:
+      JUPYTER_TOKEN: bigdata
+    ports:
+      - "8888:8888"   # Jupyter Lab
+      - "4040:4040"   # Spark Driver UI cua job dang chay
+    depends_on: [spark-master, namenode, mongodb]
+    deploy:
+      resources:
+        limits: { memory: 4g }
+
+  # ----------------------------- MONGODB ------------------------------
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    hostname: mongodb
+    command: ["--wiredTigerCacheSizeGB", "1"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+    networks: [bigdata]
+    deploy:
+      resources:
+        limits: { memory: 1536m }
+
+networks:
+  bigdata:
+    name: bigdata
+
+volumes:
+  namenode:
+  datanode1:
+  datanode2:
+  mongodb:

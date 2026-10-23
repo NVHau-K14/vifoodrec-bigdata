@@ -1,0 +1,24 @@
+{
+  "raw_rows": {
+    "cooky": 4296,
+    "mnmn": 1213
+  },
+  "exact_duplicates_removed": 10,
+  "old_ids_with_several_raw_candidates": 1,
+  "old_ids_matched": 3996,
+  "old_rows_unmatched": 0,
+  "ratings_raw_rows": 182678,
+  "ratings_orphan_removed": 47,
+  "ratings_merged_duplicates": 75,
+  "foods_v2_rows": 5499,
+  "foods_from_original_clean": 3996,
+  "foods_new": 1503,
+  "foods_by_source": {
+    "mnmn": 1208,
+    "cooky": 4291
+  },
+  "dup_name_rows_kept": 372,
+  "serving_size_set_null": 8,
+  "no_image": 19,
+  "ratings_v2_rows": 182556
+}
