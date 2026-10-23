@@ -22,6 +22,7 @@ PROJECT_DIR = os.getenv("PROJECT_DIR", os.path.abspath(os.path.join(os.path.dirn
 HDFS_URL = os.getenv("HDFS_URL", "hdfs://namenode:8020")
 SPARK_MASTER = os.getenv("SPARK_MASTER", "spark://spark-master:7077")
 DRIVER_HOST = os.getenv("SPARK_DRIVER_HOST", "jupyter")
+EVENT_LOG_DIR = os.path.join(PROJECT_DIR, "logs", "spark-events")
 
 
 def get_spark(app_name: str, local: bool = False) -> SparkSession:
@@ -34,6 +35,11 @@ def get_spark(app_name: str, local: bool = False) -> SparkSession:
              .config("spark.driver.host", DRIVER_HOST)
              .config("spark.executor.memory", "2g")
              .config("spark.hadoop.fs.defaultFS", HDFS_URL))
+    # Event log -> logs/spark-events (thu muc du an, mount o moi container) de Spark History Server
+    # (http://localhost:18080) xem lai cac job da chay xong: chup anh UI, do hieu nang
+    os.makedirs(EVENT_LOG_DIR, exist_ok=True)
+    b = (b.config("spark.eventLog.enabled", "true")
+          .config("spark.eventLog.dir", "file://" + EVENT_LOG_DIR))
     spark = (b.config("spark.sql.session.timeZone", "Asia/Ho_Chi_Minh")
               .config("spark.sql.shuffle.partitions", "8")
               .getOrCreate())

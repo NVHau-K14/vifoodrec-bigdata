@@ -7,7 +7,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 ## Bắt đầu mỗi phiên
 1. Đọc `docs/PROGRESS.md`: trạng thái, việc tiếp theo, việc còn treo. **Không đọc lại toàn bộ dự án.**
    Đọc thêm `docs/LAST_RUN.md` để biết lần chạy gần nhất và các câu hỏi đang chờ người dùng.
-2. Kiểm tra cụm khi cần chạy job: `docker compose -f docker/docker-compose.yml ps` (đủ 8 container),
+2. Kiểm tra cụm khi cần chạy job: `docker compose -f docker/docker-compose.yml ps` (đủ 9 container),
    `docker exec namenode hdfs dfs -ls -R /data | head`.
 3. Chỉ mở khi cần: `docs/DECISIONS.md` (vì sao làm vậy), `docs/DATA_DICTIONARY.md` (cột của các bảng),
    `docs/plan/ke_hoach_chi_tiet.md` (phạm vi các bước còn lại), `docs/plan/yeu_cau_giang_vien.md` (rubric).
@@ -16,6 +16,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 - HDFS: `namenode` (UI http://localhost:9870, RPC `hdfs://namenode:8020`), `datanode1`, `datanode2` (replication 2).
 - Spark 4.2.0 Standalone: `spark-master` (UI :8080), `spark-worker-1/2` (mỗi worker 2 core, 3GB).
 - `jupyter` (http://localhost:8888, token `bigdata`) là driver; Spark UI của job đang chạy ở :4040.
+- `spark-history` (http://localhost:18080): xem lại các job đã chạy xong. `get_spark()` ghi event log vào `logs/spark-events/` (đã có trong `.gitignore`).
 - `mongodb` (:27017, admin/admin123). FastAPI và web chưa có trong compose.
 - Thư mục dự án được mount vào `/home/jovyan/work` ở jupyter, master, worker và namenode.
 - Dữ liệu HDFS nằm trong Docker volume nên vẫn còn sau khi tắt máy.

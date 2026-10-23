@@ -2,25 +2,25 @@
  {
   "meal_slot": "Tất cả",
   "size": "1",
-  "count": 1672276,
-  "share_pct": 84.96
+  "count": 1660528,
+  "share_pct": 84.36
  },
  {
   "meal_slot": "Tất cả",
   "size": "2",
-  "count": 193766,
-  "share_pct": 9.84
+  "count": 201125,
+  "share_pct": 10.22
  },
  {
   "meal_slot": "Tất cả",
   "size": "3",
-  "count": 102296,
-  "share_pct": 5.2
+  "count": 106688,
+  "share_pct": 5.42
  },
  {
   "meal_slot": "khuya",
   "size": "1",
-  "count": 145134,
+  "count": 145137,
   "share_pct": 100.0
  },
  {
@@ -32,37 +32,37 @@
  {
   "meal_slot": "trưa",
   "size": "1",
-  "count": 431372,
-  "share_pct": 78.63
+  "count": 426470,
+  "share_pct": 77.73
  },
  {
   "meal_slot": "trưa",
   "size": "2",
-  "count": 76765,
-  "share_pct": 13.99
+  "count": 79662,
+  "share_pct": 14.52
  },
  {
   "meal_slot": "trưa",
   "size": "3",
-  "count": 40496,
-  "share_pct": 7.38
+  "count": 42501,
+  "share_pct": 7.75
  },
  {
   "meal_slot": "tối",
   "size": "1",
-  "count": 751563,
-  "share_pct": 80.78
+  "count": 744714,
+  "share_pct": 80.05
  },
  {
   "meal_slot": "tối",
   "size": "2",
-  "count": 117001,
-  "share_pct": 12.58
+  "count": 121463,
+  "share_pct": 13.06
  },
  {
   "meal_slot": "tối",
   "size": "3",
-  "count": 61800,
-  "share_pct": 6.64
+  "count": 64187,
+  "share_pct": 6.9
  }
 ]

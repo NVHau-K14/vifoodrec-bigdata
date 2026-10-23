@@ -3,1344 +3,1344 @@
   "month": "2025-10",
   "region": "Bắc",
   "season": "không",
-  "cooks": 46930,
-  "share_pct": 74.64
+  "cooks": 48891,
+  "share_pct": 77.26
  },
  {
   "month": "2025-10",
   "region": "Bắc",
   "season": "lạnh",
-  "cooks": 3506,
-  "share_pct": 5.58
+  "cooks": 3747,
+  "share_pct": 5.92
  },
  {
   "month": "2025-10",
   "region": "Bắc",
   "season": "nóng",
-  "cooks": 9570,
-  "share_pct": 15.22
+  "cooks": 7806,
+  "share_pct": 12.34
  },
  {
   "month": "2025-10",
   "region": "Bắc",
   "season": "tết",
-  "cooks": 2870,
-  "share_pct": 4.56
+  "cooks": 2834,
+  "share_pct": 4.48
  },
  {
   "month": "2025-10",
   "region": "Nam",
   "season": "không",
-  "cooks": 61179,
-  "share_pct": 75.1
+  "cooks": 63002,
+  "share_pct": 76.75
  },
  {
   "month": "2025-10",
   "region": "Nam",
   "season": "lạnh",
-  "cooks": 4241,
-  "share_pct": 5.21
+  "cooks": 4586,
+  "share_pct": 5.59
  },
  {
   "month": "2025-10",
   "region": "Nam",
   "season": "nóng",
-  "cooks": 13697,
-  "share_pct": 16.81
+  "cooks": 12101,
+  "share_pct": 14.74
  },
  {
   "month": "2025-10",
   "region": "Nam",
   "season": "tết",
-  "cooks": 2345,
-  "share_pct": 2.88
+  "cooks": 2403,
+  "share_pct": 2.93
  },
  {
   "month": "2025-10",
   "region": "Trung",
   "season": "không",
-  "cooks": 26591,
-  "share_pct": 75.13
+  "cooks": 28041,
+  "share_pct": 78.38
  },
  {
   "month": "2025-10",
   "region": "Trung",
   "season": "lạnh",
-  "cooks": 1941,
-  "share_pct": 5.48
+  "cooks": 2107,
+  "share_pct": 5.89
  },
  {
   "month": "2025-10",
   "region": "Trung",
   "season": "nóng",
-  "cooks": 5845,
+  "cooks": 4626,
+  "share_pct": 12.93
+ },
+ {
+  "month": "2025-10",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1003,
+  "share_pct": 2.8
+ },
+ {
+  "month": "2025-10",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 139934,
+  "share_pct": 77.25
+ },
+ {
+  "month": "2025-10",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 10440,
+  "share_pct": 5.76
+ },
+ {
+  "month": "2025-10",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 24533,
+  "share_pct": 13.54
+ },
+ {
+  "month": "2025-10",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 6240,
+  "share_pct": 3.44
+ },
+ {
+  "month": "2025-11",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 46692,
+  "share_pct": 72.09
+ },
+ {
+  "month": "2025-11",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 10694,
   "share_pct": 16.51
  },
  {
-  "month": "2025-10",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 1018,
-  "share_pct": 2.88
- },
- {
-  "month": "2025-10",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 134700,
-  "share_pct": 74.94
- },
- {
-  "month": "2025-10",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 9688,
-  "share_pct": 5.39
- },
- {
-  "month": "2025-10",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 29112,
-  "share_pct": 16.2
- },
- {
-  "month": "2025-10",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 6233,
-  "share_pct": 3.47
- },
- {
-  "month": "2025-11",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 46152,
-  "share_pct": 71.44
- },
- {
-  "month": "2025-11",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 10047,
-  "share_pct": 15.55
- },
- {
   "month": "2025-11",
   "region": "Bắc",
   "season": "nóng",
-  "cooks": 5479,
-  "share_pct": 8.48
+  "cooks": 4579,
+  "share_pct": 7.07
  },
  {
   "month": "2025-11",
   "region": "Bắc",
   "season": "tết",
-  "cooks": 2920,
-  "share_pct": 4.52
+  "cooks": 2803,
+  "share_pct": 4.33
  },
  {
   "month": "2025-11",
   "region": "Nam",
   "season": "không",
-  "cooks": 62948,
-  "share_pct": 74.85
+  "cooks": 64963,
+  "share_pct": 76.64
  },
  {
   "month": "2025-11",
   "region": "Nam",
   "season": "lạnh",
-  "cooks": 4604,
-  "share_pct": 5.47
+  "cooks": 4842,
+  "share_pct": 5.71
  },
  {
   "month": "2025-11",
   "region": "Nam",
   "season": "nóng",
-  "cooks": 14057,
-  "share_pct": 16.72
+  "cooks": 12453,
+  "share_pct": 14.69
  },
  {
   "month": "2025-11",
   "region": "Nam",
   "season": "tết",
-  "cooks": 2485,
+  "cooks": 2509,
   "share_pct": 2.96
  },
  {
   "month": "2025-11",
   "region": "Trung",
   "season": "không",
-  "cooks": 26371,
-  "share_pct": 72.14
+  "cooks": 26867,
+  "share_pct": 73.18
  },
  {
   "month": "2025-11",
   "region": "Trung",
   "season": "lạnh",
-  "cooks": 5738,
-  "share_pct": 15.7
+  "cooks": 5999,
+  "share_pct": 16.34
  },
  {
   "month": "2025-11",
   "region": "Trung",
   "season": "nóng",
-  "cooks": 3428,
-  "share_pct": 9.38
+  "cooks": 2821,
+  "share_pct": 7.68
  },
  {
   "month": "2025-11",
   "region": "Trung",
   "season": "tết",
-  "cooks": 1019,
-  "share_pct": 2.79
+  "cooks": 1028,
+  "share_pct": 2.8
  },
  {
   "month": "2025-11",
   "region": "Tất cả",
   "season": "không",
-  "cooks": 135471,
-  "share_pct": 73.13
+  "cooks": 138522,
+  "share_pct": 74.37
  },
  {
   "month": "2025-11",
   "region": "Tất cả",
   "season": "lạnh",
-  "cooks": 20389,
-  "share_pct": 11.01
+  "cooks": 21535,
+  "share_pct": 11.56
  },
  {
   "month": "2025-11",
   "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 22964,
-  "share_pct": 12.4
- },
- {
-  "month": "2025-11",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 6424,
-  "share_pct": 3.47
- },
- {
-  "month": "2025-12",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 46106,
-  "share_pct": 71.46
- },
- {
-  "month": "2025-12",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 10070,
-  "share_pct": 15.61
- },
- {
-  "month": "2025-12",
-  "region": "Bắc",
-  "season": "nóng",
-  "cooks": 5266,
-  "share_pct": 8.16
- },
- {
-  "month": "2025-12",
-  "region": "Bắc",
-  "season": "tết",
-  "cooks": 3076,
-  "share_pct": 4.77
- },
- {
-  "month": "2025-12",
-  "region": "Nam",
-  "season": "không",
-  "cooks": 61147,
-  "share_pct": 72.94
- },
- {
-  "month": "2025-12",
-  "region": "Nam",
-  "season": "lạnh",
-  "cooks": 11900,
-  "share_pct": 14.2
- },
- {
-  "month": "2025-12",
-  "region": "Nam",
-  "season": "nóng",
-  "cooks": 8285,
-  "share_pct": 9.88
- },
- {
-  "month": "2025-12",
-  "region": "Nam",
-  "season": "tết",
-  "cooks": 2498,
-  "share_pct": 2.98
- },
- {
-  "month": "2025-12",
-  "region": "Trung",
-  "season": "không",
-  "cooks": 26556,
-  "share_pct": 72.94
- },
- {
-  "month": "2025-12",
-  "region": "Trung",
-  "season": "lạnh",
-  "cooks": 5547,
-  "share_pct": 15.24
- },
- {
-  "month": "2025-12",
-  "region": "Trung",
-  "season": "nóng",
-  "cooks": 3308,
-  "share_pct": 9.09
- },
- {
-  "month": "2025-12",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 997,
-  "share_pct": 2.74
- },
- {
-  "month": "2025-12",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 133809,
-  "share_pct": 72.42
- },
- {
-  "month": "2025-12",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 27517,
-  "share_pct": 14.89
- },
- {
-  "month": "2025-12",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 16859,
-  "share_pct": 9.13
- },
- {
-  "month": "2025-12",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 6571,
-  "share_pct": 3.56
- },
- {
-  "month": "2026-01",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 46682,
-  "share_pct": 69.19
- },
- {
-  "month": "2026-01",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 9787,
-  "share_pct": 14.51
- },
- {
-  "month": "2026-01",
-  "region": "Bắc",
-  "season": "nóng",
-  "cooks": 5900,
-  "share_pct": 8.74
- },
- {
-  "month": "2026-01",
-  "region": "Bắc",
-  "season": "tết",
-  "cooks": 5102,
-  "share_pct": 7.56
- },
- {
-  "month": "2026-01",
-  "region": "Nam",
-  "season": "không",
-  "cooks": 62239,
-  "share_pct": 71.01
- },
- {
-  "month": "2026-01",
-  "region": "Nam",
-  "season": "lạnh",
-  "cooks": 11845,
-  "share_pct": 13.51
- },
- {
-  "month": "2026-01",
-  "region": "Nam",
-  "season": "nóng",
-  "cooks": 8958,
-  "share_pct": 10.22
- },
- {
-  "month": "2026-01",
-  "region": "Nam",
-  "season": "tết",
-  "cooks": 4605,
-  "share_pct": 5.25
- },
- {
-  "month": "2026-01",
-  "region": "Trung",
-  "season": "không",
-  "cooks": 27192,
-  "share_pct": 70.98
- },
- {
-  "month": "2026-01",
-  "region": "Trung",
-  "season": "lạnh",
-  "cooks": 5408,
-  "share_pct": 14.12
- },
- {
-  "month": "2026-01",
-  "region": "Trung",
-  "season": "nóng",
-  "cooks": 3672,
-  "share_pct": 9.58
- },
- {
-  "month": "2026-01",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 2039,
-  "share_pct": 5.32
- },
- {
-  "month": "2026-01",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 136113,
-  "share_pct": 70.37
- },
- {
-  "month": "2026-01",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 27040,
-  "share_pct": 13.98
- },
- {
-  "month": "2026-01",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 18530,
-  "share_pct": 9.58
- },
- {
-  "month": "2026-01",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 11746,
-  "share_pct": 6.07
- },
- {
-  "month": "2026-02",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 41934,
-  "share_pct": 59.5
- },
- {
-  "month": "2026-02",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 5351,
-  "share_pct": 7.59
- },
- {
-  "month": "2026-02",
-  "region": "Bắc",
-  "season": "nóng",
-  "cooks": 7139,
-  "share_pct": 10.13
- },
- {
-  "month": "2026-02",
-  "region": "Bắc",
-  "season": "tết",
-  "cooks": 16054,
-  "share_pct": 22.78
- },
- {
-  "month": "2026-02",
-  "region": "Nam",
-  "season": "không",
-  "cooks": 57854,
-  "share_pct": 63.22
- },
- {
-  "month": "2026-02",
-  "region": "Nam",
-  "season": "lạnh",
-  "cooks": 5798,
-  "share_pct": 6.34
- },
- {
-  "month": "2026-02",
-  "region": "Nam",
-  "season": "nóng",
-  "cooks": 12273,
-  "share_pct": 13.41
- },
- {
-  "month": "2026-02",
-  "region": "Nam",
-  "season": "tết",
-  "cooks": 15589,
-  "share_pct": 17.03
- },
- {
-  "month": "2026-02",
-  "region": "Trung",
-  "season": "không",
-  "cooks": 25903,
-  "share_pct": 63.83
- },
- {
-  "month": "2026-02",
-  "region": "Trung",
-  "season": "lạnh",
-  "cooks": 2804,
-  "share_pct": 6.91
- },
- {
-  "month": "2026-02",
-  "region": "Trung",
-  "season": "nóng",
-  "cooks": 5167,
-  "share_pct": 12.73
- },
- {
-  "month": "2026-02",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 6708,
-  "share_pct": 16.53
- },
- {
-  "month": "2026-02",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 125691,
-  "share_pct": 62.05
- },
- {
-  "month": "2026-02",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 13953,
-  "share_pct": 6.89
- },
- {
-  "month": "2026-02",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 24579,
-  "share_pct": 12.13
- },
- {
-  "month": "2026-02",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 38351,
-  "share_pct": 18.93
- },
- {
-  "month": "2026-03",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 51943,
-  "share_pct": 74.21
- },
- {
-  "month": "2026-03",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 4540,
-  "share_pct": 6.49
- },
- {
-  "month": "2026-03",
-  "region": "Bắc",
-  "season": "nóng",
-  "cooks": 9880,
-  "share_pct": 14.12
- },
- {
-  "month": "2026-03",
-  "region": "Bắc",
-  "season": "tết",
-  "cooks": 3632,
-  "share_pct": 5.19
- },
- {
-  "month": "2026-03",
-  "region": "Nam",
-  "season": "không",
-  "cooks": 54280,
-  "share_pct": 62.08
- },
- {
-  "month": "2026-03",
-  "region": "Nam",
-  "season": "lạnh",
-  "cooks": 2827,
-  "share_pct": 3.23
- },
- {
-  "month": "2026-03",
-  "region": "Nam",
-  "season": "nóng",
-  "cooks": 27823,
-  "share_pct": 31.82
- },
- {
-  "month": "2026-03",
-  "region": "Nam",
-  "season": "tết",
-  "cooks": 2505,
-  "share_pct": 2.86
- },
- {
-  "month": "2026-03",
-  "region": "Trung",
-  "season": "không",
-  "cooks": 29687,
-  "share_pct": 75.02
- },
- {
-  "month": "2026-03",
-  "region": "Trung",
-  "season": "lạnh",
-  "cooks": 2440,
-  "share_pct": 6.17
- },
- {
-  "month": "2026-03",
-  "region": "Trung",
-  "season": "nóng",
-  "cooks": 6163,
-  "share_pct": 15.57
- },
- {
-  "month": "2026-03",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 1281,
-  "share_pct": 3.24
- },
- {
-  "month": "2026-03",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 135910,
-  "share_pct": 68.99
- },
- {
-  "month": "2026-03",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 9807,
-  "share_pct": 4.98
- },
- {
-  "month": "2026-03",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 43866,
-  "share_pct": 22.27
- },
- {
-  "month": "2026-03",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 7418,
-  "share_pct": 3.77
- },
- {
-  "month": "2026-04",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 49970,
-  "share_pct": 74.38
- },
- {
-  "month": "2026-04",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 4110,
-  "share_pct": 6.12
- },
- {
-  "month": "2026-04",
-  "region": "Bắc",
-  "season": "nóng",
-  "cooks": 9750,
-  "share_pct": 14.51
- },
- {
-  "month": "2026-04",
-  "region": "Bắc",
-  "season": "tết",
-  "cooks": 3351,
-  "share_pct": 4.99
- },
- {
-  "month": "2026-04",
-  "region": "Nam",
-  "season": "không",
-  "cooks": 52267,
-  "share_pct": 62.14
- },
- {
-  "month": "2026-04",
-  "region": "Nam",
-  "season": "lạnh",
-  "cooks": 2506,
-  "share_pct": 2.98
- },
- {
-  "month": "2026-04",
-  "region": "Nam",
-  "season": "nóng",
-  "cooks": 27012,
-  "share_pct": 32.12
- },
- {
-  "month": "2026-04",
-  "region": "Nam",
-  "season": "tết",
-  "cooks": 2324,
-  "share_pct": 2.76
- },
- {
-  "month": "2026-04",
-  "region": "Trung",
-  "season": "không",
-  "cooks": 23821,
-  "share_pct": 63.27
- },
- {
-  "month": "2026-04",
-  "region": "Trung",
-  "season": "lạnh",
-  "cooks": 1386,
-  "share_pct": 3.68
- },
- {
-  "month": "2026-04",
-  "region": "Trung",
-  "season": "nóng",
-  "cooks": 11424,
-  "share_pct": 30.35
- },
- {
-  "month": "2026-04",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 1016,
-  "share_pct": 2.7
- },
- {
-  "month": "2026-04",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 126058,
-  "share_pct": 66.72
- },
- {
-  "month": "2026-04",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 8002,
-  "share_pct": 4.24
- },
- {
-  "month": "2026-04",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 48186,
-  "share_pct": 25.5
- },
- {
-  "month": "2026-04",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 6691,
-  "share_pct": 3.54
- },
- {
-  "month": "2026-05",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 46155,
-  "share_pct": 63.88
- },
- {
-  "month": "2026-05",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 2518,
-  "share_pct": 3.48
- },
- {
-  "month": "2026-05",
-  "region": "Bắc",
-  "season": "nóng",
-  "cooks": 20648,
-  "share_pct": 28.58
- },
- {
-  "month": "2026-05",
-  "region": "Bắc",
-  "season": "tết",
-  "cooks": 2936,
-  "share_pct": 4.06
- },
- {
-  "month": "2026-05",
-  "region": "Nam",
-  "season": "không",
-  "cooks": 57265,
-  "share_pct": 62.08
- },
- {
-  "month": "2026-05",
-  "region": "Nam",
-  "season": "lạnh",
-  "cooks": 2755,
-  "share_pct": 2.99
- },
- {
-  "month": "2026-05",
-  "region": "Nam",
-  "season": "nóng",
-  "cooks": 29816,
-  "share_pct": 32.32
- },
- {
-  "month": "2026-05",
-  "region": "Nam",
-  "season": "tết",
-  "cooks": 2403,
-  "share_pct": 2.61
- },
- {
-  "month": "2026-05",
-  "region": "Trung",
-  "season": "không",
-  "cooks": 25956,
-  "share_pct": 63.56
- },
- {
-  "month": "2026-05",
-  "region": "Trung",
-  "season": "lạnh",
-  "cooks": 1353,
-  "share_pct": 3.31
- },
- {
-  "month": "2026-05",
-  "region": "Trung",
-  "season": "nóng",
-  "cooks": 12515,
-  "share_pct": 30.64
- },
- {
-  "month": "2026-05",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 1016,
-  "share_pct": 2.49
- },
- {
-  "month": "2026-05",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 129376,
-  "share_pct": 63.01
- },
- {
-  "month": "2026-05",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 6626,
-  "share_pct": 3.23
- },
- {
-  "month": "2026-05",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 62979,
-  "share_pct": 30.67
- },
- {
-  "month": "2026-05",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 6355,
-  "share_pct": 3.09
- },
- {
-  "month": "2026-06",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 43063,
-  "share_pct": 63.43
- },
- {
-  "month": "2026-06",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 2232,
-  "share_pct": 3.29
- },
- {
-  "month": "2026-06",
-  "region": "Bắc",
   "season": "nóng",
   "cooks": 19853,
-  "share_pct": 29.24
+  "share_pct": 10.66
  },
  {
-  "month": "2026-06",
+  "month": "2025-11",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 6340,
+  "share_pct": 3.4
+ },
+ {
+  "month": "2025-12",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 46744,
+  "share_pct": 72.28
+ },
+ {
+  "month": "2025-12",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 10607,
+  "share_pct": 16.4
+ },
+ {
+  "month": "2025-12",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 4368,
+  "share_pct": 6.75
+ },
+ {
+  "month": "2025-12",
   "region": "Bắc",
   "season": "tết",
-  "cooks": 2745,
-  "share_pct": 4.04
+  "cooks": 2952,
+  "share_pct": 4.56
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Nam",
   "season": "không",
-  "cooks": 53549,
-  "share_pct": 61.72
+  "cooks": 61944,
+  "share_pct": 73.56
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Nam",
   "season": "lạnh",
-  "cooks": 2514,
+  "cooks": 12560,
+  "share_pct": 14.91
+ },
+ {
+  "month": "2025-12",
+  "region": "Nam",
+  "season": "nóng",
+  "cooks": 7270,
+  "share_pct": 8.63
+ },
+ {
+  "month": "2025-12",
+  "region": "Nam",
+  "season": "tết",
+  "cooks": 2439,
   "share_pct": 2.9
  },
  {
-  "month": "2026-06",
-  "region": "Nam",
-  "season": "nóng",
-  "cooks": 28446,
-  "share_pct": 32.79
- },
- {
-  "month": "2026-06",
-  "region": "Nam",
-  "season": "tết",
-  "cooks": 2256,
-  "share_pct": 2.6
- },
- {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Trung",
   "season": "không",
-  "cooks": 24005,
-  "share_pct": 62.73
+  "cooks": 27028,
+  "share_pct": 73.7
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Trung",
   "season": "lạnh",
-  "cooks": 1231,
-  "share_pct": 3.22
+  "cooks": 6004,
+  "share_pct": 16.37
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Trung",
   "season": "nóng",
-  "cooks": 12091,
-  "share_pct": 31.6
+  "cooks": 2675,
+  "share_pct": 7.29
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Trung",
   "season": "tết",
-  "cooks": 941,
-  "share_pct": 2.46
+  "cooks": 966,
+  "share_pct": 2.63
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Tất cả",
   "season": "không",
-  "cooks": 120617,
-  "share_pct": 62.52
+  "cooks": 135716,
+  "share_pct": 73.14
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Tất cả",
   "season": "lạnh",
-  "cooks": 5977,
-  "share_pct": 3.1
+  "cooks": 29171,
+  "share_pct": 15.72
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Tất cả",
   "season": "nóng",
-  "cooks": 60390,
-  "share_pct": 31.3
+  "cooks": 14313,
+  "share_pct": 7.71
  },
  {
-  "month": "2026-06",
+  "month": "2025-12",
   "region": "Tất cả",
   "season": "tết",
-  "cooks": 5942,
-  "share_pct": 3.08
+  "cooks": 6357,
+  "share_pct": 3.43
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Bắc",
   "season": "không",
-  "cooks": 44732,
-  "share_pct": 63.05
+  "cooks": 47336,
+  "share_pct": 69.95
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Bắc",
   "season": "lạnh",
-  "cooks": 2377,
-  "share_pct": 3.35
+  "cooks": 10404,
+  "share_pct": 15.37
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Bắc",
   "season": "nóng",
-  "cooks": 20976,
-  "share_pct": 29.56
+  "cooks": 4833,
+  "share_pct": 7.14
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Bắc",
   "season": "tết",
-  "cooks": 2867,
-  "share_pct": 4.04
+  "cooks": 5099,
+  "share_pct": 7.53
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Nam",
   "season": "không",
-  "cooks": 69515,
-  "share_pct": 73.85
+  "cooks": 63077,
+  "share_pct": 71.87
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Nam",
   "season": "lạnh",
-  "cooks": 5022,
-  "share_pct": 5.34
+  "cooks": 12328,
+  "share_pct": 14.05
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Nam",
   "season": "nóng",
-  "cooks": 16652,
-  "share_pct": 17.69
+  "cooks": 7762,
+  "share_pct": 8.84
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Nam",
   "season": "tết",
-  "cooks": 2938,
-  "share_pct": 3.12
+  "cooks": 4602,
+  "share_pct": 5.24
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Trung",
   "season": "không",
-  "cooks": 25099,
-  "share_pct": 62.47
+  "cooks": 27921,
+  "share_pct": 72.49
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Trung",
   "season": "lạnh",
-  "cooks": 1293,
-  "share_pct": 3.22
+  "cooks": 5803,
+  "share_pct": 15.07
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Trung",
   "season": "nóng",
-  "cooks": 12742,
-  "share_pct": 31.72
+  "cooks": 2747,
+  "share_pct": 7.13
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Trung",
   "season": "tết",
-  "cooks": 1042,
-  "share_pct": 2.59
+  "cooks": 2047,
+  "share_pct": 5.31
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Tất cả",
   "season": "không",
-  "cooks": 139346,
-  "share_pct": 67.89
+  "cooks": 138334,
+  "share_pct": 71.32
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Tất cả",
   "season": "lạnh",
-  "cooks": 8692,
-  "share_pct": 4.23
+  "cooks": 28535,
+  "share_pct": 14.71
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Tất cả",
   "season": "nóng",
-  "cooks": 50370,
-  "share_pct": 24.54
+  "cooks": 15342,
+  "share_pct": 7.91
  },
  {
-  "month": "2026-07",
+  "month": "2026-01",
   "region": "Tất cả",
   "season": "tết",
-  "cooks": 6847,
-  "share_pct": 3.34
+  "cooks": 11748,
+  "share_pct": 6.06
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Bắc",
   "season": "không",
-  "cooks": 48280,
-  "share_pct": 63.18
+  "cooks": 42672,
+  "share_pct": 60.33
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Bắc",
   "season": "lạnh",
-  "cooks": 2427,
-  "share_pct": 3.18
+  "cooks": 5888,
+  "share_pct": 8.32
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Bắc",
   "season": "nóng",
-  "cooks": 22767,
-  "share_pct": 29.79
+  "cooks": 5927,
+  "share_pct": 8.38
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Bắc",
   "season": "tết",
-  "cooks": 2947,
-  "share_pct": 3.86
+  "cooks": 16244,
+  "share_pct": 22.97
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Nam",
   "season": "không",
-  "cooks": 74778,
-  "share_pct": 74.31
+  "cooks": 59387,
+  "share_pct": 64.4
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Nam",
   "season": "lạnh",
-  "cooks": 5421,
-  "share_pct": 5.39
+  "cooks": 6153,
+  "share_pct": 6.67
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Nam",
   "season": "nóng",
-  "cooks": 17406,
-  "share_pct": 17.3
+  "cooks": 10739,
+  "share_pct": 11.65
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Nam",
   "season": "tết",
-  "cooks": 3019,
-  "share_pct": 3.0
+  "cooks": 15935,
+  "share_pct": 17.28
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Trung",
   "season": "không",
-  "cooks": 26698,
-  "share_pct": 62.74
+  "cooks": 26952,
+  "share_pct": 65.7
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Trung",
   "season": "lạnh",
-  "cooks": 1284,
-  "share_pct": 3.02
+  "cooks": 3046,
+  "share_pct": 7.42
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Trung",
   "season": "nóng",
-  "cooks": 13497,
-  "share_pct": 31.72
+  "cooks": 4109,
+  "share_pct": 10.02
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Trung",
   "season": "tết",
-  "cooks": 1077,
-  "share_pct": 2.53
+  "cooks": 6918,
+  "share_pct": 16.86
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Tất cả",
   "season": "không",
-  "cooks": 149756,
-  "share_pct": 68.19
+  "cooks": 129011,
+  "share_pct": 63.25
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Tất cả",
   "season": "lạnh",
-  "cooks": 9132,
-  "share_pct": 4.16
+  "cooks": 15087,
+  "share_pct": 7.4
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Tất cả",
   "season": "nóng",
-  "cooks": 53670,
-  "share_pct": 24.44
+  "cooks": 20775,
+  "share_pct": 10.19
  },
  {
-  "month": "2026-08",
+  "month": "2026-02",
   "region": "Tất cả",
   "season": "tết",
-  "cooks": 7043,
+  "cooks": 39097,
+  "share_pct": 19.17
+ },
+ {
+  "month": "2026-03",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 53398,
+  "share_pct": 76.18
+ },
+ {
+  "month": "2026-03",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 4804,
+  "share_pct": 6.85
+ },
+ {
+  "month": "2026-03",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 8347,
+  "share_pct": 11.91
+ },
+ {
+  "month": "2026-03",
+  "region": "Bắc",
+  "season": "tết",
+  "cooks": 3543,
+  "share_pct": 5.05
+ },
+ {
+  "month": "2026-03",
+  "region": "Nam",
+  "season": "không",
+  "cooks": 56930,
+  "share_pct": 64.56
+ },
+ {
+  "month": "2026-03",
+  "region": "Nam",
+  "season": "lạnh",
+  "cooks": 3044,
+  "share_pct": 3.45
+ },
+ {
+  "month": "2026-03",
+  "region": "Nam",
+  "season": "nóng",
+  "cooks": 25682,
+  "share_pct": 29.12
+ },
+ {
+  "month": "2026-03",
+  "region": "Nam",
+  "season": "tết",
+  "cooks": 2530,
+  "share_pct": 2.87
+ },
+ {
+  "month": "2026-03",
+  "region": "Trung",
+  "season": "không",
+  "cooks": 30810,
+  "share_pct": 77.34
+ },
+ {
+  "month": "2026-03",
+  "region": "Trung",
+  "season": "lạnh",
+  "cooks": 2697,
+  "share_pct": 6.77
+ },
+ {
+  "month": "2026-03",
+  "region": "Trung",
+  "season": "nóng",
+  "cooks": 4994,
+  "share_pct": 12.54
+ },
+ {
+  "month": "2026-03",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1338,
+  "share_pct": 3.36
+ },
+ {
+  "month": "2026-03",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 141138,
+  "share_pct": 71.24
+ },
+ {
+  "month": "2026-03",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 10545,
+  "share_pct": 5.32
+ },
+ {
+  "month": "2026-03",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 39023,
+  "share_pct": 19.7
+ },
+ {
+  "month": "2026-03",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 7411,
+  "share_pct": 3.74
+ },
+ {
+  "month": "2026-04",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 51524,
+  "share_pct": 76.41
+ },
+ {
+  "month": "2026-04",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 4527,
+  "share_pct": 6.71
+ },
+ {
+  "month": "2026-04",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 8086,
+  "share_pct": 11.99
+ },
+ {
+  "month": "2026-04",
+  "region": "Bắc",
+  "season": "tết",
+  "cooks": 3294,
+  "share_pct": 4.88
+ },
+ {
+  "month": "2026-04",
+  "region": "Nam",
+  "season": "không",
+  "cooks": 54442,
+  "share_pct": 64.27
+ },
+ {
+  "month": "2026-04",
+  "region": "Nam",
+  "season": "lạnh",
+  "cooks": 2598,
+  "share_pct": 3.07
+ },
+ {
+  "month": "2026-04",
+  "region": "Nam",
+  "season": "nóng",
+  "cooks": 25343,
+  "share_pct": 29.92
+ },
+ {
+  "month": "2026-04",
+  "region": "Nam",
+  "season": "tết",
+  "cooks": 2331,
+  "share_pct": 2.75
+ },
+ {
+  "month": "2026-04",
+  "region": "Trung",
+  "season": "không",
+  "cooks": 25781,
+  "share_pct": 67.42
+ },
+ {
+  "month": "2026-04",
+  "region": "Trung",
+  "season": "lạnh",
+  "cooks": 1462,
+  "share_pct": 3.82
+ },
+ {
+  "month": "2026-04",
+  "region": "Trung",
+  "season": "nóng",
+  "cooks": 9919,
+  "share_pct": 25.94
+ },
+ {
+  "month": "2026-04",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1079,
+  "share_pct": 2.82
+ },
+ {
+  "month": "2026-04",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 131747,
+  "share_pct": 69.2
+ },
+ {
+  "month": "2026-04",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 8587,
+  "share_pct": 4.51
+ },
+ {
+  "month": "2026-04",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 43348,
+  "share_pct": 22.77
+ },
+ {
+  "month": "2026-04",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 6704,
+  "share_pct": 3.52
+ },
+ {
+  "month": "2026-05",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 48898,
+  "share_pct": 67.08
+ },
+ {
+  "month": "2026-05",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 2673,
+  "share_pct": 3.67
+ },
+ {
+  "month": "2026-05",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 18301,
+  "share_pct": 25.1
+ },
+ {
+  "month": "2026-05",
+  "region": "Bắc",
+  "season": "tết",
+  "cooks": 3028,
+  "share_pct": 4.15
+ },
+ {
+  "month": "2026-05",
+  "region": "Nam",
+  "season": "không",
+  "cooks": 59999,
+  "share_pct": 64.6
+ },
+ {
+  "month": "2026-05",
+  "region": "Nam",
+  "season": "lạnh",
+  "cooks": 2986,
   "share_pct": 3.21
  },
  {
-  "month": "2026-09",
-  "region": "Bắc",
-  "season": "không",
-  "cooks": 54837,
-  "share_pct": 73.82
- },
- {
-  "month": "2026-09",
-  "region": "Bắc",
-  "season": "lạnh",
-  "cooks": 4240,
-  "share_pct": 5.71
- },
- {
-  "month": "2026-09",
-  "region": "Bắc",
-  "season": "nóng",
-  "cooks": 11656,
-  "share_pct": 15.69
- },
- {
-  "month": "2026-09",
-  "region": "Bắc",
-  "season": "tết",
-  "cooks": 3553,
-  "share_pct": 4.78
- },
- {
-  "month": "2026-09",
-  "region": "Nam",
-  "season": "không",
-  "cooks": 70912,
-  "share_pct": 74.22
- },
- {
-  "month": "2026-09",
-  "region": "Nam",
-  "season": "lạnh",
-  "cooks": 5159,
-  "share_pct": 5.4
- },
- {
-  "month": "2026-09",
+  "month": "2026-05",
   "region": "Nam",
   "season": "nóng",
-  "cooks": 16617,
-  "share_pct": 17.39
+  "cooks": 27397,
+  "share_pct": 29.5
  },
  {
-  "month": "2026-09",
+  "month": "2026-05",
   "region": "Nam",
   "season": "tết",
-  "cooks": 2857,
+  "cooks": 2496,
+  "share_pct": 2.69
+ },
+ {
+  "month": "2026-05",
+  "region": "Trung",
+  "season": "không",
+  "cooks": 27528,
+  "share_pct": 66.57
+ },
+ {
+  "month": "2026-05",
+  "region": "Trung",
+  "season": "lạnh",
+  "cooks": 1641,
+  "share_pct": 3.97
+ },
+ {
+  "month": "2026-05",
+  "region": "Trung",
+  "season": "nóng",
+  "cooks": 11095,
+  "share_pct": 26.83
+ },
+ {
+  "month": "2026-05",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1089,
+  "share_pct": 2.63
+ },
+ {
+  "month": "2026-05",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 136425,
+  "share_pct": 65.86
+ },
+ {
+  "month": "2026-05",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 7300,
+  "share_pct": 3.52
+ },
+ {
+  "month": "2026-05",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 56793,
+  "share_pct": 27.42
+ },
+ {
+  "month": "2026-05",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 6613,
+  "share_pct": 3.19
+ },
+ {
+  "month": "2026-06",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 45545,
+  "share_pct": 66.66
+ },
+ {
+  "month": "2026-06",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 2421,
+  "share_pct": 3.54
+ },
+ {
+  "month": "2026-06",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 17526,
+  "share_pct": 25.65
+ },
+ {
+  "month": "2026-06",
+  "region": "Bắc",
+  "season": "tết",
+  "cooks": 2830,
+  "share_pct": 4.14
+ },
+ {
+  "month": "2026-06",
+  "region": "Nam",
+  "season": "không",
+  "cooks": 55797,
+  "share_pct": 64.03
+ },
+ {
+  "month": "2026-06",
+  "region": "Nam",
+  "season": "lạnh",
+  "cooks": 2602,
   "share_pct": 2.99
  },
  {
-  "month": "2026-09",
+  "month": "2026-06",
+  "region": "Nam",
+  "season": "nóng",
+  "cooks": 26570,
+  "share_pct": 30.49
+ },
+ {
+  "month": "2026-06",
+  "region": "Nam",
+  "season": "tết",
+  "cooks": 2175,
+  "share_pct": 2.5
+ },
+ {
+  "month": "2026-06",
   "region": "Trung",
   "season": "không",
-  "cooks": 31298,
-  "share_pct": 74.4
+  "cooks": 26027,
+  "share_pct": 66.65
  },
  {
-  "month": "2026-09",
+  "month": "2026-06",
   "region": "Trung",
   "season": "lạnh",
-  "cooks": 2406,
-  "share_pct": 5.72
- },
- {
-  "month": "2026-09",
-  "region": "Trung",
-  "season": "nóng",
-  "cooks": 7160,
-  "share_pct": 17.02
- },
- {
-  "month": "2026-09",
-  "region": "Trung",
-  "season": "tết",
-  "cooks": 1205,
-  "share_pct": 2.86
- },
- {
-  "month": "2026-09",
-  "region": "Tất cả",
-  "season": "không",
-  "cooks": 157047,
-  "share_pct": 74.11
- },
- {
-  "month": "2026-09",
-  "region": "Tất cả",
-  "season": "lạnh",
-  "cooks": 11805,
-  "share_pct": 5.57
- },
- {
-  "month": "2026-09",
-  "region": "Tất cả",
-  "season": "nóng",
-  "cooks": 35433,
-  "share_pct": 16.72
- },
- {
-  "month": "2026-09",
-  "region": "Tất cả",
-  "season": "tết",
-  "cooks": 7615,
+  "cooks": 1402,
   "share_pct": 3.59
+ },
+ {
+  "month": "2026-06",
+  "region": "Trung",
+  "season": "nóng",
+  "cooks": 10608,
+  "share_pct": 27.17
+ },
+ {
+  "month": "2026-06",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1012,
+  "share_pct": 2.59
+ },
+ {
+  "month": "2026-06",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 127369,
+  "share_pct": 65.48
+ },
+ {
+  "month": "2026-06",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 6425,
+  "share_pct": 3.3
+ },
+ {
+  "month": "2026-06",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 54704,
+  "share_pct": 28.12
+ },
+ {
+  "month": "2026-06",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 6017,
+  "share_pct": 3.09
+ },
+ {
+  "month": "2026-07",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 47793,
+  "share_pct": 66.59
+ },
+ {
+  "month": "2026-07",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 2455,
+  "share_pct": 3.42
+ },
+ {
+  "month": "2026-07",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 18643,
+  "share_pct": 25.98
+ },
+ {
+  "month": "2026-07",
+  "region": "Bắc",
+  "season": "tết",
+  "cooks": 2877,
+  "share_pct": 4.01
+ },
+ {
+  "month": "2026-07",
+  "region": "Nam",
+  "season": "không",
+  "cooks": 71301,
+  "share_pct": 75.39
+ },
+ {
+  "month": "2026-07",
+  "region": "Nam",
+  "season": "lạnh",
+  "cooks": 5290,
+  "share_pct": 5.59
+ },
+ {
+  "month": "2026-07",
+  "region": "Nam",
+  "season": "nóng",
+  "cooks": 15098,
+  "share_pct": 15.96
+ },
+ {
+  "month": "2026-07",
+  "region": "Nam",
+  "season": "tết",
+  "cooks": 2891,
+  "share_pct": 3.06
+ },
+ {
+  "month": "2026-07",
+  "region": "Trung",
+  "season": "không",
+  "cooks": 27234,
+  "share_pct": 66.72
+ },
+ {
+  "month": "2026-07",
+  "region": "Trung",
+  "season": "lạnh",
+  "cooks": 1338,
+  "share_pct": 3.28
+ },
+ {
+  "month": "2026-07",
+  "region": "Trung",
+  "season": "nóng",
+  "cooks": 11196,
+  "share_pct": 27.43
+ },
+ {
+  "month": "2026-07",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1052,
+  "share_pct": 2.58
+ },
+ {
+  "month": "2026-07",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 146328,
+  "share_pct": 70.63
+ },
+ {
+  "month": "2026-07",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 9083,
+  "share_pct": 4.38
+ },
+ {
+  "month": "2026-07",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 44937,
+  "share_pct": 21.69
+ },
+ {
+  "month": "2026-07",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 6820,
+  "share_pct": 3.29
+ },
+ {
+  "month": "2026-08",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 51425,
+  "share_pct": 66.6
+ },
+ {
+  "month": "2026-08",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 2640,
+  "share_pct": 3.42
+ },
+ {
+  "month": "2026-08",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 20123,
+  "share_pct": 26.06
+ },
+ {
+  "month": "2026-08",
+  "region": "Bắc",
+  "season": "tết",
+  "cooks": 3025,
+  "share_pct": 3.92
+ },
+ {
+  "month": "2026-08",
+  "region": "Nam",
+  "season": "không",
+  "cooks": 76395,
+  "share_pct": 75.72
+ },
+ {
+  "month": "2026-08",
+  "region": "Nam",
+  "season": "lạnh",
+  "cooks": 5712,
+  "share_pct": 5.66
+ },
+ {
+  "month": "2026-08",
+  "region": "Nam",
+  "season": "nóng",
+  "cooks": 15812,
+  "share_pct": 15.67
+ },
+ {
+  "month": "2026-08",
+  "region": "Nam",
+  "season": "tết",
+  "cooks": 2978,
+  "share_pct": 2.95
+ },
+ {
+  "month": "2026-08",
+  "region": "Trung",
+  "season": "không",
+  "cooks": 28819,
+  "share_pct": 66.57
+ },
+ {
+  "month": "2026-08",
+  "region": "Trung",
+  "season": "lạnh",
+  "cooks": 1480,
+  "share_pct": 3.42
+ },
+ {
+  "month": "2026-08",
+  "region": "Trung",
+  "season": "nóng",
+  "cooks": 11875,
+  "share_pct": 27.43
+ },
+ {
+  "month": "2026-08",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1119,
+  "share_pct": 2.58
+ },
+ {
+  "month": "2026-08",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 156639,
+  "share_pct": 70.75
+ },
+ {
+  "month": "2026-08",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 9832,
+  "share_pct": 4.44
+ },
+ {
+  "month": "2026-08",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 47810,
+  "share_pct": 21.59
+ },
+ {
+  "month": "2026-08",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 7122,
+  "share_pct": 3.22
+ },
+ {
+  "month": "2026-09",
+  "region": "Bắc",
+  "season": "không",
+  "cooks": 56665,
+  "share_pct": 75.96
+ },
+ {
+  "month": "2026-09",
+  "region": "Bắc",
+  "season": "lạnh",
+  "cooks": 4605,
+  "share_pct": 6.17
+ },
+ {
+  "month": "2026-09",
+  "region": "Bắc",
+  "season": "nóng",
+  "cooks": 9971,
+  "share_pct": 13.37
+ },
+ {
+  "month": "2026-09",
+  "region": "Bắc",
+  "season": "tết",
+  "cooks": 3359,
+  "share_pct": 4.5
+ },
+ {
+  "month": "2026-09",
+  "region": "Nam",
+  "season": "không",
+  "cooks": 73027,
+  "share_pct": 76.0
+ },
+ {
+  "month": "2026-09",
+  "region": "Nam",
+  "season": "lạnh",
+  "cooks": 5385,
+  "share_pct": 5.6
+ },
+ {
+  "month": "2026-09",
+  "region": "Nam",
+  "season": "nóng",
+  "cooks": 14819,
+  "share_pct": 15.42
+ },
+ {
+  "month": "2026-09",
+  "region": "Nam",
+  "season": "tết",
+  "cooks": 2851,
+  "share_pct": 2.97
+ },
+ {
+  "month": "2026-09",
+  "region": "Trung",
+  "season": "không",
+  "cooks": 32628,
+  "share_pct": 76.67
+ },
+ {
+  "month": "2026-09",
+  "region": "Trung",
+  "season": "lạnh",
+  "cooks": 2590,
+  "share_pct": 6.09
+ },
+ {
+  "month": "2026-09",
+  "region": "Trung",
+  "season": "nóng",
+  "cooks": 6063,
+  "share_pct": 14.25
+ },
+ {
+  "month": "2026-09",
+  "region": "Trung",
+  "season": "tết",
+  "cooks": 1276,
+  "share_pct": 3.0
+ },
+ {
+  "month": "2026-09",
+  "region": "Tất cả",
+  "season": "không",
+  "cooks": 162320,
+  "share_pct": 76.12
+ },
+ {
+  "month": "2026-09",
+  "region": "Tất cả",
+  "season": "lạnh",
+  "cooks": 12580,
+  "share_pct": 5.9
+ },
+ {
+  "month": "2026-09",
+  "region": "Tất cả",
+  "season": "nóng",
+  "cooks": 30853,
+  "share_pct": 14.47
+ },
+ {
+  "month": "2026-09",
+  "region": "Tất cả",
+  "season": "tết",
+  "cooks": 7486,
+  "share_pct": 3.51
  }
 ]

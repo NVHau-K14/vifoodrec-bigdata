@@ -7,6 +7,7 @@
 #    Spark Master UI  : http://localhost:8080
 #    Spark Worker UI  : http://localhost:8081 , http://localhost:8082
 #    Spark Driver UI  : http://localhost:4040  (chi co khi dang chay job)
+#    Spark History    : http://localhost:18080 (cac job da chay xong)
 #    Jupyter Lab      : http://localhost:8888  (token: bigdata)
 #    MongoDB          : mongodb://admin:admin123@localhost:27017
 # =====================================================================
@@ -127,6 +128,27 @@ services:
     deploy:
       resources:
         limits: { memory: 4g }
+
+  # Xem lai cac job da chay xong (event log do get_spark() ghi vao logs/spark-events)
+  spark-history:
+    <<: *spark-common
+    healthcheck:
+      disable: true
+    container_name: spark-history
+    hostname: spark-history
+    command: >
+      bash -c "mkdir -p /home/jovyan/work/logs/spark-events &&
+      /usr/local/spark/bin/spark-class org.apache.spark.deploy.history.HistoryServer"
+    environment:
+      SPARK_HISTORY_OPTS: >-
+        -Dspark.history.fs.logDirectory=file:///home/jovyan/work/logs/spark-events
+        -Dspark.history.ui.port=18080
+        -Dspark.history.fs.update.interval=10s
+    ports:
+      - "18080:18080"   # Spark History Server UI
+    deploy:
+      resources:
+        limits: { memory: 1g }
 
   # ------------------------- JUPYTER (DRIVER) -------------------------
   jupyter:

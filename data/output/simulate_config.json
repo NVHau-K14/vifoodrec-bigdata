@@ -5,6 +5,7 @@
     "latent_k": 8,
     "latent_w": 0.7,
     "zipf": 0.45,
+    "zipf_offset": 30,
     "quality_sel": 0.3,
     "quality_clip": 2.5,
     "temp": 1.0,

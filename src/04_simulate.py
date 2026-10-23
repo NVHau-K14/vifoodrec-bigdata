@@ -17,7 +17,7 @@ Mo hinh sinh (moi user):
   diem_hop_khau_vi(mon) = w_user . x_mon                 (persona chinh + 0.5 * persona phu
                                                           + vung mien + nhom tuoi + nhieu ca nhan)
                         + LAT_W * u_user . v_mon         (so thich an - mo hinh CF hoc duoc, content thi khong)
-                        - ZIPF * log(hang_pho_bien)      (do pho bien kieu Zipf)
+                        - ZIPF * log(hang_pho_bien + 30) (do pho bien kieu Zipf, phan dau lam phang)
                         + ngu_canh(bua, mua theo vung, cuoi tuan)
   Chon mon xem trong moi phien = lay mau softmax khong lap (Gumbel top-k).
   Pheu: xem -> luu (it hon) -> nau (phien nau) -> cham diem (mot lan / mon, sau khi nau).
@@ -75,6 +75,7 @@ CFG = dict(
     w_noise=0.35,          # do lech so thich ca nhan tren tung dac trung
     latent_k=8, latent_w=0.7,
     zipf=0.45,             # do doc cua phan phoi pho bien
+    zipf_offset=30,        # log(hang + 30): lam phang phan dau Zipf, mon hang 1 khong ap dao (D11)
     quality_sel=0.3,       # mon "ngon" (chat luong an) duoc chon nhieu hon chut
     quality_clip=2.5,      # kep chat luong vao [-2.5, 2.5] de khong mon nao chiem ap dao
     temp=1.0,              # nhiet do softmax
@@ -256,7 +257,7 @@ quality = np.clip(quality, -CFG["quality_clip"], CFG["quality_clip"])
 pop_key = 0.6 * quality + 0.8 * rng0.normal(0, 1, N_DISH)
 pop_rank = np.empty(N_DISH, np.int64)
 pop_rank[np.argsort(-pop_key)] = np.arange(1, N_DISH + 1)
-pop_term = (-CFG["zipf"] * np.log(pop_rank)).astype(np.float32)
+pop_term = (-CFG["zipf"] * np.log(pop_rank + CFG["zipf_offset"])).astype(np.float32)
 pop_term -= pop_term.mean()
 V_LAT = (rng0.normal(0, 1, (N_DISH, CFG["latent_k"])) / np.sqrt(CFG["latent_k"])).astype(np.float32)
 item_base = pop_term + CFG["quality_sel"] * quality

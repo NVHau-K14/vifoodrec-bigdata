@@ -20,3 +20,6 @@ Thumbs.db
 desktop.ini
 *.tmp
 ~$*
+
+# Spark event log (History Server), sinh lai moi lan chay job
+logs/

@@ -1,52 +1,52 @@
 [
  {
   "rating": 0.5,
-  "count": 6178,
-  "share_pct": 0.81
+  "count": 6939,
+  "share_pct": 0.87
  },
  {
   "rating": 1.0,
-  "count": 9691,
-  "share_pct": 1.27
+  "count": 10915,
+  "share_pct": 1.37
  },
  {
   "rating": 1.5,
-  "count": 20361,
-  "share_pct": 2.67
+  "count": 22679,
+  "share_pct": 2.84
  },
  {
   "rating": 2.0,
-  "count": 37011,
-  "share_pct": 4.85
+  "count": 42173,
+  "share_pct": 5.28
  },
  {
   "rating": 2.5,
-  "count": 61447,
-  "share_pct": 8.05
+  "count": 68878,
+  "share_pct": 8.62
  },
  {
   "rating": 3.0,
-  "count": 89455,
-  "share_pct": 11.73
+  "count": 100652,
+  "share_pct": 12.6
  },
  {
   "rating": 3.5,
-  "count": 113302,
-  "share_pct": 14.85
+  "count": 124878,
+  "share_pct": 15.63
  },
  {
   "rating": 4.0,
-  "count": 123276,
-  "share_pct": 16.16
+  "count": 133734,
+  "share_pct": 16.74
  },
  {
   "rating": 4.5,
-  "count": 112149,
-  "share_pct": 14.7
+  "count": 117788,
+  "share_pct": 14.74
  },
  {
   "rating": 5.0,
-  "count": 190025,
-  "share_pct": 24.91
+  "count": 170259,
+  "share_pct": 21.31
  }
 ]

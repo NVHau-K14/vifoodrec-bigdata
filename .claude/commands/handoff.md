@@ -14,7 +14,8 @@ Kết thúc phiên làm việc. Làm lần lượt:
    - Lỗi môi trường mới gặp cùng cách xử lý: ghi vào mục "Lỗi môi trường đã gặp" trong `CLAUDE.md`.
 3. Có quyết định thiết kế mới (chọn tham số, bỏ hoặc thêm phần nào, lý do) thì thêm một mục `Dxx` vào cuối `docs/DECISIONS.md`.
 4. Có bảng hoặc cột mới, hoặc đổi đường dẫn HDFS, thì cập nhật `docs/DATA_DICTIONARY.md` và bảng Pipeline trong `CLAUDE.md`.
-5. Commit với message tiếng Việt ngắn gọn, ví dụ `Buoc 05: phan tich hanh vi bang Spark SQL`. Không push nếu người dùng chưa yêu cầu.
-6. Báo lại cho người dùng trong 3–5 dòng: phiên này xong những gì, việc tiếp theo là gì, việc nào cần người làm (chụp ảnh UI, kiểm tra tay…).
+5. Ghi đè `docs/LAST_RUN.md` theo mẫu có sẵn trong file: giữ đúng các mục (Yêu cầu, Đã làm, Số liệu chính, Lỗi / sự cố và cách xử lý, Cần người dùng quyết định, Commit), tối đa khoảng 80 dòng, số liệu lấy từ `data/output/*_report.json`. Mọi câu hỏi cần người dùng trả lời phải nằm trong mục "Cần người dùng quyết định"; không có thì ghi "Không".
+6. Commit với message tiếng Việt ngắn gọn, ví dụ `Buoc 05: phan tich hanh vi bang Spark SQL`. Không push nếu người dùng chưa yêu cầu.
+7. Báo lại cho người dùng trong 3–5 dòng: phiên này xong những gì, việc tiếp theo là gì, việc nào cần người làm (chụp ảnh UI, kiểm tra tay…).
 
 $ARGUMENTS

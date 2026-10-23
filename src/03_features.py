@@ -388,8 +388,10 @@ with open(os.path.join(P.output_local, "features_report.json"), "w", encoding="u
     json.dump(report, fh, ensure_ascii=False, indent=2)
 
 # 100 mon ngau nhien de nhom kiem tra tay (dien dung/sai vao cot 'kiem_tra')
+# Chon theo hash(food_id) thay vi rand(42): rand phu thuoc cach chia partition nen moi lan chay
+# lai ra mau khac; hash chi phu thuoc food_id -> chay lai van ra dung 100 mon do (D11)
 sample = (feat.join(foods.select("food_id", F.array_join("ingredient_list", ", ").alias("nguyen_lieu")), "food_id")
-              .orderBy(F.rand(42)).limit(100)
+              .orderBy(F.xxhash64(F.col("food_id"), F.lit(42)), "food_id").limit(100)
               .select("food_id", "dish_name", "nguyen_lieu", "main_protein", "main_method", "dish_category",
                       "dish_type_fixed", "is_vegetarian", "is_spicy", "season",
                       F.lit("").alias("kiem_tra"), F.lit("").alias("ghi_chu")))
