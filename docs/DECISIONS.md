@@ -237,3 +237,22 @@ Bản đề xuất nằm trong LAST_RUN (commit `c276f42`), chat góp ý 9 đi�
   Xem câu hỏi trong LAST_RUN.
 - Ở biến thể khám phá, ALS (0,0934) nhỉnh hơn hybrid (0,0905), vì thành phần "nấu lại" không giúp gì khi đã bỏ món cũ.
 - MinHashLSH với 10 bảng băm đạt recall@20 = 0,993, nhưng ở quy mô 5.499 món thì tính chính xác (37 giây) **không chậm hơn** LSH (14–36 giây). Lợi thế của LSH chỉ thể hiện khi danh mục món lớn hơn nhiều; báo cáo cần nói rõ điều này.
+
+**Bổ sung 25/10, theo 3 câu trả lời của người dùng:**
+- **Lưới ALS implicit mở rộng một lần, sẽ không mở rộng thêm:** alpha {0,25; 0,5; 1; 5; 20; 40}, rank {32, 64, 128}, regParam cố định 0,1. Luật: rank 128 chỉ được chọn nếu hơn rank 64 ít nhất 0,003 NDCG@10 trên val.
+  - Theo alpha (rank 32): 0,25 → 0,1433; 0,5 → 0,1485; **1 → 0,1541**; 5 → 0,1506; 20 → 0,1118; 40 → 0,0808. Alpha 1 là đỉnh thật, không còn nằm ở biên lưới.
+  - Theo rank (alpha 1): 32 → 0,1541; 64 → 0,1591; 128 → 0,1623. Rank 128 hơn rank 64 0,0032, đạt ngưỡng, nên **chọn rank 128**. Ở local (bản 10%) mức chênh chỉ 0,0029 nên local giữ rank 64; luật đã chạy đúng ở cả hai chiều.
+  - Độ nhạy trọng số tại tham số chọn: 1/3/5 → 0,1623; 1/2/10 → 0,1620; chỉ cook → 0,1328.
+  - Kết quả trên test: ALS 0,1539 (trước đó 0,1508); hybrid 0,1588 (trước đó 0,1564). Trọng số hybrid mới: ALS 0,9, nấu lại 0,1.
+- **"hybrid + content 2 vị trí" (`hybrid_c2`):**
+  - Vị trí 1–8 lấy từ hybrid.
+  - Vị trí 9: món content user chưa nấu, xếp theo điểm content × log1p(lượt nấu trong lịch sử).
+  - Vị trí 10: món content user chưa nấu và có ít tương tác (lượt nấu ≤ phân vị 20% của các món: 43 ở view test, 38 ở view val), xếp theo điểm content. Không có món nào như vậy thì lấy món thứ hai của vị trí 9.
+  - Lý do gợi ý: "Giống món X bạn đã nấu", với X là món đã nấu có độ tương tự cao nhất. Có 96,67% vị trí content tìm được món đã nấu; số còn lại ghi "bạn đã xem".
+  - `recs_final` lấy từ `hybrid_c2`. Bảng đánh giá báo cả hai phiên bản.
+  - Trên test: NDCG@10 0,1495 so với 0,1588 của hybrid, hiệu −0,0092 [−0,0096; −0,0089]. Coverage 58,0% so với 41,3%. Novelty 9,91 so với 9,13. Diversity 0,849 so với 0,854. Recall món mới @10 1,80% so với 0.
+  - **Đánh đổi:** mất khoảng 6% NDCG@10 để gợi ý được món mới và có lý do gợi ý dạng "giống món X". Báo cáo nêu rõ điều này.
+- **K-means:** dashboard dùng **k = 8**; `/data/models/kmeans` là model k = 8. `user_clusters` có cột `cluster_k3`, `cluster_k8`, `cluster_k11`. `cluster_profile` có hồ sơ cho cả 3 giá trị k.
+  - k = 3: Silhouette 0,227, ARI 0,285, NMI 0,365.
+  - k = 8: Silhouette 0,174, ARI 0,418, NMI 0,442.
+  - k = 11: Silhouette 0,184, ARI 0,504, NMI 0,512.

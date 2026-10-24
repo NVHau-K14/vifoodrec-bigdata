@@ -12,7 +12,8 @@ Du doan diem (RMSE/MAE tren dong 'rate' cua thang danh gia):
   trung_binh, bias (mu + b_u + b_i, dieu chuan lambda), als_explicit, als_explicit thieu thi dung bias
 
 Do tham so: tu viet vong lap tren view val (khong dung TrainValidationSplit vi no chia ngau nhien).
-  ALS implicit: do lan luot alpha {1, 5, 20, 40} -> rank {32, 64} -> regParam {0,01; 0,1}, chon theo NDCG@10 tren mau 10.000 user cua val,
+  ALS implicit: do lan luot alpha {0,25; 0,5; 1; 5; 20; 40} -> rank {32, 64, 128} (128 chi chon neu hon 64 >= 0,003),
+  regParam co dinh 0,1, chon theo NDCG@10 tren mau 10.000 user cua val,
   roi kiem tra do nhay trong so implicit {1/3/5, 1/2/10, chi cook}.
 Tham so tot nhat duoc fit lai tren view test (lich su = train + val).
 
@@ -47,8 +48,10 @@ if args.quick:
 else:
     G_BIAS = [5, 10, 25]
     G_EXP = [(r, g) for r in (16, 32, 64) for g in (0.05, 0.1, 0.2)]
-    # alpha = 1 them sau lan chay local: alpha tot nhat (5) nam o bien duoi cua luoi {5, 20, 40}
-    G_ALPHA, G_RANK, G_REG, MAXITER = [1, 5, 20, 40], [32, 64], [0.01, 0.1], 10
+    # Luoi mo rong 1 lan (D13): alpha tot nhat lien tiep cham bien duoi ({5,20,40} -> 5, roi {1,...} -> 1),
+    # rank tot nhat cham bien tren (64). Giu regParam 0,1 (lan chay truoc: 0,1 > 0,01).
+    G_ALPHA, G_RANK, G_REG, MAXITER = [0.25, 0.5, 1, 5, 20, 40], [32, 64, 128], [0.1], 10
+RANK_MIN_GAIN = 0.003   # rank 128 chi duoc chon neu hon rank 64 tu 0,003 NDCG@10 tro len (D13)
 START = {"alpha": G_ALPHA[len(G_ALPHA) // 2], "rank": G_RANK[0], "regParam": G_REG[-1]}
 
 
@@ -206,6 +209,10 @@ for v in ("val", "test"):
             for name, grid in (("alpha", G_ALPHA), ("rank", G_RANK), ("regParam", G_REG)):
                 scores = {x: try_params(**{**best, name: x}) for x in grid}
                 best[name] = max(scores, key=scores.get)
+                if name == "rank" and best["rank"] == 128 and 64 in scores                         and scores[128] - scores[64] < RANK_MIN_GAIN:
+                    best["rank"] = 64
+                    report["rank_rule"] = (f"rank 128 ({scores[128]}) hơn rank 64 ({scores[64]}) dưới "
+                                           f"{RANK_MIN_GAIN} -> giữ rank 64")
             sens = {w: try_params(**best, w=w) for w in R.IMPLICIT_W}
             report["tuning_als_implicit"] = tuning
             report["best_als_implicit"] = best

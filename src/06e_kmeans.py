@@ -9,8 +9,9 @@ Chon k = 2..12 theo Silhouette (ClusteringEvaluator). Bao ARI va NMI so voi pers
   kiem chung) tai k da chon VA tai k = 8 (so persona). ARI khong the dat 1: moi user con persona phu, vung, tuoi.
 
 Dau vao : /data/results/models/user_features_val (06a), /data/events/users_truth
-Dau ra  : /data/models/kmeans, /data/results/models/user_clusters (user_id, cluster_best, cluster_k8)
-          /data/results/models/cluster_profile (k, cluster, n_users, trung binh tung dac trung, persona pho bien)
+Dau ra  : /data/models/kmeans (k = 8, dung cho dashboard - D13)
+          /data/results/models/user_clusters (user_id, cluster_k3, cluster_k8, cluster_k11)
+          /data/results/models/cluster_profile (k = 3/8/11, cluster, n_users, trung binh tung dac trung, persona pho bien)
           data/output/model_kmeans_report.json
 
 Chay tren cum:  python src/06e_kmeans.py
@@ -81,17 +82,21 @@ with T("search_k"):
     report["best_by_silhouette"] = best
     report["at_k8"] = [r for r in res if r["k"] == 8]
 
+REPORT_KS = [3, 8, 11]     # D13: k = 3 (Silhouette cao nhat), 8 (so persona, DASHBOARD dung), 11 (ARI cao nhat)
+DASHBOARD_K = 8
 with T("save"):
-    m_best = models[(best["algo"], best["k"])]
-    m8 = models[("KMeans", 8)] if ("KMeans", 8) in models else m_best
-    m_best.write().overwrite().save(f"{P.models}/kmeans")
-    cl = (m_best.transform(x).select("user_id", F.col("prediction").alias("cluster_best"))
-          .join(m8.transform(x).select("user_id", F.col("prediction").alias("cluster_k8")), "user_id"))
+    ks = [k for k in REPORT_KS if ("KMeans", k) in models]
+    models[("KMeans", DASHBOARD_K if DASHBOARD_K in ks else best["k"])].write().overwrite().save(f"{P.models}/kmeans")
+    cl = x.select("user_id")
+    for k in ks:
+        cl = cl.join(models[("KMeans", k)].transform(x).select("user_id", F.col("prediction").alias(f"cluster_k{k}")),
+                     "user_id")
     R.save(cl, P, "user_clusters")
     cl = R.load(spark, P, "user_clusters")
+    j = x.join(cl, "user_id").join(truth, "user_id").cache()
     prof = None
-    for kname, col in ((f"best (k={best['k']})", "cluster_best"), ("k=8", "cluster_k8")):
-        j = x.join(cl, "user_id").join(truth, "user_id")
+    for k in ks:
+        col = f"cluster_k{k}"
         p = (j.groupBy(F.col(col).alias("cluster"))
              .agg(F.count("*").alias("n_users"), *[F.round(F.avg(f), 3).alias(f) for f in FEATS]))
         top_p = (j.groupBy(F.col(col).alias("cluster"), "persona_main").count()
@@ -99,9 +104,11 @@ with T("save"):
                  .withColumn("share", F.round(F.col("count") / F.sum("count").over(Window.partitionBy("cluster")), 3))
                  .filter("r = 1").select("cluster", F.col("persona_main").alias("persona_pho_bien_kiem_chung"),
                                          F.col("share").alias("persona_share")))
-        p = p.join(top_p, "cluster").withColumn("k", F.lit(kname))
+        p = p.join(top_p, "cluster").withColumn("k", F.lit(k))
         prof = p if prof is None else prof.unionByName(p)
     R.save(prof, P, "cluster_profile", coalesce=1)
+    report["dashboard_k"] = DASHBOARD_K
+    report["summary_k"] = {str(k): [r for r in res if r["k"] == k] for k in ks}
     report["profile"] = [r.asDict() for r in R.load(spark, P, "cluster_profile").orderBy("k", "cluster").collect()]
 
 report["timings_s"] = T.parts

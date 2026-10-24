@@ -8,6 +8,9 @@ Do trong so: luoi alpha+beta+gamma+delta = 1, buoc 0,1 (286 to hop), toi da NDCG
   10.000 user cua val. Bang ung vien do Spark tao, vong do luoi chay bang numpy tren driver (D12).
 Cold-start theo nhom user cua 06a: lanh -> pop_vung_tuoi; it -> chon giua "giu trong so" va "alpha = 0"
   (so tren moi user 'it' cua val); am -> hybrid day du.
+"hybrid + content 2 vi tri" (hybrid_c2, D13): vi tri 1-8 tu hybrid; vi tri 9 = mon content user CHUA nau,
+  diem content x log1p(luot nau trong lich su); vi tri 10 = mon content chua nau va IT tuong tac (luot nau
+  <= phan vi 20% cua cac mon), theo diem content; phan sau la hybrid tiep. recs_final dung ban nay.
 
 Danh gia (view test, tham so lay tu val):
   - bang chinh: moi mo hinh tren CUNG tap user, tach nhom tat ca / am / it / lanh
@@ -17,7 +20,7 @@ Danh gia (view test, tham so lay tu val):
   - thi nghiem mon moi: an lich su cua 300 mon, fit lai ALS, do kha nang goi y ra cac mon do
 
 Dau vao : /data/results/models/{recs_*,truth,user_groups,implicit,item_pop,item_tokens,item_sim}_<v>
-Dau ra  : /data/results/models/recs_hybrid_<v>, eval_hybrid_<v>
+Dau ra  : /data/results/models/recs_hybrid_<v>, eval_hybrid_<v>, recs_hybrid_c2_<v>, eval_hybrid_c2_<v>
           /data/results/models/recs_final  (user_id, rank, food_id, score, source, reason_type,
                                             because_food_id, reason) top 50 cho MOI user - buoc 07 xuat MongoDB
           /data/results/models/metrics     bang tong hop (model, variant, group, do do)
@@ -33,7 +36,7 @@ import sys
 
 import numpy as np
 from pyspark.ml.recommendation import ALS
-from pyspark.sql import functions as F
+from pyspark.sql import Window, functions as F
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rec_common as R  # noqa: E402
@@ -48,6 +51,7 @@ T = R.Timer()
 report = {"mode": "local" if args.local else "cluster"}
 SOURCES = {"als": "als_implicit", "content": "content", "pop": "pop_vung_tuoi", "rep": "nau_lai"}
 KRRF, N_OUT, N_FINAL = 60, 100, 50
+LOW_POP_Q = 0.2          # mon 'it tuong tac': luot nau trong lich su <= phan vi 20% cua cac mon
 BASE_MODELS = ["random", "pop_chung", "pop_gan_day", "pop_vung_tuoi", "nau_lai", "als_implicit", "content"]
 
 
@@ -159,7 +163,43 @@ def explore_eval(recs, truth, cooked):
     return R.per_user_metrics(r, t)
 
 
+def content_slots(hyb, con, cooked, ipop, thr):
+    """
+    hybrid + content 2 vi tri: giu vi tri 1-8 cua hybrid, chen 2 mon content vao vi tri 9-10, day phan con lai.
+      hyb : (user_id, food_id, rank, source)    con: (user_id, food_id, score) - diem content cua user
+      cooked: (user_id, food_id) mon user da nau  ipop: (food_id, cooks) luot nau trong lich su  thr: nguong 'it'
+    Vi tri 9: diem content x log1p(cooks) ; vi tri 10: mon co cooks <= thr, theo diem content
+    (khong co thi lay mon thu 2 cua vi tri 9).
+    """
+    top8 = hyb.filter("rank <= 8").select("user_id", "food_id")
+    c = (con.select("user_id", "food_id", "score")
+         .join(cooked, ["user_id", "food_id"], "left_anti").join(top8, ["user_id", "food_id"], "left_anti")
+         .join(F.broadcast(ipop.select("food_id", "cooks")), "food_id", "left").fillna(0, ["cooks"]).cache())
+    s9 = R.top_n(c.select("user_id", "food_id", (F.col("score") * F.log1p("cooks")).alias("score")), 2)
+    s10 = R.top_n(c.filter(F.col("cooks") <= thr).select("user_id", "food_id", "score"), 2)
+    cand = (s9.filter("rank = 1").select("user_id", "food_id", F.lit(1).alias("pri"))
+            .unionByName(s10.select("user_id", "food_id", (1 + F.col("rank")).alias("pri")))      # 2, 3
+            .unionByName(s9.filter("rank = 2").select("user_id", "food_id", F.lit(4).alias("pri")))  # du phong
+            .groupBy("user_id", "food_id").agg(F.min("pri").alias("pri")))
+    picks = R.top_n(cand.withColumn("s", -F.col("pri").cast("double")), 2, "s").select(
+        "user_id", "food_id", (8 + F.col("rank")).alias("pos"), F.lit("content_slot").alias("source"))
+    npk = picks.groupBy("user_id").agg(F.count("*").alias("k"))
+    rest = (hyb.join(picks.select("user_id", "food_id"), ["user_id", "food_id"], "left_anti")
+            .withColumn("r", F.row_number().over(Window.partitionBy("user_id").orderBy("rank")))
+            .join(npk, "user_id", "left").fillna(0, ["k"])
+            .select("user_id", "food_id", "source",
+                    F.when(F.col("r") <= 8, F.col("r")).otherwise(F.col("r") + F.col("k")).alias("pos")))
+    return (rest.unionByName(picks.select("user_id", "food_id", "source", "pos"))
+            .filter(F.col("pos") <= N_OUT).withColumnRenamed("pos", "rank")
+            .withColumn("score", -F.col("rank").cast("double")))
+
+
+def low_pop_threshold(ipop):
+    return ipop.approxQuantile("cooks", [LOW_POP_Q], 0.0)[0]
+
+
 rows, ci = [], []
+thr_by_view = {}
 for v in ("val", "test"):
     with T(f"{v}:hybrid"):
         truth = R.load(spark, P, "truth", v).cache()
@@ -168,7 +208,15 @@ for v in ("val", "test"):
         R.save(hybrid(v, users).select("user_id", "food_id", "rank", "score", "source", "because_food_id"),
                P, "recs_hybrid", v)
         R.save(R.per_user_metrics(R.load(spark, P, "recs_hybrid", v), truth), P, "eval_hybrid", v)
-    models = BASE_MODELS + ["hybrid"]
+    with T(f"{v}:hybrid_c2"):
+        ipop_v = R.load(spark, P, "item_pop", v)
+        thr_by_view[v] = low_pop_threshold(ipop_v)
+        cooked_v = R.load(spark, P, "implicit", v).filter("n_cook > 0").select("user_id", "food_id")
+        c2 = content_slots(R.load(spark, P, "recs_hybrid", v), R.load(spark, P, "recs_content", v),
+                           cooked_v, ipop_v, thr_by_view[v])
+        R.save(c2, P, "recs_hybrid_c2", v)
+        R.save(R.per_user_metrics(R.load(spark, P, "recs_hybrid_c2", v), truth), P, "eval_hybrid_c2", v)
+    models = BASE_MODELS + ["hybrid", "hybrid_c2"]
     with T(f"{v}:metrics"):
         for m in models:
             for g in R.summarize(R.load(spark, P, f"eval_{m}", v)):
@@ -206,11 +254,15 @@ for v in ("val", "test"):
             em = R.load(spark, P, f"eval_{m}", v)
             ci.append({**R.paired_ci(eh, em, name_a="hybrid", name_b=m), "users": "tất cả"})
             ci.append({**R.paired_ci(eh, em, name_a="hybrid", name_b=m, where=warm), "users": "ấm"})
+        ec2 = R.load(spark, P, "eval_hybrid_c2", v)
+        ci.append({**R.paired_ci(ec2, eh, name_a="hybrid_c2", name_b="hybrid"), "users": "tất cả"})
+        ci.append({**R.paired_ci(ec2, eh, name_a="hybrid_c2", name_b="hybrid", where=warm), "users": "ấm"})
         ea = R.load(spark, P, "eval_als_implicit", v)
         ci.append({**R.paired_ci(ea, R.load(spark, P, "eval_nau_lai", v), name_a="als_implicit", name_b="nau_lai"),
                    "users": "tất cả"})
     truth.unpersist()
 
+report["low_pop_threshold_cooks"] = thr_by_view
 report["metrics"] = rows
 report["ci95_test_ndcg@10"] = ci
 
@@ -225,24 +277,43 @@ with T("final_recs"):
     except Exception:
         names = spark.read.parquet("file://" + os.path.join(P.processed_local, "dish_features.parquet")).select("food_id", "dish_name")
     names = F.broadcast(names)
-    fin = (R.load(spark, P, "recs_hybrid", "test").filter(F.col("rank") <= N_FINAL)
+    # Ly do cho vi tri content: mon DA NAU cua user giong mon duoc goi y nhat (theo item_sim);
+    # khong co thi dung mon dong gop nhieu nhat cua 06c (co the chi la mon da xem)
+    c2t = R.load(spark, P, "recs_hybrid_c2", "test").filter(F.col("rank") <= N_FINAL)
+    picks = c2t.filter("source = 'content_slot'").select("user_id", "food_id")
+    sim = F.broadcast(R.load(spark, P, "item_sim").select(F.col("food_id").alias("j"),
+                                                          F.col("sim_food_id").alias("food_id"), "sim"))
+    bc = (picks.join(imp.filter("n_cook > 0").select("user_id", F.col("food_id").alias("j")), "user_id")
+          .join(sim, ["j", "food_id"]).groupBy("user_id", "food_id").agg(F.max_by("j", "sim").alias("because_cooked")))
+    bv = R.load(spark, P, "recs_content", "test").select("user_id", "food_id",
+                                                         F.col("because_food_id").alias("because_viewed"))
+    hb = R.load(spark, P, "recs_hybrid", "test").select("user_id", "food_id", F.col("because_food_id").alias("because_h"),
+                                                        F.round("score", 6).alias("score"))
+    c2t = (c2t.drop("score").join(bc, ["user_id", "food_id"], "left").join(bv, ["user_id", "food_id"], "left")
+           .join(hb, ["user_id", "food_id"], "left")      # diem hybrid goc (vi tri content co the null)
+           .withColumn("because_food_id", F.coalesce("because_cooked", "because_viewed", "because_h"))
+           .withColumn("because_is_cooked", F.col("because_cooked").isNotNull()))
+    fin = (c2t
            .join(ug.select("user_id", "region", "age_group"), "user_id")
            .join(imp, ["user_id", "food_id"], "left")
            .join(names.select(F.col("food_id").alias("because_food_id"), F.col("dish_name").alias("because_name")),
                  "because_food_id", "left")
            .withColumn("reason_type", F.col("source"))
            .withColumn("reason", F.when(F.col("source") == "als", F.lit("Người có khẩu vị giống bạn cũng hay nấu món này"))
-                       .when(F.col("source") == "content", F.concat(F.lit("Giống món "), F.coalesce("because_name", F.lit("bạn đã nấu")),
-                                                                     F.lit(" bạn từng xem/nấu")))
+                       .when(F.col("source").isin("content", "content_slot"),
+                             F.concat(F.lit("Giống món "), F.coalesce("because_name", F.lit("bạn từng chọn")),
+                                      F.when(F.col("because_is_cooked"), F.lit(" bạn đã nấu")).otherwise(F.lit(" bạn đã xem"))))
                        .when(F.col("source") == "rep", F.concat(F.lit("Bạn đã nấu món này "), F.col("n_cook").cast("string"), F.lit(" lần")))
                        .otherwise(F.concat(F.lit("Đang được nhiều người "), F.col("age_group"), F.lit(" tuổi ở miền "),
                                            F.col("region"), F.lit(" nấu"))))
-           .select("user_id", "rank", "food_id", F.round("score", 6).alias("score"), "source", "reason_type",
+           .select("user_id", "rank", "food_id", "score", "source", "reason_type",
                    "because_food_id", "reason"))
     R.save(fin, P, "recs_final")
     fin = R.load(spark, P, "recs_final")
     report["final_recs"] = {"users": fin.select("user_id").distinct().count(), "rows": fin.count(),
-                            "by_source": {r["source"]: r["count"] for r in fin.groupBy("source").count().collect()}}
+                            "by_source": {r["source"]: r["count"] for r in fin.groupBy("source").count().collect()},
+                            "content_slot_because_cooked_pct": round(100 * c2t.filter("source = 'content_slot'").agg(
+                                F.avg(F.col("because_is_cooked").cast("int"))).first()[0], 2)}
 
 # ===========================================================================
 # 4. THI NGHIEM MON MOI (uu tien thap): an lich su cua 300 mon
@@ -279,6 +350,11 @@ if not args.no_cold_items:
                 .agg(*[F.max(F.when(F.col("src") == s, 1.0 / (KRRF + F.col("rank")))).alias(f"f_{s}") for s in SOURCES])
                 .fillna(0.0))
         src["hybrid"] = R.top_n(cand.withColumn("score", score_expr(best_w)), N_OUT).select("user_id", "food_id", "rank")
+        ipop_f = (R.load(spark, P, "item_pop", v).select("food_id")
+                  .join(imp_f.groupBy("food_id").agg(F.sum("n_cook").alias("cooks")), "food_id", "left").fillna(0, ["cooks"]))
+        src["hybrid_c2"] = content_slots(src["hybrid"].withColumn("source", F.lit("hybrid")), con_c,
+                                         imp_f.filter("n_cook > 0").select("user_id", "food_id"), ipop_f,
+                                         low_pop_threshold(ipop_f)).select("user_id", "food_id", "rank")
         n_pairs = tp.count()
         res = {}
         for s, d0 in src.items():

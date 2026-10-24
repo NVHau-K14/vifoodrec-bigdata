@@ -1,127 +1,123 @@
-# Lần chạy gần nhất – 24/10/2026 (khuya)
+# Lần chạy gần nhất – 25/10/2026
 
 > File này được **ghi đè sau mỗi lần làm xong một yêu cầu** (xem quy tắc trong CLAUDE.md).
 > Người dùng đọc nó ở bên chat claude.ai. Giữ đúng các mục bên dưới, không giới hạn độ dài.
-> Dữ liệu hành vi là **mô phỏng**. Mọi số liệu bên dưới lấy từ `data/output/model_*_report.json` và `models_metrics.json` (chạy trên cụm).
+> Dữ liệu hành vi là **mô phỏng**. Số liệu lấy từ `data/output/model_*_report.json` và `models_metrics.json` (chạy trên cụm).
 
 ## Yêu cầu
-Đọc góp ý thiết kế 06 (sửa đổi a–i) và câu trả lời 7 câu hỏi. Ghi bản đã chốt thành D12, cập nhật PROGRESS, rồi viết code theo thứ tự 06a → 06b → 06c → 06f → 06d → 06e → 06g, mỗi file chạy `--local` trước. Xong thì ghi LAST_RUN và chạy `/handoff`.
+Trả lời 3 câu hỏi của bước 06:
+1. Mở rộng lưới ALS implicit một lần: alpha {0,25; 0,5}, rank 128, giữ regParam 0,1. Rank 128 phải hơn rank 64 ít nhất 0,003 NDCG@10 trên val mới được chọn.
+2. Phương án (b) có chỉnh: 2 vị trí cuối của top 10 trong `recs_final` dành cho content, chỉ lấy món user chưa nấu.
+   - Một vị trí xếp theo sim × log1p(lượt nấu trong lịch sử).
+   - Một vị trí ưu tiên món có ít hoặc không có tương tác.
+   - Lý do gợi ý: "giống món X bạn đã nấu".
+   - Bảng đánh giá báo cả hai phiên bản.
+3. Dashboard dùng k = 8; report ghi đủ k = 3, 8, 11.
+
+Sau đó chạy lại 06b và 06f trên cụm, cập nhật `models_metrics.json`, D13, LAST_RUN, rồi chạy `/handoff`. Việc tiếp theo là bước 07 theo kiểu thiết kế trước.
 
 ## Đã làm
-**Hạ tầng (câu hỏi 1, 2):**
-- `get_spark()` ghi HDFS với 2 bản sao; đã chạy `setrep -R -w 2 /data`. fsck: HEALTHY, thiếu 0 bản sao, replication trung bình 2,0.
-- Đã xóa `/data/events/events_csv` (bản cũ).
-- `get_spark()` đặt thêm `spark.driver.memory` (3g khi chạy local, 2g trên cụm). `Paths` có thêm `models` và `checkpoint`.
-
-**D12** ghi bản thiết kế đã chốt, gồm đủ 7 câu trả lời và 9 sửa đổi. **D13** ghi các điều chỉnh khi cài đặt và các phát hiện.
-
-**Code** (mỗi file chạy local trên bản 10% trước, rồi chạy trên cụm; tất cả đều thành công):
-| File | Nội dung | Thời gian trên cụm |
-|---|---|---|
-| `src/rec_common.py` | Module dùng chung: 2 view, nhóm user, độ đo cho từng user bằng hàm mảng Spark SQL, tổng hợp theo nhóm, khoảng tin cậy ghép cặp | – |
-| `06a_split.py` | Hai bộ `_val` (lịch sử = train) và `_test` (lịch sử = train + val): implicit, ratings, `user_groups`, truth, popularity, đặc trưng user | 101 giây |
-| `06b_als.py` | Random, 3 kiểu popularity, nấu lại, bias, ALS explicit, ALS implicit (dò tham số + độ nhạy trọng số), đối chiếu `RankingEvaluator`, khoảng tin cậy | 1.294 giây |
-| `06c_content.py` | Token (âm tiết, nguyên liệu nối `_`, đặc trưng có cấu trúc), CountVectorizer(minDF=2) → IDF → Normalizer, độ tương tự chính xác bằng chỉ mục ngược, MinHashLSH, gợi ý theo nội dung | 200 giây |
-| `06f_hybrid.py` | RRF có trọng số trên 4 nguồn, dò 286 tổ hợp, luật cold-start, mọi độ đo, biến thể khám phá, coverage/novelty/diversity, khoảng tin cậy, `recs_final`, thí nghiệm món mới | 662 giây |
-| `06d_fpgrowth.py` | Luật nguyên liệu (giữ và bỏ gia vị), luật mâm cơm, hit rate@3 so với 2 mốc | 34 giây |
-| `06e_kmeans.py` | KMeans và BisectingKMeans với k = 2…12, Silhouette, ARI và NMI tại k tốt nhất và k = 8, hồ sơ cụm | 256 giây |
-| `06g_control.py` | ALS trên ratings gốc so với đoán ngẫu nhiên, trung bình chung và bias | 61 giây |
-
-Tài liệu: DATA_DICTIONARY có thêm mục bước 06 (20 bảng); bảng Pipeline trong CLAUDE.md, PROGRESS và D12, D13 đều đã cập nhật.
+- **`06b_als.py`:**
+  - Lưới alpha {0,25; 0,5; 1; 5; 20; 40}, rank {32, 64, 128}, regParam cố định 0,1.
+  - Thêm luật `RANK_MIN_GAIN = 0,003`: rank 128 chỉ được chọn nếu hơn rank 64 ít nhất 0,003. Luật đã chạy đúng ở cả hai chiều: ở local (chênh 0,0029) giữ rank 64; trên cụm (chênh 0,0032) chọn rank 128.
+- **`06f_hybrid.py`:** thêm hàm `content_slots()` tạo phiên bản `hybrid_c2`, cách làm chi tiết trong mục "Số liệu chính".
+  - `hybrid_c2` được đánh giá đủ như các mô hình khác: bảng chính, biến thể khám phá, coverage, novelty, diversity, khoảng tin cậy so với hybrid, và recall món mới.
+  - `recs_final` giờ lấy từ `hybrid_c2`.
+  - Lý do của vị trí content là món đã nấu giống nhất (tra `item_sim`); không có thì ghi "bạn đã xem".
+- **`06e_kmeans.py`:** `user_clusters` có cột `cluster_k3`, `cluster_k8`, `cluster_k11`. `cluster_profile` có hồ sơ cho 3 giá trị k. `/data/models/kmeans` là model k = 8. Report có thêm `summary_k` và `dashboard_k`.
+  - Bạn chỉ dặn chạy lại 06b và 06f, nhưng muốn dashboard dùng k = 8 và có hồ sơ cho k = 11 thì 06e cũng phải chạy lại (315 giây).
+- Cả 3 file đều chạy `--local` trước, rồi chạy trên cụm theo thứ tự 06b → 06f → 06e. Tất cả thành công.
+- Đã cập nhật D13 (phần "Bổ sung 25/10"), DATA_DICTIONARY (`hybrid_c2`, cột cluster, `recs_final`) và PROGRESS. Việc tiếp theo trong PROGRESS là thiết kế bước 07.
 
 ## Số liệu chính
-**Chia dữ liệu (06a, kiểm tra theo sửa đổi a):** view test có 39.012 user được đánh giá, gồm ấm 36.979, ít 742 và **lạnh 1.291**. Con số 2.690 trong bản đề xuất là tính theo train; tính đúng theo train + val ra 1.291.
-
-**Xếp hạng trên test, cùng 39.012 user cho mọi mô hình:**
-| Mô hình | NDCG@10 | P@10 | R@10 | MAP@10 | NDCG@10 ấm | NDCG@10 lạnh |
+**1. Lưới ALS implicit (val, mẫu 10.000 user, NDCG@10):**
+| alpha (rank 32) | 0,25 | 0,5 | **1** | 5 | 20 | 40 |
 |---|---|---|---|---|---|---|
-| random | 0,0015 | 0,0010 | 0,0019 | 0,0006 | 0,0015 | 0,0004 |
-| pop_chung | 0,0510 | 0,0286 | 0,0583 | 0,0251 | 0,0512 | 0,0473 |
-| pop_gan_day (2 tháng cuối) | 0,0497 | 0,0282 | 0,0555 | 0,0244 | 0,0500 | 0,0448 |
-| pop_vung_tuoi | 0,0571 | 0,0324 | 0,0655 | 0,0283 | 0,0573 | 0,0540 |
-| nau_lai | 0,1317 | 0,0691 | 0,1417 | 0,0746 | 0,1362 | 0,0473 |
-| als_implicit | 0,1508 | 0,0798 | 0,1692 | 0,0856 | 0,1572 | 0 |
-| content | 0,0095 | 0,0065 | 0,0117 | 0,0039 | 0,0099 | 0 |
-| **hybrid** | **0,1564** | **0,0828** | **0,1750** | **0,0890** | **0,1611** | 0,0540 |
+| NDCG@10 | 0,1433 | 0,1485 | **0,1541** | 0,1506 | 0,1118 | 0,0808 |
 
-- **Khoảng tin cậy 95% của hiệu NDCG@10:**
-  - hybrid − ALS = +0,0055 [0,0046; 0,0065]; chỉ tính user ấm: +0,0040 [0,0031; 0,0049];
-  - hybrid − nấu lại = +0,0246 [0,0231; 0,0262];
-  - ALS − nấu lại = +0,0191 [0,0172; 0,0210];
-  - hybrid − popularity theo vùng-tuổi = +0,0993 [0,0975; 0,1011].
-- **Biến thể khám phá, NDCG@10** (37.253 user còn món đáp án): ALS 0,0934, hybrid 0,0905, pop_vung_tuoi 0,0314, nấu lại 0,0263, content 0,0087.
-- **Ngoài độ chính xác (top 10):**
+| rank (alpha 1) | 32 | 64 | **128** |
+|---|---|---|---|
+| NDCG@10 | 0,1541 | 0,1591 | **0,1623** |
 
-  | Mô hình | Coverage | Novelty | Diversity |
-  |---|---|---|---|
-  | hybrid | 35,6% | 8,98 | 0,859 |
-  | ALS | 32,9% | 9,18 | 0,848 |
-  | content | 77,0% | 12,93 | 0,736 |
-  | nấu lại | 97,6% | 10,26 | 0,895 |
-  | popularity | 0,2–0,5% | – | – |
+- Alpha 1 là đỉnh thật, không còn nằm ở biên lưới.
+- Rank 128 hơn rank 64 0,0032, đạt ngưỡng 0,003, nên chọn **rank 128**. Rank vẫn ở biên trên, nhưng theo yêu cầu không mở rộng thêm.
+- Độ nhạy trọng số implicit: 1/3/5 → 0,1623; 1/2/10 → 0,1620; chỉ cook → 0,1328.
+- Thời gian dò ALS trên cụm tăng từ 870 lên 1.973 giây vì có rank 128.
 
-- **Kiểm tra độ đo tự viết với `RankingEvaluator`** (ALS, test): NDCG@10 0,1508 = 0,1508; P@10 0,0798 = 0,0798; MAP@10 0,0856 = 0,0856; R@10 0,1692 = 0,1692.
+**2. Hybrid và hybrid + content 2 vị trí (test, cùng 39.012 user):**
 
-**ALS implicit (dò tham số trên 10.000 user của val):**
-- Theo alpha (rank 32, reg 0,1): alpha 1 → 0,1541; 5 → 0,1506; 20 → 0,1118; 40 → 0,0808.
-- Rank 64 → 0,1591. regParam 0,01 → 0,1521.
-- **Tham số chọn: alpha 1, rank 64, reg 0,1. Cả alpha và rank đều nằm ở biên lưới** (câu hỏi 1).
-- Độ nhạy trọng số implicit: 1/3/5 → 0,1591; 1/2/10 → 0,1593; chỉ cook → 0,1327. Giữ 1/3/5 vì 1/2/10 chỉ hơn 0,0002.
+Cách làm `hybrid_c2`:
+- vị trí 1–8 lấy từ hybrid;
+- vị trí 9: món content user chưa nấu, xếp theo điểm content × log1p(lượt nấu);
+- vị trí 10: món content chưa nấu và có ít tương tác (lượt nấu ≤ 43 ở view test, tức phân vị 20% của các món), xếp theo điểm content; không có thì lấy món thứ hai của vị trí 9;
+- phần còn lại là hybrid đẩy lùi 2 vị trí.
 
-**Hybrid:**
-- Trọng số tốt nhất: α (ALS) 0,8, δ (nấu lại) 0,2, **β (content) 0**, **γ (popularity) 0**. NDCG@10 trên mẫu val 0,1698; nếu chỉ dùng ALS thì 0,1659.
-- Ứng viên phủ 62,6% số món đáp án.
-- Nhóm "ít" giữ nguyên trọng số (0,0999 so với 0,0647 khi đặt α = 0).
-- `recs_final`: 50.000 user × 50 món. Nguồn lý do gợi ý: als 2.408.650 dòng, pop 91.350 dòng (user lạnh); **không có dòng nào mang lý do content hoặc nấu lại** (câu hỏi 2).
+| Độ đo | Hybrid | Hybrid + content 2 vị trí | Hiệu (c2 − hybrid) |
+|---|---|---|---|
+| NDCG@10 tất cả | **0,1588** | 0,1495 | −0,0092 [−0,0096; −0,0089] |
+| NDCG@10 user ấm | 0,1636 | 0,1539 | −0,0097 [−0,0100; −0,0093] |
+| NDCG@10 ít / lạnh | 0,1034 / 0,0540 | 0,0987 / 0,0540 | |
+| P@10 / R@10 | 0,0838 / 0,1786 | 0,0744 / 0,1599 | |
+| NDCG@10 biến thể khám phá | 0,0960 | 0,0846 | |
+| Coverage top 10 | 41,3% | **58,0%** | +16,7 điểm % |
+| Novelty | 9,13 | **9,91** | |
+| Diversity | 0,854 | 0,849 | gần như không đổi |
+| Recall món mới @10 (300 món ẩn) | 0 | **1,80%** | |
 
-**Món mới (300 món bị ẩn, 12.168 cặp ở test):** content recall@10 = 2,65%, recall@100 = 10,25%. ALS, popularity, nấu lại và **hybrid đều bằng 0**.
+- Đánh đổi: mất khoảng 6% NDCG@10 để có món mới, coverage cao hơn và lý do gợi ý dạng "giống món X".
+- Content đứng riêng có recall món mới @10 là 2,65% và @100 là 10,25%. Trong `hybrid_c2` chỉ có 2 vị trí, nên recall @10 và @100 đều là 1,80%.
+- Trọng số hybrid mới: ALS 0,9, nấu lại 0,1, content 0, popularity 0. NDCG@10 trên val 0,1728; nếu chỉ dùng ALS thì 0,1691.
 
-**Dự đoán điểm (test):**
-| | Trên dòng chung (63.370) | Trên toàn bộ dòng (66.388) |
-|---|---|---|
-| Trung bình chung | 1,071 | 1,072 |
-| Bias (λ = 5) | 0,737 | 0,740 |
-| ALS explicit (rank 16, reg 0,1) | **0,684** | – |
-| ALS, thiếu thì dùng bias | – | 0,689 |
+**Bảng xếp hạng đầy đủ trên test (NDCG@10):**
 
-ALS bỏ 4,55% số dòng vì user/món không có trong lịch sử.
+| Mô hình | NDCG@10 |
+|---|---|
+| hybrid | 0,1588 |
+| ALS implicit | 0,1539 |
+| hybrid + content 2 vị trí | 0,1495 |
+| nấu lại | 0,1317 |
+| popularity theo vùng-tuổi | 0,0571 |
+| popularity chung | 0,0510 |
+| popularity 2 tháng cuối | 0,0497 |
+| content | 0,0095 |
+| random | 0,0015 |
 
-**Đối chứng 06g (ratings gốc, 182.556 dòng, 101 user, 3.996 món):** đoán ngẫu nhiên 2,240; trung bình chung 1,578; bias 1,588; **ALS 1,673, kém hơn trung bình chung 6,0%**. Trên dữ liệu mô phỏng, ALS tốt hơn trung bình chung 36,1%.
+Khoảng tin cậy 95% của các hiệu:
+- hybrid − ALS = +0,0049 [0,0042; 0,0056];
+- ALS − nấu lại = +0,0221 [0,0203; 0,0240];
+- hybrid − popularity theo vùng-tuổi = +0,1017 [0,0999; 0,1035].
 
-**Content:**
-- Từ điển 2.862 token: 992 âm tiết, 1.829 nguyên liệu, 41 nhãn đặc trưng. Trung bình 15,6 token mỗi món.
-- TF-IDF tính bằng SQL khớp pipeline Spark (sai khác lớn nhất 1,1e-16).
-- Tính chính xác: 10,9M cặp có độ tương tự khác 0, mất 37 giây.
-- MinHashLSH recall@20: 3 bảng băm 0,789 (14 giây); 5 bảng 0,868 (17 giây); 10 bảng 0,993 (36 giây). Ở 5.499 món, LSH chưa nhanh hơn tính chính xác.
-- Món content gợi ý có hạng phổ biến trung vị 1.598, món user thật sự nấu là 410 (chạy trên bản 10%). Đây là lý do content xếp hạng kém.
+**`recs_final`:** 50.000 user × 50 món.
 
-**FP-Growth:**
-- Mâm cơm: 279.148 phiên, 677 luật, 656 món có món ăn kèm.
-- Hit rate@3 trên 67.308 lượt hỏi ở test: **luật 0,219**; luật thiếu thì dùng mốc theo nhóm món 0,240; mốc theo nhóm món 0,076; mốc 3 canh phổ biến 0,035. Luật phủ 64,5% số lượt hỏi; tính riêng phần có luật thì đạt 0,339.
-- Nguyên liệu: giữ gia vị có 2.963 luật, bỏ gia vị có 36 luật. Ví dụ: men nở → bột mì (lift 8,7), lá dứa → nước cốt dừa (lift 7,6).
+| Nguồn lý do | Số dòng |
+|---|---|
+| als | 2.312.304 |
+| content_slot | 96.346 |
+| pop (user lạnh) | 91.350 |
 
-**K-means (46.130 user):**
-- Silhouette cao nhất ở **k = 3** (0,227; ARI 0,285; NMI 0,365).
-- Tại k = 8: KMeans có ARI 0,418, NMI 0,442; BisectingKMeans có ARI 0,377.
-- Các cụm k = 8 khớp với persona: gia đình truyền thống 90,6%, hảo ngọt 81,8%, cay/nhậu 77,2%, bận rộn 76,9% (cụm có tỷ trọng món nhanh 0,85), ăn chay 47,1% (cụm có tỷ trọng món chay 0,90).
-- ARI cao nhất đạt ở k = 11 (0,504).
+Trong các vị trí content, 96,67% có món đã nấu làm lý do; số còn lại ghi "bạn đã xem".
+
+**3. K-means (46.130 user; dashboard dùng k = 8):**
+| k | Silhouette | ARI | NMI | Ghi chú |
+|---|---|---|---|---|
+| 3 | **0,227** | 0,285 | 0,365 | Silhouette cao nhất |
+| 8 | 0,174 | 0,418 | 0,442 | **Dashboard**, bằng số persona |
+| 11 | 0,184 | **0,504** | **0,512** | ARI cao nhất |
+
+- k = 8: các cụm khớp với persona gia đình truyền thống 90,6%, hảo ngọt 81,8%, cay/nhậu 77,2%, bận rộn 76,9%.
+- k = 11: tách persona mịn hơn, ví dụ gia đình truyền thống 94,9%, bận rộn 88,9%, cay/nhậu 88,9%, hảo ngọt 86,2%, mê hải sản 76,6%.
+
+**Thời gian trên cụm (lần chạy này):** 06b 2.756 giây, 06f 1.386 giây (riêng thí nghiệm món mới 806 giây, vì phải fit lại ALS với rank 128), 06e 315 giây.
 
 ## Lỗi / sự cố và cách xử lý
-- 06b local lần đầu bị lỗi tên tham số (`reg` và `regParam`). Đã sửa và chạy lại.
-- 06c local lần đầu bị lỗi `F.when("cột")`: Spark 4 yêu cầu Column. Đã sửa thành `F.col(...)`.
-- Content xếp hạng rất kém. Đã kiểm tra code (khớp pipeline, món tương tự hợp lý); nguyên nhân là phương pháp bỏ qua độ phổ biến. Ghi trong D13.
-- Không chạy song song job local và job cụm được, vì bộ nhớ container jupyter có hạn. Đã ghi vào CLAUDE.md.
+- Lần đầu sửa 06f bằng heredoc trong bash bị lỗi phân tích chuỗi, chưa có gì được ghi vào file. Đã chuyển script sửa file sang scratchpad rồi chạy lại.
+- Không có lỗi khi chạy job.
 
 ## Cần người dùng quyết định
-1. **Lưới ALS implicit chạm biên:** alpha tốt nhất là 1 (giá trị nhỏ nhất) và rank tốt nhất là 64 (giá trị lớn nhất). Đề xuất: mở rộng thêm một lần, alpha {0,25; 0,5} và rank 128. Chi phí khoảng 4 lần fit, cộng chạy lại 06f. Mở rộng hay giữ nguyên?
-2. **Content có trọng số 0 trong hybrid.** Hệ quả: món mới không bao giờ được gợi ý, và lý do gợi ý chỉ có "als" hoặc "pop". Các lựa chọn:
-   - (a) giữ nguyên, tối ưu độ chính xác thuần;
-   - (b) **dành 2 vị trí cuối của top 10 cho content** (món chưa nấu, có lý do "giống món X"). Đo mức giảm NDCG@10 trên test và mức tăng coverage, novelty, recall món mới. **Đề xuất (b)**, chỉ áp cho `recs_final` và dashboard; bảng đánh giá báo cả hai phiên bản;
-   - (c) cộng điểm content cho món có ít tương tác.
-3. **K cho trang "Phân khúc người dùng":** k = 3 (Silhouette cao nhất) hay k = 8 (ARI 0,42, các cụm diễn giải được theo persona)? Đề xuất: dashboard dùng **k = 8**, báo cáo trình bày cả hai.
+Không. Việc tiếp theo là bước 07 (xuất MongoDB), bắt đầu bằng bản đề xuất thiết kế ghi vào file này để chat góp ý. Các phần bản thiết kế cần có đã liệt kê trong PROGRESS, mục "Việc tiếp theo".
 
 Việc cần người làm (không đổi): kiểm tra tay 100 món (Hậu 50, Ngọc 50); Ngọc dựng notebook biểu đồ cho bước 05 và 06.
 
 ## Commit
-- `c276f42`, `bc210e3`: bản thiết kế đầy đủ, bỏ giới hạn độ dài LAST_RUN.
-- Commit của phiên này: `Buoc 06: 06a-06g, hybrid, danh gia tren cum` (code, report, D12, D13, PROGRESS, DATA_DICTIONARY, CLAUDE.md, file này).
+- `9b447f2`: bước 06 lần đầu (06a–06g).
+- Commit của phiên này: `Buoc 06: luoi ALS mo rong, hybrid + content 2 vi tri, k = 8` (06b, 06e, 06f, report, D13, DATA_DICTIONARY, PROGRESS, file này).

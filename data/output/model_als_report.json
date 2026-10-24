@@ -257,38 +257,38 @@
         {
           "group": "tất cả",
           "n_users": 38796,
-          "p@5": 0.1115,
-          "r@5": 0.1172,
-          "ndcg@5": 0.1483,
-          "ap@5": 0.0951,
-          "p@10": 0.085,
-          "r@10": 0.1743,
-          "ndcg@10": 0.1579,
-          "ap@10": 0.0893
+          "p@5": 0.113,
+          "r@5": 0.1193,
+          "ndcg@5": 0.1505,
+          "ap@5": 0.0967,
+          "p@10": 0.0868,
+          "r@10": 0.1791,
+          "ndcg@10": 0.1612,
+          "ap@10": 0.0912
         },
         {
           "group": "ấm",
           "n_users": 36815,
-          "p@5": 0.1164,
-          "r@5": 0.1217,
-          "ndcg@5": 0.1545,
-          "ap@5": 0.099,
-          "p@10": 0.0888,
-          "r@10": 0.1812,
-          "ndcg@10": 0.1644,
-          "ap@10": 0.0928
+          "p@5": 0.1181,
+          "r@5": 0.124,
+          "ndcg@5": 0.1568,
+          "ap@5": 0.1007,
+          "p@10": 0.0907,
+          "r@10": 0.1863,
+          "ndcg@10": 0.1679,
+          "ap@10": 0.0949
         },
         {
           "group": "ít",
           "n_users": 705,
-          "p@5": 0.0559,
-          "r@5": 0.0941,
-          "ndcg@5": 0.0926,
-          "ap@5": 0.0624,
-          "p@10": 0.0406,
-          "r@10": 0.1334,
-          "ndcg@10": 0.1039,
-          "ap@10": 0.0642
+          "p@5": 0.053,
+          "r@5": 0.0898,
+          "ndcg@5": 0.0922,
+          "ap@5": 0.0638,
+          "p@10": 0.0399,
+          "r@10": 0.1296,
+          "ndcg@10": 0.104,
+          "ap@10": 0.0654
         },
         {
           "group": "lạnh",
@@ -436,6 +436,24 @@
   },
   "tuning_als_implicit": [
     {
+      "alpha": 0.25,
+      "rank": 32,
+      "regParam": 0.1,
+      "weights": "1/3/5",
+      "ndcg@10": 0.1433,
+      "p@10": 0.0781,
+      "r@10": 0.1591
+    },
+    {
+      "alpha": 0.5,
+      "rank": 32,
+      "regParam": 0.1,
+      "weights": "1/3/5",
+      "ndcg@10": 0.1485,
+      "p@10": 0.0802,
+      "r@10": 0.1636
+    },
+    {
       "alpha": 1,
       "rank": 32,
       "regParam": 0.1,
@@ -482,41 +500,41 @@
     },
     {
       "alpha": 1,
-      "rank": 64,
-      "regParam": 0.01,
+      "rank": 128,
+      "regParam": 0.1,
       "weights": "1/3/5",
-      "ndcg@10": 0.1521,
-      "p@10": 0.0822,
-      "r@10": 0.1711
+      "ndcg@10": 0.1623,
+      "p@10": 0.0874,
+      "r@10": 0.1797
     },
     {
       "alpha": 1,
-      "rank": 64,
+      "rank": 128,
       "regParam": 0.1,
       "weights": "1/2/10",
-      "ndcg@10": 0.1593,
-      "p@10": 0.0861,
-      "r@10": 0.1751
+      "ndcg@10": 0.162,
+      "p@10": 0.0874,
+      "r@10": 0.1795
     },
     {
       "alpha": 1,
-      "rank": 64,
+      "rank": 128,
       "regParam": 0.1,
       "weights": "chỉ cook",
-      "ndcg@10": 0.1327,
-      "p@10": 0.0735,
-      "r@10": 0.1422
+      "ndcg@10": 0.1328,
+      "p@10": 0.0736,
+      "r@10": 0.1416
     }
   ],
   "best_als_implicit": {
     "alpha": 1,
-    "rank": 64,
+    "rank": 128,
     "regParam": 0.1
   },
   "sensitivity_implicit_weights_ndcg@10": {
-    "1/3/5": 0.1591,
-    "1/2/10": 0.1593,
-    "chỉ cook": 0.1327
+    "1/3/5": 0.1623,
+    "1/2/10": 0.162,
+    "chỉ cook": 0.1328
   },
   "test": {
     "ranking": {
@@ -774,38 +792,38 @@
         {
           "group": "tất cả",
           "n_users": 39012,
-          "p@5": 0.1042,
-          "r@5": 0.1131,
-          "ndcg@5": 0.1402,
-          "ap@5": 0.0901,
-          "p@10": 0.0798,
-          "r@10": 0.1692,
-          "ndcg@10": 0.1508,
-          "ap@10": 0.0856
+          "p@5": 0.1061,
+          "r@5": 0.1159,
+          "ndcg@5": 0.1431,
+          "ap@5": 0.0922,
+          "p@10": 0.0813,
+          "r@10": 0.1725,
+          "ndcg@10": 0.1539,
+          "ap@10": 0.0877
         },
         {
           "group": "ấm",
           "n_users": 36979,
-          "p@5": 0.1089,
-          "r@5": 0.1174,
-          "ndcg@5": 0.1462,
-          "ap@5": 0.0938,
-          "p@10": 0.0835,
-          "r@10": 0.1759,
-          "ndcg@10": 0.1572,
-          "ap@10": 0.0891
+          "p@5": 0.1109,
+          "r@5": 0.1203,
+          "ndcg@5": 0.1491,
+          "ap@5": 0.0959,
+          "p@10": 0.085,
+          "r@10": 0.1793,
+          "ndcg@10": 0.1602,
+          "ap@10": 0.0912
         },
         {
           "group": "ít",
           "n_users": 742,
-          "p@5": 0.0518,
-          "r@5": 0.0994,
-          "ndcg@5": 0.0893,
-          "ap@5": 0.0608,
-          "p@10": 0.0365,
-          "r@10": 0.1266,
-          "ndcg@10": 0.0986,
-          "ap@10": 0.0626
+          "p@5": 0.0528,
+          "r@5": 0.0999,
+          "ndcg@5": 0.0943,
+          "ap@5": 0.0657,
+          "p@10": 0.0388,
+          "r@10": 0.1332,
+          "ndcg@10": 0.1062,
+          "ap@10": 0.0686
         },
         {
           "group": "lạnh",
@@ -863,20 +881,20 @@
   },
   "check_ranking_evaluator": {
     "ndcgAtK": {
-      "spark": 0.1508,
-      "tu_viet": 0.1508
+      "spark": 0.1539,
+      "tu_viet": 0.1539
     },
     "precisionAtK": {
-      "spark": 0.0798,
-      "tu_viet": 0.0798
+      "spark": 0.0813,
+      "tu_viet": 0.0813
     },
     "meanAveragePrecisionAtK": {
-      "spark": 0.0856,
-      "tu_viet": 0.0856
+      "spark": 0.0877,
+      "tu_viet": 0.0877
     },
     "recallAtK": {
-      "spark": 0.1692,
-      "tu_viet": 0.1692
+      "spark": 0.1725,
+      "tu_viet": 0.1725
     }
   },
   "ci95_test_ndcg@10": [
@@ -884,60 +902,60 @@
       "so_sanh": "als_implicit - pop_chung",
       "metric": "ndcg@10",
       "n_users": 39012,
-      "als_implicit": 0.1508,
+      "als_implicit": 0.1539,
       "pop_chung": 0.051,
-      "hieu": 0.0998,
+      "hieu": 0.1029,
       "ci95": [
-        0.098,
-        0.1017
+        0.101,
+        0.1048
       ]
     },
     {
       "so_sanh": "als_implicit - pop_gan_day",
       "metric": "ndcg@10",
       "n_users": 39012,
-      "als_implicit": 0.1508,
+      "als_implicit": 0.1539,
       "pop_gan_day": 0.0497,
-      "hieu": 0.1012,
+      "hieu": 0.1042,
       "ci95": [
-        0.0993,
-        0.103
+        0.1023,
+        0.1061
       ]
     },
     {
       "so_sanh": "als_implicit - pop_vung_tuoi",
       "metric": "ndcg@10",
       "n_users": 39012,
-      "als_implicit": 0.1508,
+      "als_implicit": 0.1539,
       "pop_vung_tuoi": 0.0571,
-      "hieu": 0.0938,
+      "hieu": 0.0968,
       "ci95": [
-        0.0919,
-        0.0956
+        0.0949,
+        0.0987
       ]
     },
     {
       "so_sanh": "als_implicit - nau_lai",
       "metric": "ndcg@10",
       "n_users": 39012,
-      "als_implicit": 0.1508,
+      "als_implicit": 0.1539,
       "nau_lai": 0.1317,
-      "hieu": 0.0191,
+      "hieu": 0.0221,
       "ci95": [
-        0.0172,
-        0.021
+        0.0203,
+        0.024
       ]
     }
   ],
   "timings_s": {
-    "val:baselines": 46.2,
-    "val:rating_models": 170.9,
-    "val:als_implicit": 869.8,
-    "test:baselines": 36.0,
-    "test:rating_models": 11.3,
-    "test:als_implicit": 151.9,
-    "check_ranking_evaluator": 2.3,
-    "ci_test": 1.3
+    "val:baselines": 47.1,
+    "val:rating_models": 166.5,
+    "val:als_implicit": 1972.8,
+    "test:baselines": 40.8,
+    "test:rating_models": 13.2,
+    "test:als_implicit": 505.7,
+    "check_ranking_evaluator": 2.7,
+    "ci_test": 1.4
   },
-  "total_seconds": 1294.1
+  "total_seconds": 2756.1
 }

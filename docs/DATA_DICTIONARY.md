@@ -137,15 +137,15 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 | `pop_<v>` | 06a | `kind` (chung, 2 tháng cuối, vùng-tuổi), `region, age_group, food_id, cooks, rank` | Top 100 popularity |
 | `item_pop_<v>` | 06a | `food_id, cooks, share` | Lượt nấu của cả 5.499 món (dùng cho novelty) |
 | `user_features_<v>` | 06a | `n_events, n_sessions, share_*, slot_0..3, share_weekend, cat_entropy, avg_rating, pref_slot…` | Đặc trưng hành vi của user (K-means, ngữ cảnh) |
-| `recs_<model>_<v>` | 06b, 06c, 06f | `user_id, food_id, rank, score` (content có thêm `because_food_id`; hybrid có thêm `source`) | Top 100. View val gồm user được đánh giá; view test gồm mọi user (content: user có lịch sử). `model` ∈ random, pop_chung, pop_gan_day, pop_vung_tuoi, nau_lai, als_implicit, content, hybrid |
+| `recs_<model>_<v>` | 06b, 06c, 06f | `user_id, food_id, rank, score` (content có thêm `because_food_id`; hybrid có thêm `source`) | Top 100. View val gồm user được đánh giá; view test gồm mọi user (content: user có lịch sử). `model` ∈ random, pop_chung, pop_gan_day, pop_vung_tuoi, nau_lai, als_implicit, content, hybrid, **hybrid_c2** (hybrid + content ở vị trí 9–10, `source = content_slot`; D13) |
 | `eval_<model>_<v>` | 06b, 06c, 06f | `user_id, group, n_truth, n_pred, p@k, r@k, ndcg@k, ap@k` (k = 5, 10) | Độ đo của **từng user**, dùng để tính khoảng tin cậy |
 | `item_tokens` | 06c | `food_id, tokens` | Tập token của món (trong từ điển, minDF = 2) |
 | `item_sim` | 06c | `food_id, sim_food_id, sim, jaccard, rank` | 50 món tương tự nhất theo cosine TF-IDF (tính chính xác) |
 | `rules_ingredients`, `ingredient_edges` | 06d | `variant` (giữ / bỏ gia vị), `antecedent, consequent` hoặc `src, dst`, `confidence, lift, support` | Luật nguyên liệu, cạnh 1 → 1 cho đồ thị mạng |
 | `rules_meal`, `companion` | 06d | `food_id, companion_id, rank, confidence, lift` | Luật "mâm cơm" và tối đa 5 món ăn kèm cho mỗi món |
-| `user_clusters` | 06e | `user_id, cluster_best, cluster_k8` | Cụm của user |
-| `cluster_profile` | 06e | `k, cluster, n_users`, trung bình từng đặc trưng, `persona_pho_bien_kiem_chung, persona_share` | Hồ sơ cụm. Cột persona chỉ để kiểm chứng |
-| `recs_final` | 06f | `user_id, rank, food_id, score, source, reason_type, because_food_id, reason` | **Gợi ý cuối**: top 50 cho mọi user. Bước 07 xuất bảng này |
+| `user_clusters` | 06e | `user_id, cluster_k3, cluster_k8, cluster_k11` | Cụm của user. **Dashboard dùng `cluster_k8`** (D13) |
+| `cluster_profile` | 06e | `k` (3, 8, 11), `cluster, n_users`, trung bình từng đặc trưng, `persona_pho_bien_kiem_chung, persona_share` | Hồ sơ cụm. Cột persona chỉ để kiểm chứng |
+| `recs_final` | 06f | `user_id, rank, food_id, score, source, reason_type, because_food_id, reason` | **Gợi ý cuối**: top 50 cho mọi user, lấy từ `hybrid_c2`. `source` ∈ als, rep, pop, content_slot. Vị trí content: `score` là null, `because_food_id` là món đã nấu giống nhất (không có thì là món đã xem). Bước 07 xuất bảng này |
 | `metrics` | 06f | `view, model, variant, group, metrics` (JSON) | Bảng độ đo tổng hợp |
 
 ## File trong `data/output/`
