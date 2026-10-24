@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **24/10/2026**, sau khi chạy lại 03 để chốt mẫu kiểm tra tay theo hash. `dish_features` không đổi.
+> Cập nhật lần cuối: **24/10/2026**, sau khi viết bản đề xuất thiết kế bước 06 vào `docs/LAST_RUN.md` (đang chờ góp ý).
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -13,7 +13,7 @@
 | 03 Đặc trưng món | ✅ Xong (sửa 24/10) | `dish_features` 5.499 dòng, khớp từng giá trị với lần chạy local. Loại món: mặn 3.448, ngọt 1.236, chay 580, đồ uống 235. Đã sửa "hào" (D10) |
 | 04 Sinh hành vi | ✅ Xong (100%, chạy lại 24/10) | 50.000 user (49.815 có hoạt động); **23.205.143 sự kiện**; Parquet 261MB; chạy 9 phút. `zipf_offset = 30`, món đứng đầu 1,44% (D11) |
 | 05 Phân tích hành vi | ✅ Xong | `src/05_analysis.py`, 14 bảng trong `/data/results/analysis` và JSON trong `data/output/analysis/`; chạy trên cụm 104 giây |
-| 06 Mô hình + đánh giá | ⬜ Chưa | |
+| 06 Mô hình + đánh giá | 🟡 Thiết kế | Bản đề xuất nằm trong `docs/LAST_RUN.md`, chờ chat góp ý và người dùng chốt 6 câu hỏi. Chưa viết code |
 | 07 Xuất MongoDB | ⬜ Chưa | |
 | 08 FastAPI + dashboard | ⬜ Chưa | |
 | Nâng cao: Structured Streaming | ⬜ Chưa | |
@@ -43,7 +43,7 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Bước 06: THIẾT KẾ TRƯỚC, CHƯA VIẾT CODE.** Ghi bản đề xuất thiết kế vào `docs/LAST_RUN.md` (mục "Đã làm" là bản thiết kế, mục "Cần người dùng quyết định" là các điểm cần chốt). Chat claude.ai sẽ góp ý, sau khi chốt mới viết code. Bản thiết kế phải có:
+1. **Bước 06: THIẾT KẾ TRƯỚC, CHƯA VIẾT CODE.** ✅ Đã ghi bản đề xuất vào `docs/LAST_RUN.md` (24/10). **Việc tiếp theo:** đọc góp ý của chat và câu trả lời cho 6 câu hỏi (replication, `events_csv`, giả lập món mới, giao thức, tên module, 06g), ghi bản đã chốt thành D12, rồi mới viết code theo thứ tự 06a → 06b → 06c → 06f → 06d → 06e → 06g. Yêu cầu gốc: ghi bản đề xuất vào `docs/LAST_RUN.md` (mục "Đã làm" là bản thiết kế, mục "Cần người dùng quyết định" là các điểm cần chốt). Chat claude.ai sẽ góp ý, sau khi chốt mới viết code. Bản thiết kế phải có:
    - **Chia file:** ví dụ `src/06_*.py` theo từng nhóm mô hình, phần chung (chia dữ liệu, hàm độ đo) để ở đâu, file nào ghi gì lên `/data/results/models/...`, report JSON nào.
    - **Chia dữ liệu theo thời gian:** train 10/2025–07/2026, validation 08/2026, test 09/2026. Nêu cách xử lý user hoặc món chỉ có trong validation/test, cách định nghĩa "món liên quan" (relevant) cho độ đo xếp hạng, và có loại món user đã tương tác trong train khỏi danh sách gợi ý hay không.
    - **Cold-start:** user mới (28% đăng ký trong năm), món ít tương tác; chuyển sang content-based hoặc popularity như thế nào.
@@ -64,6 +64,8 @@
 - [ ] Ratings gốc: đã **tạm gác lại**. Cần quyết định có chạy thí nghiệm đối chứng ALS hay không (khoảng 15 phút công, kế hoạch khuyến nghị có).
 - [ ] Ảnh chụp UI cho báo cáo: **để cuối dự án, làm cùng lúc với đo hiệu năng**. Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
 - [x] Chốt mẫu kiểm tra tay theo hash: đã chạy lại 03 trên cụm (24/10).
+- [ ] HDFS: các file do Spark ghi có replication 3, cụm chỉ có 2 datanode nên thiếu 64 bản sao. Không mất block nào. Đề xuất sửa trong LAST_RUN (câu hỏi 1).
+- [ ] `/data/events/events_csv` (1,4GB) đã cũ so với events hiện tại (LAST_RUN, câu hỏi 2).
 - [ ] Repo GitHub và `git config`: tạm chưa làm, theo quyết định của nhóm (tác giả commit đang là `Admin`).
 - [ ] Ngọc: dựng notebook biểu đồ từ `data/output/analysis/*.json`, làm nền cho trang "Hành vi ăn uống" của dashboard.
 - [ ] Nhắn giảng viên về việc dùng dữ liệu hành vi mô phỏng (kế hoạch mục 2.2 khuyến nghị). Chưa rõ đã nhắn hay chưa.
@@ -96,3 +98,4 @@
   - thêm `zipf_offset = 30` ở 04 và chạy lại 04 (100%) → 05. Món đứng đầu giảm còn 1,44%, Gini 0,698;
   - mẫu kiểm tra tay chọn theo hash (D11).
 - **24/10 (tiếp):** chạy lại 03 trên cụm để ghi mẫu kiểm tra theo hash. `dish_features` mới giống hệt bản cũ (`exceptAll` ra 0 dòng ở cả hai chiều). Bước 06 sẽ làm theo kiểu thiết kế trước.
+- **24/10 tối:** chạy job khảo sát chia train/val/test (56,7% cặp được nấu ở test đã gặp ở train; 2.690 user lạnh trong test). Viết bản đề xuất thiết kế bước 06 vào LAST_RUN. Phát hiện lỗi replication 3 trên HDFS.
