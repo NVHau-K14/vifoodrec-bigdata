@@ -13,7 +13,8 @@ Khi thêm hoặc đổi bảng, cập nhật file này. Kiểu cột ghi theo Sp
 /data/events/events/month=YYYY-MM/   sự kiện hành vi, 12 partition (bước 04)
 /data/events/events_csv/         bản CSV của events, chỉ để so sánh dung lượng (bước 04 --csv)
 /data/results/analysis/<bảng>/   kết quả phân tích hành vi (bước 05), mỗi bảng 1 file Parquet
-/data/results/                   kết quả mô hình (bước 06 trở đi)
+/data/results/models/<bảng>[_val|_test]   bảng trung gian và kết quả bước 06 (xem mục bên dưới)
+/data/models/{als_implicit,als_explicit,content_pipeline,kmeans}   model Spark đã lưu (bước 06)
 ```
 Chạy `--local` thì cùng cấu trúc đó nằm trong `data/hdfs_local/`. Các bản sao nhỏ để xem trên máy nằm trong `data/processed/`.
 
@@ -123,6 +124,30 @@ Mỗi bảng có thêm bản JSON cùng tên trong `data/output/analysis/`. Hai 
 | `user_activity` | `ord`, `cooks_per_user` (0, 1-5, …, >100), `users`, `avg_events`, `share_pct` | Phân bố mức hoạt động của user |
 | `long_tail_curve` | `dish_pct` 1–100, `views_cum_pct`, `cooks_cum_pct` | Đường tích lũy: x% món phổ biến nhất chiếm bao nhiêu % lượt |
 
+## Bước 06 – `/data/results/models/` (D12)
+Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng 08/2026. Hậu tố `_test`: lịch sử là train + val (đến 08/2026), đánh giá tháng 09/2026. Bảng không có hậu tố thì không phụ thuộc view.
+
+| Bảng | Bước | Cột chính | Nội dung |
+|---|---|---|---|
+| `implicit_<v>` | 06a | `user_id, food_id, n_view, n_favorite, n_cook, n_rate, last_ts` | Ma trận implicit tính từ lịch sử |
+| `ratings_<v>` | 06a | `user_id, food_id, rating` | Các dòng `rate` trong lịch sử |
+| `user_groups_<v>` | 06a | `user_id, region, age_group, n_events, n_cooks, n_rates, group, is_eval, tune` | Nhóm theo số sự kiện trong lịch sử: lạnh = 0, ít = 1–19, ấm ≥ 20. `tune` đánh dấu mẫu 10.000 user dùng để dò tham số |
+| `truth_<v>` | 06a | `user_id, items, group, region, age_group, tune` | Món **nấu** trong tháng đánh giá (đáp án) |
+| `truth_rate_<v>` | 06a | `user_id, food_id, rating` | Các dòng `rate` trong tháng đánh giá |
+| `pop_<v>` | 06a | `kind` (chung, 2 tháng cuối, vùng-tuổi), `region, age_group, food_id, cooks, rank` | Top 100 popularity |
+| `item_pop_<v>` | 06a | `food_id, cooks, share` | Lượt nấu của cả 5.499 món (dùng cho novelty) |
+| `user_features_<v>` | 06a | `n_events, n_sessions, share_*, slot_0..3, share_weekend, cat_entropy, avg_rating, pref_slot…` | Đặc trưng hành vi của user (K-means, ngữ cảnh) |
+| `recs_<model>_<v>` | 06b, 06c, 06f | `user_id, food_id, rank, score` (content có thêm `because_food_id`; hybrid có thêm `source`) | Top 100. View val gồm user được đánh giá; view test gồm mọi user (content: user có lịch sử). `model` ∈ random, pop_chung, pop_gan_day, pop_vung_tuoi, nau_lai, als_implicit, content, hybrid |
+| `eval_<model>_<v>` | 06b, 06c, 06f | `user_id, group, n_truth, n_pred, p@k, r@k, ndcg@k, ap@k` (k = 5, 10) | Độ đo của **từng user**, dùng để tính khoảng tin cậy |
+| `item_tokens` | 06c | `food_id, tokens` | Tập token của món (trong từ điển, minDF = 2) |
+| `item_sim` | 06c | `food_id, sim_food_id, sim, jaccard, rank` | 50 món tương tự nhất theo cosine TF-IDF (tính chính xác) |
+| `rules_ingredients`, `ingredient_edges` | 06d | `variant` (giữ / bỏ gia vị), `antecedent, consequent` hoặc `src, dst`, `confidence, lift, support` | Luật nguyên liệu, cạnh 1 → 1 cho đồ thị mạng |
+| `rules_meal`, `companion` | 06d | `food_id, companion_id, rank, confidence, lift` | Luật "mâm cơm" và tối đa 5 món ăn kèm cho mỗi món |
+| `user_clusters` | 06e | `user_id, cluster_best, cluster_k8` | Cụm của user |
+| `cluster_profile` | 06e | `k, cluster, n_users`, trung bình từng đặc trưng, `persona_pho_bien_kiem_chung, persona_share` | Hồ sơ cụm. Cột persona chỉ để kiểm chứng |
+| `recs_final` | 06f | `user_id, rank, food_id, score, source, reason_type, because_food_id, reason` | **Gợi ý cuối**: top 50 cho mọi user. Bước 07 xuất bảng này |
+| `metrics` | 06f | `view, model, variant, group, metrics` (JSON) | Bảng độ đo tổng hợp |
+
 ## File trong `data/output/`
 | File | Nội dung |
 |---|---|
@@ -135,3 +160,5 @@ Mỗi bảng có thêm bản JSON cùng tên trong `data/output/analysis/`. Hai 
 | `analysis_report.json` | Số liệu chính của bước 05: kiểm tra tổng, phễu theo user, lift nổi bật, đuôi dài, thời gian từng phần |
 | `analysis/*.json` | Bản JSON của các bảng kết quả bước 05 (cho dashboard) |
 | `analysis/explain.txt` | Kế hoạch thực thi của truy vấn phễu và truy vấn lọc theo tháng (dùng cho báo cáo) |
+| `model_split_report.json`, `model_als_report.json`, `model_content_report.json`, `model_hybrid_report.json`, `model_fpgrowth_report.json`, `model_kmeans_report.json`, `model_control_report.json` | Report từng file của bước 06 |
+| `models_metrics.json` | Bảng tổng hợp độ đo xếp hạng (chính, khám phá, ngoài độ chính xác) và khoảng tin cậy 95% |

@@ -145,3 +145,95 @@ Không dùng ratings gốc cho phân tích hay gợi ý. Có thể chạy một 
 - **Spark History Server:** `get_spark()` bật `spark.eventLog.enabled`, ghi vào `logs/spark-events/` trong thư mục dự án. Thư mục này mount ở mọi container và đã thêm vào `.gitignore`. Service `spark-history` (cổng 18080) đọc thư mục đó. Đặt cấu hình trong code thay vì `spark-defaults.conf` để không phải build lại image, và chạy `--local` cũng có log. Mục đích: chụp ảnh UI và đo hiệu năng sau khi job đã xong, không cần canh lúc job đang chạy ở cổng 4040.
 - **Mẫu kiểm tra tay ở bước 03:** chọn theo `xxhash64(food_id, 42)` thay vì `rand(42)`. Đã kiểm tra: chia 1 hay 7 partition đều ra đúng 100 món như nhau. Ngày 24/10 đã chạy lại 03 trên cụm để ghi mẫu theo hash. `dish_features` giống hệt bản trước (schema trùng, `exceptAll` ra 0 dòng ở cả hai chiều), nên không cần chạy lại 04 và 05.
 - **Ảnh chụp UI:** để cuối dự án, chụp cùng lúc với phần đo hiệu năng (lấy từ History Server).
+
+## D12. Thiết kế bước 06 đã chốt (24/10)
+Bản đề xuất nằm trong LAST_RUN (commit `c276f42`), chat góp ý 9 điểm (a–i), người dùng trả lời 7 câu hỏi. Bản chốt như sau.
+
+**Hạ tầng (làm ngay):**
+- `get_spark()` đặt `spark.hadoop.dfs.replication=2`. Đã chạy `hdfs dfs -setrep -R -w 2 /data`; fsck: HEALTHY, thiếu 0 bản sao.
+- Đã xóa `/data/events/events_csv` (bản cũ). Khi đo hiệu năng sẽ sinh lại bằng `04 --csv`.
+
+**File:** module dùng chung `src/rec_common.py`, cùng các file `06a_split`, `06b_als`, `06c_content`, `06f_hybrid`, `06d_fpgrowth`, `06e_kmeans`, `06g_control`. Viết và chạy theo thứ tự đó, mỗi file chạy `--local` (bản 10%) trước rồi mới lên cụm.
+- Bảng trung gian ghi vào `/data/results/models/<bảng>_<view>`.
+- Model Spark lưu vào `/data/models/`.
+- Report: `data/output/model_<x>_report.json`.
+
+**Hai "view" dữ liệu (sửa đổi a):**
+| view | lịch sử (dùng để fit) | tháng đánh giá | dùng cho |
+|---|---|---|---|
+| `val` | train: 10/2025–07/2026 | 08/2026 | dò tham số |
+| `test` | train + val: 10/2025–08/2026 | 09/2026 | kết quả cuối, gợi ý cuối cho MongoDB |
+
+- 06a ghi riêng cho từng view mọi thứ phụ thuộc lịch sử: ma trận implicit, ratings, `user_groups`, các bảng popularity, đặc trưng user, tập đáp án.
+- **Nhóm user** được định nghĩa một lần trong 06a, theo số sự kiện trong lịch sử của view: **lạnh** = 0, **ít** = 1–19, **ấm** ≥ 20. Luật cold-start của hybrid dùng đúng nhóm này. Số user lạnh ở test được tính lại theo train + val.
+
+**Giao thức đánh giá (câu hỏi 4, sửa đổi b, g):**
+- Món liên quan = các món user nấu trong tháng đánh giá. User được đánh giá = user có ít nhất 1 lượt nấu trong tháng đó.
+- **Mọi mô hình xếp hạng chấm trên cùng tập user.** Mô hình không có gợi ý cho một user thì user đó nhận danh sách rỗng, điểm bằng 0. Hybrid có luật dùng popularity thay, ghi rõ.
+- Báo cáo theo nhóm: tất cả user, ấm, ít, lạnh. Bảng phụ chỉ gồm user ấm.
+- Bảng chính không loại món đã gặp. Biến thể "khám phá" bỏ món user đã nấu trong lịch sử ra khỏi cả danh sách gợi ý lẫn tập đáp án; user không còn món đáp án nào thì bị loại khỏi biến thể này.
+- Độ đo P@K, R@K, NDCG@K, MAP@K (K = 5, 10) tính **cho từng user** bằng hàm mảng của Spark SQL (`transform`, `aggregate`). Kết quả được kiểm tra lại với `RankingEvaluator`. MAP@K chia cho min(K, số món đáp án), giống Spark.
+- Lưu NDCG@10 của từng user. Các so sánh chính báo **khoảng tin cậy 95%** của hiệu số ghép cặp theo user: trung bình ± 1,96·sd/√n.
+- **RMSE/MAE** báo trên **phần dòng chung**, tức các dòng mà mọi mô hình đều dự đoán được (ALS bỏ user/món không có trong lịch sử). Có thêm biến thể "ALS, thiếu thì dùng bias" trên toàn bộ dòng.
+- Ngoài độ chính xác: coverage, novelty (−log₂ tỷ trọng lượt nấu trong lịch sử), diversity (1 − Jaccard trung bình giữa các cặp món trong top 10, dùng tập token của 06c). Tất cả tính trên test ở 06f.
+
+**06b — baseline và ALS (sửa đổi e, câu hỏi 5):**
+- Baseline: random (chọn món bằng hash, có seed), popularity chung, **popularity 2 tháng cuối của lịch sử**, popularity theo (vùng, nhóm tuổi), **"nấu lại"** (món user đã nấu nhiều nhất trong lịch sử, thiếu thì bổ sung bằng popularity chung).
+- Rating: trung bình chung, bias baseline (λ ∈ {5, 10, 25}), ALS explicit (rank {16, 32, 64} × regParam {0,05; 0,1; 0,2}). Tự dò trên val, không dùng TrainValidationSplit vì nó chia ngẫu nhiên.
+- ALS implicit: độ tin cậy `log1p(1·view + 3·favorite + 5·cook)`. Dò lần lượt alpha {5, 20, 40} → rank {32, 64} → regParam {0,01; 0,1}, chọn theo NDCG@10 trên mẫu 10.000 user của val.
+- **Kiểm tra độ nhạy trọng số** với tham số đã chọn: {1/3/5, 1/2/10, chỉ cook}.
+- Tham số tốt nhất được fit lại trên view `test`. Lưu top 100 cho user được đánh giá; ở view `test` thì lưu cho mọi user có lịch sử.
+
+**06c — content (sửa đổi c, d):**
+- Token của món:
+  - âm tiết của tên món, tags và nhãn đặc trưng, tách bằng `RegexTokenizer(pattern="[^\p{L}\p{M}]+")`;
+  - mỗi nguyên liệu là 1 token, nối bằng `_` (ví dụ `hành_lá`). Bỏ gia vị (`SEASONINGS`) và stopword tự viết;
+  - đặc trưng có cấu trúc thành token dạng `cat=…`, `protein=…`, `method=…`.
+
+  Không dùng bigram ghép xuyên các trường.
+- Vector: `CountVectorizer(minDF=2)` → `IDF` → `Normalizer`.
+- **Độ tương tự chính xác** tính phân tán bằng chỉ mục ngược (join theo token, rồi tổng tích trọng số). Cùng phép join cho cả cosine TF-IDF và số token chung để tính Jaccard. Bảng `item_sim` lấy 50 món có cosine cao nhất cho mỗi món.
+- **LSH:** `MinHashLSH` trên tập token, đo recall@20 so với Jaccard chính xác và so thời gian chạy. Không dùng `BucketedRandomProjectionLSH` trên vector thưa nhiều chiều (lý do ở góp ý c).
+- Gợi ý theo nội dung: lấy 30 món nặng nhất của user trong lịch sử, score(u, i) = Σ conf_uj · sim(j, i), lưu top 100 kèm món j đóng góp nhiều nhất (dùng làm lý do gợi ý).
+
+**06f — hybrid (sửa đổi e, f; câu hỏi 3):**
+- Bốn nguồn có **cùng độ sâu 100**: ALS implicit, content, popularity theo (vùng, nhóm tuổi), nấu lại.
+- Gộp bằng **weighted RRF**: score = Σ w_s / (60 + hạng_s). Trọng số α, β, γ, δ dò trên lưới bước 0,1 với tổng bằng 1 (286 tổ hợp), dùng mẫu 10.000 user của val.
+  - Spark tạo bảng ứng viên. Vòng dò lưới chạy bằng numpy trên driver, vì bảng ứng viên của 10.000 user chỉ vài triệu dòng; nếu tạo 286 job Spark thì phần lớn thời gian là chi phí khởi tạo job.
+- **Cold-start** theo nhóm của 06a:
+  - lạnh → popularity theo (vùng, nhóm tuổi);
+  - ít → so 2 phương án trên val (giữ trọng số chung, hoặc α = 0) rồi chọn phương án tốt hơn;
+  - ấm → hybrid đầy đủ.
+- Đánh giá cuối trên test cho mọi mô hình. Bảng tổng hợp ghi vào `models_metrics.json`.
+- Gợi ý cuối: top 50 cho mọi user, kèm `reason`.
+- Thí nghiệm món mới (ưu tiên thấp, làm cuối 06f): ẩn lịch sử của 300 món, fit lại ALS, đo khả năng các nguồn gợi ý ra những món đó.
+
+**06d — FP-Growth (sửa đổi h):**
+- `array_distinct` mỗi giao dịch.
+- Luật nguyên liệu: chạy có và không có gia vị.
+- Luật mâm cơm: fit trên lịch sử của view `test`, đánh giá hit rate@3 trên các phiên mâm cơm của tháng test. So với 2 mốc: "3 canh phổ biến nhất" và "món hay nấu cùng nhất theo nhóm món".
+
+**06e — K-means (sửa đổi i):** đặc trưng user lấy từ lịch sử view `val` (train). KMeans và BisectingKMeans với k = 2…12, chọn k theo Silhouette. Báo ARI và NMI so với `persona_main` tại k đã chọn **và tại k = 8**.
+
+**06g — đối chứng (câu hỏi 7):** ALS explicit trên `ratings_original`, chia ngẫu nhiên 80/20, so với trung bình chung và đoán ngẫu nhiên.
+
+**Cấu hình phụ:**
+- `get_spark()` đặt `spark.driver.memory`: 3g khi chạy local (driver kiêm executor), 2g trên cụm.
+- ALS dùng thư mục checkpoint `/tmp/checkpoint` trên HDFS, hoặc `data/hdfs_local/_checkpoint` khi chạy local.
+
+## D13. Bước 06: điều chỉnh khi cài đặt và phát hiện từ kết quả (24/10)
+**Điều chỉnh so với D12:**
+- **Lưới alpha của ALS implicit có thêm giá trị 1.** Khi chạy local, alpha tốt nhất (5) nằm đúng biên dưới của lưới {5, 20, 40}. Trên cụm, alpha = 1 thắng (NDCG@10 0,1541 so với 0,1506 của alpha = 5), nên **lại nằm ở biên dưới**. Rank tốt nhất là 64, cũng là biên trên. Xem câu hỏi trong LAST_RUN.
+- **TF-IDF của content tính bằng Spark SQL ở dạng dài** (món, token, trọng số), với công thức giống `IDF` của Spark (tf nhị phân, idf = log((N+1)/(df+1)), chuẩn hóa L2). Cách này giúp tính độ tương tự chính xác bằng join trên chỉ mục ngược mà không cần UDF. `CountVectorizer(minDF=2)` quyết định từ điển. Pipeline `CountVectorizer → IDF → Normalizer` vẫn được fit và lưu lại; trên 30 món mẫu, sai khác lớn nhất so với cách tính SQL là 1,1e-16.
+- Độ đo xếp hạng tự viết bằng hàm mảng Spark SQL (để có giá trị cho từng user) **khớp hoàn toàn** với `RankingEvaluator` ở cả 4 độ đo (NDCG@10, P@10, MAP@10, R@10 của ALS trên test).
+- `SEASONINGS` chuyển vào `rec_common.py`, dùng chung cho 06c và 06d.
+
+**Phát hiện (dữ liệu mô phỏng):**
+- **Content xếp hạng rất kém** (NDCG@10 0,0095, thấp hơn cả popularity). Món content gợi ý có hạng phổ biến trung vị 1.598, trong khi món user thật sự nấu có hạng trung vị 410. Lý do: bộ sinh chọn món theo Zipf và thành phần ẩn, còn content bỏ qua độ phổ biến. Đổi lại, content có coverage 77% và novelty cao nhất.
+- **Hybrid dò ra β (content) = 0 và γ (popularity) = 0**, chọn α = 0,8, δ (nấu lại) = 0,2. Hệ quả:
+  - trong thí nghiệm món mới, hybrid ra 0, chỉ content tìm lại được món bị ẩn (recall@100 = 10,25%);
+  - `recs_final` có lý do gợi ý gần như chỉ là "als" (2.408.650 dòng) và "pop" (91.350 dòng, của user lạnh). Không có dòng nào mang lý do "content" hay "nấu lại".
+
+  Xem câu hỏi trong LAST_RUN.
+- Ở biến thể khám phá, ALS (0,0934) nhỉnh hơn hybrid (0,0905), vì thành phần "nấu lại" không giúp gì khi đã bỏ món cũ.
+- MinHashLSH với 10 bảng băm đạt recall@20 = 0,993, nhưng ở quy mô 5.499 món thì tính chính xác (37 giây) **không chậm hơn** LSH (14–36 giây). Lợi thế của LSH chỉ thể hiện khi danh mục món lớn hơn nhiều; báo cáo cần nói rõ điều này.

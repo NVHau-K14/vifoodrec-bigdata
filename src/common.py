@@ -29,12 +29,16 @@ def get_spark(app_name: str, local: bool = False) -> SparkSession:
     """local=True: chay Spark tren 1 may (de thu nhanh). Mac dinh: nop job len cum Docker."""
     b = SparkSession.builder.appName(app_name)
     if local:
-        b = b.master("local[*]")
+        # local: driver kiem luon executor -> can nhieu bo nho hon (container jupyter gioi han 4g)
+        b = b.master("local[*]").config("spark.driver.memory", "3g")
     else:
         b = (b.master(SPARK_MASTER)
+             .config("spark.driver.memory", "2g")
              .config("spark.driver.host", DRIVER_HOST)
              .config("spark.executor.memory", "2g")
-             .config("spark.hadoop.fs.defaultFS", HDFS_URL))
+             .config("spark.hadoop.fs.defaultFS", HDFS_URL)
+             # Client Hadoop mac dinh ghi 3 ban, cum chi co 2 DataNode -> thieu ban sao (D12)
+             .config("spark.hadoop.dfs.replication", "2"))
     # Event log -> logs/spark-events (thu muc du an, mount o moi container) de Spark History Server
     # (http://localhost:18080) xem lai cac job da chay xong: chup anh UI, do hieu nang
     os.makedirs(EVENT_LOG_DIR, exist_ok=True)
@@ -59,6 +63,8 @@ class Paths:
         self.features = f"{root}/features"
         self.events = f"{root}/events"
         self.results = f"{root}/results"
+        self.models = f"{root}/models"           # model Spark da luu (buoc 06)
+        self.checkpoint = f"{root}/_checkpoint" if local else f"{HDFS_URL}/tmp/checkpoint"
         # Thu muc tren may (mount vao container tai /home/jovyan/work)
         self.processed_local = os.path.join(PROJECT_DIR, "data", "processed")
         self.output_local = os.path.join(PROJECT_DIR, "data", "output")

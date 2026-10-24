@@ -29,7 +29,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 | 03 Đặc trưng món | `src/03_features.py` | `/data/curated/foods` | `/data/features/dish_features` | `features_report.json` |
 | 04 Sinh hành vi | `src/04_simulate.py` | `dish_features` | `/data/events/{events,users,users_truth}` | `simulate_report.json` |
 | 05 Phân tích hành vi | `src/05_analysis.py` | `/data/events`, `dish_features`, `foods` | `/data/results/analysis/*` (14 bảng) | `analysis_report.json`, `analysis/*.json` |
-| 06 Mô hình | (chưa có) | ALS, content-based, FP-Growth, K-means, hybrid + đánh giá | | |
+| 06 Mô hình | `src/06a_split.py` … `06g_control.py`, dùng chung `src/rec_common.py` | `/data/events`, `dish_features`, `foods`, `ratings_original` | `/data/results/models/*`, `/data/models/*` | `model_*_report.json`, `models_metrics.json` |
 | 07 Xuất MongoDB | (chưa có) | | | |
 | 08 API + dashboard | `api/`, `web/` (trống) | MongoDB | | |
 
@@ -74,3 +74,5 @@ Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bư�
   đặt `MSYS_NO_PATHCONV=1` trước lệnh `docker exec`, hoặc chạy từ PowerShell.
 - `hdfs dfs -cp ... /tmp/x` báo `No such file or directory`: HDFS chưa có `/tmp`. Chạy `hdfs dfs -mkdir -p /tmp/bak` trước.
 - Script thử chạy trong container đọc file trên máy phải ghi `file:///home/jovyan/work/...`. Không có `file://` thì Spark hiểu là đường dẫn HDFS.
+- Không chạy cùng lúc một job `--local` và một job trên cụm. Cả hai driver đều nằm trong container `jupyter` (local 3GB, cụm 2GB), mà container chỉ có 4GB. Chạy lần lượt.
+- Lọc log bằng `grep "^..."` có thể trượt, vì dòng in ra bị dính sau thanh tiến trình của Spark (`\r`). Dùng `grep -ao "\[06\][^[]*"`.
