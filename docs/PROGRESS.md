@@ -13,7 +13,7 @@
 | 03 Đặc trưng món | ✅ Xong (sửa 24/10) | `dish_features` 5.499 dòng, khớp từng giá trị với lần chạy local. Loại món: mặn 3.448, ngọt 1.236, chay 580, đồ uống 235. Đã sửa "hào" (D10) |
 | 04 Sinh hành vi | ✅ Xong (100%, chạy lại 24/10) | 50.000 user (49.815 có hoạt động); **23.205.143 sự kiện**; Parquet 261MB; chạy 9 phút. `zipf_offset = 30`, món đứng đầu 1,44% (D11) |
 | 05 Phân tích hành vi | ✅ Xong | `src/05_analysis.py`, 14 bảng trong `/data/results/analysis` và JSON trong `data/output/analysis/`; chạy trên cụm 104 giây |
-| 06 Mô hình + đánh giá | 🟡 Thiết kế | Bản đề xuất nằm trong `docs/LAST_RUN.md`, chờ chat góp ý và người dùng chốt 6 câu hỏi. Chưa viết code |
+| 06 Mô hình + đánh giá | 🟡 Thiết kế | Bản đề xuất nằm trong `docs/LAST_RUN.md`, chờ chat góp ý và người dùng chốt 7 câu hỏi. Chưa viết code |
 | 07 Xuất MongoDB | ⬜ Chưa | |
 | 08 FastAPI + dashboard | ⬜ Chưa | |
 | Nâng cao: Structured Streaming | ⬜ Chưa | |
@@ -43,7 +43,7 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Bước 06: THIẾT KẾ TRƯỚC, CHƯA VIẾT CODE.** ✅ Đã ghi bản đề xuất vào `docs/LAST_RUN.md` (24/10). **Việc tiếp theo:** đọc góp ý của chat và câu trả lời cho 6 câu hỏi (replication, `events_csv`, giả lập món mới, giao thức, tên module, 06g), ghi bản đã chốt thành D12, rồi mới viết code theo thứ tự 06a → 06b → 06c → 06f → 06d → 06e → 06g. Yêu cầu gốc: ghi bản đề xuất vào `docs/LAST_RUN.md` (mục "Đã làm" là bản thiết kế, mục "Cần người dùng quyết định" là các điểm cần chốt). Chat claude.ai sẽ góp ý, sau khi chốt mới viết code. Bản thiết kế phải có:
+1. **Bước 06: THIẾT KẾ TRƯỚC, CHƯA VIẾT CODE.** ✅ Đã ghi bản đề xuất vào `docs/LAST_RUN.md` (24/10). **Việc tiếp theo:** đọc góp ý của chat và câu trả lời cho 7 câu hỏi (replication, `events_csv`, giả lập món mới, giao thức, trọng số implicit và chuẩn hóa hybrid, tên module, 06g), ghi bản đã chốt thành D12, rồi mới viết code theo thứ tự 06a → 06b → 06c → 06f → 06d → 06e → 06g. Yêu cầu gốc: ghi bản đề xuất vào `docs/LAST_RUN.md` (mục "Đã làm" là bản thiết kế, mục "Cần người dùng quyết định" là các điểm cần chốt). Chat claude.ai sẽ góp ý, sau khi chốt mới viết code. Bản thiết kế phải có:
    - **Chia file:** ví dụ `src/06_*.py` theo từng nhóm mô hình, phần chung (chia dữ liệu, hàm độ đo) để ở đâu, file nào ghi gì lên `/data/results/models/...`, report JSON nào.
    - **Chia dữ liệu theo thời gian:** train 10/2025–07/2026, validation 08/2026, test 09/2026. Nêu cách xử lý user hoặc món chỉ có trong validation/test, cách định nghĩa "món liên quan" (relevant) cho độ đo xếp hạng, và có loại món user đã tương tác trong train khỏi danh sách gợi ý hay không.
    - **Cold-start:** user mới (28% đăng ký trong năm), món ít tương tác; chuyển sang content-based hoặc popularity như thế nào.
