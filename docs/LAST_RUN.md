@@ -1,7 +1,7 @@
 # Lần chạy gần nhất – 24/10/2026 22:10
 
 > File này được **ghi đè sau mỗi lần làm xong một yêu cầu** (xem quy tắc trong CLAUDE.md).
-> Người dùng đọc nó ở bên chat claude.ai. Lần này dài hơn 80 dòng vì nội dung chính là bản thiết kế bước 06.
+> Người dùng đọc nó ở bên chat claude.ai. Giữ đúng các mục bên dưới, không giới hạn độ dài.
 
 ## Yêu cầu
 Kiểm tra cụm, rồi làm việc tiếp theo trong PROGRESS: **đề xuất thiết kế bước 06, chưa viết code**.
