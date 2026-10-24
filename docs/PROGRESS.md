@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **25/10/2026**, sau khi chốt 3 câu hỏi của bước 06 (lưới ALS, hybrid + content 2 vị trí, k = 8) và chạy lại 06b, 06f, 06e trên cụm.
+> Cập nhật lần cuối: **25/10/2026**, sau khi viết bản đề xuất thiết kế bước 07 (xuất MongoDB) vào `docs/LAST_RUN.md`, chờ chốt.
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -14,7 +14,7 @@
 | 04 Sinh hành vi | ✅ Xong (100%, chạy lại 24/10) | 50.000 user (49.815 có hoạt động); **23.205.143 sự kiện**; Parquet 261MB; chạy 9 phút. `zipf_offset = 30`, món đứng đầu 1,44% (D11) |
 | 05 Phân tích hành vi | ✅ Xong | `src/05_analysis.py`, 14 bảng trong `/data/results/analysis` và JSON trong `data/output/analysis/`; chạy trên cụm 104 giây |
 | 06 Mô hình + đánh giá | ✅ Xong | Trên test (39.012 user), NDCG@10: hybrid **0,1588**, hybrid + content 2 vị trí 0,1495 (dùng cho `recs_final`), ALS implicit 0,1539 (alpha 1, rank 128), nấu lại 0,1317. RMSE: ALS 0,684, bias 0,737. Dashboard dùng k = 8. D12, D13 |
-| 07 Xuất MongoDB | ⬜ Chưa | |
+| 07 Xuất MongoDB | 🟡 Đang thiết kế | Bản đề xuất trong LAST_RUN (25/10), chờ chốt 7 câu hỏi. Ước tính khoảng 280 MB BSON chưa nén, `recs` 202,6 MB |
 | 08 FastAPI + dashboard | ⬜ Chưa | |
 | Nâng cao: Structured Streaming | ⬜ Chưa | |
 | Đo hiệu năng (1 vs 2 worker, 10/50/100%) | ⬜ Chưa | |
@@ -79,21 +79,7 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Bước 07: THIẾT KẾ TRƯỚC, CHƯA VIẾT CODE.** Ghi bản đề xuất thiết kế vào `docs/LAST_RUN.md` (mục "Đã làm" là bản thiết kế, mục "Cần người dùng quyết định" là các điểm cần chốt). Chat claude.ai góp ý, sau khi chốt thì ghi thành `Dxx` rồi mới viết `src/07_export_mongo.py`. Bản thiết kế phải có:
-   - **Danh sách collection và schema từng document:**
-     - `dishes`: `foods` + `dish_features` + `dish_stats` của bước 05 + `image_link`;
-     - `recs` (`recs_final`), `similar` (`item_sim`, mỗi món bao nhiêu món tương tự), `companions` (`companion`);
-     - `users` (`users` + `cluster_k8`), `clusters` (`cluster_profile`, k = 8, có thể kèm 3 và 11);
-     - `analysis_*`: 14 bảng của bước 05;
-     - `metrics` (`models_metrics.json`);
-     - các luật nguyên liệu và cạnh đồ thị.
-
-     Lồng mảng hay tách document (ví dụ `recs` để mỗi user 1 document chứa mảng 50 món, hay mỗi dòng 1 document); kích thước ước tính.
-   - **Cách ghi từ Spark:** `foreachPartition` với `pymongo` `insert_many`/`bulk_write` theo lô, hay collect về driver cho bảng nhỏ. Có dùng MongoDB Spark Connector không (cần jar; image hiện chưa có). Ghi lại từ đầu mỗi lần chạy (drop rồi insert, hoặc ghi vào collection tạm rồi đổi tên) để chạy lại vẫn ra cùng kết quả.
-   - **Index** cho các truy vấn của API: `recs.user_id`, `dishes.food_id`, tìm theo tên món (text index), lọc theo chay / món nhanh / bữa.
-   - Kiểm tra sau khi ghi: số document khớp với bảng HDFS, lấy mẫu vài user. Report `data/output/export_report.json`.
-   - Thêm service `mongo-express` vào compose (cổng, tài khoản); RAM của MongoDB (đang giới hạn 1,5GB, cache 1GB).
-   - Những gì API bước 08 cần đọc, để bước 07 xuất đủ ngay từ đầu.
+1. **Bước 07: chờ chốt thiết kế.** Bản đề xuất đã nằm trong `docs/LAST_RUN.md` (25/10), gồm 14 nhóm collection, schema, kích thước BSON đo trên mẫu, cách ghi bằng `pymongo` + `foreachPartition`, index, kiểm tra, `mongo-express`, và bảng trang dashboard ↔ collection. Có 7 câu hỏi cần chốt. Sau khi chốt: ghi D14, viết `src/07_export_mongo.py`, chạy `--local` (database `vifood_local`) rồi chạy trên cụm, đọc `export_report.json`.
 2. **Bước 08:** FastAPI (`api/`) đọc MongoDB, rồi dashboard (`web/`, ECharts). Cũng làm theo kiểu thiết kế trước.
 3. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy.
 
@@ -141,3 +127,4 @@
 - **24/10 tối:** chạy job khảo sát chia train/val/test (56,7% cặp được nấu ở test đã gặp ở train; 2.690 user lạnh trong test). Viết bản đề xuất thiết kế bước 06 vào LAST_RUN. Phát hiện lỗi replication 3 trên HDFS.
 - **24/10 khuya:** chốt thiết kế bước 06 (D12, có 9 sửa đổi của chat). Sửa replication về 2, xóa `events_csv`. Viết `rec_common.py` và 06a–06g, chạy local rồi trên cụm. Số user lạnh ở test đúng ra là 1.291 (con số 2.690 ở dòng trên tính theo train). Hybrid thắng ALS với khoảng tin cậy dương, nhưng trọng số content bằng 0 (D13).
 - **25/10:** chốt 3 câu hỏi của bước 06. Mở rộng lưới ALS một lần (chọn alpha 1, rank 128), thêm hybrid + content 2 vị trí cho `recs_final`, dashboard dùng k = 8 (có thêm k = 3 và k = 11). Chạy lại 06b, 06f, 06e trên cụm. Bước 07 sẽ làm theo kiểu thiết kế trước.
+- **25/10 (tiếp):** viết bản đề xuất thiết kế bước 07 vào LAST_RUN. Đã đo kích thước BSON trên mẫu thật: `recs` 1 doc/user bỏ chuỗi lý do còn 4.052 B/user, so với 8.956 B khi giữ chuỗi. MongoDB đang trống, `pymongo` 4.19.0 có sẵn trong image.
