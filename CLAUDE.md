@@ -7,7 +7,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 ## Bắt đầu mỗi phiên
 1. Đọc `docs/PROGRESS.md`: trạng thái, việc tiếp theo, việc còn treo. **Không đọc lại toàn bộ dự án.**
    Đọc thêm `docs/LAST_RUN.md` để biết lần chạy gần nhất và các câu hỏi đang chờ người dùng.
-2. Kiểm tra cụm khi cần chạy job: `docker compose -f docker/docker-compose.yml ps` (đủ 9 container),
+2. Kiểm tra cụm khi cần chạy job: `docker compose -f docker/docker-compose.yml ps` (đủ 10 container),
    `docker exec namenode hdfs dfs -ls -R /data | head`.
 3. Chỉ mở khi cần: `docs/DECISIONS.md` (vì sao làm vậy), `docs/DATA_DICTIONARY.md` (cột của các bảng),
    `docs/plan/ke_hoach_chi_tiet.md` (phạm vi các bước còn lại), `docs/plan/yeu_cau_giang_vien.md` (rubric).
@@ -17,7 +17,8 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 - Spark 4.2.0 Standalone: `spark-master` (UI :8080), `spark-worker-1/2` (mỗi worker 2 core, 3GB).
 - `jupyter` (http://localhost:8888, token `bigdata`) là driver; Spark UI của job đang chạy ở :4040.
 - `spark-history` (http://localhost:18080): xem lại các job đã chạy xong. `get_spark()` ghi event log vào `logs/spark-events/` (đã có trong `.gitignore`).
-- `mongodb` (:27017, admin/admin123). FastAPI và web chưa có trong compose.
+- `mongodb` (:27017, admin/admin123), database `vifood` (`vifood_local` khi chạy `--local`).
+- `mongo-express` (http://localhost:8090, tài khoản trong `.env`). Cổng 8081 trên máy là UI của `spark-worker-1`. FastAPI và web chưa có trong compose.
 - Thư mục dự án được mount vào `/home/jovyan/work` ở jupyter, master, worker và namenode.
 - Dữ liệu HDFS nằm trong Docker volume nên vẫn còn sau khi tắt máy.
 
@@ -30,7 +31,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 | 04 Sinh hành vi | `src/04_simulate.py` | `dish_features` | `/data/events/{events,users,users_truth}` | `simulate_report.json` |
 | 05 Phân tích hành vi | `src/05_analysis.py` | `/data/events`, `dish_features`, `foods` | `/data/results/analysis/*` (14 bảng) | `analysis_report.json`, `analysis/*.json` |
 | 06 Mô hình | `src/06a_split.py` … `06g_control.py`, dùng chung `src/rec_common.py` | `/data/events`, `dish_features`, `foods`, `ratings_original` | `/data/results/models/*`, `/data/models/*` | `model_*_report.json`, `models_metrics.json` |
-| 07 Xuất MongoDB | (chưa có) | | | |
+| 07 Xuất MongoDB | `src/07_export_mongo.py` | kết quả 02–06 trên HDFS, `data/output/*report*.json` | MongoDB `vifood` (26 collection) | `export_report.json` |
 | 08 API + dashboard | `api/`, `web/` (trống) | MongoDB | | |
 
 Bản sao nhỏ để xem trên máy nằm ở `data/processed/`. Report và mẫu kiểm tra nằm ở `data/output/`.

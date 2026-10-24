@@ -1,0 +1,683 @@
+{
+  "mode": "cluster",
+  "db": "vifood",
+  "spark_session_timezone": "Asia/Ho_Chi_Minh",
+  "collections": {
+    "dishes": {
+      "docs": 5499,
+      "expected": 5499,
+      "write_s": 6.4,
+      "total_s": 6.8,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "text_ten_mon",
+        "name_search_1",
+        "is_vegetarian_1_stats.cook_rank_1",
+        "is_quick_1_stats.cook_rank_1",
+        "meal_types_1_stats.cook_rank_1",
+        "dish_category_1_stats.cook_rank_1",
+        "stats.cook_rank_1"
+      ],
+      "count": 5499,
+      "size_bytes": 15353442,
+      "avg_obj_bytes": 2792,
+      "storage_bytes": 8282112,
+      "total_index_bytes": 946176,
+      "n_indexes": 8,
+      "compression_ratio": 1.85
+    },
+    "recs": {
+      "docs": 50000,
+      "expected": 50000,
+      "write_s": 11.8,
+      "total_s": 11.8,
+      "method": "foreachPartition (8 partition)",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 50000,
+      "size_bytes": 202624870,
+      "avg_obj_bytes": 4052,
+      "storage_bytes": 50335744,
+      "total_index_bytes": 843776,
+      "n_indexes": 1,
+      "compression_ratio": 4.03
+    },
+    "similar": {
+      "docs": 5499,
+      "expected": 5499,
+      "write_s": 2.4,
+      "total_s": 2.4,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 5499,
+      "size_bytes": 17134884,
+      "avg_obj_bytes": 3116,
+      "storage_bytes": 6684672,
+      "total_index_bytes": 69632,
+      "n_indexes": 1,
+      "compression_ratio": 2.56
+    },
+    "users": {
+      "docs": 50000,
+      "expected": 50000,
+      "write_s": 12.0,
+      "total_s": 12.3,
+      "method": "foreachPartition (8 partition)",
+      "indexes": [
+        "_id_",
+        "cluster_k8_1",
+        "region_1_age_group_1",
+        "truth.persona_main_1"
+      ],
+      "count": 50000,
+      "size_bytes": 53780895,
+      "avg_obj_bytes": 1075,
+      "storage_bytes": 19009536,
+      "total_index_bytes": 1409024,
+      "n_indexes": 4,
+      "compression_ratio": 2.83
+    },
+    "popular": {
+      "docs": 14,
+      "expected": 14,
+      "write_s": 0.0,
+      "total_s": 0.0,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 14,
+      "size_bytes": 61542,
+      "avg_obj_bytes": 4395,
+      "storage_bytes": 36864,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 1.67
+    },
+    "clusters": {
+      "docs": 22,
+      "expected": 22,
+      "write_s": 0.3,
+      "total_s": 0.4,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "k_1_cluster_1"
+      ],
+      "count": 22,
+      "size_bytes": 10762,
+      "avg_obj_bytes": 489,
+      "storage_bytes": 24576,
+      "total_index_bytes": 40960,
+      "n_indexes": 2,
+      "compression_ratio": 0.44
+    },
+    "meal_rules": {
+      "docs": 677,
+      "expected": 677,
+      "write_s": 0.3,
+      "total_s": 0.4,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "antecedent_1",
+        "consequent_1"
+      ],
+      "count": 677,
+      "size_bytes": 81917,
+      "avg_obj_bytes": 121,
+      "storage_bytes": 45056,
+      "total_index_bytes": 69632,
+      "n_indexes": 3,
+      "compression_ratio": 1.82
+    },
+    "ingredient_rules": {
+      "docs": 2999,
+      "expected": 2999,
+      "write_s": 0.4,
+      "total_s": 0.5,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "variant_1_lift_-1"
+      ],
+      "count": 2999,
+      "size_bytes": 583069,
+      "avg_obj_bytes": 194,
+      "storage_bytes": 180224,
+      "total_index_bytes": 110592,
+      "n_indexes": 2,
+      "compression_ratio": 3.24
+    },
+    "ingredient_edges": {
+      "docs": 416,
+      "expected": 416,
+      "write_s": 0.3,
+      "total_s": 0.3,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "variant_1_lift_-1"
+      ],
+      "count": 416,
+      "size_bytes": 58859,
+      "avg_obj_bytes": 141,
+      "storage_bytes": 36864,
+      "total_index_bytes": 45056,
+      "n_indexes": 2,
+      "compression_ratio": 1.6
+    },
+    "metrics": {
+      "docs": 117,
+      "expected": 117,
+      "write_s": 0.0,
+      "total_s": 0.1,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "view_1_variant_1_model_1"
+      ],
+      "count": 117,
+      "size_bytes": 27590,
+      "avg_obj_bytes": 235,
+      "storage_bytes": 24576,
+      "total_index_bytes": 40960,
+      "n_indexes": 2,
+      "compression_ratio": 1.12
+    },
+    "analysis_heatmap_hour_dow": {
+      "docs": 168,
+      "expected": 168,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 168,
+      "size_bytes": 15792,
+      "avg_obj_bytes": 94,
+      "storage_bytes": 24576,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.64
+    },
+    "analysis_trend_month_category": {
+      "docs": 120,
+      "expected": 120,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "month_1"
+      ],
+      "count": 120,
+      "size_bytes": 14244,
+      "avg_obj_bytes": 118,
+      "storage_bytes": 20480,
+      "total_index_bytes": 40960,
+      "n_indexes": 2,
+      "compression_ratio": 0.7
+    },
+    "analysis_season_month": {
+      "docs": 192,
+      "expected": 192,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "region_1_month_1"
+      ],
+      "count": 192,
+      "size_bytes": 20784,
+      "avg_obj_bytes": 108,
+      "storage_bytes": 24576,
+      "total_index_bytes": 40960,
+      "n_indexes": 2,
+      "compression_ratio": 0.85
+    },
+    "analysis_top_dish_by_slot": {
+      "docs": 78,
+      "expected": 78,
+      "write_s": 0.2,
+      "total_s": 0.3,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "meal_slot_1_rk_1"
+      ],
+      "count": 78,
+      "size_bytes": 22254,
+      "avg_obj_bytes": 285,
+      "storage_bytes": 24576,
+      "total_index_bytes": 40960,
+      "n_indexes": 2,
+      "compression_ratio": 0.91
+    },
+    "analysis_lift_by_group": {
+      "docs": 507,
+      "expected": 507,
+      "write_s": 0.2,
+      "total_s": 0.3,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "group_type_1_group_value_1"
+      ],
+      "count": 507,
+      "size_bytes": 93509,
+      "avg_obj_bytes": 184,
+      "storage_bytes": 40960,
+      "total_index_bytes": 45056,
+      "n_indexes": 2,
+      "compression_ratio": 2.28
+    },
+    "analysis_funnel_by_category": {
+      "docs": 11,
+      "expected": 11,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 11,
+      "size_bytes": 3284,
+      "avg_obj_bytes": 298,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.16
+    },
+    "analysis_catalog_vs_cooked": {
+      "docs": 31,
+      "expected": 31,
+      "write_s": 0.3,
+      "total_s": 0.3,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 31,
+      "size_bytes": 5348,
+      "avg_obj_bytes": 172,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.26
+    },
+    "analysis_top_ingredients": {
+      "docs": 4538,
+      "expected": 4538,
+      "write_s": 0.3,
+      "total_s": 0.4,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "cook_rank_1"
+      ],
+      "count": 4538,
+      "size_bytes": 502049,
+      "avg_obj_bytes": 110,
+      "storage_bytes": 180224,
+      "total_index_bytes": 118784,
+      "n_indexes": 2,
+      "compression_ratio": 2.79
+    },
+    "analysis_rating_dist": {
+      "docs": 10,
+      "expected": 10,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 10,
+      "size_bytes": 680,
+      "avg_obj_bytes": 68,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.03
+    },
+    "analysis_session_size": {
+      "docs": 11,
+      "expected": 11,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 11,
+      "size_bytes": 950,
+      "avg_obj_bytes": 86,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.05
+    },
+    "analysis_repeat_by_category": {
+      "docs": 11,
+      "expected": 11,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 11,
+      "size_bytes": 1414,
+      "avg_obj_bytes": 128,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.07
+    },
+    "analysis_user_activity": {
+      "docs": 6,
+      "expected": 6,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 6,
+      "size_bytes": 635,
+      "avg_obj_bytes": 105,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.03
+    },
+    "analysis_long_tail_curve": {
+      "docs": 100,
+      "expected": 100,
+      "write_s": 0.2,
+      "total_s": 0.2,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 100,
+      "size_bytes": 8200,
+      "avg_obj_bytes": 82,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.4
+    },
+    "reports": {
+      "docs": 12,
+      "expected": 12,
+      "write_s": 0.0,
+      "total_s": 0.0,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 12,
+      "size_bytes": 105995,
+      "avg_obj_bytes": 8832,
+      "storage_bytes": 57344,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 1.85
+    },
+    "overview": {
+      "docs": 1,
+      "expected": 1,
+      "write_s": 0.0,
+      "total_s": 0.0,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_"
+      ],
+      "count": 1,
+      "size_bytes": 1511,
+      "avg_obj_bytes": 1511,
+      "storage_bytes": 20480,
+      "total_index_bytes": 20480,
+      "n_indexes": 1,
+      "compression_ratio": 0.07
+    },
+    "trending": {
+      "docs": 0,
+      "note": "chỉ tạo index, phần Structured Streaming ghi vào sau"
+    }
+  },
+  "checks": {
+    "timezone_session_start_outside_meal_slot": {
+      "sessions": 4929272,
+      "outside": 0
+    },
+    "food_id_not_in_dishes": 0,
+    "recs_items": {
+      "docs": 50000,
+      "items_total": 2500000,
+      "items_min": 50,
+      "items_max": 50,
+      "hdfs_rows": 2500000,
+      "ok": true
+    },
+    "recs_sample_users": [
+      {
+        "user_id": 30494,
+        "group": "ấm",
+        "n_items": 50,
+        "identical": true
+      },
+      {
+        "user_id": 33988,
+        "group": "ấm",
+        "n_items": 50,
+        "identical": true
+      },
+      {
+        "user_id": 14251,
+        "group": "ấm",
+        "n_items": 50,
+        "identical": true
+      },
+      {
+        "user_id": 38037,
+        "group": "ấm",
+        "n_items": 50,
+        "identical": true
+      },
+      {
+        "user_id": 21864,
+        "group": "lạnh",
+        "n_items": 50,
+        "identical": true
+      }
+    ],
+    "similar_items": {
+      "items_total": 274950,
+      "min": 50,
+      "max": 50,
+      "hdfs_rows": 274950
+    },
+    "users": {
+      "with_history": 47718,
+      "with_test_cooks": 39012,
+      "with_cluster_k8": 46130,
+      "with_profile": 48173,
+      "with_truth": 50000,
+      "history_items": 439297,
+      "history_example": [
+        {
+          "food_id": 5164,
+          "n_cook": 5,
+          "last_cook": "2026-08-14 12:06"
+        },
+        {
+          "food_id": 5417,
+          "n_cook": 2,
+          "last_cook": "2026-08-28 09:11"
+        },
+        {
+          "food_id": 1270,
+          "n_cook": 2,
+          "last_cook": "2026-08-01 08:44"
+        },
+        {
+          "food_id": 4939,
+          "n_cook": 1,
+          "last_cook": "2026-08-09 18:57"
+        },
+        {
+          "food_id": 5199,
+          "n_cook": 1,
+          "last_cook": "2026-08-03 08:56"
+        }
+      ]
+    },
+    "dishes": {
+      "with_companions": 656,
+      "without_image": 19,
+      "name_search_example": {
+        "_id": 0,
+        "dish_name": "Mực ống hấp củ đậu",
+        "name_search": "muc ong hap cu dau"
+      }
+    }
+  },
+  "explain": {
+    "recs_theo_user": {
+      "query": "recs.find({_id: 30494})",
+      "winning_plan": [
+        "IDHACK"
+      ],
+      "n_returned": 1,
+      "keys_examined": 1,
+      "docs_examined": 1,
+      "time_ms": 0
+    },
+    "bu_mon_theo_bo_loc": {
+      "query": "dishes.find({is_vegetarian: true, is_quick: true, meal_types: 'tối', _id: {$nin: <50 món gợi ý>}}).sort({'stats.cook_rank': 1}).limit(10)",
+      "winning_plan": [
+        "LIMIT",
+        "FETCH",
+        "IXSCAN(is_vegetarian_1_stats.cook_rank_1)"
+      ],
+      "n_returned": 10,
+      "keys_examined": 30,
+      "docs_examined": 30,
+      "time_ms": 3
+    },
+    "tim_mon_regex": {
+      "query": "dishes.find({name_search: {$regex: 'dau hu'}}).limit(20)",
+      "winning_plan": [
+        "LIMIT",
+        "FETCH",
+        "IXSCAN(name_search_1)"
+      ],
+      "n_returned": 20,
+      "keys_examined": 2541,
+      "docs_examined": 20,
+      "time_ms": 3
+    },
+    "tim_mon_text_index": {
+      "query": "dishes.find({$text: {$search: 'dau hu'}}).limit(20)",
+      "winning_plan": [
+        "LIMIT",
+        "TEXT_MATCH(text_ten_mon)",
+        "FETCH",
+        "OR",
+        "IXSCAN(text_ten_mon)"
+      ],
+      "n_returned": 20,
+      "keys_examined": 20,
+      "docs_examined": 20,
+      "time_ms": 1
+    },
+    "bu_mon_so_mon_tim_duoc": 281
+  },
+  "timings_s": {
+    "checks": 13.3,
+    "total": 66.1
+  },
+  "source_rows": {
+    "foods": 5499,
+    "recs_final": 2500000,
+    "item_sim": 274950,
+    "companion": 677
+  },
+  "overview": {
+    "exported_at": "2026-10-25T01:29:40+07:00",
+    "mode": "cluster",
+    "n_dishes": 5499,
+    "n_users": 50000,
+    "n_events": 23205143,
+    "events_by_type": {
+      "cook": 2382842,
+      "view": 18637934,
+      "rate": 798895,
+      "favorite": 1385472
+    },
+    "event_months": [
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09"
+    ],
+    "n_recs_rows": 2500000,
+    "hdfs": {
+      "raw": {
+        "bytes": 19930427,
+        "bytes_with_replicas": 39860854,
+        "files": 4
+      },
+      "curated": {
+        "bytes": 5512186,
+        "bytes_with_replicas": 11024372,
+        "files": 18
+      },
+      "features": {
+        "bytes": 200169,
+        "bytes_with_replicas": 400338,
+        "files": 9
+      },
+      "events": {
+        "bytes": 274494226,
+        "bytes_with_replicas": 548988452,
+        "files": 17
+      },
+      "results": {
+        "bytes": 567333277,
+        "bytes_with_replicas": 1134666554,
+        "files": 243
+      },
+      "models": {
+        "bytes": 31268560,
+        "bytes_with_replicas": 62537120,
+        "files": 67
+      }
+    },
+    "reference_date": "2026-09-01",
+    "notes": [
+      "Dữ liệu hành vi (sự kiện, user, persona) là MÔ PHỎNG; danh mục món là món thật (Cooky, Món Ngon Mỗi Ngày).",
+      "dishes.stats là thống kê cả năm mô phỏng (10/2025–09/2026, gồm cả tháng val và test), chỉ để mô tả, không phải dữ liệu mô hình đã thấy.",
+      "Gợi ý (recs), users.history và users.profile dùng lịch sử đến hết 08/2026; mốc của dashboard là 01/09/2026.",
+      "dishes.nutrition là số ngẫu nhiên của dữ liệu gốc: lưu lại nhưng không hiển thị.",
+      "users.truth (persona thật) chỉ để kiểm chứng phân cụm; endpoint gợi ý không trả trường này."
+    ]
+  }
+}

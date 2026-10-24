@@ -10,6 +10,7 @@
 #    Spark History    : http://localhost:18080 (cac job da chay xong)
 #    Jupyter Lab      : http://localhost:8888  (token: bigdata)
 #    MongoDB          : mongodb://admin:admin123@localhost:27017
+#    Mongo Express    : http://localhost:8090  (tai khoan trong ../.env)
 # =====================================================================
 
 name: vifood
@@ -183,6 +184,23 @@ services:
     deploy:
       resources:
         limits: { memory: 1536m }
+
+  # Xem du lieu MongoDB tren trinh duyet (buoc 07). Cong 8081 da dung cho spark-worker-1 -> may dung 8090.
+  # Tai khoan dang nhap va chuoi ket noi: bien ME_CONFIG_* trong ../.env
+  mongo-express:
+    image: mongo-express:1.0.2
+    container_name: mongo-express
+    hostname: mongo-express
+    env_file: ../.env
+    environment:
+      ME_CONFIG_BASICAUTH: "true"
+    ports:
+      - "8090:8081"   # Mongo Express UI
+    depends_on: [mongodb]
+    networks: [bigdata]
+    deploy:
+      resources:
+        limits: { memory: 256m }
 
 networks:
   bigdata:

@@ -256,3 +256,36 @@ Bản đề xuất nằm trong LAST_RUN (commit `c276f42`), chat góp ý 9 đi�
   - k = 3: Silhouette 0,227, ARI 0,285, NMI 0,365.
   - k = 8: Silhouette 0,174, ARI 0,418, NMI 0,442.
   - k = 11: Silhouette 0,184, ARI 0,504, NMI 0,512.
+
+## D14. Thiết kế bước 07: xuất MongoDB (25/10)
+Bản đề xuất ở LAST_RUN ngày 25/10, chốt với 7 câu trả lời và 6 sửa đổi của người dùng.
+
+**Nguyên tắc:**
+- MongoDB chỉ là **tầng phục vụ** cho API và dashboard. Sự kiện thô và các bảng trung gian của bước 06 (`implicit_*`, `recs_<model>_*`, `eval_*`) vẫn chỉ nằm trên HDFS.
+- Mốc thời gian của dashboard là **01/09/2026**: `recs_final`, `users.history` và `users.profile` dùng lịch sử đến hết 08/2026 (view test).
+- `_id` là khóa nghiệp vụ (`food_id`, `user_id`, hoặc chuỗi khóa như `"k8_c5"`). Các bảng không có khóa tự nhiên (luật, bảng phân tích) dùng ObjectId và được sắp xếp trước khi ghi.
+
+**Các câu trả lời:**
+1. **`recs`: 1 document/user** với mảng `items` gồm 50 món (`rank, food_id, score, source, because_food_id`). Bỏ chuỗi `reason` và `reason_type`; API sinh câu lý do từ `source` và tên món `because_food_id`. Đo trên mẫu: 4.052 B/user, so với 8.956 B khi giữ chuỗi. API chỉ hiện "Giống món X" khi `source = "content_slot"`.
+2. **Ghi bằng `pymongo`:** `recs` và `users` ghi bằng `foreachPartition` từ executor (8 partition, lô 1.000 document, `insert_many(ordered=False)`); bảng nhỏ `collect()` về driver. Mọi collection ghi vào `<tên>__staging`, kiểm tra số document, tạo index, rồi `renameCollection(dropTarget=True)`. Không dùng MongoDB Spark Connector.
+3. **Bỏ bộ lọc calo.** Thay "thời gian nấu" bằng `is_quick`. Bộ lọc còn: chay, món nhanh, không cay, bữa, nhóm món. `dishes.nutrition` vẫn được lưu nhưng dashboard không hiển thị.
+4. **Xuất persona thật** vào `users.truth` và `clusters.persona_kiem_chung`, chỉ để kiểm chứng. **Endpoint gợi ý của bước 08 không được trả trường `truth`.**
+5. **Có `users.test_cooks`:** các món user thật sự nấu tháng 09/2026, dùng để dashboard đánh dấu gợi ý "trúng".
+6. **`mongo-express`:** cổng 8090 trên máy (8081 đã dùng cho UI của `spark-worker-1`). Tài khoản đặt trong `.env` (`ME_CONFIG_*`).
+7. **`users.history`:** tối đa 10 món, xếp theo `n_cook` giảm dần; bằng nhau thì món có lần nấu gần nhất đứng trước, sau đó theo `food_id`. Lần nấu gần nhất tính từ sự kiện `cook`, vì `last_ts` của `implicit_test` là sự kiện cuối thuộc mọi loại.
+
+**Sửa đổi:**
+- **a. Múi giờ:** timestamp đổi sang chuỗi bằng `date_format` trong Spark, theo múi giờ phiên Spark. `get_spark()` đã đặt `Asia/Ho_Chi_Minh` từ bước 02, và các bước 04, 05 cũng dùng múi giờ này nên không phải sửa. Report kiểm tra lại: giờ của mọi lượt nấu phải nằm trong khung `meal_slot` mà bước 04 đã gán.
+- **b. Chuyển kiểu:** dùng `asDict(recursive=True)`, ép `DecimalType` sang `double` (trong Spark, Python kiểm tra lại một lần nữa), `NaN` thành `null`. Kiểu `date` đổi thành chuỗi `"yyyy-MM-dd"` ngay trong Spark.
+- **c. Lỗi khi ghi:** gặp `BulkWriteError` thì chỉ bỏ qua khi **mọi** mục trong `writeErrors` có mã 11000 (trùng khóa do Spark chạy lại task) và không có `writeConcernErrors`. Các trường hợp khác dừng job.
+- **d. Bù món khi bộ lọc làm danh sách gợi ý ngắn đi (API bước 08):** truy vấn `dishes` với cùng bộ lọc, bỏ các món đã có trong danh sách, xếp theo `stats.cook_rank`. **Không dùng `popular`.** Report ghi `explain()` của truy vấn này.
+- **e. Tìm món (API bước 08):** dùng `$regex` trên `name_search` (có index thường). Text index trên `name_search` và `dish_name` giữ lại để minh họa.
+- **f. `overview` ghi chú** rằng `dishes.stats` là thống kê cả năm mô phỏng (10/2025–09/2026, gồm cả tháng val và test). Nó chỉ dùng để mô tả, không phải dữ liệu mà mô hình đã thấy.
+
+**Điều chỉnh nhỏ khi cài đặt:** tên trường trong `reports` có dấu chấm (ví dụ `"4.0"` trong phân bố rating) được đổi dấu chấm thành dấu phẩy (`"4,0"`). Tên có `@` (`ndcg@10`) giữ nguyên, vì MongoDB cho phép ký tự này. Bản thiết kế ghi sẽ đổi thành `ndcg_10`, nhưng điều đó không cần thiết.
+
+**Khi cài đặt và chạy (25/10):**
+- **Kiểm tra múi giờ đổi sang giờ bắt đầu phiên.** Lần chạy local đầu tiên kiểm tra giờ của từng lượt nấu và thấy 42.799 lượt nằm ngoài khung `meal_slot`. Nguyên nhân không phải múi giờ: bước 04 chọn giờ **bắt đầu phiên** trong khung `[h0, h1)` (`04_simulate.py:409`), còn các sự kiện sau trong phiên có thể lấn sang giờ kế tiếp (sáng sang 9h, trưa sang 13h, tối sang 20h, khuya qua 0h). Vì vậy đổi sang kiểm tra giờ của sự kiện đầu tiên trong mỗi phiên. Trên cụm, cả 4.929.272 phiên đều nằm đúng khung. Nếu múi giờ lệch 7 tiếng thì gần như phiên nào cũng sai, nên phép kiểm tra này vẫn bắt được lỗi múi giờ.
+- `storageSize` ngay sau khi ghi bằng 0, vì WiredTiger chưa checkpoint. Do đó `collStats` được đọc ở cuối job, sau lệnh `fsync`.
+- Không xuất `dish_type` (nhãn gốc không đáng tin, đã có `dish_type_fixed`). Trong `metrics`, document con `metrics` bỏ 4 khóa lặp lại với document cha (`view, model, variant, group`).
+- `users` thực tế là 1.075 B/doc (53,8 MB), lớn hơn con số 858 B trong bản thiết kế, vì có thêm `group`, `test_cooks` và `truth`.

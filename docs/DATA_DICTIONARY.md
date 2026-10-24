@@ -162,3 +162,26 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 | `analysis/explain.txt` | Kế hoạch thực thi của truy vấn phễu và truy vấn lọc theo tháng (dùng cho báo cáo) |
 | `model_split_report.json`, `model_als_report.json`, `model_content_report.json`, `model_hybrid_report.json`, `model_fpgrowth_report.json`, `model_kmeans_report.json`, `model_control_report.json` | Report từng file của bước 06 |
 | `models_metrics.json` | Bảng tổng hợp độ đo xếp hạng (chính, khám phá, ngoài độ chính xác) và khoảng tin cậy 95% |
+| `export_report.json` | Bước 07: số doc, cách ghi, thời gian ghi, `collStats` (size, storageSize, index) từng collection, các kiểm tra (múi giờ, toàn vẹn tham chiếu, 5 user mẫu), `explain()` của 4 truy vấn tiêu biểu, nội dung `overview` |
+
+## MongoDB – database `vifood` (bước 07, D14)
+Ghi bằng `src/07_export_mongo.py`. Chạy `--local` thì ghi vào database `vifood_local`, cùng cấu trúc. Xem dữ liệu ở http://localhost:8090 (mongo-express, tài khoản trong `.env`).
+Mốc của dashboard là **01/09/2026**: `recs`, `users.history` và `users.profile` dùng lịch sử đến hết 08/2026.
+Ngày giờ lưu dạng chuỗi theo giờ Việt Nam (`"yyyy-MM-dd"`, `"yyyy-MM-dd HH:mm"`). `NaN` lưu thành `null`.
+
+| Collection | `_id` | Số doc | Trường chính | Index (ngoài `_id`) |
+|---|---|---|---|---|
+| `dishes` | `food_id` | 5.499 | Các cột của `foods` (bỏ `dish_type`, `cooking_time`, `source_stt`, `in_original_clean`, `dup_name_group`) và `dish_features`; `name_search` (tên chữ thường, không dấu, "đ" → "d"); `nutrition {calories, fat, fiber, sugar, protein}` (**số ngẫu nhiên, không hiển thị**); `stats {views, favorites, cooks, rates, avg_rating, cook_rank}` (**cả năm mô phỏng**, chỉ để mô tả); `companions [{rank, food_id, confidence, lift}]` (≤ 3 món, 656 món có) | text `text_ten_mon` (`name_search`, `dish_name`, `default_language: none`); `name_search`; `{is_vegetarian, stats.cook_rank}`; `{is_quick, stats.cook_rank}`; `{meal_types, stats.cook_rank}`; `{dish_category, stats.cook_rank}`; `stats.cook_rank` |
+| `recs` | `user_id` | 50.000 | `items [{rank, food_id, score, source, because_food_id}]`, đúng 50 món theo `rank`. `source` ∈ als, rep, pop, content_slot. Không có chuỗi lý do: API sinh câu lý do từ `source` và `because_food_id` (chỉ dùng với `content_slot`) | – |
+| `similar` | `food_id` | 5.499 | `items [{rank, food_id, sim, jaccard}]`, 50 món tương tự (cosine TF-IDF) | – |
+| `users` | `user_id` | 50.000 | `region, age_group, gender, device, signup_date`; `group` (lạnh/ít/ấm); `cluster_k3/k8/k11` (null với 3.870 user); `profile {n_events, n_cook, n_rate, avg_rating, share_chay, share_haisan, share_ngot, share_nhanh, share_cay, pref_slot}`; `history [{food_id, n_cook, last_cook}]` (≤ 10 món, xếp theo `n_cook` rồi `last_cook` giảm dần); `test_cooks [food_id]` (món nấu tháng 09/2026, chỉ 39.012 user có); `truth {persona_main, persona_sub}` (**chỉ để kiểm chứng, endpoint gợi ý không trả trường này**) | `cluster_k8`; `{region, age_group}`; `truth.persona_main` |
+| `popular` | `"chung"`, `"2 tháng cuối"`, `"vùng-tuổi\|<vùng>\|<tuổi>"` | 14 | `kind, region, age_group, items [{rank, food_id, cooks}]` (top 100 của `pop_test`) | – |
+| `clusters` | `"k<k>_c<cụm>"` | 22 | `k, cluster, n_users, features {18 đặc trưng trung bình}, persona_kiem_chung, persona_share` | `{k, cluster}` |
+| `meal_rules` | ObjectId | 677 | `antecedent [food_id], consequent [food_id], confidence, lift, support` | `antecedent`; `consequent` |
+| `ingredient_rules` | ObjectId | 2.999 | `variant, antecedent [str], consequent [str], confidence, lift, support` | `{variant, lift -1}` |
+| `ingredient_edges` | ObjectId | 416 | `variant, src, dst, confidence, lift, support` | `{variant, lift -1}` |
+| `analysis_<bảng>` | ObjectId | 5.783 (13 collection) | Mỗi dòng của 13 bảng bước 05 (trừ `dish_stats`) là 1 doc, cùng cột như trên HDFS. `top_ingredients` có đủ 4.538 dòng | `lift_by_group {group_type, group_value}`; `top_dish_by_slot {meal_slot, rk}`; `trend_month_category {month}`; `season_month {region, month}`; `top_ingredients {cook_rank}` |
+| `metrics` | ObjectId | 117 | `view, model, variant, group, metrics {n_users, p@5, r@5, ndcg@5, ap@5, p@10, …}` | `{view, variant, model}` |
+| `reports` | tên file (vd `model_als_report`) | 12 | `file, content` (nội dung JSON; dấu chấm trong tên trường đổi thành dấu phẩy, vd `"4,0"`) | – |
+| `overview` | `"overview"` | 1 | `n_dishes, n_users, n_events, events_by_type, event_months, n_recs_rows, hdfs {thư mục: bytes, bytes_with_replicas, files}, reference_date, exported_at, notes` | – |
+| `trending` | | 0 | Để dành cho Structured Streaming | `window_end -1` |
