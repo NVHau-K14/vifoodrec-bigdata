@@ -9,7 +9,7 @@ from ..dishes_common import MEALS, categories
 
 router = APIRouter(tags=["Tổng quan"])
 
-# (buoc, ten, report trong collection reports; None = khong co report rieng)
+# (buoc, ten, report trong collection reports; "perf" = collection perf (D17); None = khong co report rieng)
 PIPELINE = [
     ("01", "Nạp dữ liệu vào HDFS", None),
     ("02", "Làm sạch", "clean_report"),
@@ -19,7 +19,8 @@ PIPELINE = [
     ("06", "Mô hình và đánh giá", "model_"),
     ("07", "Xuất MongoDB", None),
     ("08", "API và dashboard", None),
-    ("09", "Structured Streaming", None),
+    ("09", "Đo hiệu năng Spark", "perf"),
+    ("10", "Structured Streaming", None),
 ]
 
 
@@ -44,7 +45,9 @@ def pipeline(ov):
     out = []
     for step, name, key in PIPELINE:
         seconds = None
-        if key == "model_":
+        if key == "perf":
+            status = "Xong" if get_db().perf.find_one({"_id": "summary"}, {"_id": 1}) else "Chưa"
+        elif key == "model_":
             found = [v for k, v in rep.items() if k.startswith("model_")]
             seconds = round(sum(v.get("total_seconds") or 0 for v in found), 1) if found else None
             status = "Xong" if found else "Chưa"

@@ -1,8 +1,9 @@
-// danh-gia.js - trang Danh gia mo hinh: E23 (xep hang, KTC), E24 (RMSE, ALS, LSH, FP-Growth, doi chung, thoi gian)
+// danh-gia.js - trang Danh gia mo hinh: E23 (xep hang, KTC), E24 (RMSE, ALS, LSH, FP-Growth, doi chung, thoi gian,
+// hieu nang Spark 1 / 2 worker x 10 / 50 / 100% - D17)
 
 import { getJSON, shared, qs, fmtFixed, fmtNum, fmtPct, fmtRatio, fmtSeconds, fmtInt } from './api.js';
-import { load, hbars, segmented, statusPill, esc } from './components.js';
-import { C, lines, groupedBars } from './charts.js';
+import { load, hbars, segmented, esc, showEmpty } from './components.js';
+import { C, lines, groupedBars, hGroupedBars } from './charts.js';
 
 const $ = (id) => document.getElementById(id);
 const METRICS = ['ndcg@10', 'p@10', 'r@10', 'ap@10', 'ndcg@5', 'p@5', 'r@5', 'ap@5'];
@@ -120,5 +121,58 @@ load($('timings'), async (el) => {
   const d = await details();
   el.dataset.state = 'ready';
   el.innerHTML = hbars(d.timings.map((t) => ({ label: t.step, value: t.seconds, text: fmtSeconds(t.seconds) }))) +
-    `<ul class="steps" style="margin-top:12px"><li><span>So sánh 1 và 2 worker, dữ liệu 10/50/100%</span><span class="sec"></span>${statusPill('Chưa')}</li></ul>`;
+    '<p class="source">Lần chạy thật, có dò tham số. So sánh 1 và 2 worker (chỉ fit một lần) ở thẻ Hiệu năng Spark.</p>';
 });
+
+// ---------- Hieu nang Spark (D17): 3 bieu do tu E24.perf ----------
+const CHAIN = ['04', '05', '06a', '06b', '06c', '06d', '06e', '06f'];
+const LEVEL = { s010: '10%', s050: '50%', s100: '100%' };
+const minutes = (s) => (s == null ? null : Math.round((s / 60) * 10) / 10);
+
+load($('perf'), async (el) => {
+  const p = (await details()).perf;
+  if (!p.available) {
+    showEmpty(el, 'Chưa có kết quả đo hiệu năng (collection perf trống). Chạy scripts/09_perf.py rồi 07 --only perf.');
+    return;
+  }
+  const at = (level, w, job) => p.rows.find((r) => r.level === level && r.workers === w && r.job === job);
+  const chain = (level, w) => p.chain_totals.find((c) => c.level === level && c.workers === w);
+  const jobs = CHAIN.filter((j) => at('s100', 1, j) || at('s100', 2, j));
+  const c1 = chain('s100', 1);
+  const c2 = chain('s100', 2);
+  const failed = p.rows.filter((r) => r.failed > 0)
+    .map((r) => `${r.job} ở ${LEVEL[r.level] || 'danh mục'}, ${r.workers} worker (${r.failed} lần lỗi)`);
+  const sp = [...p.speedup.filter((s) => s.level === 's100'), ...p.speedup.filter((s) => s.level === 'catalog')];
+  const sp10 = (job) => p.speedup.find((s) => s.level === 's010' && s.job === job)?.speedup ?? null;
+  el.dataset.state = 'ready';
+  el.innerHTML = `<p class="lead">${c1 && c2 ? `Ở 100% dữ liệu, chuỗi 04 → 06f mất ${fmtSeconds(c2.total_s)} với 2 worker và
+      ${fmtSeconds(c1.total_s)} với 1 worker (speedup ${fmtFixed(c1.total_s / c2.total_s, 2)}, lý tưởng là 2).` : ''}
+      1 worker giảm cả số core (4 → 2) lẫn bộ nhớ executor (4 → 2 GB). Mọi container chạy trên cùng một máy, nên shuffle giữa
+      2 worker đi qua mạng ảo của Docker.</p>
+    <div class="mini-grid">
+      <div><h3>Thời gian từng job ở 100%</h3><div class="chart" id="perf-jobs"></div>
+        <p class="source">Phút, theo Spark History Server. 05 và 06b: trung vị 3 lần; job khác: 1 lần.</p></div>
+      <div><h3>Tổng chuỗi 04 → 06f theo quy mô dữ liệu</h3><div class="chart" id="perf-scale"></div>
+        <p class="source">10% và 50% là dân số sinh mới (04 --scale), không phải tập con. 1 worker không đo ở 50%.</p></div>
+    </div>
+    <h3 class="sub-h">Speedup: 2 worker so với 1 worker</h3><div class="chart chart-tall" id="perf-speedup"></div>
+    <p class="source">T(1 worker) ÷ T(2 worker); vạch đứt là mức lý tưởng 2, dưới 1 là 1 worker nhanh hơn. Ở 10%, phần cố định
+      (khởi động, đọc danh mục, lập lịch task) chiếm phần lớn thời gian nên thêm worker không có lợi.</p>
+    <p class="source">06b, 06c, 06e, 06f, 06g chạy --fixed (fit một lần với tham số đã chọn). Dữ liệu hành vi mô phỏng.
+      ${failed.length ? `Lần lỗi: ${esc(failed.join('; '))}.` : ''}</p>`;
+  const stepOf = (j) => at('s100', 2, j)?.step || at('s100', 1, j)?.step || j;
+  groupedBars($('perf-jobs'), jobs, [
+    { name: '1 worker', data: jobs.map((j) => minutes(at('s100', 1, j)?.median_s)), color: C.slate },
+    { name: '2 worker', data: jobs.map((j) => minutes(at('s100', 2, j)?.median_s)), color: C.herb },
+  ], { yFmt: (v) => fmtNum(v, 1) }).setOption({ xAxis: { axisLabel: { interval: 0 } }, tooltip: { formatter: (ps) => `${esc(stepOf(ps[0].name))}<br>` +
+    ps.map((x) => `${x.marker}${x.seriesName}: ${x.value == null ? 'lỗi / không đo' : `${fmtNum(x.value, 1)} phút`}`).join('<br>') } });
+  const levels = ['s010', 's050', 's100'];
+  lines($('perf-scale'), levels.map((l) => LEVEL[l]), [
+    { name: '1 worker', data: levels.map((l) => minutes(chain(l, 1)?.complete ? chain(l, 1).total_s : null)), color: C.slate, connectNulls: true },
+    { name: '2 worker', data: levels.map((l) => minutes(chain(l, 2)?.complete ? chain(l, 2).total_s : null)), color: C.herb },
+  ], { yMin: 0, yFmt: (v) => `${fmtNum(v, 1)} ph` });
+  hGroupedBars($('perf-speedup'), sp.map((s) => (s.level === 'catalog' ? `${s.step} (danh mục)` : s.step)), [
+    { name: '100% / danh mục', data: sp.map((s) => s.speedup), color: C.herb },
+    { name: '10%', data: sp.map((s) => (s.level === 's100' ? sp10(s.job) : null)), color: C.herbMid },
+  ], { xFmt: (v) => fmtFixed(v, 2), markX: [2] });
+}, 280);

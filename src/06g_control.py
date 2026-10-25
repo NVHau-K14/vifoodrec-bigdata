@@ -14,8 +14,8 @@ Dau ra  : data/output/model_control_report.json
 
 Chay tren cum:  python src/06g_control.py
 Chay thu local: python src/06g_control.py --local
+Do hieu nang:   python src/06g_control.py --fixed  (D17: lambda, rank, regParam lay tu data/output/model_control_report.json)
 """
-import json
 import os
 import sys
 
@@ -28,6 +28,8 @@ import rec_common as R  # noqa: E402
 args, spark, P = R.setup("06g_control", __doc__)
 T = R.Timer()
 report = {"mode": "local" if args.local else "cluster"}
+if args.fixed:
+    report["fixed"] = True
 
 
 def rmse_mae(df, pred):
@@ -61,14 +63,18 @@ with T("control"):
     report["rows"] = {"all": r.count(), "train": tr.count(), "val": va.count(), "test": te.count(),
                       "users": r.select("user_id").distinct().count(), "foods": r.select("food_id").distinct().count()}
 
-    lam = min((5, 10, 25), key=lambda L: rmse_mae(bias(tr, L)(va), "pred_bias")["rmse"])
     grid = []
-    for rk in (8, 16, 32):
-        for reg in (0.1, 0.5, 1.0):
-            m = ALS(userCol="user_id", itemCol="food_id", ratingCol="rating", rank=rk, regParam=reg, maxIter=15,
-                    seed=R.SEED, coldStartStrategy="drop").fit(tr)
-            grid.append({"rank": rk, "regParam": reg, **rmse_mae(m.transform(va), "prediction")})
-    be = min(grid, key=lambda g: g["rmse"])
+    if args.fixed:          # D17: tham so da chon cua ban that, bo luoi
+        best = R.prod_report(P, "control")["best"]
+        lam, be = best["bias_lambda"], best["als"]
+    else:
+        lam = min((5, 10, 25), key=lambda L: rmse_mae(bias(tr, L)(va), "pred_bias")["rmse"])
+        for rk in (8, 16, 32):
+            for reg in (0.1, 0.5, 1.0):
+                m = ALS(userCol="user_id", itemCol="food_id", ratingCol="rating", rank=rk, regParam=reg, maxIter=15,
+                        seed=R.SEED, coldStartStrategy="drop").fit(tr)
+                grid.append({"rank": rk, "regParam": reg, **rmse_mae(m.transform(va), "prediction")})
+        be = min(grid, key=lambda g: g["rmse"])
     m = ALS(userCol="user_id", itemCol="food_id", ratingCol="rating", rank=be["rank"], regParam=be["regParam"],
             maxIter=15, seed=R.SEED, coldStartStrategy="nan").fit(tr)
     pr = (bias(tr, lam)(m.transform(te))
@@ -90,7 +96,7 @@ with T("control"):
     c = report["test_common_rows"]
     report["als_vs_mean_improvement_pct_goc"] = round(100 * (1 - c["als_explicit"]["rmse"] / c["trung_binh"]["rmse"]), 2)
     try:
-        sim = json.load(open(os.path.join(P.output_local, "model_als_report.json"), encoding="utf-8"))["test"]["rating"]["on_common_rows"]
+        sim = R.prod_report(P, "als")["test"]["rating"]["on_common_rows"]
         report["simulated_for_comparison"] = {
             "trung_binh": sim["trung_binh"], "bias": sim["bias"], "als_explicit": sim["als_explicit"],
             "als_vs_mean_improvement_pct": round(100 * (1 - sim["als_explicit"]["rmse"] / sim["trung_binh"]["rmse"]), 2)}

@@ -2,8 +2,9 @@
 rec_common.py - Ham dung chung cho buoc 06 (goi y mon an). Khong phai mot buoc cua pipeline.
 
   - VIEWS, group_expr()   : 2 "view" du lieu (D12) va nhom user lanh / it / am
-  - setup()               : tham so dong lenh chung, SparkSession, Paths, thu muc checkpoint
-  - Timer                 : do thoi gian tung phan (dua vao report, dung cho phan do hieu nang)
+  - setup()               : tham so dong lenh chung (--local, --quick, --fixed), SparkSession, Paths, checkpoint
+  - Timer                 : do thoi gian tung phan + job group Spark (common.Timer, dung cho phan do hieu nang)
+  - prod_report()         : report cua ban that (data/output) - --fixed lay tham so da chon tu day (D17)
   - save() / load()       : ghi / doc bang trung gian /data/results/models/<ten>_<view>
   - conf_expr()           : do tin cay implicit tu so lan xem / luu / nau
   - top_n()               : cat top-N theo diem trong tung user -> (user_id, food_id, rank, score)
@@ -16,17 +17,15 @@ View (D12):
   test: lich su = 2025-10..2026-08 (train + val) , danh gia thang 2026-09 -> ket qua cuoi
 """
 import argparse
-import contextlib
 import json
 import math
 import os
 import sys
-import time
 
 from pyspark.sql import Window, functions as F
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import Paths, get_spark  # noqa: E402
+from common import Paths, Timer, get_spark  # noqa: E402,F401
 
 VIEWS = {
     "val": {"hist_max": "2026-07", "eval": "2026-08", "recent": ["2026-06", "2026-07"]},
@@ -56,6 +55,8 @@ def setup(app, doc=None, extra=None):
     ap = argparse.ArgumentParser(description=doc)
     ap.add_argument("--local", action="store_true", help="chay Spark local tren data/hdfs_local (ban 10%%)")
     ap.add_argument("--quick", action="store_true", help="luoi tham so nho de chay thu")
+    ap.add_argument("--fixed", action="store_true",
+                    help="do hieu nang (D17): fit 1 lan voi tham so da chon trong data/output/model_*_report.json")
     if extra:
         extra(ap)
     args = ap.parse_args()
@@ -66,19 +67,10 @@ def setup(app, doc=None, extra=None):
     return args, spark, P
 
 
-class Timer:
-    def __init__(self):
-        self.t0, self.parts = time.time(), {}
-
-    @contextlib.contextmanager
-    def __call__(self, name):
-        t = time.time()
-        yield
-        self.parts[name] = round(time.time() - t, 1)
-        print(f"[06] {name}: {self.parts[name]}s", flush=True)
-
-    def total(self):
-        return round(time.time() - self.t0, 1)
+def prod_report(P, name):
+    """data/output/model_<name>_report.json cua ban that (khong phai thu muc report cua lan do hieu nang)."""
+    with open(os.path.join(P.output_prod, f"model_{name}_report.json"), encoding="utf-8") as fh:
+        return json.load(fh)
 
 
 def path(P, name, view=None):

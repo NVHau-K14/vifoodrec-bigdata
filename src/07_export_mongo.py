@@ -18,6 +18,7 @@ Collection (_id la khoa nghiep vu):
   reports           cac file data/output/*report*.json va models_metrics.json
   overview          so lieu trang Tong quan: so mon, user, su kien theo loai, dung luong HDFS
   trending          de trong, chi tao index (phan Structured Streaming ghi vao sau)
+  perf              ket qua do hieu nang (data/output/perf_report.json cua scripts/09_perf.py, D17), neu co file
 
 Cach ghi (D14):
   - recs, users: foreachPartition tren executor, pymongo insert_many theo lo 1.000 doc (ordered=False).
@@ -31,7 +32,7 @@ Cach ghi (D14):
 Dau vao : HDFS /data/curated/foods, /data/features/dish_features, /data/events/{users,users_truth,events},
           /data/results/analysis/*, /data/results/models/{recs_final,item_sim,companion,rules_*,ingredient_edges,
           user_clusters,cluster_profile,metrics,pop_test,user_features_test,user_groups_test,truth_test}
-          data/output/*report*.json, models_metrics.json
+          data/output/*report*.json, models_metrics.json, perf_report.json
 Dau ra  : MongoDB database MONGO_DB (mac dinh vifood; --local -> vifood_local)
           data/output/export_report.json (so doc, kiem tra, collStats, explain(), thoi gian ghi)
 
@@ -405,6 +406,15 @@ for fpath in rep_files:
     with open(fpath, encoding="utf-8") as fh:
         rep_docs.append({"_id": name, "file": os.path.basename(fpath), "content": safe_keys(json.load(fh))})
 export("reports", docs=rep_docs)
+
+# perf (D17): ket qua do hieu nang cua scripts/09_perf.py. 1 doc / (job, muc du lieu, so worker) + 1 doc tong hop
+perf_file = os.path.join(P.output_local, "perf_report.json")
+if want("perf") and os.path.exists(perf_file):
+    with open(perf_file, encoding="utf-8") as fh:
+        perf = json.load(fh)
+    perf_docs = [{"_id": f"{r['job']}|{r['level']}|w{r['workers']}", "kind": "job", **safe_keys(r)} for r in perf["rows"]]
+    perf_docs.append({"_id": "summary", "kind": "summary", **safe_keys({k: v for k, v in perf.items() if k != "rows"})})
+    export("perf", docs=perf_docs, indexes=[idx([("kind", ASCENDING), ("level", ASCENDING), ("workers", ASCENDING)])])
 
 if want("overview"):
     jvm = spark._jvm

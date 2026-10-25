@@ -1,0 +1,1346 @@
+[
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 0,
+  "views": 4098,
+  "cooks": 3751,
+  "events": 10349
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 1,
+  "views": 0,
+  "cooks": 3,
+  "events": 1786
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 2,
+  "views": 0,
+  "cooks": 0,
+  "events": 1471
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 3,
+  "views": 0,
+  "cooks": 0,
+  "events": 779
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 4,
+  "views": 0,
+  "cooks": 0,
+  "events": 148
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 5,
+  "views": 0,
+  "cooks": 0,
+  "events": 0
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 6,
+  "views": 62166,
+  "cooks": 2662,
+  "events": 69433
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 7,
+  "views": 67828,
+  "cooks": 6711,
+  "events": 79712
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 8,
+  "views": 67947,
+  "cooks": 6922,
+  "events": 80478
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 9,
+  "views": 4210,
+  "cooks": 4120,
+  "events": 10111
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 10,
+  "views": 100644,
+  "cooks": 5329,
+  "events": 115521
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 11,
+  "views": 108092,
+  "cooks": 13971,
+  "events": 131921
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 12,
+  "views": 107296,
+  "cooks": 14262,
+  "events": 131690
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 13,
+  "views": 7188,
+  "cooks": 8626,
+  "events": 19422
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 14,
+  "views": 0,
+  "cooks": 9,
+  "events": 4262
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 15,
+  "views": 0,
+  "cooks": 0,
+  "events": 3328
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 16,
+  "views": 132689,
+  "cooks": 6667,
+  "events": 151015
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 17,
+  "views": 141981,
+  "cooks": 17270,
+  "events": 170271
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 18,
+  "views": 141352,
+  "cooks": 17413,
+  "events": 171097
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 19,
+  "views": 142284,
+  "cooks": 17186,
+  "events": 173905
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 20,
+  "views": 9474,
+  "cooks": 10619,
+  "events": 26213
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 21,
+  "views": 45912,
+  "cooks": 994,
+  "events": 56014
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 22,
+  "views": 49233,
+  "cooks": 2486,
+  "events": 59484
+ },
+ {
+  "dow_idx": 1,
+  "dow_vn": "T2",
+  "hour": 23,
+  "views": 49095,
+  "cooks": 2460,
+  "events": 57847
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 0,
+  "views": 2999,
+  "cooks": 1508,
+  "events": 5709
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 1,
+  "views": 0,
+  "cooks": 0,
+  "events": 760
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 2,
+  "views": 0,
+  "cooks": 0,
+  "events": 609
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 3,
+  "views": 0,
+  "cooks": 0,
+  "events": 316
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 4,
+  "views": 0,
+  "cooks": 0,
+  "events": 49
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 5,
+  "views": 0,
+  "cooks": 0,
+  "events": 0
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 6,
+  "views": 58268,
+  "cooks": 2574,
+  "events": 65170
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 7,
+  "views": 63170,
+  "cooks": 6392,
+  "events": 74268
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 8,
+  "views": 62148,
+  "cooks": 6363,
+  "events": 73767
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 9,
+  "views": 4008,
+  "cooks": 3721,
+  "events": 9383
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 10,
+  "views": 94909,
+  "cooks": 5228,
+  "events": 109091
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 11,
+  "views": 100389,
+  "cooks": 13250,
+  "events": 122777
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 12,
+  "views": 101380,
+  "cooks": 13270,
+  "events": 124352
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 13,
+  "views": 6776,
+  "cooks": 8131,
+  "events": 18367
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 14,
+  "views": 0,
+  "cooks": 4,
+  "events": 3973
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 15,
+  "views": 0,
+  "cooks": 0,
+  "events": 3112
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 16,
+  "views": 123966,
+  "cooks": 6209,
+  "events": 141087
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 17,
+  "views": 132975,
+  "cooks": 16020,
+  "events": 159555
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 18,
+  "views": 133223,
+  "cooks": 16092,
+  "events": 160902
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 19,
+  "views": 132374,
+  "cooks": 16178,
+  "events": 162041
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 20,
+  "views": 8713,
+  "cooks": 9764,
+  "events": 24073
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 21,
+  "views": 42074,
+  "cooks": 943,
+  "events": 51397
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 22,
+  "views": 46323,
+  "cooks": 2308,
+  "events": 56229
+ },
+ {
+  "dow_idx": 2,
+  "dow_vn": "T3",
+  "hour": 23,
+  "views": 44829,
+  "cooks": 2279,
+  "events": 52758
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 0,
+  "views": 2832,
+  "cooks": 1372,
+  "events": 5201
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 1,
+  "views": 0,
+  "cooks": 1,
+  "events": 768
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 2,
+  "views": 0,
+  "cooks": 0,
+  "events": 552
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 3,
+  "views": 0,
+  "cooks": 0,
+  "events": 255
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 4,
+  "views": 0,
+  "cooks": 0,
+  "events": 63
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 5,
+  "views": 0,
+  "cooks": 0,
+  "events": 0
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 6,
+  "views": 60437,
+  "cooks": 2619,
+  "events": 67619
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 7,
+  "views": 63702,
+  "cooks": 6390,
+  "events": 74822
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 8,
+  "views": 64678,
+  "cooks": 6507,
+  "events": 76543
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 9,
+  "views": 4061,
+  "cooks": 3919,
+  "events": 9639
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 10,
+  "views": 95783,
+  "cooks": 5075,
+  "events": 109991
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 11,
+  "views": 102457,
+  "cooks": 13312,
+  "events": 125114
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 12,
+  "views": 101726,
+  "cooks": 13115,
+  "events": 124572
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 13,
+  "views": 6710,
+  "cooks": 8100,
+  "events": 18282
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 14,
+  "views": 0,
+  "cooks": 3,
+  "events": 3969
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 15,
+  "views": 0,
+  "cooks": 0,
+  "events": 3074
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 16,
+  "views": 126073,
+  "cooks": 6391,
+  "events": 143384
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 17,
+  "views": 134674,
+  "cooks": 16521,
+  "events": 162198
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 18,
+  "views": 134910,
+  "cooks": 16664,
+  "events": 163416
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 19,
+  "views": 134973,
+  "cooks": 16299,
+  "events": 164878
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 20,
+  "views": 8775,
+  "cooks": 9990,
+  "events": 24730
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 21,
+  "views": 43355,
+  "cooks": 966,
+  "events": 53079
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 22,
+  "views": 47149,
+  "cooks": 2297,
+  "events": 57010
+ },
+ {
+  "dow_idx": 3,
+  "dow_vn": "T4",
+  "hour": 23,
+  "views": 46305,
+  "cooks": 2359,
+  "events": 54572
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 0,
+  "views": 2937,
+  "cooks": 1357,
+  "events": 5395
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 1,
+  "views": 0,
+  "cooks": 0,
+  "events": 685
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 2,
+  "views": 0,
+  "cooks": 0,
+  "events": 523
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 3,
+  "views": 0,
+  "cooks": 0,
+  "events": 277
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 4,
+  "views": 0,
+  "cooks": 0,
+  "events": 49
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 5,
+  "views": 0,
+  "cooks": 0,
+  "events": 0
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 6,
+  "views": 62007,
+  "cooks": 2724,
+  "events": 69340
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 7,
+  "views": 66284,
+  "cooks": 6724,
+  "events": 77952
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 8,
+  "views": 66164,
+  "cooks": 6703,
+  "events": 78390
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 9,
+  "views": 4159,
+  "cooks": 3959,
+  "events": 9791
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 10,
+  "views": 98522,
+  "cooks": 5298,
+  "events": 113229
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 11,
+  "views": 104913,
+  "cooks": 13609,
+  "events": 128000
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 12,
+  "views": 105350,
+  "cooks": 13706,
+  "events": 128976
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 13,
+  "views": 6885,
+  "cooks": 8377,
+  "events": 18797
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 14,
+  "views": 0,
+  "cooks": 4,
+  "events": 4114
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 15,
+  "views": 0,
+  "cooks": 0,
+  "events": 3133
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 16,
+  "views": 130121,
+  "cooks": 6698,
+  "events": 148497
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 17,
+  "views": 139007,
+  "cooks": 16952,
+  "events": 166867
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 18,
+  "views": 137919,
+  "cooks": 16863,
+  "events": 166957
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 19,
+  "views": 139965,
+  "cooks": 16788,
+  "events": 170954
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 20,
+  "views": 9283,
+  "cooks": 10404,
+  "events": 25775
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 21,
+  "views": 45215,
+  "cooks": 1021,
+  "events": 55030
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 22,
+  "views": 48632,
+  "cooks": 2486,
+  "events": 58764
+ },
+ {
+  "dow_idx": 4,
+  "dow_vn": "T5",
+  "hour": 23,
+  "views": 47763,
+  "cooks": 2401,
+  "events": 56374
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 0,
+  "views": 3118,
+  "cooks": 1437,
+  "events": 5734
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 1,
+  "views": 0,
+  "cooks": 0,
+  "events": 768
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 2,
+  "views": 0,
+  "cooks": 0,
+  "events": 574
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 3,
+  "views": 0,
+  "cooks": 0,
+  "events": 296
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 4,
+  "views": 0,
+  "cooks": 0,
+  "events": 62
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 5,
+  "views": 0,
+  "cooks": 0,
+  "events": 0
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 6,
+  "views": 65585,
+  "cooks": 2886,
+  "events": 73354
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 7,
+  "views": 69785,
+  "cooks": 7112,
+  "events": 82119
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 8,
+  "views": 68870,
+  "cooks": 7159,
+  "events": 81934
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 9,
+  "views": 4240,
+  "cooks": 4085,
+  "events": 10165
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 10,
+  "views": 104559,
+  "cooks": 5751,
+  "events": 120363
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 11,
+  "views": 111393,
+  "cooks": 14523,
+  "events": 136086
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 12,
+  "views": 110712,
+  "cooks": 14463,
+  "events": 135740
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 13,
+  "views": 7458,
+  "cooks": 8905,
+  "events": 20150
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 14,
+  "views": 0,
+  "cooks": 6,
+  "events": 4309
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 15,
+  "views": 0,
+  "cooks": 0,
+  "events": 3464
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 16,
+  "views": 136951,
+  "cooks": 7007,
+  "events": 156181
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 17,
+  "views": 146893,
+  "cooks": 17710,
+  "events": 176140
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 18,
+  "views": 145873,
+  "cooks": 18095,
+  "events": 176636
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 19,
+  "views": 145585,
+  "cooks": 17592,
+  "events": 177845
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 20,
+  "views": 9518,
+  "cooks": 10960,
+  "events": 26767
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 21,
+  "views": 47575,
+  "cooks": 1033,
+  "events": 58055
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 22,
+  "views": 50510,
+  "cooks": 2616,
+  "events": 61345
+ },
+ {
+  "dow_idx": 5,
+  "dow_vn": "T6",
+  "hour": 23,
+  "views": 50839,
+  "cooks": 2612,
+  "events": 59819
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 0,
+  "views": 3169,
+  "cooks": 1521,
+  "events": 5877
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 1,
+  "views": 0,
+  "cooks": 2,
+  "events": 785
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 2,
+  "views": 0,
+  "cooks": 0,
+  "events": 621
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 3,
+  "views": 0,
+  "cooks": 0,
+  "events": 307
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 4,
+  "views": 0,
+  "cooks": 0,
+  "events": 54
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 5,
+  "views": 0,
+  "cooks": 0,
+  "events": 0
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 6,
+  "views": 82060,
+  "cooks": 4982,
+  "events": 92835
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 7,
+  "views": 88705,
+  "cooks": 12280,
+  "events": 107408
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 8,
+  "views": 87933,
+  "cooks": 12408,
+  "events": 107820
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 9,
+  "views": 5900,
+  "cooks": 7379,
+  "events": 16353
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 10,
+  "views": 131228,
+  "cooks": 9551,
+  "events": 153794
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 11,
+  "views": 144190,
+  "cooks": 25126,
+  "events": 182768
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 12,
+  "views": 142810,
+  "cooks": 25555,
+  "events": 182395
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 13,
+  "views": 9798,
+  "cooks": 15594,
+  "events": 31725
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 14,
+  "views": 0,
+  "cooks": 8,
+  "events": 7527
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 15,
+  "views": 0,
+  "cooks": 0,
+  "events": 6005
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 16,
+  "views": 174084,
+  "cooks": 12223,
+  "events": 201644
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 17,
+  "views": 187791,
+  "cooks": 31179,
+  "events": 233271
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 18,
+  "views": 187513,
+  "cooks": 31202,
+  "events": 235101
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 19,
+  "views": 186569,
+  "cooks": 31140,
+  "events": 237718
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 20,
+  "views": 12650,
+  "cooks": 18745,
+  "events": 42024
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 21,
+  "views": 59901,
+  "cooks": 2359,
+  "events": 77015
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 22,
+  "views": 63515,
+  "cooks": 5814,
+  "events": 81303
+ },
+ {
+  "dow_idx": 6,
+  "dow_vn": "T7",
+  "hour": 23,
+  "views": 64881,
+  "cooks": 5860,
+  "events": 80092
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 0,
+  "views": 4160,
+  "cooks": 3495,
+  "events": 9915
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 1,
+  "views": 0,
+  "cooks": 0,
+  "events": 1887
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 2,
+  "views": 0,
+  "cooks": 0,
+  "events": 1375
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 3,
+  "views": 0,
+  "cooks": 0,
+  "events": 766
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 4,
+  "views": 0,
+  "cooks": 0,
+  "events": 135
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 5,
+  "views": 0,
+  "cooks": 0,
+  "events": 0
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 6,
+  "views": 88333,
+  "cooks": 5326,
+  "events": 99814
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 7,
+  "views": 95563,
+  "cooks": 13327,
+  "events": 115867
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 8,
+  "views": 95353,
+  "cooks": 13464,
+  "events": 116800
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 9,
+  "views": 6002,
+  "cooks": 7971,
+  "events": 17261
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 10,
+  "views": 143939,
+  "cooks": 10459,
+  "events": 168772
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 11,
+  "views": 153853,
+  "cooks": 26976,
+  "events": 195010
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 12,
+  "views": 153296,
+  "cooks": 27096,
+  "events": 195578
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 13,
+  "views": 10222,
+  "cooks": 16587,
+  "events": 33353
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 14,
+  "views": 0,
+  "cooks": 7,
+  "events": 8384
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 15,
+  "views": 0,
+  "cooks": 0,
+  "events": 6380
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 16,
+  "views": 188928,
+  "cooks": 13115,
+  "events": 218981
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 17,
+  "views": 200829,
+  "cooks": 33933,
+  "events": 249952
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 18,
+  "views": 202260,
+  "cooks": 33522,
+  "events": 253481
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 19,
+  "views": 202040,
+  "cooks": 33843,
+  "events": 257428
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 20,
+  "views": 13210,
+  "cooks": 20489,
+  "events": 45225
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 21,
+  "views": 64758,
+  "cooks": 2519,
+  "events": 83054
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 22,
+  "views": 68929,
+  "cooks": 6277,
+  "events": 88613
+ },
+ {
+  "dow_idx": 7,
+  "dow_vn": "CN",
+  "hour": 23,
+  "views": 69341,
+  "cooks": 6251,
+  "events": 85647
+ }
+]

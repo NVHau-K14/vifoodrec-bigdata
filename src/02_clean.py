@@ -24,7 +24,7 @@ import sys
 from pyspark.sql import Window, functions as F
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import (Paths, clean_text, export_single, fix_word_case, get_spark,  # noqa: E402
+from common import (Paths, Timer, clean_text, export_single, fix_word_case, get_spark,  # noqa: E402
                     name_key, nfc_udf, parse_ingredients_udf, read_csv)
 
 NEW_ID_START = 4001          # mon moi (khong co trong foods.csv goc) danh so tu day
@@ -37,6 +37,8 @@ args = ap.parse_args()
 spark = get_spark("02_clean", local=args.local)
 P = Paths(local=args.local)
 report = {}
+T = Timer("02")      # thoi gian tung phan + job group Spark (D17)
+T.mark("read_raw")
 
 # ---------------------------------------------------------------------------
 # 1. Doc va gop 2 nguon raw ve chung mot luoc do
@@ -72,6 +74,7 @@ def unify(df, source):
 
 raw = unify(ck, "cooky").unionByName(unify(mn, "mnmn"))
 
+T.mark("clean_dedup_ids")       # buoc 2-5 phan lon la phep bien doi luoi, chay khi ghi
 # ---------------------------------------------------------------------------
 # 2. Lam sach tung cot
 # ---------------------------------------------------------------------------
@@ -186,15 +189,18 @@ ratings = (ratings.withColumn("rating", F.round(F.col("rating") * 2) / 2).drop("
 # ---------------------------------------------------------------------------
 # 6. Ghi ket qua
 # ---------------------------------------------------------------------------
+T.mark("write_hdfs")
 foods.write.mode("overwrite").parquet(f"{P.curated}/foods")
 ratings.write.mode("overwrite").parquet(f"{P.curated}/ratings_original")
 
+T.mark("export_local")
 os.makedirs(P.processed_local, exist_ok=True)
 os.makedirs(P.output_local, exist_ok=True)
 for fmt in ("parquet", "csv"):
     export_single(foods, os.path.join(P.processed_local, f"foods_v2.{fmt}"), fmt)
     export_single(ratings, os.path.join(P.processed_local, f"ratings_v2.{fmt}"), fmt)
 
+T.mark("report")
 report.update({
     "foods_v2_rows": foods.count(),
     "foods_from_original_clean": foods.filter("in_original_clean").count(),
@@ -205,6 +211,9 @@ report.update({
     "no_image": foods.filter(F.col("image_link").isNull()).count(),
     "ratings_v2_rows": ratings.count(),
 })
+T.mark()
+report["timings_s"] = T.parts
+report["total_seconds"] = T.total()
 with open(os.path.join(P.output_local, "clean_report.json"), "w", encoding="utf-8") as fh:
     json.dump(report, fh, ensure_ascii=False, indent=2)
 print(json.dumps(report, ensure_ascii=False, indent=2))

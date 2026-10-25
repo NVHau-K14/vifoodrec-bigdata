@@ -1,0 +1,88 @@
+{
+  "mode": "cluster",
+  "ingredients": {
+    "giữ gia vị": {
+      "transactions": 5499,
+      "items_per_tx_avg": 9.95,
+      "freq_itemsets": 1726,
+      "rules": 2963,
+      "edges_1to1": 390,
+      "top10_by_lift": [
+        "bột mì + trứng gà + đường trắng -> bột nở (conf 0.32, lift 13.10, sup 0.012)",
+        "xốt mayonnaise + dầu ăn -> gia vị nêm sẵn (conf 0.38, lift 11.12, sup 0.012)",
+        "bột nở + trứng gà + đường trắng -> bột mì (conf 0.93, lift 9.19, sup 0.012)",
+        "gia vị nêm sẵn + dầu ăn -> xốt mayonnaise (conf 0.41, lift 9.10, sup 0.012)",
+        "men nở + muối -> bột mì (conf 0.92, lift 9.08, sup 0.010)",
+        "men nở + đường trắng -> bột mì (conf 0.91, lift 8.98, sup 0.012)",
+        "bột nở + trứng gà -> bột mì (conf 0.90, lift 8.96, sup 0.014)",
+        "men nở -> bột mì (conf 0.88, lift 8.69, sup 0.016)",
+        "bột mì + trứng gà + đường trắng -> bơ (conf 0.40, lift 8.58, sup 0.015)",
+        "bơ + trứng gà + đường trắng -> bột mì (conf 0.86, lift 8.54, sup 0.015)"
+      ]
+    },
+    "bỏ gia vị": {
+      "transactions": 5498,
+      "items_per_tx_avg": 6.36,
+      "freq_itemsets": 189,
+      "rules": 36,
+      "edges_1to1": 26,
+      "top10_by_lift": [
+        "men nở -> bột mì (conf 0.88, lift 8.69, sup 0.016)",
+        "bơ + trứng gà -> bột mì (conf 0.83, lift 8.23, sup 0.019)",
+        "lá dứa -> nước cốt dừa (conf 0.43, lift 7.60, sup 0.010)",
+        "sữa tươi + trứng gà -> bột mì (conf 0.71, lift 7.05, sup 0.014)",
+        "bột mì + trứng gà -> bơ (conf 0.32, lift 6.86, sup 0.019)",
+        "đường bột -> bột mì (conf 0.63, lift 6.20, sup 0.011)",
+        "bơ + bột mì -> trứng gà (conf 0.80, lift 5.78, sup 0.019)",
+        "sữa tươi + bột mì -> trứng gà (conf 0.75, lift 5.39, sup 0.014)",
+        "gừng + ớt -> tỏi (conf 0.58, lift 5.05, sup 0.011)",
+        "bơ -> bột mì (conf 0.50, lift 4.97, sup 0.023)"
+      ]
+    }
+  },
+  "meal": {
+    "transactions": 28123,
+    "items_per_tx_avg": 2.35,
+    "freq_itemsets": 2285,
+    "rules": 711,
+    "dishes_with_companion": 683,
+    "top10_by_lift": [
+      "Mắm Tép Miền Tây -> Canh Cua Rau Đay (conf 1.00, lift 148.8)",
+      "Sườn Non Ram Mặn -> Canh gà quay tam sắc (conf 1.00, lift 115.7)",
+      "Ếch xào bông hẹ sa tế -> Canh Bắp Cải Thịt Viên (conf 0.57, lift 114.8)",
+      "Lươn kho củ nén -> Canh Bắp Cải Thịt Viên (conf 0.56, lift 113.0)",
+      "Thịt quay kho dưa cải -> Canh cải xoăn (conf 0.88, lift 111.3)",
+      "Canh Bắp Cải Thịt Viên -> Chả Ram Chiên Giòn (conf 0.10, lift 104.2)",
+      "Chả Ram Chiên Giòn -> Canh Bắp Cải Thịt Viên (conf 0.52, lift 104.2)",
+      "Nghêu Xào Sả Ớt -> Canh sườn nha đam (conf 0.86, lift 98.4)",
+      "Sốt Chấm Bánh Tráng -> Canh cải xoăn (conf 0.75, lift 95.4)",
+      "Tôm Chiên Xù -> Canh Tôm Củ Cải (conf 0.88, lift 94.6)"
+    ]
+  },
+  "meal_eval_hit_rate@3": {
+    "test_sessions": 2892,
+    "queries (phiên, món)": 6756,
+    "moc_3_canh_pho_bien": 0.0321,
+    "moc_theo_nhom_mon": 0.0752,
+    "luat_fpgrowth": 0.2139,
+    "luat_fpgrowth_thieu_thi_theo_nhom_mon": 0.2355,
+    "luat_do_phu": 0.643,
+    "luat_tren_phan_co_luat": 0.3326
+  },
+  "params": {
+    "ingredients": {
+      "minSupport": 0.01,
+      "minConfidence": 0.3
+    },
+    "meal": {
+      "minSupport": 0.0002,
+      "minConfidence": 0.1
+    }
+  },
+  "timings_s": {
+    "ingredients": 15.7,
+    "meal_rules": 7.1,
+    "meal_eval": 4.1
+  },
+  "total_seconds": 29.5
+}

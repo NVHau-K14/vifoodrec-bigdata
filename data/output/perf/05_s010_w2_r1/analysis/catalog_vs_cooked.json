@@ -1,0 +1,312 @@
+[
+ {
+  "attribute": "dish_category",
+  "value": "món chính",
+  "n_dishes": 2432,
+  "cooks": 104458,
+  "catalog_pct": 44.23,
+  "cook_pct": 44.05,
+  "cooks_per_dish": 43.0,
+  "lift": 0.996
+ },
+ {
+  "attribute": "dish_category",
+  "value": "canh/súp",
+  "n_dishes": 341,
+  "cooks": 48984,
+  "catalog_pct": 6.2,
+  "cook_pct": 20.66,
+  "cooks_per_dish": 143.6,
+  "lift": 3.332
+ },
+ {
+  "attribute": "dish_category",
+  "value": "gỏi/salad",
+  "n_dishes": 300,
+  "cooks": 20762,
+  "catalog_pct": 5.46,
+  "cook_pct": 8.76,
+  "cooks_per_dish": 69.2,
+  "lift": 1.604
+ },
+ {
+  "attribute": "dish_category",
+  "value": "bánh",
+  "n_dishes": 979,
+  "cooks": 19600,
+  "catalog_pct": 17.8,
+  "cook_pct": 8.27,
+  "cooks_per_dish": 20.0,
+  "lift": 0.465
+ },
+ {
+  "attribute": "dish_category",
+  "value": "bún/phở/mì/miến",
+  "n_dishes": 367,
+  "cooks": 13144,
+  "catalog_pct": 6.67,
+  "cook_pct": 5.54,
+  "cooks_per_dish": 35.8,
+  "lift": 0.831
+ },
+ {
+  "attribute": "dish_category",
+  "value": "cơm/xôi/cháo",
+  "n_dishes": 250,
+  "cooks": 8128,
+  "catalog_pct": 4.55,
+  "cook_pct": 3.43,
+  "cooks_per_dish": 32.5,
+  "lift": 0.754
+ },
+ {
+  "attribute": "dish_category",
+  "value": "chè/tráng miệng",
+  "n_dishes": 398,
+  "cooks": 7877,
+  "catalog_pct": 7.24,
+  "cook_pct": 3.32,
+  "cooks_per_dish": 19.8,
+  "lift": 0.459
+ },
+ {
+  "attribute": "dish_category",
+  "value": "đồ uống",
+  "n_dishes": 235,
+  "cooks": 6347,
+  "catalog_pct": 4.27,
+  "cook_pct": 2.68,
+  "cooks_per_dish": 27.0,
+  "lift": 0.628
+ },
+ {
+  "attribute": "dish_category",
+  "value": "lẩu",
+  "n_dishes": 117,
+  "cooks": 4930,
+  "catalog_pct": 2.13,
+  "cook_pct": 2.08,
+  "cooks_per_dish": 42.1,
+  "lift": 0.977
+ },
+ {
+  "attribute": "dish_category",
+  "value": "ăn vặt",
+  "n_dishes": 80,
+  "cooks": 2896,
+  "catalog_pct": 1.45,
+  "cook_pct": 1.22,
+  "cooks_per_dish": 36.2,
+  "lift": 0.841
+ },
+ {
+  "attribute": "main_method",
+  "value": "hầm/nấu",
+  "n_dishes": 1121,
+  "cooks": 69425,
+  "catalog_pct": 20.39,
+  "cook_pct": 29.28,
+  "cooks_per_dish": 61.9,
+  "lift": 1.436
+ },
+ {
+  "attribute": "main_method",
+  "value": "xào",
+  "n_dishes": 672,
+  "cooks": 32079,
+  "catalog_pct": 12.22,
+  "cook_pct": 13.53,
+  "cooks_per_dish": 47.7,
+  "lift": 1.107
+ },
+ {
+  "attribute": "main_method",
+  "value": "nướng",
+  "n_dishes": 699,
+  "cooks": 27156,
+  "catalog_pct": 12.71,
+  "cook_pct": 11.45,
+  "cooks_per_dish": 38.8,
+  "lift": 0.901
+ },
+ {
+  "attribute": "main_method",
+  "value": "kho/rim",
+  "n_dishes": 433,
+  "cooks": 24399,
+  "catalog_pct": 7.87,
+  "cook_pct": 10.29,
+  "cooks_per_dish": 56.3,
+  "lift": 1.307
+ },
+ {
+  "attribute": "main_method",
+  "value": "trộn/gỏi",
+  "n_dishes": 365,
+  "cooks": 23168,
+  "catalog_pct": 6.64,
+  "cook_pct": 9.77,
+  "cooks_per_dish": 63.5,
+  "lift": 1.471
+ },
+ {
+  "attribute": "main_method",
+  "value": "chiên",
+  "n_dishes": 1076,
+  "cooks": 23144,
+  "catalog_pct": 19.57,
+  "cook_pct": 9.76,
+  "cooks_per_dish": 21.5,
+  "lift": 0.499
+ },
+ {
+  "attribute": "main_method",
+  "value": "hấp",
+  "n_dishes": 431,
+  "cooks": 14129,
+  "catalog_pct": 7.84,
+  "cook_pct": 5.96,
+  "cooks_per_dish": 32.8,
+  "lift": 0.76
+ },
+ {
+  "attribute": "main_method",
+  "value": "luộc",
+  "n_dishes": 225,
+  "cooks": 10250,
+  "catalog_pct": 4.09,
+  "cook_pct": 4.32,
+  "cooks_per_dish": 45.6,
+  "lift": 1.056
+ },
+ {
+  "attribute": "main_method",
+  "value": "khác",
+  "n_dishes": 252,
+  "cooks": 7211,
+  "catalog_pct": 4.58,
+  "cook_pct": 3.04,
+  "cooks_per_dish": 28.6,
+  "lift": 0.664
+ },
+ {
+  "attribute": "main_method",
+  "value": "pha/xay",
+  "n_dishes": 225,
+  "cooks": 6165,
+  "catalog_pct": 4.09,
+  "cook_pct": 2.6,
+  "cooks_per_dish": 27.4,
+  "lift": 0.636
+ },
+ {
+  "attribute": "main_protein",
+  "value": "đậu hũ/chay",
+  "n_dishes": 539,
+  "cooks": 47503,
+  "catalog_pct": 9.8,
+  "cook_pct": 20.03,
+  "cooks_per_dish": 88.1,
+  "lift": 2.044
+ },
+ {
+  "attribute": "main_protein",
+  "value": "hải sản",
+  "n_dishes": 826,
+  "cooks": 44984,
+  "catalog_pct": 15.02,
+  "cook_pct": 18.97,
+  "cooks_per_dish": 54.5,
+  "lift": 1.263
+ },
+ {
+  "attribute": "main_protein",
+  "value": "không",
+  "n_dishes": 1471,
+  "cooks": 31261,
+  "catalog_pct": 26.75,
+  "cook_pct": 13.18,
+  "cooks_per_dish": 21.3,
+  "lift": 0.493
+ },
+ {
+  "attribute": "main_protein",
+  "value": "heo",
+  "n_dishes": 878,
+  "cooks": 30688,
+  "catalog_pct": 15.97,
+  "cook_pct": 12.94,
+  "cooks_per_dish": 35.0,
+  "lift": 0.81
+ },
+ {
+  "attribute": "main_protein",
+  "value": "cá",
+  "n_dishes": 475,
+  "cooks": 25747,
+  "catalog_pct": 8.64,
+  "cook_pct": 10.86,
+  "cooks_per_dish": 54.2,
+  "lift": 1.257
+ },
+ {
+  "attribute": "main_protein",
+  "value": "rau củ",
+  "n_dishes": 252,
+  "cooks": 25425,
+  "catalog_pct": 4.58,
+  "cook_pct": 10.72,
+  "cooks_per_dish": 100.9,
+  "lift": 2.341
+ },
+ {
+  "attribute": "main_protein",
+  "value": "gà",
+  "n_dishes": 428,
+  "cooks": 13508,
+  "catalog_pct": 7.78,
+  "cook_pct": 5.7,
+  "cooks_per_dish": 31.6,
+  "lift": 0.733
+ },
+ {
+  "attribute": "main_protein",
+  "value": "bò",
+  "n_dishes": 283,
+  "cooks": 8618,
+  "catalog_pct": 5.15,
+  "cook_pct": 3.63,
+  "cooks_per_dish": 30.5,
+  "lift": 0.705
+ },
+ {
+  "attribute": "main_protein",
+  "value": "trứng",
+  "n_dishes": 226,
+  "cooks": 6895,
+  "catalog_pct": 4.11,
+  "cook_pct": 2.91,
+  "cooks_per_dish": 30.5,
+  "lift": 0.708
+ },
+ {
+  "attribute": "main_protein",
+  "value": "vịt",
+  "n_dishes": 64,
+  "cooks": 1409,
+  "catalog_pct": 1.16,
+  "cook_pct": 0.59,
+  "cooks_per_dish": 22.0,
+  "lift": 0.509
+ },
+ {
+  "attribute": "main_protein",
+  "value": "thịt khác",
+  "n_dishes": 57,
+  "cooks": 1088,
+  "catalog_pct": 1.04,
+  "cook_pct": 0.46,
+  "cooks_per_dish": 19.1,
+  "lift": 0.442
+ }
+]

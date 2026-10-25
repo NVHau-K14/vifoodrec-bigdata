@@ -35,6 +35,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 | 06 Mô hình | `src/06a_split.py` … `06g_control.py`, dùng chung `src/rec_common.py` | `/data/events`, `dish_features`, `foods`, `ratings_original` | `/data/results/models/*`, `/data/models/*` | `model_*_report.json`, `models_metrics.json` |
 | 07 Xuất MongoDB | `src/07_export_mongo.py` | kết quả 02–06 trên HDFS, `data/output/*report*.json` | MongoDB `vifood` (26 collection) | `export_report.json` |
 | 08 API + dashboard | `api/main.py` + `api/routers/*`, `web/` (skill `vifood-dashboard`), `scripts/08_fetch_vendor.sh`, `api/bench_latency.py` | MongoDB | – | pytest `api/tests/`, `api_report.json` |
+| 09 Đo hiệu năng | `scripts/09_perf.py` (chạy trên máy, D17) | `/data/{curated,features}` (chép sang gốc đo) | `/perf/{s010,s050,s100,catalog}` | `perf_runs.jsonl`, `perf_report.json`, `perf/<lần chạy>/` |
 
 Bản sao nhỏ để xem trên máy nằm ở `data/processed/`. Report và mẫu kiểm tra nằm ở `data/output/`.
 
@@ -48,6 +49,8 @@ docker exec namenode bash /home/jovyan/work/scripts/01_ingest.sh
 docker exec -w /home/jovyan/work -e PYTHONPATH=/usr/local/spark/python/lib/py4j-0.10.9.9-src.zip:/usr/local/spark/python jupyter python src/04_simulate.py --scale 0.01
 ```
 Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bước sinh dữ liệu và các bước nặng có thêm `--scale`.
+Đo hiệu năng (D17): `python scripts/09_perf.py --plan` để xem kế hoạch, `python scripts/09_perf.py` để chạy (dừng giữa chừng thì chạy lại, lần đã có được bỏ qua), rồi `07 --only perf`.
+Biến `VIFOOD_DATA_ROOT`, `VIFOOD_OUTPUT_DIR`, `VIFOOD_RUN_TAG` chỉ dùng cho phép đo; không đặt thì mọi script chạy như cũ. `--fixed` (06b, 06c, 06e, 06f, 06g) fit một lần với tham số đã chọn.
 
 ```bash
 # Bước 08: dựng và chạy service api (trong thư mục docker/)
@@ -104,3 +107,5 @@ docker exec -w /home/jovyan/work api python -m api.bench_latency
 - `07 --only ...` gộp vào `export_report.json` cũ khi cùng database. Bản local và bản cụm ghi chung file này: chạy `--local` thì sao lưu report của cụm trước rồi chép lại.
 - Chrome headless `--window-size=390,...` vẫn dựng trang rộng hơn rồi cắt ảnh (bề rộng cửa sổ tối thiểu). Chụp ảnh mobile phải giả lập bằng DevTools Protocol (`Emulation.setDeviceMetricsOverride`, `mobile: true`), như lần chụp `docs/images/08_*`.
 - Lọc log bằng `grep "^..."` có thể trượt, vì dòng in ra bị dính sau thanh tiến trình của Spark (`\r`). Dùng `grep -ao "\[06\][^[]*"`.
+- Sửa file bằng Python trên máy (Windows) với `open(p, 'w')` sẽ đổi xuống dòng thành CRLF. Ghi bằng `newline=''` (đọc cũng `newline=''`), hoặc chạy `sed -i 's/\r$//' <file>` sau khi sửa.
+- History Server có lúc không coi ứng dụng là đã kết thúc dù job xong (event log còn file `appstatus_*`, gặp ở 03 với 1 worker). `scripts/09_perf.py --summarize` tra lại theo tên và lấy thời lượng từ job cuối (D17).

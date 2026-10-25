@@ -3,16 +3,20 @@ common.py - Ham dung chung cho toan bo pipeline ViFood Big Data.
 
   - get_spark()      : tao SparkSession (cum Docker hoac local de chay thu)
   - Paths            : duong dan HDFS / local cho tung tang du lieu
+  - Timer            : do thoi gian tung giai doan (timings_s) + gan job group Spark cung ten
   - clean_text()     : lam sach van ban tieng Viet bang ham Spark (chay phan tan)
   - parse_ingredients: tach chuoi nguyen lieu thanh danh sach ten nguyen lieu
   - export_single()  : ghi 1 bang nho ra 1 file duy nhat de mo xem tren may
 """
+import contextlib
 import glob
 import os
 import re
 import shutil
+import time
 import unicodedata
 
+from pyspark import SparkContext
 from pyspark.sql import SparkSession, functions as F, types as T
 
 # ---------------------------------------------------------------------------
@@ -23,11 +27,15 @@ HDFS_URL = os.getenv("HDFS_URL", "hdfs://namenode:8020")
 SPARK_MASTER = os.getenv("SPARK_MASTER", "spark://spark-master:7077")
 DRIVER_HOST = os.getenv("SPARK_DRIVER_HOST", "jupyter")
 EVENT_LOG_DIR = os.path.join(PROJECT_DIR, "logs", "spark-events")
+# Do hieu nang (D17, scripts/09_perf.py). Khong dat bien nao thi moi thu chay nhu cu.
+DATA_ROOT = os.getenv("VIFOOD_DATA_ROOT", "/data")      # goc HDFS cua cac tang du lieu (vd /perf/s100)
+OUTPUT_DIR = os.getenv("VIFOOD_OUTPUT_DIR")             # thu muc report (tuong doi thi tinh tu PROJECT_DIR)
+RUN_TAG = os.getenv("VIFOOD_RUN_TAG")                   # gan vao ten ung dung, vd 06b_als|s100|w1|r2
 
 
 def get_spark(app_name: str, local: bool = False) -> SparkSession:
     """local=True: chay Spark tren 1 may (de thu nhanh). Mac dinh: nop job len cum Docker."""
-    b = SparkSession.builder.appName(app_name)
+    b = SparkSession.builder.appName(f"{app_name}|{RUN_TAG}" if RUN_TAG else app_name)
     if local:
         # local: driver kiem luon executor -> can nhieu bo nho hon (container jupyter gioi han 4g)
         b = b.master("local[*]").config("spark.driver.memory", "3g")
@@ -54,20 +62,77 @@ def get_spark(app_name: str, local: bool = False) -> SparkSession:
 
 
 class Paths:
-    """Cac tang du lieu. Tren cum: HDFS /data/... ; khi local: thu muc data/ cua du an."""
+    """
+    Cac tang du lieu. Tren cum: HDFS /data/... ; khi local: thu muc data/ cua du an.
+    Do hieu nang (D17): VIFOOD_DATA_ROOT doi goc HDFS (raw van doc /data/raw, checkpoint nam trong goc moi);
+    VIFOOD_OUTPUT_DIR doi thu muc report va ban sao nho (processed_local = <thu muc>/processed).
+    output_prod luon la data/output: --fixed doc tham so da chon cua ban that tu day.
+    """
 
     def __init__(self, local: bool = False):
-        root = f"file://{PROJECT_DIR}/data/hdfs_local" if local else f"{HDFS_URL}/data"
-        self.raw = f"file://{PROJECT_DIR}/data/raw" if local else f"{root}/raw"
+        root = f"file://{PROJECT_DIR}/data/hdfs_local" if local else f"{HDFS_URL}{DATA_ROOT}"
+        self.raw = f"file://{PROJECT_DIR}/data/raw" if local else f"{HDFS_URL}/data/raw"
         self.curated = f"{root}/curated"
         self.features = f"{root}/features"
         self.events = f"{root}/events"
         self.results = f"{root}/results"
         self.models = f"{root}/models"           # model Spark da luu (buoc 06)
-        self.checkpoint = f"{root}/_checkpoint" if local else f"{HDFS_URL}/tmp/checkpoint"
+        if local or DATA_ROOT != "/data":
+            self.checkpoint = f"{root}/_checkpoint"
+        else:
+            self.checkpoint = f"{HDFS_URL}/tmp/checkpoint"
         # Thu muc tren may (mount vao container tai /home/jovyan/work)
-        self.processed_local = os.path.join(PROJECT_DIR, "data", "processed")
-        self.output_local = os.path.join(PROJECT_DIR, "data", "output")
+        self.output_prod = os.path.join(PROJECT_DIR, "data", "output")
+        if OUTPUT_DIR:
+            self.output_local = os.path.join(PROJECT_DIR, OUTPUT_DIR)     # OUTPUT_DIR tuyet doi thi giu nguyen
+            self.processed_local = os.path.join(self.output_local, "processed")
+        else:
+            self.output_local = self.output_prod
+            self.processed_local = os.path.join(PROJECT_DIR, "data", "processed")
+
+
+class Timer:
+    """
+    Do thoi gian tung giai doan (dua vao timings_s cua report) va gan job group Spark trung ten giai doan,
+    de phan do hieu nang (D17) gom so lieu stage tu History Server theo dung giai doan.
+      with T("ten"): ...          khoi lenh
+      T.mark("ten") / T.mark()    script khong chia khoi with: ket thuc giai doan dang mo, mo giai doan moi
+    """
+
+    def __init__(self, tag="06"):
+        self.t0, self.parts, self.tag, self._open = time.time(), {}, tag, None
+
+    @staticmethod
+    def _group(name):
+        sc = SparkContext._active_spark_context
+        if sc is None:
+            return
+        if name:
+            sc.setJobGroup(name, name)
+        else:
+            sc.setLocalProperty("spark.jobGroup.id", None)
+            sc.setLocalProperty("spark.job.description", None)
+
+    def _close(self, name, t):
+        self.parts[name] = round(time.time() - t, 1)
+        print(f"[{self.tag}] {name}: {self.parts[name]}s", flush=True)
+
+    @contextlib.contextmanager
+    def __call__(self, name):
+        t = time.time()
+        self._group(name)
+        yield
+        self._group(None)
+        self._close(name, t)
+
+    def mark(self, name=None):
+        if self._open:
+            self._close(*self._open)
+        self._open = (name, time.time()) if name else None
+        self._group(name)
+
+    def total(self):
+        return round(time.time() - self.t0, 1)
 
 
 def read_csv(spark, path):

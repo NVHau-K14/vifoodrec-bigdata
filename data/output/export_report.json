@@ -452,6 +452,24 @@
     "trending": {
       "docs": 0,
       "note": "chỉ tạo index, phần Structured Streaming ghi vào sau"
+    },
+    "perf": {
+      "docs": 47,
+      "expected": 47,
+      "write_s": 0.1,
+      "total_s": 0.1,
+      "method": "collect + insert_many",
+      "indexes": [
+        "_id_",
+        "kind_1_level_1_workers_1"
+      ],
+      "count": 47,
+      "size_bytes": 180190,
+      "avg_obj_bytes": 3833,
+      "storage_bytes": 65536,
+      "total_index_bytes": 40960,
+      "n_indexes": 2,
+      "compression_ratio": 2.75
     }
   },
   "checks": {
@@ -647,6 +665,16 @@
       "timings_s": {
         "checks": 12.7,
         "total": 40.3
+      }
+    },
+    {
+      "only": [
+        "perf"
+      ],
+      "at": "2026-10-25T17:36:53",
+      "timings_s": {
+        "checks": 9.2,
+        "total": 22.6
       }
     }
   ]

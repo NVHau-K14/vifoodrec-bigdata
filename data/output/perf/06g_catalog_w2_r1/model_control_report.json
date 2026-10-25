@@ -1,0 +1,82 @@
+{
+  "mode": "cluster",
+  "fixed": true,
+  "rows": {
+    "all": 182556,
+    "train": 127831,
+    "val": 18272,
+    "test": 36453,
+    "users": 101,
+    "foods": 3996
+  },
+  "best": {
+    "bias_lambda": 25,
+    "als": {
+      "rank": 8,
+      "regParam": 0.5
+    }
+  },
+  "tuning_als": [],
+  "test_common_rows": {
+    "doan_ngau_nhien": {
+      "n": 36453,
+      "rmse": 2.2395,
+      "mae": 1.8199
+    },
+    "trung_binh": {
+      "n": 36453,
+      "rmse": 1.5784,
+      "mae": 1.3602
+    },
+    "bias": {
+      "n": 36453,
+      "rmse": 1.5877,
+      "mae": 1.3727
+    },
+    "als_explicit": {
+      "n": 36453,
+      "rmse": 1.6734,
+      "mae": 1.4253
+    }
+  },
+  "test_all_rows": {
+    "trung_binh": {
+      "n": 36453,
+      "rmse": 1.5784,
+      "mae": 1.3602
+    },
+    "bias": {
+      "n": 36453,
+      "rmse": 1.5877,
+      "mae": 1.3727
+    },
+    "als_thieu_thi_bias": {
+      "n": 36453,
+      "rmse": 1.6734,
+      "mae": 1.4253
+    }
+  },
+  "als_vs_mean_improvement_pct_goc": -6.02,
+  "simulated_for_comparison": {
+    "trung_binh": {
+      "n": 63370,
+      "rmse": 1.0712,
+      "mae": 0.8804
+    },
+    "bias": {
+      "n": 63370,
+      "rmse": 0.7374,
+      "mae": 0.5756
+    },
+    "als_explicit": {
+      "n": 63370,
+      "rmse": 0.6841,
+      "mae": 0.5331
+    },
+    "als_vs_mean_improvement_pct": 36.14
+  },
+  "timings_s": {
+    "control": 22.7
+  },
+  "total_seconds": 22.7
+}

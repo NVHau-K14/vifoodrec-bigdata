@@ -1,4 +1,4 @@
-"""E23 so sanh mo hinh xep hang, E24 chi tiet danh gia (tu cac report), E26 report nguyen ban."""
+"""E23 so sanh mo hinh xep hang, E24 chi tiet danh gia (tu cac report + collection perf), E26 report nguyen ban."""
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException
@@ -27,6 +27,36 @@ def metric_rows(view, variant, group):
     return list(get_db().metrics.find({"view": view, "variant": variant, "group": group}, {"_id": 0}))
 
 
+@cached
+def perf_docs():
+    return list(get_db().perf.find())
+
+
+PERF_ROW_KEYS = ("job", "step", "level", "level_pct", "workers", "n_runs", "n_ok", "median_s", "min_s", "max_s",
+                 "runs_s", "events_per_s", "timings_s")
+PERF_SPARK_KEYS = ("shuffle_read_mb", "shuffle_remote_read_mb", "shuffle_write_mb", "spill_memory_mb", "spill_disk_mb",
+                   "gc_s", "executor_run_s", "cpu_ratio", "tasks", "stages")
+
+
+def perf_block():
+    """Do hieu nang Spark (D17): thoi gian theo job x muc du lieu x so worker, speedup, tong chuoi theo muc."""
+    docs = perf_docs()
+    summary = next((d for d in docs if d["_id"] == "summary"), None)
+    if not summary:
+        return {"available": False}
+    rows = []
+    for d in docs:
+        if d.get("kind") != "job":
+            continue
+        row = {k: d.get(k) for k in PERF_ROW_KEYS}
+        row["failed"] = len(d.get("failed") or [])
+        row["spark"] = {k: (d.get("spark") or {}).get(k) for k in PERF_SPARK_KEYS}
+        rows.append(row)
+    return {"available": True, "rows": rows,
+            **{k: summary.get(k) for k in ("speedup", "chain_totals", "scaling_2w", "cluster", "data", "notes",
+                                           "runs_total", "runs_failed", "generated_at")}}
+
+
 @router.get("/eval/ranking", summary="E23 – độ đo xếp hạng các mô hình, khoảng tin cậy 95%")
 def ranking(view: Literal["test", "val"] = "test",
             variant: Literal["chính", "khám phá", "ngoài độ chính xác"] = "chính",
@@ -43,7 +73,7 @@ def ranking(view: Literal["test", "val"] = "test",
     return {"view": view, "variant": variant, "group": group, "rows": rows, "ci95": ci}
 
 
-@router.get("/eval/details", summary="E24 – RMSE, dò tham số ALS, LSH, FP-Growth, đối chứng, K-means, thời gian")
+@router.get("/eval/details", summary="E24 – RMSE, dò tham số ALS, LSH, FP-Growth, đối chứng, K-means, thời gian, hiệu năng Spark")
 def details():
     rep = reports()
     als = rep.get("model_als_report", {})
@@ -80,6 +110,7 @@ def details():
         "kmeans_k": km.get("search", []),
         "timings": [{"report": k, "step": v, "seconds": rep[k].get("total_seconds")}
                     for k, v in STEP_OF_REPORT.items() if k in rep],
+        "perf": perf_block(),
     }
 
 

@@ -1,0 +1,224 @@
+{
+  "scale": 0.1,
+  "users": 5000,
+  "active_users": 4979,
+  "dishes": 5499,
+  "period": "2025-10-01 -> 2026-09-30",
+  "seed": 2026,
+  "events": 2292479,
+  "events_by_type": {
+    "cook": 237126,
+    "view": 1839159,
+    "rate": 80880,
+    "favorite": 135314
+  },
+  "events_by_month": {
+    "2025-10": 176020,
+    "2025-11": 177914,
+    "2025-12": 181621,
+    "2026-01": 187709,
+    "2026-02": 193049,
+    "2026-03": 191308,
+    "2026-04": 187309,
+    "2026-05": 199550,
+    "2026-06": 189293,
+    "2026-07": 199620,
+    "2026-08": 206576,
+    "2026-09": 202510
+  },
+  "events_by_slot": {
+    "trưa": 609819,
+    "tối": 1066572,
+    "khuya": 248663,
+    "sáng": 367425
+  },
+  "events_by_weekday": {
+    "Sun": 437259,
+    "Wed": 279326,
+    "Sat": 406373,
+    "Thu": 287989,
+    "Mon": 297472,
+    "Tue": 276232,
+    "Fri": 307828
+  },
+  "events_per_user_p10_p50_p90_p99": [
+    70,
+    331,
+    995,
+    2316
+  ],
+  "funnel": {
+    "favorite/view %": 7.36,
+    "cook/view %": 12.89,
+    "rate/cook %": 34.11
+  },
+  "rating": {
+    "mean": 3.708,
+    "std": 1.065,
+    "users_rated": 4714,
+    "distribution": {
+      "0.5": 677,
+      "1.0": 1103,
+      "1.5": 2288,
+      "2.0": 4300,
+      "2.5": 6840,
+      "3.0": 10147,
+      "3.5": 12782,
+      "4.0": 13579,
+      "4.5": 11997,
+      "5.0": 17167
+    }
+  },
+  "user_food_pairs": 1231117,
+  "density_%": 4.4965,
+  "views_share_top1pct_dishes_%": 10.7,
+  "users_active_val_2026-08": 4266,
+  "users_active_test_2026-09": 4357,
+  "cook_sessions_with_2plus_dishes_%": 15.9,
+  "persona_check_cook": {
+    "% mon nau la mon chay (is_vegetarian)": {
+      "hảo ngọt": 55.9,
+      "tập gym": 24.3,
+      "thích cay/nhậu": 15.5,
+      "ăn kiêng": 47.8,
+      "gia đình truyền thống": 30.4,
+      "mê hải sản": 9.6,
+      "ăn chay": 100.0,
+      "bận rộn": 38.3
+    },
+    "% mon nau la hai san": {
+      "hảo ngọt": 7.6,
+      "tập gym": 12.3,
+      "thích cay/nhậu": 32.9,
+      "ăn kiêng": 16.5,
+      "gia đình truyền thống": 14.5,
+      "mê hải sản": 66.5,
+      "ăn chay": 0.0,
+      "bận rộn": 16.7
+    },
+    "% mon nau la mon ngot/do uong": {
+      "hảo ngọt": 66.4,
+      "tập gym": 11.0,
+      "thích cay/nhậu": 7.0,
+      "ăn kiêng": 9.0,
+      "gia đình truyền thống": 4.7,
+      "mê hải sản": 6.4,
+      "ăn chay": 8.7,
+      "bận rộn": 16.4
+    },
+    "% mon nau la mon nhanh": {
+      "hảo ngọt": 45.5,
+      "tập gym": 36.3,
+      "thích cay/nhậu": 37.0,
+      "ăn kiêng": 50.3,
+      "gia đình truyền thống": 40.8,
+      "mê hải sản": 36.5,
+      "ăn chay": 50.8,
+      "bận rộn": 93.0
+    },
+    "% mon nau la mon cay": {
+      "hảo ngọt": 9.2,
+      "tập gym": 23.9,
+      "thích cay/nhậu": 65.2,
+      "ăn kiêng": 23.2,
+      "gia đình truyền thống": 24.4,
+      "mê hải sản": 27.1,
+      "ăn chay": 14.7,
+      "bận rộn": 17.6
+    },
+    "% mon nau la canh/sup": {
+      "hảo ngọt": 6.4,
+      "tập gym": 12.2,
+      "thích cay/nhậu": 11.8,
+      "ăn kiêng": 15.9,
+      "gia đình truyền thống": 34.4,
+      "mê hải sản": 19.8,
+      "ăn chay": 18.6,
+      "bận rộn": 8.9
+    }
+  },
+  "top_category_by_slot_view_%": {
+    "sáng": {
+      "bánh": 26.4,
+      "món chính": 23.0,
+      "bún/phở/mì/miến": 14.2,
+      "đồ uống": 12.3
+    },
+    "trưa": {
+      "món chính": 58.1,
+      "canh/súp": 12.4,
+      "gỏi/salad": 12.0,
+      "bún/phở/mì/miến": 5.9
+    },
+    "tối": {
+      "món chính": 55.1,
+      "canh/súp": 10.9,
+      "gỏi/salad": 10.5,
+      "bánh": 6.2
+    },
+    "khuya": {
+      "bánh": 30.4,
+      "món chính": 19.7,
+      "chè/tráng miệng": 17.1,
+      "đồ uống": 11.5
+    }
+  },
+  "season_check_cook_%": [
+    "2025-10 Bắc: lẩu 1.67 | tết 4.41 | nóng 11.9",
+    "2025-10 Nam: lẩu 1.52 | tết 2.92 | nóng 13.87",
+    "2025-10 Trung: lẩu 1.63 | tết 3.21 | nóng 14.41",
+    "2025-11 Bắc: lẩu 5.17 | tết 4.51 | nóng 7.63",
+    "2025-11 Nam: lẩu 1.81 | tết 2.84 | nóng 14.44",
+    "2025-11 Trung: lẩu 5.17 | tết 2.87 | nóng 8.29",
+    "2025-12 Bắc: lẩu 4.66 | tết 4.06 | nóng 6.63",
+    "2025-12 Nam: lẩu 4.94 | tết 3.06 | nóng 8.26",
+    "2025-12 Trung: lẩu 4.82 | tết 2.48 | nóng 7.63",
+    "2026-01 Bắc: lẩu 4.82 | tết 7.81 | nóng 7.46",
+    "2026-01 Nam: lẩu 4.53 | tết 5.01 | nóng 8.89",
+    "2026-01 Trung: lẩu 4.92 | tết 4.62 | nóng 8.51",
+    "2026-02 Bắc: lẩu 2.32 | tết 23.4 | nóng 8.29",
+    "2026-02 Nam: lẩu 2.35 | tết 17.93 | nóng 11.46",
+    "2026-02 Trung: lẩu 2.03 | tết 17.13 | nóng 11.51",
+    "2026-03 Bắc: lẩu 1.69 | tết 5.0 | nóng 12.09",
+    "2026-03 Nam: lẩu 0.76 | tết 2.69 | nóng 29.45",
+    "2026-03 Trung: lẩu 1.76 | tết 3.25 | nóng 13.69",
+    "2026-04 Bắc: lẩu 1.85 | tết 5.26 | nóng 11.8",
+    "2026-04 Nam: lẩu 0.97 | tết 2.41 | nóng 29.77",
+    "2026-04 Trung: lẩu 1.12 | tết 2.91 | nóng 27.84",
+    "2026-05 Bắc: lẩu 1.02 | tết 3.7 | nóng 25.3",
+    "2026-05 Nam: lẩu 0.72 | tết 2.49 | nóng 30.79",
+    "2026-05 Trung: lẩu 0.93 | tết 2.71 | nóng 27.04",
+    "2026-06 Bắc: lẩu 0.75 | tết 4.21 | nóng 25.77",
+    "2026-06 Nam: lẩu 0.69 | tết 2.57 | nóng 30.02",
+    "2026-06 Trung: lẩu 0.83 | tết 2.57 | nóng 26.42",
+    "2026-07 Bắc: lẩu 0.87 | tết 4.1 | nóng 25.59",
+    "2026-07 Nam: lẩu 1.5 | tết 3.13 | nóng 15.04",
+    "2026-07 Trung: lẩu 0.98 | tết 2.71 | nóng 28.5",
+    "2026-08 Bắc: lẩu 0.88 | tết 3.73 | nóng 26.25",
+    "2026-08 Nam: lẩu 1.78 | tết 2.99 | nóng 15.4",
+    "2026-08 Trung: lẩu 0.94 | tết 2.44 | nóng 28.33",
+    "2026-09 Bắc: lẩu 1.66 | tết 4.46 | nóng 13.23",
+    "2026-09 Nam: lẩu 1.55 | tết 2.74 | nóng 15.14",
+    "2026-09 Trung: lẩu 1.72 | tết 3.05 | nóng 14.46"
+  ],
+  "dish_region_tags": {
+    "không": 5096,
+    "nam": 191,
+    "bắc": 142,
+    "trung": 70
+  },
+  "dish_foreign": 463,
+  "hdfs_bytes_events": 29947071,
+  "hdfs_mb_events": 28.6,
+  "hdfs_mb_events_csv": null,
+  "generate_write_seconds": 61.9,
+  "total_seconds": 98.9,
+  "timings_s": {
+    "dish_matrix": 6.8,
+    "users_driver": 0.8,
+    "generate_write": 61.9,
+    "users_write": 0.7,
+    "checks": 15.2,
+    "export_local": 7.0
+  }
+}

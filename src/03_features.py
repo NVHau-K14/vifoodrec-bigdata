@@ -27,7 +27,7 @@ import sys
 from pyspark.sql import functions as F
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import Paths, export_single, get_spark  # noqa: E402
+from common import Paths, Timer, export_single, get_spark  # noqa: E402
 
 
 # ===========================================================================
@@ -199,6 +199,8 @@ args = ap.parse_args()
 
 spark = get_spark("03_features", local=args.local)
 P = Paths(local=args.local)
+T = Timer("03")      # thoi gian tung phan + job group Spark (D17); mau kiem tra tay ghi sau report, khong tinh
+T.mark("features")
 
 if args.local:
     foods = spark.read.parquet("file://" + os.path.join(P.processed_local, "foods_v2.parquet"))
@@ -343,7 +345,9 @@ feat = df.select(*COLS).orderBy("food_id").cache()
 n = feat.count()
 
 out_dir = f"{P.features}/dish_features"
+T.mark("write_hdfs")
 feat.write.mode("overwrite").parquet(out_dir)
+T.mark("export_local")
 os.makedirs(P.processed_local, exist_ok=True)
 os.makedirs(P.output_local, exist_ok=True)
 for fmt in ("parquet", "csv"):
@@ -360,6 +364,7 @@ def dist_array(col):
     return {r["v"]: r["count"] for r in rows}
 
 
+T.mark("report")
 old_vs_new = feat.join(foods.select("food_id", "dish_type"), "food_id") \
                  .groupBy("dish_type", "dish_type_fixed").count().orderBy("dish_type", F.desc("count")).collect()
 report = {
@@ -384,6 +389,9 @@ report = {
     "quick_by_source": {f"{r['source']}|{r['is_quick']}": r["count"]
                         for r in feat.groupBy("source", "is_quick").count().collect()},
 }
+T.mark()
+report["timings_s"] = T.parts
+report["total_seconds"] = T.total()
 with open(os.path.join(P.output_local, "features_report.json"), "w", encoding="utf-8") as fh:
     json.dump(report, fh, ensure_ascii=False, indent=2)
 

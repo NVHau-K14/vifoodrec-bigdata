@@ -374,3 +374,62 @@ Làm theo mục H của bản thiết kế (D15). 9 endpoint mới: E4, E5, E7 (
 - **Tra cứu món ở trang Món ăn:** khi có chữ tìm thì dùng E12 (không có bộ lọc), lọc lại 30 kết quả đầu ở trình duyệt theo đúng nghĩa bộ lọc của E14; không gõ thì dùng E14, 12 món một lần, nút "Xem thêm".
 - **Đo độ trễ `vifood_local`** bằng một uvicorn tạm ở cổng 8001 trong chính container `api` (`MONGO_DB=vifood_local`), không phải dựng lại service; đo xong thì tắt.
 - **Ảnh chụp 7 trang** (`docs/images/08_*_{1440,390}.png`) chụp bằng Chrome headless điều khiển qua DevTools Protocol (giả lập thiết bị, chụp toàn trang). `--window-size=390` không dùng được vì Chrome headless dựng trang rộng hơn rồi mới cắt ảnh.
+
+## D17. Đo hiệu năng Spark: thiết kế đã chốt (26/10)
+Bản đề xuất (LAST_RUN 26/10, mục A–I) được duyệt với 7 câu trả lời sau. Mục đích: đo thời gian các job 02–06 khi đổi **số worker (1 / 2)** và **quy mô dữ liệu (10 / 50 / 100%)**, không đụng dữ liệu và report của bản thật.
+
+**Phạm vi đo (câu 2, rút gọn so với ma trận đầy đủ, khoảng 3 giờ):**
+
+| Phần | Cấu hình | Số lần |
+|---|---|---|
+| Chuỗi 04 → 05 → 06a → 06b → 06c → 06d → 06e → 06f ở 100% | 1 và 2 worker | 1 |
+| 05 và 06b ở 100% | 1 và 2 worker | thêm 2 lần (tổng 3, lấy trung vị, ghi min–max) |
+| Chuỗi ở 50% | 2 worker | 1 |
+| Chuỗi ở 10% | 1 và 2 worker | 1 |
+| Danh mục: 02, 03, 06g | 1 và 2 worker | 1 |
+
+- Không đo 07 (nút thắt là ghi MongoDB, và 07 ghi đè `vifood`).
+- Không có lần làm nóng riêng. Job chỉ chạy 1 lần thì số đo là lần duy nhất; báo cáo ghi rõ điều này.
+
+**Đổi số worker (câu 4):** chỉ dừng `spark-worker-2` (`docker stop`), không thêm cấu hình 1 worker × 4 core.
+- 1 worker = 1 executor (2 core, 2 GB); 2 worker = 2 executor (4 core, 4 GB tổng). **1 worker giảm cả số core lẫn bộ nhớ executor**, report và báo cáo phải ghi rõ: speedup đo được là của "cụm 2 nút so với 1 nút", không tách riêng ảnh hưởng của core và của bộ nhớ.
+- Giữ nguyên `shuffle.partitions`, bộ nhớ executor, driver ở cả hai cấu hình.
+- Mọi container chạy trên cùng một máy (máy ảo Docker 8 CPU): shuffle giữa 2 worker đi qua mạng ảo, datanode là container riêng nên không có data locality.
+
+**Gốc dữ liệu và report riêng (câu 5):**
+- `common.Paths` đọc `VIFOOD_DATA_ROOT` (mặc định `/data`) và `VIFOOD_OUTPUT_DIR` (mặc định `data/output`). Không đặt biến thì mọi thứ như cũ.
+- Khi đặt `VIFOOD_DATA_ROOT`: `raw` vẫn đọc `/data/raw` (chỉ đọc), checkpoint ALS nằm trong gốc đó (`<gốc>/_checkpoint`).
+- Khi đặt `VIFOOD_OUTPUT_DIR`: report và bản sao nhỏ (`processed_local` = `<thư mục>/processed`) đều ghi vào thư mục đó, không ghi đè `data/output/` và `data/processed/` của bản thật.
+- `Paths.output_prod` luôn là `data/output`: `--fixed` đọc tham số đã chọn từ đây, 06g đọc số liệu mô phỏng để so sánh từ đây.
+- Gốc đo: `/perf/s010`, `/perf/s050`, `/perf/s100`, `/perf/catalog`. Trước khi đo, chép `curated/` và `features/` từ `/data` sang từng gốc. Report mỗi lần chạy: `data/output/perf/<job>_<mức>_w<số worker>_r<lần>/`.
+- `VIFOOD_RUN_TAG` gắn vào tên ứng dụng (vd `06b_als|s100|w1|r2`) để tìm lại trên History Server.
+
+**Sinh 50% và 10% (câu 6):** chạy `04 --scale 0.5` và `04 --scale 0.1` vào gốc riêng. **Đây là dân số sinh mới, không phải tập con của bản 100%** (bảng users sinh tuần tự bằng một RNG với kích thước n). Phân bố persona, vùng, tuổi và cách sinh sự kiện giống nhau, nên số sự kiện tăng gần tuyến tính theo số user. Bản 100% chạy lại 04 vào `/perf/s100` (cùng seed nên ra đúng dữ liệu của `/data`).
+
+**Chế độ `--fixed`** (chỉ fit một lần với tham số đã chọn, đọc từ `data/output/model_*_report.json`):
+- 06b (câu 1): **chỉ chạy view test** (lịch sử train + val → đánh giá test), như lần fit cuối của bản thật: baseline, bias λ = `best_bias_lambda`, ALS explicit `best_als_explicit`, ALS implicit `best_als_implicit` (alpha 1, rank 128, regParam 0,1). Bỏ dò lưới và độ nhạy trọng số.
+- 06c: bỏ vòng MinHash 3 / 5 / 10 bảng băm (thí nghiệm so sánh), giữ token, độ giống chính xác, gợi ý val và test.
+- 06e: chỉ fit KMeans k = 3, 8, 11 (3 cột `cluster_k*` cần lưu), bỏ dò k = 2…12 và BisectingKMeans.
+- 06f (câu 3): chỉ view test; trọng số lấy `best_weights` và `few_users_rule.weights` (bỏ `tune_weights`, vốn là numpy trên driver); **bỏ `test:explore_beyond`** và `cold_items`.
+- 06g: bias λ và (rank, regParam) lấy từ `model_control_report.best`, bỏ lưới.
+
+**Đo gì:** thời gian ứng dụng theo History Server (số chính), `timings_s` theo giai đoạn, và số liệu stage qua REST của History Server (shuffle đọc/ghi, phần đọc từ xa, spill, GC, thời gian CPU, số task). `common.Timer` gắn job group Spark trùng tên giai đoạn, nên số liệu stage gom được theo đúng giai đoạn của `timings_s`; 02, 03, 04 có thêm `timings_s`. Lấy mẫu `docker stats` trong lúc chạy (đỉnh RAM, CPU của worker và `jupyter`).
+
+**Nơi lưu (câu 7):** `scripts/09_perf.py` (chạy trên máy) ghi nối tiếp `data/output/perf_runs.jsonl` (mỗi dòng một lần chạy, dừng giữa chừng thì chạy tiếp được) và tổng hợp ra `data/output/perf_report.json`. `07 --only perf` nạp vào collection `perf`. Trang Đánh giá có thẻ "Hiệu năng Spark" (E24 thêm khóa `perf`).
+
+**Nếu 06b ở 100% với 1 worker hết bộ nhớ:** không giảm rank cho riêng một cấu hình. Ghi lại lần chạy lỗi đó, và đo speedup của 06b bằng `--quick` (cả hai cấu hình), có ghi chú.
+
+**Khi cài đặt và chạy (26/10):**
+- **Kiểm tra bản thường:** chạy 05, 06a–06g `--local` bằng code cũ (làm mốc) và code mới, không đặt biến nào: 28/28 file report giống hệt (bỏ qua khóa thời gian); `explain.txt` chỉ khác số hiệu nội bộ của Spark (`#id`, `plan_id`). Khóa `fixed` chỉ ghi vào report khi chạy `--fixed`.
+- **`common.Timer`** thay cho Timer riêng của `rec_common` và hàm `step` của 05 (cùng cách in). 02, 03, 04 đánh dấu giai đoạn bằng `T.mark()` (không phải thụt lề lại cả file).
+- **Tiến độ ở Tổng quan:** bước 09 là "Đo hiệu năng Spark" (trùng số với `scripts/09_perf.py`, "Xong" khi collection `perf` có doc `summary`); Structured Streaming chuyển thành bước 10.
+- **Thứ tự chạy:** 3 lần 06b ở 100% / 1 worker chạy liền nhau ở bước chạy thử (bộ lọc `s100:w1:06b` khớp cả 3 lần), không xen kẽ với 2 worker như dự kiến. Ba lần này lệch nhau 5,3% (776,5–817,9 giây).
+- **Lần 03 / danh mục / 1 worker:** job xong (exit 0, report đủ) nhưng event log không được đóng (còn file `appstatus`), lặp lại ở lần chạy lại; mọi lần khác đều bình thường. Thời lượng của lần này lấy từ REST của History Server: kết thúc job cuối − bắt đầu ứng dụng (38,8 giây), ghi `duration_note`. Thời gian lệnh `docker exec` khớp với lần 2 worker (42,8 so với 42,5 giây).
+- **`executorCpuTime` không tính CPU của tiến trình Python** (mapInPandas, UDF), nên tỷ lệ CPU / thời gian chạy của 04 chỉ khoảng 0,07.
+- **Ước tính `--plan`** sửa theo số đo thật ở 10% (chi phí cố định lớn hơn giả định 0,2 lần): kế hoạch 54 lần ước tính 3,3 giờ; thực tế 2,71 giờ chạy job (21:26–00:29, kể cả bật/tắt worker và chờ History Server).
+
+**Kết quả chính (dữ liệu hành vi mô phỏng, chi tiết trong `perf_report.json`):**
+- 100%: chuỗi 04 → 06f mất 1.702,9 giây với 2 worker, 2.309,2 giây với 1 worker: **speedup 1,36** (efficiency 0,68). Theo job: 04 1,64; 06b 1,32; 06a 1,30; 05 1,21; 06c 1,15; 06f 1,08; 06e 0,93; 06d 0,89.
+- 10%: 2 worker **chậm hơn** 1 worker (chuỗi 535,8 so với 473,1 giây, speedup 0,88); danh mục 02 / 03 / 06g: 0,90 / 0,98 / 0,73.
+- Theo dữ liệu (2 worker): tổng chuỗi 10% → 50% → 100% = 535,8 → 1.044,8 → 1.702,9 giây (1,95 và 3,18 lần, trong khi dữ liệu tăng 5 và 10 lần). Job tăng gần tuyến tính: 04 (5,42 lần) và 06b (5,02 lần); job khác chủ yếu là chi phí cố định (06d chỉ 1,22 lần).
+- **Vì sao speedup dưới 2:** (1) tổng thời gian task tăng khi thêm worker (06b: 1.491,5 → 1.852,3 giây; 05: 179,1 → 267,2 giây) vì 2 worker dùng chung 8 CPU của máy ảo Docker với datanode và driver; (2) khoảng một nửa shuffle đọc từ worker kia qua mạng ảo (06b 1.815,5 / 3.748,1 MB); (3) phần chạy trên driver không song song được (khởi động SparkSession, `collect`, numpy); (4) job nhỏ có quá ít task để chia. Ngược lại, 1 worker có ít bộ nhớ hơn nên spill nhiều hơn (06a 7.526,9 so với 4.129,9 MB spill bộ nhớ; 04 spill 2.144 MB, 2 worker không spill).

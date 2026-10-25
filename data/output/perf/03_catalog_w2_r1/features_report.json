@@ -1,0 +1,101 @@
+{
+  "rows": 5499,
+  "coverage": {
+    "main_protein_known": 4028,
+    "dish_category_not_default": 3067,
+    "main_method_known": 5247,
+    "season_tagged": 1193
+  },
+  "thresholds_is_quick": {
+    "n_ingredients_q40": "top 50% it nguyen lieu trong nguon",
+    "method_words_q40": "top 40% it chu trong nguon"
+  },
+  "main_protein": {
+    "không": 1471,
+    "heo": 878,
+    "hải sản": 826,
+    "đậu hũ/chay": 539,
+    "cá": 475,
+    "gà": 428,
+    "bò": 283,
+    "rau củ": 252,
+    "trứng": 226,
+    "vịt": 64,
+    "thịt khác": 57
+  },
+  "dish_category": {
+    "món chính": 2432,
+    "bánh": 979,
+    "chè/tráng miệng": 398,
+    "bún/phở/mì/miến": 367,
+    "canh/súp": 341,
+    "gỏi/salad": 300,
+    "cơm/xôi/cháo": 250,
+    "đồ uống": 235,
+    "lẩu": 117,
+    "ăn vặt": 80
+  },
+  "main_method": {
+    "hầm/nấu": 1121,
+    "chiên": 1076,
+    "nướng": 699,
+    "xào": 672,
+    "kho/rim": 433,
+    "hấp": 431,
+    "trộn/gỏi": 365,
+    "khác": 252,
+    "luộc": 225,
+    "pha/xay": 225
+  },
+  "dish_type_fixed": {
+    "Món mặn": 3448,
+    "Món ngọt": 1236,
+    "Món chay": 580,
+    "Đồ uống": 235
+  },
+  "dish_type_old_vs_fixed": [
+    "Món chay -> Món chay: 199",
+    "Món chay -> Món ngọt: 19",
+    "Món mặn -> Món mặn: 3448",
+    "Món mặn -> Món ngọt: 1217",
+    "Món mặn -> Món chay: 381",
+    "Món mặn -> Đồ uống: 235"
+  ],
+  "is_vegetarian": {
+    "False": 3895,
+    "True": 1604
+  },
+  "is_spicy": {
+    "False": 4588,
+    "True": 911
+  },
+  "is_quick": {
+    "False": 3861,
+    "True": 1638
+  },
+  "season": {
+    "không": 4306,
+    "nóng": 708,
+    "lạnh": 308,
+    "tết": 177
+  },
+  "meal_types": {
+    "tối": 4108,
+    "trưa": 3578,
+    "sáng": 1784,
+    "ăn vặt": 1692
+  },
+  "quick_by_source": {
+    "mnmn|False": 812,
+    "mnmn|True": 396,
+    "cooky|False": 3049,
+    "cooky|True": 1242
+  },
+  "timings_s": {
+    "features": 21.5,
+    "write_hdfs": 1.2,
+    "export_local": 2.6,
+    "report": 8.5
+  },
+  "total_seconds": 33.9
+}

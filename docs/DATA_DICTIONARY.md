@@ -15,6 +15,8 @@ Khi thêm hoặc đổi bảng, cập nhật file này. Kiểu cột ghi theo Sp
 /data/results/analysis/<bảng>/   kết quả phân tích hành vi (bước 05), mỗi bảng 1 file Parquet
 /data/results/models/<bảng>[_val|_test]   bảng trung gian và kết quả bước 06 (xem mục bên dưới)
 /data/models/{als_implicit,als_explicit,content_pipeline,kmeans}   model Spark đã lưu (bước 06)
+/perf/{s010,s050,s100,catalog}/  gốc riêng của phép đo hiệu năng (D17): cùng cấu trúc curated/features/events/results/models
+                                 (s010, s050, s100 = dữ liệu 10/50/100% sinh bằng 04 --scale; catalog = 02, 03, 06g)
 ```
 Chạy `--local` thì cùng cấu trúc đó nằm trong `data/hdfs_local/`. Các bản sao nhỏ để xem trên máy nằm trong `data/processed/`.
 
@@ -151,10 +153,10 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 ## File trong `data/output/`
 | File | Nội dung |
 |---|---|
-| `clean_report.json` | Số liệu từng bước làm sạch |
-| `features_report.json` | Độ phủ và phân bố từng thuộc tính món |
+| `clean_report.json` | Số liệu từng bước làm sạch; `timings_s` (giai đoạn, từ 26/10), `total_seconds` |
+| `features_report.json` | Độ phủ và phân bố từng thuộc tính món; `timings_s`, `total_seconds` (từ 26/10) |
 | `features_check_sample.csv` | 100 món để kiểm tra tay (cột `kiem_tra`, `ghi_chu`) |
-| `simulate_report.json` | Số sự kiện, phễu, rating, kiểm tra persona, mùa, dung lượng HDFS |
+| `simulate_report.json` | Số sự kiện, phễu, rating, kiểm tra persona, mùa, dung lượng HDFS; `timings_s` (từ 26/10) |
 | `simulate_config.json` | Toàn bộ tham số và trọng số persona |
 | `events_sample.csv` | Toàn bộ sự kiện của 200 user |
 | `analysis_report.json` | Số liệu chính của bước 05: kiểm tra tổng, phễu theo user, lift nổi bật, đuôi dài, thời gian từng phần |
@@ -163,6 +165,9 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 | `model_split_report.json`, `model_als_report.json`, `model_content_report.json`, `model_hybrid_report.json`, `model_fpgrowth_report.json`, `model_kmeans_report.json`, `model_control_report.json` | Report từng file của bước 06 |
 | `models_metrics.json` | Bảng tổng hợp độ đo xếp hạng (chính, khám phá, ngoài độ chính xác) và khoảng tin cậy 95% |
 | `api_report.json` | Bước 08: `latency.<database>` (do `api/bench_latency.py` ghi: p50/p95/p99/max, req/s, `server_app_p95_ms`, `server_db_mean_ms` từng endpoint, mục tiêu p95 và `pass`, vòng E19 10 luồng × 100), `docker_stats_api`, `page_load_1440` (thời gian tải 7 trang), `screenshots` |
+| `perf_runs.jsonl` | Đo hiệu năng (D17, `scripts/09_perf.py`): mỗi dòng một lần chạy. `key` (`<job>_| `perf` | `"<job>|<mức>|w<số worker>"`, `"summary"` | 47 |_w<số worker>_r<lần>`), `level, workers, job, rep, args, app_name, app_id, git, started_at, exit_code, ok, wall_s` (thời gian lệnh docker exec), `duration_s` (thời lượng ứng dụng theo History Server), `docker_stats_peak {container: {mem_mib, cpu_pct}}`, `report {timings_s, total_seconds, users, events, …}`, `spark {jobs, stages, tasks, failed_*, executor_run_s, executor_cpu_s, cpu_ratio, gc_s, input_mb, output_mb, shuffle_read_mb, shuffle_remote_read_mb, shuffle_local_read_mb, shuffle_write_mb, shuffle_fetch_wait_s, spill_memory_mb, spill_disk_mb, by_group {giai đoạn: …}, executors […]}`, `error` (khi lỗi) |
+| `perf_report.json` | Tổng hợp từ `perf_runs.jsonl`: `cluster`, `plan`, `data {mức: users, events, hdfs}`, `rows` (job × mức × số worker: `median_s, min_s, max_s, runs_s, n_runs, n_ok, failed, timings_s` trung vị, số liệu Spark của lần gần trung vị, `docker_stats_peak`, `events_per_s` cho 04 và 05), `speedup [{level, job, t_1w_s, t_2w_s, speedup, efficiency}]`, `chain_totals` (tổng chuỗi 04 → 06f theo mức × số worker), `scaling_2w`, `notes` |
+| `perf/<lần chạy>/` | Report của từng lần đo (`VIFOOD_OUTPUT_DIR`). Thư mục con `processed/` và file CSV không đưa lên Git |
 | `export_report.json` | Bước 07: số doc, cách ghi, thời gian ghi, `collStats` (size, storageSize, index) từng collection, các kiểm tra (múi giờ, toàn vẹn tham chiếu, 5 user mẫu), `explain()` của 4 truy vấn tiêu biểu, nội dung `overview`. Chạy `--only` thì gộp vào report cũ cùng database và thêm `partial_runs [{only, at, timings_s}]`; kiểm tra `recs_because_cooked` đếm phần tử theo `source` và `because_cooked` |
 
 ## MongoDB – database `vifood` (bước 07, D14)
@@ -186,6 +191,7 @@ Ngày giờ lưu dạng chuỗi theo giờ Việt Nam (`"yyyy-MM-dd"`, `"yyyy-MM
 | `reports` | tên file (vd `model_als_report`) | 12 | `file, content` (nội dung JSON; dấu chấm trong tên trường đổi thành dấu phẩy, vd `"4,0"`) | – |
 | `overview` | `"overview"` | 1 | `n_dishes, n_users, n_events, events_by_type, event_months, n_recs_rows, hdfs {thư mục: bytes, bytes_with_replicas, files}, reference_date, exported_at, notes` | – |
 | `trending` | | 0 | Để dành cho Structured Streaming | `window_end -1` |
+| `perf` | `"<job>|<mức>|w<số worker>"`, `"summary"` | 47 |\|<mức>\|w<số worker>"`, `"summary"` | 47 | Đo hiệu năng (D17), nạp từ `perf_report.json` bằng `07 --only perf`. `kind = "job"`: một dòng `rows` của report (`job, step, level, level_pct, workers, median_s, min_s, max_s, runs_s, timings_s, spark {…}, executors, docker_stats_peak, failed`). `kind = "summary"`: `speedup, chain_totals, scaling_2w, cluster, data, plan, notes, runs_total, runs_failed` | `{kind, level, workers}` |
 
 ## API bước 08 (`api/`, D15)
 FastAPI đọc MongoDB (database `MONGO_DB`), phục vụ `/api/...` và `web/` tĩnh trên http://localhost:8000. Schema đầy đủ ở http://localhost:8000/docs.
@@ -196,7 +202,7 @@ Bộ lọc món **F** (query): `veg`, `quick`, `not_spicy` (bool), `meal` ∈ s�
 | # | Endpoint | Collection | Đợt |
 |---|---|---|---|
 | E0 | `GET /api/health` | `ping`, số doc `dishes/users/recs` | 1 |
-| E1 | `GET /api/overview` | `overview`, `reports` (tiến độ pipeline suy ra từ report), `trending` | 1 |
+| E1 | `GET /api/overview` | `overview`, `reports` (tiến độ pipeline suy ra từ report), `perf` (bước 09 "Đo hiệu năng Spark"), `trending` (bước 10) | 1 |
 | E2 | `GET /api/behavior/heatmap?metric=cooks\|views\|events` | `analysis_heatmap_hour_dow` | 1 |
 | E3 | `GET /api/behavior/monthly?region=` | `analysis_trend_month_category`, `analysis_season_month`, `reports.model_split_report` | 1 |
 | E6 | `GET /api/behavior/funnel` | `analysis_funnel_by_category`, `reports.analysis_report` | 1 |
@@ -209,7 +215,7 @@ Bộ lọc món **F** (query): `veg`, `quick`, `not_spicy` (bool), `meal` ∈ s�
 | E20 | `POST /api/recs/new-user` body `{food_ids, region?, age_group?, limit?, F}` | `similar`, `dishes`, `popular` | 1 |
 | E22 | `GET /api/meta/filters` | `distinct` trên `dishes`, `users` | 1 |
 | E23 | `GET /api/eval/ranking?view&variant&group` | `metrics`, `reports.models_metrics` | 1 |
-| E24 | `GET /api/eval/details` | `reports` (ALS, content, FP-Growth, đối chứng, hybrid, K-means, thời gian) | 1 |
+| E24 | `GET /api/eval/details` | `reports` (ALS, content, FP-Growth, đối chứng, hybrid, K-means, thời gian); `perf` → khóa `perf {available, rows, speedup, chain_totals, scaling_2w, cluster, data, notes, runs_total, runs_failed}` (D17) | 1 |
 | E26 | `GET /api/reports/{name}` | `reports` | 1 |
 | E4 | `GET /api/behavior/top-dishes?slot=sáng\|trưa\|tối\|khuya&by=cooks\|lift&limit≤10` | `analysis_top_dish_by_slot` (cache), thẻ món từ `dishes` | 2 |
 | E5 | `GET /api/behavior/lift?group_type&attribute&min_cooks` | `analysis_lift_by_group` (cache). `cells[].lift` = null khi `cooks < min_cooks` (mặc định 1.000) | 2 |

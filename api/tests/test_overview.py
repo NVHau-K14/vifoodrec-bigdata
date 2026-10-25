@@ -45,3 +45,22 @@ def test_eval_matches_models_metrics(client, db, full_db):
     assert r["ci95"] and all(c["ci95"][0] <= c["hieu"] <= c["ci95"][1] for c in r["ci95"])
     d = client.get("/api/eval/details").json()
     assert len(d["rmse"]["rows"]) == 3 and d["als_grid"] and d["lsh"] and d["timings"]
+
+
+def test_perf_matches_collection(client, db):
+    """E24.perf (D17): so tren API khop collection perf; speedup = T(1 worker) / T(2 worker); buoc 09 'Xong'."""
+    p = client.get("/api/eval/details").json()["perf"]
+    steps = {s["step"]: s["status"] for s in client.get("/api/overview").json()["pipeline"]}
+    if not db.perf.find_one({"_id": "summary"}):
+        assert p == {"available": False} and steps["09"] == "Chưa"
+        return
+    assert p["available"] and steps["09"] == "Xong"
+    assert len(p["rows"]) == db.perf.count_documents({"kind": "job"})
+    for r in p["rows"]:
+        if r["median_s"] is not None:
+            assert r["min_s"] <= r["median_s"] <= r["max_s"] and len(r["runs_s"]) == r["n_ok"]
+    assert p["speedup"]
+    for s in p["speedup"]:
+        t1 = db.perf.find_one({"_id": f"{s['job']}|{s['level']}|w1"})["median_s"]
+        t2 = db.perf.find_one({"_id": f"{s['job']}|{s['level']}|w2"})["median_s"]
+        assert s["t_1w_s"] == t1 and s["t_2w_s"] == t2 and abs(s["speedup"] - t1 / t2) < 0.006

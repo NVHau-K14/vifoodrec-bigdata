@@ -1,0 +1,68 @@
+[
+ {
+  "meal_slot": "Tất cả",
+  "size": "1",
+  "count": 1660528,
+  "share_pct": 84.36
+ },
+ {
+  "meal_slot": "Tất cả",
+  "size": "2",
+  "count": 201125,
+  "share_pct": 10.22
+ },
+ {
+  "meal_slot": "Tất cả",
+  "size": "3",
+  "count": 106688,
+  "share_pct": 5.42
+ },
+ {
+  "meal_slot": "khuya",
+  "size": "1",
+  "count": 145137,
+  "share_pct": 100.0
+ },
+ {
+  "meal_slot": "sáng",
+  "size": "1",
+  "count": 344207,
+  "share_pct": 100.0
+ },
+ {
+  "meal_slot": "trưa",
+  "size": "1",
+  "count": 426470,
+  "share_pct": 77.73
+ },
+ {
+  "meal_slot": "trưa",
+  "size": "2",
+  "count": 79662,
+  "share_pct": 14.52
+ },
+ {
+  "meal_slot": "trưa",
+  "size": "3",
+  "count": 42501,
+  "share_pct": 7.75
+ },
+ {
+  "meal_slot": "tối",
+  "size": "1",
+  "count": 744714,
+  "share_pct": 80.05
+ },
+ {
+  "meal_slot": "tối",
+  "size": "2",
+  "count": 121463,
+  "share_pct": 13.06
+ },
+ {
+  "meal_slot": "tối",
+  "size": "3",
+  "count": 64187,
+  "share_pct": 6.9
+ }
+]

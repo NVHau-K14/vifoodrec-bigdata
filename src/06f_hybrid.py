@@ -28,6 +28,8 @@ Dau ra  : /data/results/models/recs_hybrid_<v>, eval_hybrid_<v>, recs_hybrid_c2_
 
 Chay tren cum:  python src/06f_hybrid.py           (--no-cold-items: bo thi nghiem mon moi)
 Chay thu local: python src/06f_hybrid.py --local
+Do hieu nang:   python src/06f_hybrid.py --fixed  (D17: trong so tu data/output/model_hybrid_report.json, chi view test,
+                                                   bo explore_beyond va thi nghiem mon moi)
 """
 import itertools
 import json
@@ -49,6 +51,8 @@ if not args.local:
     spark.conf.set("spark.sql.shuffle.partitions", "32")
 T = R.Timer()
 report = {"mode": "local" if args.local else "cluster"}
+if args.fixed:
+    report["fixed"] = True
 SOURCES = {"als": "als_implicit", "content": "content", "pop": "pop_vung_tuoi", "rep": "nau_lai"}
 KRRF, N_OUT, N_FINAL = 60, 100, 50
 LOW_POP_Q = 0.2          # mon 'it tuong tac': luot nau trong lich su <= phan vi 20% cua cac mon
@@ -109,33 +113,39 @@ def ndcg10(d, w):
     return float((dcg / d["idcg"]).mean())
 
 
-with T("tune_weights"):
-    tv = R.load(spark, P, "truth", "val")
-    tune = tv.filter("tune AND group = 'ấm'")
-    d = to_numpy(candidates("val", tune.select("user_id")), tune)
-    grid = [(a / 10, b / 10, c / 10, (10 - a - b - c) / 10)
-            for a, b, c in itertools.product(range(11), repeat=3) if a + b + c <= 10]
-    res = sorted(((ndcg10(d, w), w) for w in grid), reverse=True)
-    best_w = dict(zip(SOURCES, res[0][1]))
-    report["tuning"] = {"users": d["n_users"], "candidate_rows": int(len(d["y"])), "combos": len(grid),
-                        "candidate_recall_pct": round(100 * float(d["y"].sum()) / float(
-                            tune.select(F.sum(F.size("items"))).first()[0]), 2),
-                        "top5": [{"w": dict(zip(SOURCES, w)), "ndcg@10": round(s, 4)} for s, w in res[:5]],
-                        "single_source": {s: round(ndcg10(d, [1.0 if k == s else 0.0 for k in SOURCES]), 4)
-                                          for s in SOURCES}}
-    report["best_weights"] = best_w
-    print(f"[06] best weights {best_w} ndcg@10 = {res[0][0]:.4f}", flush=True)
+if args.fixed:
+    # D17: trong so da chon cua ban that (bo do luoi numpy tren driver)
+    prod = R.prod_report(P, "hybrid")
+    best_w, few_w = prod["best_weights"], prod["few_users_rule"]["weights"]
+    report["best_weights"], report["few_users_rule"] = best_w, prod["few_users_rule"]
+else:
+    with T("tune_weights"):
+        tv = R.load(spark, P, "truth", "val")
+        tune = tv.filter("tune AND group = 'ấm'")
+        d = to_numpy(candidates("val", tune.select("user_id")), tune)
+        grid = [(a / 10, b / 10, c / 10, (10 - a - b - c) / 10)
+                for a, b, c in itertools.product(range(11), repeat=3) if a + b + c <= 10]
+        res = sorted(((ndcg10(d, w), w) for w in grid), reverse=True)
+        best_w = dict(zip(SOURCES, res[0][1]))
+        report["tuning"] = {"users": d["n_users"], "candidate_rows": int(len(d["y"])), "combos": len(grid),
+                            "candidate_recall_pct": round(100 * float(d["y"].sum()) / float(
+                                tune.select(F.sum(F.size("items"))).first()[0]), 2),
+                            "top5": [{"w": dict(zip(SOURCES, w)), "ndcg@10": round(s, 4)} for s, w in res[:5]],
+                            "single_source": {s: round(ndcg10(d, [1.0 if k == s else 0.0 for k in SOURCES]), 4)
+                                              for s in SOURCES}}
+        report["best_weights"] = best_w
+        print(f"[06] best weights {best_w} ndcg@10 = {res[0][0]:.4f}", flush=True)
 
-    # Nhom 'it': giu trong so hay alpha = 0 (so tren moi user 'it' cua val)
-    few = tv.filter("group = 'ít'")
-    df_ = to_numpy(candidates("val", few.select("user_id")), few)
-    w_no_als = dict(best_w, als=0.0)
-    s_ = sum(w_no_als.values()) or 1.0
-    w_no_als = {k: x / s_ for k, x in w_no_als.items()} if sum(w_no_als.values()) else {"als": 0, "content": 0, "pop": 1, "rep": 0}
-    a1, a2 = ndcg10(df_, [best_w[s] for s in SOURCES]), ndcg10(df_, [w_no_als[s] for s in SOURCES])
-    few_w = best_w if a1 >= a2 else w_no_als
-    report["few_users_rule"] = {"users": df_["n_users"], "giu_trong_so": round(a1, 4), "alpha_0": round(a2, 4),
-                                "chon": "giữ trọng số" if a1 >= a2 else "alpha = 0", "weights": few_w}
+        # Nhom 'it': giu trong so hay alpha = 0 (so tren moi user 'it' cua val)
+        few = tv.filter("group = 'ít'")
+        df_ = to_numpy(candidates("val", few.select("user_id")), few)
+        w_no_als = dict(best_w, als=0.0)
+        s_ = sum(w_no_als.values()) or 1.0
+        w_no_als = {k: x / s_ for k, x in w_no_als.items()} if sum(w_no_als.values()) else {"als": 0, "content": 0, "pop": 1, "rep": 0}
+        a1, a2 = ndcg10(df_, [best_w[s] for s in SOURCES]), ndcg10(df_, [w_no_als[s] for s in SOURCES])
+        few_w = best_w if a1 >= a2 else w_no_als
+        report["few_users_rule"] = {"users": df_["n_users"], "giu_trong_so": round(a1, 4), "alpha_0": round(a2, 4),
+                                    "chon": "giữ trọng số" if a1 >= a2 else "alpha = 0", "weights": few_w}
 COLD_W = {"als": 0.0, "content": 0.0, "pop": 1.0, "rep": 0.0}
 
 
@@ -200,7 +210,7 @@ def low_pop_threshold(ipop):
 
 rows, ci = [], []
 thr_by_view = {}
-for v in ("val", "test"):
+for v in ("test",) if args.fixed else ("val", "test"):
     with T(f"{v}:hybrid"):
         truth = R.load(spark, P, "truth", v).cache()
         ug = R.load(spark, P, "user_groups", v)
@@ -223,30 +233,31 @@ for v in ("val", "test"):
                 rows.append({"view": v, "model": m, "variant": "chính", **g})
     if v != "test":
         continue
-    with T("test:explore_beyond"):
-        cooked = R.load(spark, P, "implicit", v).filter("n_cook > 0").select("user_id", "food_id").cache()
-        ipop = R.load(spark, P, "item_pop", v)
-        tot, n_items = ipop.agg(F.sum("cooks"), F.count("*")).first()
-        nov = F.broadcast(ipop.select("food_id", (-F.log2((F.col("cooks") + 1) / F.lit(tot + n_items))).alias("nov")))
-        toks = F.broadcast(R.load(spark, P, "item_tokens"))
-        tusers = truth.select("user_id")
-        for m in models:
-            recs = R.load(spark, P, f"recs_{m}", v).select("user_id", "food_id", "rank")
-            for g in R.summarize(explore_eval(recs, truth, cooked)):
-                rows.append({"view": v, "model": m, "variant": "khám phá", **g})
-            t10 = recs.filter("rank <= 10").join(tusers, "user_id").cache()
-            pairs = (t10.alias("a").join(t10.alias("b"), (F.col("a.user_id") == F.col("b.user_id"))
-                                          & (F.col("a.food_id") < F.col("b.food_id")))
-                     .select(F.col("a.user_id").alias("user_id"), F.col("a.food_id").alias("i"), F.col("b.food_id").alias("j"))
-                     .join(toks.select(F.col("food_id").alias("i"), F.col("tokens").alias("ti")), "i")
-                     .join(toks.select(F.col("food_id").alias("j"), F.col("tokens").alias("tj")), "j")
-                     .withColumn("jac", F.size(F.array_intersect("ti", "tj")) / F.size(F.array_union("ti", "tj"))))
-            div = pairs.groupBy("user_id").agg(F.avg(1 - F.col("jac")).alias("d")).agg(F.avg("d")).first()[0]
-            rows.append({"view": v, "model": m, "variant": "ngoài độ chính xác", "group": "tất cả",
-                         "coverage_pct": round(100 * t10.select("food_id").distinct().count() / n_items, 2),
-                         "novelty": round(t10.join(nov, "food_id").agg(F.avg("nov")).first()[0], 3),
-                         "diversity": round(div, 4) if div is not None else None})
-            t10.unpersist()
+    if not args.fixed:     # --fixed (D17): bo danh gia them coverage / novelty / diversity, bien the kham pha
+        with T("test:explore_beyond"):
+            cooked = R.load(spark, P, "implicit", v).filter("n_cook > 0").select("user_id", "food_id").cache()
+            ipop = R.load(spark, P, "item_pop", v)
+            tot, n_items = ipop.agg(F.sum("cooks"), F.count("*")).first()
+            nov = F.broadcast(ipop.select("food_id", (-F.log2((F.col("cooks") + 1) / F.lit(tot + n_items))).alias("nov")))
+            toks = F.broadcast(R.load(spark, P, "item_tokens"))
+            tusers = truth.select("user_id")
+            for m in models:
+                recs = R.load(spark, P, f"recs_{m}", v).select("user_id", "food_id", "rank")
+                for g in R.summarize(explore_eval(recs, truth, cooked)):
+                    rows.append({"view": v, "model": m, "variant": "khám phá", **g})
+                t10 = recs.filter("rank <= 10").join(tusers, "user_id").cache()
+                pairs = (t10.alias("a").join(t10.alias("b"), (F.col("a.user_id") == F.col("b.user_id"))
+                                              & (F.col("a.food_id") < F.col("b.food_id")))
+                         .select(F.col("a.user_id").alias("user_id"), F.col("a.food_id").alias("i"), F.col("b.food_id").alias("j"))
+                         .join(toks.select(F.col("food_id").alias("i"), F.col("tokens").alias("ti")), "i")
+                         .join(toks.select(F.col("food_id").alias("j"), F.col("tokens").alias("tj")), "j")
+                         .withColumn("jac", F.size(F.array_intersect("ti", "tj")) / F.size(F.array_union("ti", "tj"))))
+                div = pairs.groupBy("user_id").agg(F.avg(1 - F.col("jac")).alias("d")).agg(F.avg("d")).first()[0]
+                rows.append({"view": v, "model": m, "variant": "ngoài độ chính xác", "group": "tất cả",
+                             "coverage_pct": round(100 * t10.select("food_id").distinct().count() / n_items, 2),
+                             "novelty": round(t10.join(nov, "food_id").agg(F.avg("nov")).first()[0], 3),
+                             "diversity": round(div, 4) if div is not None else None})
+                t10.unpersist()
     with T("test:ci"):
         eh = R.load(spark, P, "eval_hybrid", v)
         warm = truth.filter("group = 'ấm'").select("user_id")
@@ -318,7 +329,7 @@ with T("final_recs"):
 # ===========================================================================
 # 4. THI NGHIEM MON MOI (uu tien thap): an lich su cua 300 mon
 # ===========================================================================
-if not args.no_cold_items:
+if not (args.no_cold_items or args.fixed):
     with T("cold_items"):
         v = "test"
         b = json.load(open(os.path.join(P.output_local, "model_als_report.json"), encoding="utf-8"))["best_als_implicit"]

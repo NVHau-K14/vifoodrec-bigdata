@@ -100,7 +100,7 @@ export function lines(el, xs, series, { yName = '', yFmt = (v) => nfmt(v, 3), xN
     yAxis: { type: 'value', name: yName, nameTextStyle: { color: C.muted, fontSize: 11 }, scale: yMin == null,
              min: yMin, max: yMax, axisLabel: { formatter: yFmt } },
     // markX: cac gia tri tren truc x can danh dau bang duong doc (vd k = 3, 8, 11)
-    series: series.map((s, i) => ({ name: s.name, type: 'line', data: s.data, symbol: 'circle', symbolSize: 7,
+    series: series.map((s, i) => ({ name: s.name, type: 'line', data: s.data, symbol: 'circle', symbolSize: 7, connectNulls: !!s.connectNulls,
                                   itemStyle: { color: s.color || C.herb }, lineStyle: { color: s.color || C.herb },
                                   markLine: i === 0 && markX ? { symbol: 'none', silent: true, label: { color: C.muted, fontSize: 11, formatter: (p) => p.value },
                                     lineStyle: { color: C.line2, type: 'dashed' }, data: markX.map((x) => ({ xAxis: x })) } : undefined })),
@@ -186,17 +186,22 @@ export function divergingHeatmap(el, xs, ys, data, { min, max, center = 0, label
 }
 
 // Cap thanh ngang nhom: cats (hang), series [{name, data, color}]
-export function hGroupedBars(el, cats, series, { xFmt = (v) => `${nfmt(v, 1)}%` } = {}) {
+// markX: vach doc o cac gia tri tren truc x (vd speedup ly tuong 2)
+export function hGroupedBars(el, cats, series, { xFmt = (v) => `${nfmt(v, 1)}%`, markX } = {}) {
   const ch = initChart(el);
   ch.setOption({
-    grid: { left: 8, right: 40, top: 30, bottom: 8, containLabel: true },
+    // left 20: ECharts do chu tieng Viet hut vai px, nhan dai nhat bi cat chu dau khi left = 8
+    grid: { left: 20, right: 40, top: 30, bottom: 8, containLabel: true },
     legend: { top: 0, left: 0 },
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: xFmt },
-    xAxis: { type: 'value', min: 0, axisLabel: { formatter: xFmt } },
-    yAxis: { type: 'category', data: cats, inverse: true, axisLabel: { fontSize: 11 } },
-    series: series.map((s) => ({ name: s.name, type: 'bar', barMaxWidth: 12, barGap: '20%', data: s.data,
+    // co markX thi truc keo toi it nhat gia tri vach (de vach luon nam trong truc)
+    xAxis: { type: 'value', min: 0, max: markX ? (v) => Math.max(v.max, ...markX) : undefined, axisLabel: { formatter: xFmt } },
+    yAxis: { type: 'category', data: cats, inverse: true, axisLabel: { fontSize: 11, margin: 10 } },
+    series: series.map((s, i) => ({ name: s.name, type: 'bar', barMaxWidth: 12, barGap: '20%', data: s.data,
                                  itemStyle: { color: s.color, borderRadius: [0, 4, 4, 0] },
-                                 label: { show: true, position: 'right', fontSize: 10, color: C.muted, formatter: (p) => xFmt(p.value) } })),
+                                 label: { show: true, position: 'right', fontSize: 10, color: C.muted, formatter: (p) => xFmt(p.value) },
+                                 markLine: i === 0 && markX ? { symbol: 'none', silent: true, label: { color: C.muted, fontSize: 11, formatter: (p) => xFmt(p.value) },
+                                   lineStyle: { color: C.line2, type: 'dashed' }, data: markX.map((x) => ({ xAxis: x })) } : undefined })),
   }, true);
   return ch;
 }

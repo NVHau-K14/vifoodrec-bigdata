@@ -47,7 +47,7 @@ import pandas as pd
 from pyspark.sql import functions as F, types as T
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import Paths, export_single, get_spark  # noqa: E402
+from common import Paths, Timer, export_single, get_spark  # noqa: E402
 
 # ===========================================================================
 # 0. THAM SO
@@ -173,6 +173,8 @@ FOREIGN_RX = (r"pizza|spaghetti|mì ý|pasta|lasagna|burger|sandwich|steak|bít 
 t0 = time.time()
 spark = get_spark("04_simulate", local=args.local)
 P = Paths(local=args.local)
+TM = Timer("04")     # thoi gian tung phan + job group Spark (D17). T la pyspark.sql.types
+TM.mark("dish_matrix")
 
 
 # ===========================================================================
@@ -334,6 +336,7 @@ SIM = dict(
 )
 
 
+TM.mark("users_driver")
 # ===========================================================================
 # 2. BANG USERS (50.000 dong - sinh tren driver, du nho)
 # ===========================================================================
@@ -525,6 +528,7 @@ events = (users_sim.mapInPandas(make_generator(SIM), EV_SCHEMA)
                   "session_id", "rating", F.date_format("ts", "yyyy-MM").alias("month")))
 
 ev_path = f"{P.events}/events"
+TM.mark("generate_write")
 t1 = time.time()
 (events.repartitionByRange(12, "month")
        .sortWithinPartitions("month", "user_id", "ts")
@@ -532,6 +536,7 @@ t1 = time.time()
 gen_seconds = round(time.time() - t1, 1)
 print(f"[04] Da ghi events len {ev_path} sau {gen_seconds}s")
 
+TM.mark("users_write")
 PUBLIC = ["user_id", "region", "age_group", "gender", "device", "signup_date"]
 TRUTH = ["user_id", "persona_main", "persona_sub", "activity", "rater", "churned", "last_active_date"]
 users_pub = spark.createDataFrame(users_pd[PUBLIC]).withColumn("signup_date", F.to_date("signup_date"))
@@ -544,6 +549,7 @@ users_truth.coalesce(1).write.mode("overwrite").parquet(f"{P.events}/users_truth
 # ===========================================================================
 # 5. KIEM TRA QUY LUAT -> simulate_report.json
 # ===========================================================================
+TM.mark("checks")
 ev = spark.read.parquet(ev_path)
 feat_small = feat_df.select("food_id", "dish_category", "main_protein", "dish_type_fixed",
                             "is_vegetarian", "is_spicy", "is_quick", "season")
@@ -649,6 +655,7 @@ report = {
 }
 
 # ---- Xuat file de xem tren may ----
+TM.mark("export_local")
 os.makedirs(P.processed_local, exist_ok=True)
 os.makedirs(P.output_local, exist_ok=True)
 for fmt in ("parquet", "csv"):
@@ -660,6 +667,8 @@ export_single(ev.filter(F.col("user_id").isin(sample_users)).orderBy("user_id", 
               .withColumn("ts", F.date_format("ts", "yyyy-MM-dd HH:mm:ss")),
               os.path.join(P.output_local, "events_sample.csv"), "csv")
 
+TM.mark()
+report["timings_s"] = TM.parts
 report["total_seconds"] = round(time.time() - t0, 1)
 with open(os.path.join(P.output_local, "simulate_report.json"), "w", encoding="utf-8") as fh:
     json.dump(report, fh, ensure_ascii=False, indent=2, default=str)

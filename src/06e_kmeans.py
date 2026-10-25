@@ -16,6 +16,7 @@ Dau ra  : /data/models/kmeans (k = 8, dung cho dashboard - D13)
 
 Chay tren cum:  python src/06e_kmeans.py
 Chay thu local: python src/06e_kmeans.py --local
+Do hieu nang:   python src/06e_kmeans.py --fixed   (D17: chi fit KMeans k = 3, 8, 11)
 """
 import math
 import os
@@ -32,10 +33,17 @@ import rec_common as R  # noqa: E402
 args, spark, P = R.setup("06e_kmeans", __doc__)
 T = R.Timer()
 report = {"mode": "local" if args.local else "cluster"}
+REPORT_KS = [3, 8, 11]     # D13: k = 3 (Silhouette cao nhat), 8 (so persona, DASHBOARD dung), 11 (ARI cao nhat)
+DASHBOARD_K = 8
 FEATS = ["log_events", "log_sessions", "cook_per_view", "rate_per_cook", "share_chay", "share_haisan", "share_ngot",
          "share_nhanh", "share_cay", "share_canh", "share_lau", "slot_0", "slot_1", "slot_2", "slot_3",
          "share_weekend", "cat_entropy", "avg_rating"]
 KS = list(range(2, 13)) if not args.quick else [2, 4, 8]
+ALGOS = (("KMeans", KMeans), ("BisectingKMeans", BisectingKMeans))
+if args.fixed:
+    # D17: chi fit KMeans o 3 gia tri k can luu (cluster_k3/k8/k11), bo do k = 2..12 va BisectingKMeans
+    report["fixed"] = True
+    KS, ALGOS = REPORT_KS, (("KMeans", KMeans),)
 
 with T("features"):
     uf = R.load(spark, P, "user_features", "val").filter("n_cook >= 1")
@@ -69,7 +77,7 @@ def external(pred_col_df):
 with T("search_k"):
     ev = ClusteringEvaluator(featuresCol="features", metricName="silhouette", distanceMeasure="squaredEuclidean")
     res, models = [], {}
-    for algo, cls in (("KMeans", KMeans), ("BisectingKMeans", BisectingKMeans)):
+    for algo, cls in ALGOS:
         for k in KS:
             m = cls(k=k, seed=R.SEED, featuresCol="features", maxIter=30).fit(x)
             pr = m.transform(x)
@@ -82,8 +90,6 @@ with T("search_k"):
     report["best_by_silhouette"] = best
     report["at_k8"] = [r for r in res if r["k"] == 8]
 
-REPORT_KS = [3, 8, 11]     # D13: k = 3 (Silhouette cao nhat), 8 (so persona, DASHBOARD dung), 11 (ARI cao nhat)
-DASHBOARD_K = 8
 with T("save"):
     ks = [k for k in REPORT_KS if ("KMeans", k) in models]
     models[("KMeans", DASHBOARD_K if DASHBOARD_K in ks else best["k"])].write().overwrite().save(f"{P.models}/kmeans")

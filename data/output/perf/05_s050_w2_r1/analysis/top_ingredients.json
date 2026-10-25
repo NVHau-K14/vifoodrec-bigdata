@@ -1,0 +1,1402 @@
+[
+ {
+  "ingredient": "muối",
+  "n_dishes": 2340,
+  "cooks": 546527,
+  "is_seasoning": true,
+  "cook_rank": 1
+ },
+ {
+  "ingredient": "dầu ăn",
+  "n_dishes": 2186,
+  "cooks": 456221,
+  "is_seasoning": true,
+  "cook_rank": 2
+ },
+ {
+  "ingredient": "hạt nêm",
+  "n_dishes": 1660,
+  "cooks": 404815,
+  "is_seasoning": true,
+  "cook_rank": 3
+ },
+ {
+  "ingredient": "tiêu",
+  "n_dishes": 1561,
+  "cooks": 380264,
+  "is_seasoning": true,
+  "cook_rank": 4
+ },
+ {
+  "ingredient": "đường",
+  "n_dishes": 1129,
+  "cooks": 306861,
+  "is_seasoning": true,
+  "cook_rank": 5
+ },
+ {
+  "ingredient": "đường trắng",
+  "n_dishes": 1900,
+  "cooks": 301453,
+  "is_seasoning": true,
+  "cook_rank": 6
+ },
+ {
+  "ingredient": "bột ngọt",
+  "n_dishes": 1037,
+  "cooks": 301330,
+  "is_seasoning": true,
+  "cook_rank": 7
+ },
+ {
+  "ingredient": "nước mắm",
+  "n_dishes": 1303,
+  "cooks": 286075,
+  "is_seasoning": true,
+  "cook_rank": 8
+ },
+ {
+  "ingredient": "hành lá",
+  "n_dishes": 1057,
+  "cooks": 228912,
+  "is_seasoning": false,
+  "cook_rank": 9
+ },
+ {
+  "ingredient": "cà rốt",
+  "n_dishes": 681,
+  "cooks": 196587,
+  "is_seasoning": false,
+  "cook_rank": 10
+ },
+ {
+  "ingredient": "nước tương",
+  "n_dishes": 824,
+  "cooks": 190325,
+  "is_seasoning": true,
+  "cook_rank": 11
+ },
+ {
+  "ingredient": "tỏi băm",
+  "n_dishes": 762,
+  "cooks": 151394,
+  "is_seasoning": true,
+  "cook_rank": 12
+ },
+ {
+  "ingredient": "cà chua",
+  "n_dishes": 407,
+  "cooks": 134998,
+  "is_seasoning": false,
+  "cook_rank": 13
+ },
+ {
+  "ingredient": "tỏi",
+  "n_dishes": 634,
+  "cooks": 127541,
+  "is_seasoning": false,
+  "cook_rank": 14
+ },
+ {
+  "ingredient": "ớt",
+  "n_dishes": 508,
+  "cooks": 123863,
+  "is_seasoning": false,
+  "cook_rank": 15
+ },
+ {
+  "ingredient": "ngò rí",
+  "n_dishes": 415,
+  "cooks": 105972,
+  "is_seasoning": false,
+  "cook_rank": 16
+ },
+ {
+  "ingredient": "trứng gà",
+  "n_dishes": 760,
+  "cooks": 105720,
+  "is_seasoning": false,
+  "cook_rank": 17
+ },
+ {
+  "ingredient": "hành tím",
+  "n_dishes": 511,
+  "cooks": 104863,
+  "is_seasoning": false,
+  "cook_rank": 18
+ },
+ {
+  "ingredient": "hành tây",
+  "n_dishes": 638,
+  "cooks": 102718,
+  "is_seasoning": false,
+  "cook_rank": 19
+ },
+ {
+  "ingredient": "hành tím băm",
+  "n_dishes": 431,
+  "cooks": 89527,
+  "is_seasoning": true,
+  "cook_rank": 20
+ },
+ {
+  "ingredient": "hạt nêm chay knorr nấm hương",
+  "n_dishes": 165,
+  "cooks": 86458,
+  "is_seasoning": true,
+  "cook_rank": 21
+ },
+ {
+  "ingredient": "ớt sừng",
+  "n_dishes": 294,
+  "cooks": 84090,
+  "is_seasoning": false,
+  "cook_rank": 22
+ },
+ {
+  "ingredient": "gừng",
+  "n_dishes": 491,
+  "cooks": 68703,
+  "is_seasoning": false,
+  "cook_rank": 23
+ },
+ {
+  "ingredient": "ớt bột",
+  "n_dishes": 246,
+  "cooks": 66288,
+  "is_seasoning": true,
+  "cook_rank": 24
+ },
+ {
+  "ingredient": "xốt mayonnaise",
+  "n_dishes": 247,
+  "cooks": 66132,
+  "is_seasoning": false,
+  "cook_rank": 25
+ },
+ {
+  "ingredient": "bột năng",
+  "n_dishes": 406,
+  "cooks": 65261,
+  "is_seasoning": true,
+  "cook_rank": 26
+ },
+ {
+  "ingredient": "sả",
+  "n_dishes": 318,
+  "cooks": 65226,
+  "is_seasoning": false,
+  "cook_rank": 27
+ },
+ {
+  "ingredient": "tương ớt",
+  "n_dishes": 369,
+  "cooks": 61067,
+  "is_seasoning": true,
+  "cook_rank": 28
+ },
+ {
+  "ingredient": "dưa leo",
+  "n_dishes": 240,
+  "cooks": 60796,
+  "is_seasoning": false,
+  "cook_rank": 29
+ },
+ {
+  "ingredient": "tôm tươi",
+  "n_dishes": 261,
+  "cooks": 60227,
+  "is_seasoning": false,
+  "cook_rank": 30
+ },
+ {
+  "ingredient": "dầu mè",
+  "n_dishes": 266,
+  "cooks": 59822,
+  "is_seasoning": true,
+  "cook_rank": 31
+ },
+ {
+  "ingredient": "giấm gạo lên men ajinomoto",
+  "n_dishes": 225,
+  "cooks": 59580,
+  "is_seasoning": true,
+  "cook_rank": 32
+ },
+ {
+  "ingredient": "chanh",
+  "n_dishes": 292,
+  "cooks": 57699,
+  "is_seasoning": false,
+  "cook_rank": 33
+ },
+ {
+  "ingredient": "bột mì",
+  "n_dishes": 555,
+  "cooks": 57171,
+  "is_seasoning": false,
+  "cook_rank": 34
+ },
+ {
+  "ingredient": "ngò gai",
+  "n_dishes": 146,
+  "cooks": 56908,
+  "is_seasoning": false,
+  "cook_rank": 35
+ },
+ {
+  "ingredient": "thơm",
+  "n_dishes": 163,
+  "cooks": 52779,
+  "is_seasoning": false,
+  "cook_rank": 36
+ },
+ {
+  "ingredient": "ớt hiểm",
+  "n_dishes": 138,
+  "cooks": 52676,
+  "is_seasoning": false,
+  "cook_rank": 37
+ },
+ {
+  "ingredient": "nấm kim châm",
+  "n_dishes": 92,
+  "cooks": 52211,
+  "is_seasoning": false,
+  "cook_rank": 38
+ },
+ {
+  "ingredient": "thịt ba chỉ",
+  "n_dishes": 202,
+  "cooks": 47259,
+  "is_seasoning": false,
+  "cook_rank": 39
+ },
+ {
+  "ingredient": "nước cốt chanh",
+  "n_dishes": 313,
+  "cooks": 46844,
+  "is_seasoning": true,
+  "cook_rank": 40
+ },
+ {
+  "ingredient": "giấm",
+  "n_dishes": 229,
+  "cooks": 46085,
+  "is_seasoning": true,
+  "cook_rank": 41
+ },
+ {
+  "ingredient": "dầu hào",
+  "n_dishes": 282,
+  "cooks": 45463,
+  "is_seasoning": true,
+  "cook_rank": 42
+ },
+ {
+  "ingredient": "củ cải trắng",
+  "n_dishes": 100,
+  "cooks": 42869,
+  "is_seasoning": false,
+  "cook_rank": 43
+ },
+ {
+  "ingredient": "ớt băm",
+  "n_dishes": 252,
+  "cooks": 42818,
+  "is_seasoning": true,
+  "cook_rank": 44
+ },
+ {
+  "ingredient": "nấm rơm",
+  "n_dishes": 122,
+  "cooks": 42446,
+  "is_seasoning": false,
+  "cook_rank": 45
+ },
+ {
+  "ingredient": "nước",
+  "n_dishes": 250,
+  "cooks": 41228,
+  "is_seasoning": true,
+  "cook_rank": 46
+ },
+ {
+  "ingredient": "mật ong",
+  "n_dishes": 228,
+  "cooks": 40794,
+  "is_seasoning": false,
+  "cook_rank": 47
+ },
+ {
+  "ingredient": "nấm hương",
+  "n_dishes": 113,
+  "cooks": 40154,
+  "is_seasoning": false,
+  "cook_rank": 48
+ },
+ {
+  "ingredient": "dầu điều",
+  "n_dishes": 165,
+  "cooks": 37884,
+  "is_seasoning": true,
+  "cook_rank": 49
+ },
+ {
+  "ingredient": "hành tỏi băm",
+  "n_dishes": 140,
+  "cooks": 37665,
+  "is_seasoning": true,
+  "cook_rank": 50
+ },
+ {
+  "ingredient": "gia vị nêm sẵn",
+  "n_dishes": 188,
+  "cooks": 36254,
+  "is_seasoning": true,
+  "cook_rank": 51
+ },
+ {
+  "ingredient": "đậu hũ non",
+  "n_dishes": 91,
+  "cooks": 35382,
+  "is_seasoning": false,
+  "cook_rank": 52
+ },
+ {
+  "ingredient": "rượu trắng",
+  "n_dishes": 283,
+  "cooks": 34911,
+  "is_seasoning": true,
+  "cook_rank": 53
+ },
+ {
+  "ingredient": "bột bắp",
+  "n_dishes": 261,
+  "cooks": 34682,
+  "is_seasoning": true,
+  "cook_rank": 54
+ },
+ {
+  "ingredient": "nước cốt dừa",
+  "n_dishes": 314,
+  "cooks": 33279,
+  "is_seasoning": false,
+  "cook_rank": 55
+ },
+ {
+  "ingredient": "xà lách",
+  "n_dishes": 158,
+  "cooks": 32715,
+  "is_seasoning": false,
+  "cook_rank": 56
+ },
+ {
+  "ingredient": "bơ",
+  "n_dishes": 257,
+  "cooks": 30932,
+  "is_seasoning": false,
+  "cook_rank": 57
+ },
+ {
+  "ingredient": "nấm mèo",
+  "n_dishes": 165,
+  "cooks": 30847,
+  "is_seasoning": false,
+  "cook_rank": 58
+ },
+ {
+  "ingredient": "cà chua bi",
+  "n_dishes": 114,
+  "cooks": 30743,
+  "is_seasoning": false,
+  "cook_rank": 59
+ },
+ {
+  "ingredient": "đậu phộng",
+  "n_dishes": 154,
+  "cooks": 30116,
+  "is_seasoning": false,
+  "cook_rank": 60
+ },
+ {
+  "ingredient": "rau răm",
+  "n_dishes": 148,
+  "cooks": 29305,
+  "is_seasoning": false,
+  "cook_rank": 61
+ },
+ {
+  "ingredient": "giò sống",
+  "n_dishes": 127,
+  "cooks": 29198,
+  "is_seasoning": false,
+  "cook_rank": 62
+ },
+ {
+  "ingredient": "hạt nêm chay",
+  "n_dishes": 63,
+  "cooks": 28346,
+  "is_seasoning": false,
+  "cook_rank": 63
+ },
+ {
+  "ingredient": "khoai tây",
+  "n_dishes": 147,
+  "cooks": 28132,
+  "is_seasoning": false,
+  "cook_rank": 64
+ },
+ {
+  "ingredient": "đậu hà lan",
+  "n_dishes": 60,
+  "cooks": 27857,
+  "is_seasoning": false,
+  "cook_rank": 65
+ },
+ {
+  "ingredient": "rau om",
+  "n_dishes": 50,
+  "cooks": 27356,
+  "is_seasoning": false,
+  "cook_rank": 66
+ },
+ {
+  "ingredient": "sườn non",
+  "n_dishes": 84,
+  "cooks": 26741,
+  "is_seasoning": false,
+  "cook_rank": 67
+ },
+ {
+  "ingredient": "hành boa rô",
+  "n_dishes": 88,
+  "cooks": 26189,
+  "is_seasoning": false,
+  "cook_rank": 68
+ },
+ {
+  "ingredient": "sả cây",
+  "n_dishes": 81,
+  "cooks": 26096,
+  "is_seasoning": false,
+  "cook_rank": 69
+ },
+ {
+  "ingredient": "nước dừa tươi",
+  "n_dishes": 115,
+  "cooks": 25822,
+  "is_seasoning": false,
+  "cook_rank": 70
+ },
+ {
+  "ingredient": "tiêu xay",
+  "n_dishes": 126,
+  "cooks": 25775,
+  "is_seasoning": true,
+  "cook_rank": 71
+ },
+ {
+  "ingredient": "bơ lạt",
+  "n_dishes": 159,
+  "cooks": 25099,
+  "is_seasoning": false,
+  "cook_rank": 72
+ },
+ {
+  "ingredient": "cơm",
+  "n_dishes": 77,
+  "cooks": 24961,
+  "is_seasoning": false,
+  "cook_rank": 73
+ },
+ {
+  "ingredient": "đậu que",
+  "n_dishes": 40,
+  "cooks": 24696,
+  "is_seasoning": false,
+  "cook_rank": 74
+ },
+ {
+  "ingredient": "sốt mayonnaise",
+  "n_dishes": 64,
+  "cooks": 24535,
+  "is_seasoning": false,
+  "cook_rank": 75
+ },
+ {
+  "ingredient": "bột canh",
+  "n_dishes": 67,
+  "cooks": 24458,
+  "is_seasoning": false,
+  "cook_rank": 76
+ },
+ {
+  "ingredient": "tôm khô",
+  "n_dishes": 83,
+  "cooks": 24433,
+  "is_seasoning": false,
+  "cook_rank": 77
+ },
+ {
+  "ingredient": "đậu hũ trắng",
+  "n_dishes": 79,
+  "cooks": 24231,
+  "is_seasoning": false,
+  "cook_rank": 78
+ },
+ {
+  "ingredient": "đậu bắp",
+  "n_dishes": 57,
+  "cooks": 24174,
+  "is_seasoning": false,
+  "cook_rank": 79
+ },
+ {
+  "ingredient": "mè trắng",
+  "n_dishes": 163,
+  "cooks": 24138,
+  "is_seasoning": false,
+  "cook_rank": 80
+ },
+ {
+  "ingredient": "phô mai",
+  "n_dishes": 100,
+  "cooks": 23739,
+  "is_seasoning": false,
+  "cook_rank": 81
+ },
+ {
+  "ingredient": "sữa tươi",
+  "n_dishes": 231,
+  "cooks": 23622,
+  "is_seasoning": false,
+  "cook_rank": 82
+ },
+ {
+  "ingredient": "nước dừa",
+  "n_dishes": 93,
+  "cooks": 23551,
+  "is_seasoning": false,
+  "cook_rank": 83
+ },
+ {
+  "ingredient": "sa tế",
+  "n_dishes": 93,
+  "cooks": 23116,
+  "is_seasoning": false,
+  "cook_rank": 84
+ },
+ {
+  "ingredient": "húng quế",
+  "n_dishes": 83,
+  "cooks": 23085,
+  "is_seasoning": false,
+  "cook_rank": 85
+ },
+ {
+  "ingredient": "bí đỏ",
+  "n_dishes": 77,
+  "cooks": 22812,
+  "is_seasoning": false,
+  "cook_rank": 86
+ },
+ {
+  "ingredient": "sả băm",
+  "n_dishes": 104,
+  "cooks": 22721,
+  "is_seasoning": false,
+  "cook_rank": 87
+ },
+ {
+  "ingredient": "thì là",
+  "n_dishes": 68,
+  "cooks": 22512,
+  "is_seasoning": false,
+  "cook_rank": 88
+ },
+ {
+  "ingredient": "sữa tươi không đường",
+  "n_dishes": 203,
+  "cooks": 22080,
+  "is_seasoning": false,
+  "cook_rank": 89
+ },
+ {
+  "ingredient": "dầu olive",
+  "n_dishes": 103,
+  "cooks": 21740,
+  "is_seasoning": false,
+  "cook_rank": 90
+ },
+ {
+  "ingredient": "tương cà",
+  "n_dishes": 115,
+  "cooks": 21572,
+  "is_seasoning": false,
+  "cook_rank": 91
+ },
+ {
+  "ingredient": "sữa đặc",
+  "n_dishes": 193,
+  "cooks": 20265,
+  "is_seasoning": false,
+  "cook_rank": 92
+ },
+ {
+  "ingredient": "đường phèn",
+  "n_dishes": 147,
+  "cooks": 20207,
+  "is_seasoning": true,
+  "cook_rank": 93
+ },
+ {
+  "ingredient": "thịt bò",
+  "n_dishes": 138,
+  "cooks": 20037,
+  "is_seasoning": false,
+  "cook_rank": 94
+ },
+ {
+  "ingredient": "gạo nếp",
+  "n_dishes": 102,
+  "cooks": 19990,
+  "is_seasoning": false,
+  "cook_rank": 95
+ },
+ {
+  "ingredient": "trứng cút",
+  "n_dishes": 93,
+  "cooks": 19609,
+  "is_seasoning": false,
+  "cook_rank": 96
+ },
+ {
+  "ingredient": "dâu tây",
+  "n_dishes": 93,
+  "cooks": 19448,
+  "is_seasoning": false,
+  "cook_rank": 97
+ },
+ {
+  "ingredient": "nước cốt me",
+  "n_dishes": 58,
+  "cooks": 19196,
+  "is_seasoning": false,
+  "cook_rank": 98
+ },
+ {
+  "ingredient": "bí ngòi vàng",
+  "n_dishes": 7,
+  "cooks": 19092,
+  "is_seasoning": false,
+  "cook_rank": 99
+ },
+ {
+  "ingredient": "tôm sú",
+  "n_dishes": 77,
+  "cooks": 18779,
+  "is_seasoning": false,
+  "cook_rank": 100
+ },
+ {
+  "ingredient": "lá chanh",
+  "n_dishes": 93,
+  "cooks": 18762,
+  "is_seasoning": false,
+  "cook_rank": 101
+ },
+ {
+  "ingredient": "hành boaro",
+  "n_dishes": 47,
+  "cooks": 18217,
+  "is_seasoning": false,
+  "cook_rank": 102
+ },
+ {
+  "ingredient": "sữa chua",
+  "n_dishes": 97,
+  "cooks": 18025,
+  "is_seasoning": false,
+  "cook_rank": 103
+ },
+ {
+  "ingredient": "đậu hũ chiên",
+  "n_dishes": 76,
+  "cooks": 17935,
+  "is_seasoning": false,
+  "cook_rank": 104
+ },
+ {
+  "ingredient": "ớt bột parika",
+  "n_dishes": 4,
+  "cooks": 17898,
+  "is_seasoning": false,
+  "cook_rank": 105
+ },
+ {
+  "ingredient": "thịt gà",
+  "n_dishes": 103,
+  "cooks": 17872,
+  "is_seasoning": false,
+  "cook_rank": 106
+ },
+ {
+  "ingredient": "nấm hương khô",
+  "n_dishes": 22,
+  "cooks": 17861,
+  "is_seasoning": false,
+  "cook_rank": 107
+ },
+ {
+  "ingredient": "khoai lang",
+  "n_dishes": 95,
+  "cooks": 17843,
+  "is_seasoning": false,
+  "cook_rank": 108
+ },
+ {
+  "ingredient": "gừng cắt lát mỏng đập dập",
+  "n_dishes": 1,
+  "cooks": 17546,
+  "is_seasoning": false,
+  "cook_rank": 109
+ },
+ {
+  "ingredient": "hào sữa thịt",
+  "n_dishes": 1,
+  "cooks": 17546,
+  "is_seasoning": false,
+  "cook_rank": 110
+ },
+ {
+  "ingredient": "bột nghệ",
+  "n_dishes": 104,
+  "cooks": 17526,
+  "is_seasoning": false,
+  "cook_rank": 111
+ },
+ {
+  "ingredient": "nước màu",
+  "n_dishes": 79,
+  "cooks": 17383,
+  "is_seasoning": false,
+  "cook_rank": 112
+ },
+ {
+  "ingredient": "nước lọc",
+  "n_dishes": 103,
+  "cooks": 17309,
+  "is_seasoning": false,
+  "cook_rank": 113
+ },
+ {
+  "ingredient": "bún tươi",
+  "n_dishes": 116,
+  "cooks": 17266,
+  "is_seasoning": false,
+  "cook_rank": 114
+ },
+ {
+  "ingredient": "cải thìa",
+  "n_dishes": 40,
+  "cooks": 17099,
+  "is_seasoning": false,
+  "cook_rank": 115
+ },
+ {
+  "ingredient": "thịt heo bằm",
+  "n_dishes": 126,
+  "cooks": 17090,
+  "is_seasoning": false,
+  "cook_rank": 116
+ },
+ {
+  "ingredient": "nấm bào ngư",
+  "n_dishes": 61,
+  "cooks": 16869,
+  "is_seasoning": false,
+  "cook_rank": 117
+ },
+ {
+  "ingredient": "ớt chuông",
+  "n_dishes": 89,
+  "cooks": 16866,
+  "is_seasoning": false,
+  "cook_rank": 118
+ },
+ {
+  "ingredient": "nghêu",
+  "n_dishes": 34,
+  "cooks": 16203,
+  "is_seasoning": false,
+  "cook_rank": 119
+ },
+ {
+  "ingredient": "dừa nạo",
+  "n_dishes": 87,
+  "cooks": 16180,
+  "is_seasoning": false,
+  "cook_rank": 120
+ },
+ {
+  "ingredient": "bắp hột",
+  "n_dishes": 38,
+  "cooks": 16142,
+  "is_seasoning": false,
+  "cook_rank": 121
+ },
+ {
+  "ingredient": "bắp mỹ",
+  "n_dishes": 87,
+  "cooks": 15999,
+  "is_seasoning": false,
+  "cook_rank": 122
+ },
+ {
+  "ingredient": "bột gạo",
+  "n_dishes": 174,
+  "cooks": 15690,
+  "is_seasoning": false,
+  "cook_rank": 123
+ },
+ {
+  "ingredient": "ớt sa tế",
+  "n_dishes": 42,
+  "cooks": 15666,
+  "is_seasoning": false,
+  "cook_rank": 124
+ },
+ {
+  "ingredient": "hạt sen tươi",
+  "n_dishes": 43,
+  "cooks": 15619,
+  "is_seasoning": false,
+  "cook_rank": 125
+ },
+ {
+  "ingredient": "khổ qua",
+  "n_dishes": 39,
+  "cooks": 15580,
+  "is_seasoning": false,
+  "cook_rank": 126
+ },
+ {
+  "ingredient": "nấm đông cô",
+  "n_dishes": 74,
+  "cooks": 15550,
+  "is_seasoning": false,
+  "cook_rank": 127
+ },
+ {
+  "ingredient": "cam",
+  "n_dishes": 36,
+  "cooks": 15354,
+  "is_seasoning": false,
+  "cook_rank": 128
+ },
+ {
+  "ingredient": "nấm đùi gà",
+  "n_dishes": 68,
+  "cooks": 15175,
+  "is_seasoning": false,
+  "cook_rank": 129
+ },
+ {
+  "ingredient": "giò thủ",
+  "n_dishes": 2,
+  "cooks": 15122,
+  "is_seasoning": false,
+  "cook_rank": 130
+ },
+ {
+  "ingredient": "gừng băm",
+  "n_dishes": 94,
+  "cooks": 15117,
+  "is_seasoning": false,
+  "cook_rank": 131
+ },
+ {
+  "ingredient": "hành phi",
+  "n_dishes": 100,
+  "cooks": 15109,
+  "is_seasoning": false,
+  "cook_rank": 132
+ },
+ {
+  "ingredient": "húng lủi",
+  "n_dishes": 64,
+  "cooks": 15102,
+  "is_seasoning": false,
+  "cook_rank": 133
+ },
+ {
+  "ingredient": "cần tây",
+  "n_dishes": 84,
+  "cooks": 15097,
+  "is_seasoning": false,
+  "cook_rank": 134
+ },
+ {
+  "ingredient": "rau húng quế",
+  "n_dishes": 6,
+  "cooks": 15097,
+  "is_seasoning": false,
+  "cook_rank": 135
+ },
+ {
+  "ingredient": "bún",
+  "n_dishes": 39,
+  "cooks": 15072,
+  "is_seasoning": false,
+  "cook_rank": 136
+ },
+ {
+  "ingredient": "ớt hiểm băm",
+  "n_dishes": 43,
+  "cooks": 14909,
+  "is_seasoning": false,
+  "cook_rank": 137
+ },
+ {
+  "ingredient": "vani",
+  "n_dishes": 184,
+  "cooks": 14811,
+  "is_seasoning": true,
+  "cook_rank": 138
+ },
+ {
+  "ingredient": "giá đỗ",
+  "n_dishes": 71,
+  "cooks": 14746,
+  "is_seasoning": false,
+  "cook_rank": 139
+ },
+ {
+  "ingredient": "muối hột",
+  "n_dishes": 66,
+  "cooks": 14616,
+  "is_seasoning": false,
+  "cook_rank": 140
+ },
+ {
+  "ingredient": "tỏi phi",
+  "n_dishes": 47,
+  "cooks": 14500,
+  "is_seasoning": false,
+  "cook_rank": 141
+ },
+ {
+  "ingredient": "thịt xay",
+  "n_dishes": 37,
+  "cooks": 14420,
+  "is_seasoning": false,
+  "cook_rank": 142
+ },
+ {
+  "ingredient": "chuối",
+  "n_dishes": 92,
+  "cooks": 14248,
+  "is_seasoning": false,
+  "cook_rank": 143
+ },
+ {
+  "ingredient": "bánh mì sandwich",
+  "n_dishes": 38,
+  "cooks": 14113,
+  "is_seasoning": false,
+  "cook_rank": 144
+ },
+ {
+  "ingredient": "lá dứa",
+  "n_dishes": 129,
+  "cooks": 13947,
+  "is_seasoning": false,
+  "cook_rank": 145
+ },
+ {
+  "ingredient": "bánh mì",
+  "n_dishes": 56,
+  "cooks": 13811,
+  "is_seasoning": false,
+  "cook_rank": 146
+ },
+ {
+  "ingredient": "giá",
+  "n_dishes": 39,
+  "cooks": 13793,
+  "is_seasoning": false,
+  "cook_rank": 147
+ },
+ {
+  "ingredient": "cải thảo",
+  "n_dishes": 47,
+  "cooks": 13679,
+  "is_seasoning": false,
+  "cook_rank": 148
+ },
+ {
+  "ingredient": "mỡ heo",
+  "n_dishes": 46,
+  "cooks": 13515,
+  "is_seasoning": false,
+  "cook_rank": 149
+ },
+ {
+  "ingredient": "nấm đông cô tươi",
+  "n_dishes": 32,
+  "cooks": 13454,
+  "is_seasoning": false,
+  "cook_rank": 150
+ },
+ {
+  "ingredient": "cà tím",
+  "n_dishes": 46,
+  "cooks": 13437,
+  "is_seasoning": false,
+  "cook_rank": 151
+ },
+ {
+  "ingredient": "bầu non",
+  "n_dishes": 1,
+  "cooks": 13397,
+  "is_seasoning": false,
+  "cook_rank": 152
+ },
+ {
+  "ingredient": "ớt cắt nhỏ",
+  "n_dishes": 1,
+  "cooks": 13397,
+  "is_seasoning": false,
+  "cook_rank": 153
+ },
+ {
+  "ingredient": "bắp non",
+  "n_dishes": 44,
+  "cooks": 13265,
+  "is_seasoning": false,
+  "cook_rank": 154
+ },
+ {
+  "ingredient": "ngò tây",
+  "n_dishes": 53,
+  "cooks": 13167,
+  "is_seasoning": false,
+  "cook_rank": 155
+ },
+ {
+  "ingredient": "ớt sừng cắt sợi",
+  "n_dishes": 61,
+  "cooks": 13145,
+  "is_seasoning": false,
+  "cook_rank": 156
+ },
+ {
+  "ingredient": "cần tàu",
+  "n_dishes": 48,
+  "cooks": 12938,
+  "is_seasoning": false,
+  "cook_rank": 157
+ },
+ {
+  "ingredient": "cơm trắng",
+  "n_dishes": 53,
+  "cooks": 12880,
+  "is_seasoning": false,
+  "cook_rank": 158
+ },
+ {
+  "ingredient": "rau thơm",
+  "n_dishes": 65,
+  "cooks": 12876,
+  "is_seasoning": false,
+  "cook_rank": 159
+ },
+ {
+  "ingredient": "củ sắn",
+  "n_dishes": 53,
+  "cooks": 12818,
+  "is_seasoning": false,
+  "cook_rank": 160
+ },
+ {
+  "ingredient": "hẹ",
+  "n_dishes": 41,
+  "cooks": 12738,
+  "is_seasoning": false,
+  "cook_rank": 161
+ },
+ {
+  "ingredient": "rau muống",
+  "n_dishes": 49,
+  "cooks": 12674,
+  "is_seasoning": false,
+  "cook_rank": 162
+ },
+ {
+  "ingredient": "bắp cải",
+  "n_dishes": 50,
+  "cooks": 12600,
+  "is_seasoning": false,
+  "cook_rank": 163
+ },
+ {
+  "ingredient": "thịt heo",
+  "n_dishes": 72,
+  "cooks": 12504,
+  "is_seasoning": false,
+  "cook_rank": 164
+ },
+ {
+  "ingredient": "bánh tráng",
+  "n_dishes": 57,
+  "cooks": 12393,
+  "is_seasoning": false,
+  "cook_rank": 165
+ },
+ {
+  "ingredient": "củ nén",
+  "n_dishes": 13,
+  "cooks": 12331,
+  "is_seasoning": false,
+  "cook_rank": 166
+ },
+ {
+  "ingredient": "mướp hương",
+  "n_dishes": 24,
+  "cooks": 12303,
+  "is_seasoning": false,
+  "cook_rank": 167
+ },
+ {
+  "ingredient": "hạt tiêu",
+  "n_dishes": 55,
+  "cooks": 12273,
+  "is_seasoning": false,
+  "cook_rank": 168
+ },
+ {
+  "ingredient": "đầu hành",
+  "n_dishes": 20,
+  "cooks": 11973,
+  "is_seasoning": false,
+  "cook_rank": 169
+ },
+ {
+  "ingredient": "cà chua chín đỏ",
+  "n_dishes": 11,
+  "cooks": 11965,
+  "is_seasoning": false,
+  "cook_rank": 170
+ },
+ {
+  "ingredient": "nước dùng gà",
+  "n_dishes": 54,
+  "cooks": 11727,
+  "is_seasoning": false,
+  "cook_rank": 171
+ },
+ {
+  "ingredient": "bạc hà",
+  "n_dishes": 21,
+  "cooks": 11641,
+  "is_seasoning": false,
+  "cook_rank": 172
+ },
+ {
+  "ingredient": "rau mầm",
+  "n_dishes": 36,
+  "cooks": 11622,
+  "is_seasoning": false,
+  "cook_rank": 173
+ },
+ {
+  "ingredient": "thịt cua",
+  "n_dishes": 29,
+  "cooks": 11550,
+  "is_seasoning": false,
+  "cook_rank": 174
+ },
+ {
+  "ingredient": "bông cải xanh",
+  "n_dishes": 54,
+  "cooks": 11547,
+  "is_seasoning": false,
+  "cook_rank": 175
+ },
+ {
+  "ingredient": "mè trắng rang",
+  "n_dishes": 59,
+  "cooks": 11427,
+  "is_seasoning": false,
+  "cook_rank": 176
+ },
+ {
+  "ingredient": "đậu phộng rang",
+  "n_dishes": 75,
+  "cooks": 11390,
+  "is_seasoning": false,
+  "cook_rank": 177
+ },
+ {
+  "ingredient": "kem whipping",
+  "n_dishes": 98,
+  "cooks": 11380,
+  "is_seasoning": false,
+  "cook_rank": 178
+ },
+ {
+  "ingredient": "đường cát",
+  "n_dishes": 58,
+  "cooks": 11315,
+  "is_seasoning": false,
+  "cook_rank": 179
+ },
+ {
+  "ingredient": "ngò om",
+  "n_dishes": 23,
+  "cooks": 11080,
+  "is_seasoning": false,
+  "cook_rank": 180
+ },
+ {
+  "ingredient": "men nở",
+  "n_dishes": 98,
+  "cooks": 11069,
+  "is_seasoning": false,
+  "cook_rank": 181
+ },
+ {
+  "ingredient": "bắp cải tím",
+  "n_dishes": 31,
+  "cooks": 10931,
+  "is_seasoning": false,
+  "cook_rank": 182
+ },
+ {
+  "ingredient": "lá lốt",
+  "n_dishes": 57,
+  "cooks": 10766,
+  "is_seasoning": false,
+  "cook_rank": 183
+ },
+ {
+  "ingredient": "măng chua",
+  "n_dishes": 21,
+  "cooks": 10713,
+  "is_seasoning": false,
+  "cook_rank": 184
+ },
+ {
+  "ingredient": "mè rang",
+  "n_dishes": 71,
+  "cooks": 10681,
+  "is_seasoning": false,
+  "cook_rank": 185
+ },
+ {
+  "ingredient": "bột nở",
+  "n_dishes": 133,
+  "cooks": 10338,
+  "is_seasoning": true,
+  "cook_rank": 186
+ },
+ {
+  "ingredient": "đường bột",
+  "n_dishes": 99,
+  "cooks": 10293,
+  "is_seasoning": false,
+  "cook_rank": 187
+ },
+ {
+  "ingredient": "cá diêu hồng",
+  "n_dishes": 20,
+  "cooks": 10231,
+  "is_seasoning": false,
+  "cook_rank": 188
+ },
+ {
+  "ingredient": "rau nhút",
+  "n_dishes": 22,
+  "cooks": 10149,
+  "is_seasoning": false,
+  "cook_rank": 189
+ },
+ {
+  "ingredient": "thịt heo xay",
+  "n_dishes": 56,
+  "cooks": 10063,
+  "is_seasoning": false,
+  "cook_rank": 190
+ },
+ {
+  "ingredient": "chả lụa chay",
+  "n_dishes": 25,
+  "cooks": 10045,
+  "is_seasoning": false,
+  "cook_rank": 191
+ },
+ {
+  "ingredient": "việt quất",
+  "n_dishes": 15,
+  "cooks": 9964,
+  "is_seasoning": false,
+  "cook_rank": 192
+ },
+ {
+  "ingredient": "bột ngũ vị hương",
+  "n_dishes": 64,
+  "cooks": 9831,
+  "is_seasoning": false,
+  "cook_rank": 193
+ },
+ {
+  "ingredient": "táo",
+  "n_dishes": 46,
+  "cooks": 9650,
+  "is_seasoning": false,
+  "cook_rank": 194
+ },
+ {
+  "ingredient": "bắp cải trắng",
+  "n_dishes": 15,
+  "cooks": 9607,
+  "is_seasoning": false,
+  "cook_rank": 195
+ },
+ {
+  "ingredient": "rau mồng tơi",
+  "n_dishes": 20,
+  "cooks": 9540,
+  "is_seasoning": false,
+  "cook_rank": 196
+ },
+ {
+  "ingredient": "trứng vịt",
+  "n_dishes": 49,
+  "cooks": 9514,
+  "is_seasoning": false,
+  "cook_rank": 197
+ },
+ {
+  "ingredient": "xúc xích",
+  "n_dishes": 39,
+  "cooks": 9514,
+  "is_seasoning": false,
+  "cook_rank": 198
+ },
+ {
+  "ingredient": "xương heo",
+  "n_dishes": 34,
+  "cooks": 9507,
+  "is_seasoning": false,
+  "cook_rank": 199
+ },
+ {
+  "ingredient": "tiêu xanh",
+  "n_dishes": 65,
+  "cooks": 9500,
+  "is_seasoning": false,
+  "cook_rank": 200
+ }
+]

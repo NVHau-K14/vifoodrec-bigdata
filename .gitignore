@@ -11,6 +11,9 @@ data/hdfs_local/
 data/output/*.csv
 !data/output/features_check_sample.csv
 # Giu lai: data/output/*.json (report nho, dung cho bao cao)
+# Do hieu nang (D17): giu report JSON cua tung lan chay, bo ban sao bang va CSV mau
+data/output/perf/*/processed/
+data/output/perf/*/*.csv
 
 # Claude Code: cau hinh rieng tung may
 .claude/settings.local.json

@@ -99,6 +99,7 @@ section.row{display:flex;flex-wrap:wrap;gap:var(--gap);margin-bottom:var(--gap)}
 .split>*{flex:1 1 240px;min-width:0}
 .chart{width:100%;height:280px}
 .chart-sm{height:220px}
+.chart-tall{height:380px}
 
 /* KPI */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--gap);margin-bottom:var(--gap)}

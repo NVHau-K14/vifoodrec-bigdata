@@ -25,6 +25,7 @@ Dau ra  : /data/results/models/recs_<model>_<v>   (user_id, food_id, rank, score
           data/output/model_als_report.json
 
 Chay tren cum:  python src/06b_als.py            (--quick: luoi tham so nho)
+Do hieu nang:   python src/06b_als.py --fixed    (D17: chi view test, tham so lay tu data/output/model_als_report.json)
 Chay thu local: python src/06b_als.py --local
 """
 import os
@@ -41,6 +42,14 @@ args, spark, P = R.setup("06b_als", __doc__)
 T = R.Timer()
 N = 100
 report = {"mode": "local" if args.local else "cluster", "quick": args.quick}
+VIEWS = ("val", "test")
+if args.fixed:
+    # D17: fit 1 lan voi tham so da chon cua ban that, chi view test (giong lan fit cuoi), bo do luoi
+    report["fixed"] = True
+    prod = R.prod_report(P, "als")
+    for k in ("best_bias_lambda", "best_als_explicit", "best_als_implicit"):
+        report[k] = prod[k]
+    VIEWS = ("test",)
 
 if args.quick:
     G_BIAS, G_EXP = [10], [(16, 0.1)]
@@ -101,7 +110,7 @@ def als_implicit(train, alpha, rank, reg, w=R.DEFAULT_W):
                coldStartStrategy="drop").fit(data)
 
 
-for v in ("val", "test"):
+for v in VIEWS:
     report[v] = {}
     truth = R.load(spark, P, "truth", v).cache()
     ug = R.load(spark, P, "user_groups", v)

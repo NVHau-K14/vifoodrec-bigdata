@@ -42,7 +42,7 @@ from pyspark import StorageLevel
 from pyspark.sql import Window, functions as F
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import Paths, get_spark  # noqa: E402
+from common import Paths, Timer, get_spark  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--local", action="store_true", help="chay Spark local (khong can cum)")
@@ -55,16 +55,10 @@ OUT_LOCAL = os.path.join(P.output_local, "analysis")
 os.makedirs(OUT_LOCAL, exist_ok=True)
 
 t0 = time.time()
-timings, tables, report = {}, {}, {}
-
-
-@contextlib.contextmanager
-def step(name):
-    """Do thoi gian tung phan (dua vao phan hieu nang cua bao cao)."""
-    t = time.time()
-    yield
-    timings[name] = round(time.time() - t, 1)
-    print(f"[05] {name}: {timings[name]}s")
+tables, report = {}, {}
+# Do thoi gian tung phan + job group Spark cung ten (phan hieu nang cua bao cao, D17)
+step = Timer("05")
+timings = step.parts
 
 
 def read_parquet(path, local_fallback):

@@ -1,0 +1,502 @@
+[
+ {
+  "dish_pct": 1,
+  "views_cum_pct": 10.73,
+  "cooks_cum_pct": 18.95
+ },
+ {
+  "dish_pct": 2,
+  "views_cum_pct": 16.34,
+  "cooks_cum_pct": 28.18
+ },
+ {
+  "dish_pct": 3,
+  "views_cum_pct": 20.82,
+  "cooks_cum_pct": 34.82
+ },
+ {
+  "dish_pct": 4,
+  "views_cum_pct": 24.61,
+  "cooks_cum_pct": 39.98
+ },
+ {
+  "dish_pct": 5,
+  "views_cum_pct": 27.96,
+  "cooks_cum_pct": 44.25
+ },
+ {
+  "dish_pct": 6,
+  "views_cum_pct": 30.99,
+  "cooks_cum_pct": 47.84
+ },
+ {
+  "dish_pct": 7,
+  "views_cum_pct": 33.74,
+  "cooks_cum_pct": 50.9
+ },
+ {
+  "dish_pct": 8,
+  "views_cum_pct": 36.22,
+  "cooks_cum_pct": 53.61
+ },
+ {
+  "dish_pct": 9,
+  "views_cum_pct": 38.55,
+  "cooks_cum_pct": 56.06
+ },
+ {
+  "dish_pct": 10,
+  "views_cum_pct": 40.74,
+  "cooks_cum_pct": 58.28
+ },
+ {
+  "dish_pct": 11,
+  "views_cum_pct": 42.81,
+  "cooks_cum_pct": 60.34
+ },
+ {
+  "dish_pct": 12,
+  "views_cum_pct": 44.78,
+  "cooks_cum_pct": 62.26
+ },
+ {
+  "dish_pct": 13,
+  "views_cum_pct": 46.62,
+  "cooks_cum_pct": 64.05
+ },
+ {
+  "dish_pct": 14,
+  "views_cum_pct": 48.37,
+  "cooks_cum_pct": 65.72
+ },
+ {
+  "dish_pct": 15,
+  "views_cum_pct": 50.04,
+  "cooks_cum_pct": 67.28
+ },
+ {
+  "dish_pct": 16,
+  "views_cum_pct": 51.65,
+  "cooks_cum_pct": 68.76
+ },
+ {
+  "dish_pct": 17,
+  "views_cum_pct": 53.19,
+  "cooks_cum_pct": 70.17
+ },
+ {
+  "dish_pct": 18,
+  "views_cum_pct": 54.67,
+  "cooks_cum_pct": 71.47
+ },
+ {
+  "dish_pct": 19,
+  "views_cum_pct": 56.09,
+  "cooks_cum_pct": 72.71
+ },
+ {
+  "dish_pct": 20,
+  "views_cum_pct": 57.47,
+  "cooks_cum_pct": 73.9
+ },
+ {
+  "dish_pct": 21,
+  "views_cum_pct": 58.79,
+  "cooks_cum_pct": 75.02
+ },
+ {
+  "dish_pct": 22,
+  "views_cum_pct": 60.06,
+  "cooks_cum_pct": 76.1
+ },
+ {
+  "dish_pct": 23,
+  "views_cum_pct": 61.28,
+  "cooks_cum_pct": 77.12
+ },
+ {
+  "dish_pct": 24,
+  "views_cum_pct": 62.46,
+  "cooks_cum_pct": 78.1
+ },
+ {
+  "dish_pct": 25,
+  "views_cum_pct": 63.6,
+  "cooks_cum_pct": 79.02
+ },
+ {
+  "dish_pct": 26,
+  "views_cum_pct": 64.71,
+  "cooks_cum_pct": 79.91
+ },
+ {
+  "dish_pct": 27,
+  "views_cum_pct": 65.78,
+  "cooks_cum_pct": 80.76
+ },
+ {
+  "dish_pct": 28,
+  "views_cum_pct": 66.82,
+  "cooks_cum_pct": 81.58
+ },
+ {
+  "dish_pct": 29,
+  "views_cum_pct": 67.84,
+  "cooks_cum_pct": 82.35
+ },
+ {
+  "dish_pct": 30,
+  "views_cum_pct": 68.82,
+  "cooks_cum_pct": 83.1
+ },
+ {
+  "dish_pct": 31,
+  "views_cum_pct": 69.77,
+  "cooks_cum_pct": 83.82
+ },
+ {
+  "dish_pct": 32,
+  "views_cum_pct": 70.69,
+  "cooks_cum_pct": 84.5
+ },
+ {
+  "dish_pct": 33,
+  "views_cum_pct": 71.59,
+  "cooks_cum_pct": 85.16
+ },
+ {
+  "dish_pct": 34,
+  "views_cum_pct": 72.46,
+  "cooks_cum_pct": 85.78
+ },
+ {
+  "dish_pct": 35,
+  "views_cum_pct": 73.31,
+  "cooks_cum_pct": 86.38
+ },
+ {
+  "dish_pct": 36,
+  "views_cum_pct": 74.14,
+  "cooks_cum_pct": 86.95
+ },
+ {
+  "dish_pct": 37,
+  "views_cum_pct": 74.94,
+  "cooks_cum_pct": 87.5
+ },
+ {
+  "dish_pct": 38,
+  "views_cum_pct": 75.72,
+  "cooks_cum_pct": 88.03
+ },
+ {
+  "dish_pct": 39,
+  "views_cum_pct": 76.48,
+  "cooks_cum_pct": 88.54
+ },
+ {
+  "dish_pct": 40,
+  "views_cum_pct": 77.21,
+  "cooks_cum_pct": 89.03
+ },
+ {
+  "dish_pct": 41,
+  "views_cum_pct": 77.93,
+  "cooks_cum_pct": 89.5
+ },
+ {
+  "dish_pct": 42,
+  "views_cum_pct": 78.63,
+  "cooks_cum_pct": 89.95
+ },
+ {
+  "dish_pct": 43,
+  "views_cum_pct": 79.32,
+  "cooks_cum_pct": 90.39
+ },
+ {
+  "dish_pct": 44,
+  "views_cum_pct": 79.99,
+  "cooks_cum_pct": 90.81
+ },
+ {
+  "dish_pct": 45,
+  "views_cum_pct": 80.64,
+  "cooks_cum_pct": 91.21
+ },
+ {
+  "dish_pct": 46,
+  "views_cum_pct": 81.28,
+  "cooks_cum_pct": 91.6
+ },
+ {
+  "dish_pct": 47,
+  "views_cum_pct": 81.91,
+  "cooks_cum_pct": 91.98
+ },
+ {
+  "dish_pct": 48,
+  "views_cum_pct": 82.52,
+  "cooks_cum_pct": 92.34
+ },
+ {
+  "dish_pct": 49,
+  "views_cum_pct": 83.12,
+  "cooks_cum_pct": 92.68
+ },
+ {
+  "dish_pct": 50,
+  "views_cum_pct": 83.71,
+  "cooks_cum_pct": 93.01
+ },
+ {
+  "dish_pct": 51,
+  "views_cum_pct": 84.27,
+  "cooks_cum_pct": 93.33
+ },
+ {
+  "dish_pct": 52,
+  "views_cum_pct": 84.84,
+  "cooks_cum_pct": 93.64
+ },
+ {
+  "dish_pct": 53,
+  "views_cum_pct": 85.39,
+  "cooks_cum_pct": 93.94
+ },
+ {
+  "dish_pct": 54,
+  "views_cum_pct": 85.93,
+  "cooks_cum_pct": 94.24
+ },
+ {
+  "dish_pct": 55,
+  "views_cum_pct": 86.45,
+  "cooks_cum_pct": 94.51
+ },
+ {
+  "dish_pct": 56,
+  "views_cum_pct": 86.97,
+  "cooks_cum_pct": 94.79
+ },
+ {
+  "dish_pct": 57,
+  "views_cum_pct": 87.47,
+  "cooks_cum_pct": 95.06
+ },
+ {
+  "dish_pct": 58,
+  "views_cum_pct": 87.96,
+  "cooks_cum_pct": 95.31
+ },
+ {
+  "dish_pct": 59,
+  "views_cum_pct": 88.44,
+  "cooks_cum_pct": 95.56
+ },
+ {
+  "dish_pct": 60,
+  "views_cum_pct": 88.91,
+  "cooks_cum_pct": 95.8
+ },
+ {
+  "dish_pct": 61,
+  "views_cum_pct": 89.36,
+  "cooks_cum_pct": 96.03
+ },
+ {
+  "dish_pct": 62,
+  "views_cum_pct": 89.81,
+  "cooks_cum_pct": 96.25
+ },
+ {
+  "dish_pct": 63,
+  "views_cum_pct": 90.25,
+  "cooks_cum_pct": 96.46
+ },
+ {
+  "dish_pct": 64,
+  "views_cum_pct": 90.67,
+  "cooks_cum_pct": 96.67
+ },
+ {
+  "dish_pct": 65,
+  "views_cum_pct": 91.09,
+  "cooks_cum_pct": 96.87
+ },
+ {
+  "dish_pct": 66,
+  "views_cum_pct": 91.5,
+  "cooks_cum_pct": 97.05
+ },
+ {
+  "dish_pct": 67,
+  "views_cum_pct": 91.9,
+  "cooks_cum_pct": 97.24
+ },
+ {
+  "dish_pct": 68,
+  "views_cum_pct": 92.29,
+  "cooks_cum_pct": 97.41
+ },
+ {
+  "dish_pct": 69,
+  "views_cum_pct": 92.66,
+  "cooks_cum_pct": 97.57
+ },
+ {
+  "dish_pct": 70,
+  "views_cum_pct": 93.03,
+  "cooks_cum_pct": 97.74
+ },
+ {
+  "dish_pct": 71,
+  "views_cum_pct": 93.39,
+  "cooks_cum_pct": 97.9
+ },
+ {
+  "dish_pct": 72,
+  "views_cum_pct": 93.74,
+  "cooks_cum_pct": 98.05
+ },
+ {
+  "dish_pct": 73,
+  "views_cum_pct": 94.08,
+  "cooks_cum_pct": 98.19
+ },
+ {
+  "dish_pct": 74,
+  "views_cum_pct": 94.41,
+  "cooks_cum_pct": 98.32
+ },
+ {
+  "dish_pct": 75,
+  "views_cum_pct": 94.73,
+  "cooks_cum_pct": 98.46
+ },
+ {
+  "dish_pct": 76,
+  "views_cum_pct": 95.04,
+  "cooks_cum_pct": 98.58
+ },
+ {
+  "dish_pct": 77,
+  "views_cum_pct": 95.34,
+  "cooks_cum_pct": 98.69
+ },
+ {
+  "dish_pct": 78,
+  "views_cum_pct": 95.64,
+  "cooks_cum_pct": 98.81
+ },
+ {
+  "dish_pct": 79,
+  "views_cum_pct": 95.93,
+  "cooks_cum_pct": 98.93
+ },
+ {
+  "dish_pct": 80,
+  "views_cum_pct": 96.21,
+  "cooks_cum_pct": 99.02
+ },
+ {
+  "dish_pct": 81,
+  "views_cum_pct": 96.48,
+  "cooks_cum_pct": 99.11
+ },
+ {
+  "dish_pct": 82,
+  "views_cum_pct": 96.75,
+  "cooks_cum_pct": 99.21
+ },
+ {
+  "dish_pct": 83,
+  "views_cum_pct": 97.01,
+  "cooks_cum_pct": 99.3
+ },
+ {
+  "dish_pct": 84,
+  "views_cum_pct": 97.26,
+  "cooks_cum_pct": 99.39
+ },
+ {
+  "dish_pct": 85,
+  "views_cum_pct": 97.5,
+  "cooks_cum_pct": 99.46
+ },
+ {
+  "dish_pct": 86,
+  "views_cum_pct": 97.73,
+  "cooks_cum_pct": 99.53
+ },
+ {
+  "dish_pct": 87,
+  "views_cum_pct": 97.96,
+  "cooks_cum_pct": 99.6
+ },
+ {
+  "dish_pct": 88,
+  "views_cum_pct": 98.18,
+  "cooks_cum_pct": 99.67
+ },
+ {
+  "dish_pct": 89,
+  "views_cum_pct": 98.39,
+  "cooks_cum_pct": 99.72
+ },
+ {
+  "dish_pct": 90,
+  "views_cum_pct": 98.59,
+  "cooks_cum_pct": 99.77
+ },
+ {
+  "dish_pct": 91,
+  "views_cum_pct": 98.78,
+  "cooks_cum_pct": 99.81
+ },
+ {
+  "dish_pct": 92,
+  "views_cum_pct": 98.96,
+  "cooks_cum_pct": 99.86
+ },
+ {
+  "dish_pct": 93,
+  "views_cum_pct": 99.14,
+  "cooks_cum_pct": 99.9
+ },
+ {
+  "dish_pct": 94,
+  "views_cum_pct": 99.3,
+  "cooks_cum_pct": 99.92
+ },
+ {
+  "dish_pct": 95,
+  "views_cum_pct": 99.45,
+  "cooks_cum_pct": 99.95
+ },
+ {
+  "dish_pct": 96,
+  "views_cum_pct": 99.59,
+  "cooks_cum_pct": 99.97
+ },
+ {
+  "dish_pct": 97,
+  "views_cum_pct": 99.72,
+  "cooks_cum_pct": 99.99
+ },
+ {
+  "dish_pct": 98,
+  "views_cum_pct": 99.84,
+  "cooks_cum_pct": 100.0
+ },
+ {
+  "dish_pct": 99,
+  "views_cum_pct": 99.93,
+  "cooks_cum_pct": 100.0
+ },
+ {
+  "dish_pct": 100,
+  "views_cum_pct": 100.0,
+  "cooks_cum_pct": 100.0
+ }
+]

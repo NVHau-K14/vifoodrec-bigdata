@@ -1,0 +1,842 @@
+[
+ {
+  "month": "2025-10",
+  "dish_category": "món chính",
+  "views": 349612,
+  "cooks": 42097,
+  "cook_share_pct": 46.19
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "canh/súp",
+  "views": 62047,
+  "cooks": 18224,
+  "cook_share_pct": 19.99
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "bánh",
+  "views": 88815,
+  "cooks": 8209,
+  "cook_share_pct": 9.01
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "gỏi/salad",
+  "views": 53845,
+  "cooks": 6450,
+  "cook_share_pct": 7.08
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 48879,
+  "cooks": 5674,
+  "cook_share_pct": 6.23
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 29955,
+  "cooks": 3364,
+  "cook_share_pct": 3.69
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "chè/tráng miệng",
+  "views": 31267,
+  "cooks": 2322,
+  "cook_share_pct": 2.55
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "đồ uống",
+  "views": 27425,
+  "cooks": 2174,
+  "cook_share_pct": 2.39
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "lẩu",
+  "views": 11382,
+  "cooks": 1436,
+  "cook_share_pct": 1.58
+ },
+ {
+  "month": "2025-10",
+  "dish_category": "ăn vặt",
+  "views": 11745,
+  "cooks": 1194,
+  "cook_share_pct": 1.31
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "món chính",
+  "views": 350717,
+  "cooks": 43265,
+  "cook_share_pct": 45.75
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "canh/súp",
+  "views": 69539,
+  "cooks": 19531,
+  "cook_share_pct": 20.65
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "bánh",
+  "views": 90784,
+  "cooks": 8469,
+  "cook_share_pct": 8.96
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 50004,
+  "cooks": 5689,
+  "cook_share_pct": 6.02
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "gỏi/salad",
+  "views": 42038,
+  "cooks": 5115,
+  "cook_share_pct": 5.41
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 32419,
+  "cooks": 3654,
+  "cook_share_pct": 3.86
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "lẩu",
+  "views": 24815,
+  "cooks": 3475,
+  "cook_share_pct": 3.67
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "chè/tráng miệng",
+  "views": 26667,
+  "cooks": 2142,
+  "cook_share_pct": 2.27
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "đồ uống",
+  "views": 23683,
+  "cooks": 1993,
+  "cook_share_pct": 2.11
+ },
+ {
+  "month": "2025-11",
+  "dish_category": "ăn vặt",
+  "views": 11488,
+  "cooks": 1226,
+  "cook_share_pct": 1.3
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "món chính",
+  "views": 363465,
+  "cooks": 43041,
+  "cook_share_pct": 45.63
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "canh/súp",
+  "views": 76853,
+  "cooks": 20339,
+  "cook_share_pct": 21.56
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "bánh",
+  "views": 92459,
+  "cooks": 8129,
+  "cook_share_pct": 8.62
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 50600,
+  "cooks": 5651,
+  "cook_share_pct": 5.99
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "lẩu",
+  "views": 32970,
+  "cooks": 4602,
+  "cook_share_pct": 4.88
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "gỏi/salad",
+  "views": 34533,
+  "cooks": 3948,
+  "cook_share_pct": 4.19
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 35421,
+  "cooks": 3732,
+  "cook_share_pct": 3.96
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "chè/tráng miệng",
+  "views": 23974,
+  "cooks": 1851,
+  "cook_share_pct": 1.96
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "đồ uống",
+  "views": 22499,
+  "cooks": 1782,
+  "cook_share_pct": 1.89
+ },
+ {
+  "month": "2025-12",
+  "dish_category": "ăn vặt",
+  "views": 11713,
+  "cooks": 1251,
+  "cook_share_pct": 1.33
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "món chính",
+  "views": 371908,
+  "cooks": 44665,
+  "cook_share_pct": 45.59
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "canh/súp",
+  "views": 77189,
+  "cooks": 20617,
+  "cook_share_pct": 21.04
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "bánh",
+  "views": 94455,
+  "cooks": 8592,
+  "cook_share_pct": 8.77
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 51858,
+  "cooks": 5659,
+  "cook_share_pct": 5.78
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "lẩu",
+  "views": 32379,
+  "cooks": 4617,
+  "cook_share_pct": 4.71
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "gỏi/salad",
+  "views": 38556,
+  "cooks": 4346,
+  "cook_share_pct": 4.44
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 36411,
+  "cooks": 4052,
+  "cook_share_pct": 4.14
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "chè/tráng miệng",
+  "views": 29113,
+  "cooks": 2181,
+  "cook_share_pct": 2.23
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "đồ uống",
+  "views": 23493,
+  "cooks": 1950,
+  "cook_share_pct": 1.99
+ },
+ {
+  "month": "2026-01",
+  "dish_category": "ăn vặt",
+  "views": 12028,
+  "cooks": 1299,
+  "cook_share_pct": 1.33
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "món chính",
+  "views": 377427,
+  "cooks": 47032,
+  "cook_share_pct": 45.42
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "canh/súp",
+  "views": 72309,
+  "cooks": 20895,
+  "cook_share_pct": 20.18
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "bánh",
+  "views": 94744,
+  "cooks": 8997,
+  "cook_share_pct": 8.69
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "gỏi/salad",
+  "views": 56706,
+  "cooks": 6493,
+  "cook_share_pct": 6.27
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 51216,
+  "cooks": 5726,
+  "cook_share_pct": 5.53
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 38154,
+  "cooks": 4557,
+  "cook_share_pct": 4.4
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "chè/tráng miệng",
+  "views": 50591,
+  "cooks": 4115,
+  "cook_share_pct": 3.97
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "lẩu",
+  "views": 17190,
+  "cooks": 2451,
+  "cook_share_pct": 2.37
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "đồ uống",
+  "views": 25731,
+  "cooks": 1984,
+  "cook_share_pct": 1.92
+ },
+ {
+  "month": "2026-02",
+  "dish_category": "ăn vặt",
+  "views": 12006,
+  "cooks": 1290,
+  "cook_share_pct": 1.25
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "món chính",
+  "views": 362783,
+  "cooks": 44226,
+  "cook_share_pct": 43.57
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "canh/súp",
+  "views": 71413,
+  "cooks": 20791,
+  "cook_share_pct": 20.48
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "gỏi/salad",
+  "views": 83288,
+  "cooks": 9798,
+  "cook_share_pct": 9.65
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "bánh",
+  "views": 89382,
+  "cooks": 8399,
+  "cook_share_pct": 8.27
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 50534,
+  "cooks": 5772,
+  "cook_share_pct": 5.69
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "chè/tráng miệng",
+  "views": 43507,
+  "cooks": 3569,
+  "cook_share_pct": 3.52
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 30082,
+  "cooks": 3324,
+  "cook_share_pct": 3.27
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "đồ uống",
+  "views": 36233,
+  "cooks": 2885,
+  "cook_share_pct": 2.84
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "lẩu",
+  "views": 9977,
+  "cooks": 1491,
+  "cook_share_pct": 1.47
+ },
+ {
+  "month": "2026-03",
+  "dish_category": "ăn vặt",
+  "views": 11784,
+  "cooks": 1246,
+  "cook_share_pct": 1.23
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "món chính",
+  "views": 345847,
+  "cooks": 41715,
+  "cook_share_pct": 42.48
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "canh/súp",
+  "views": 70890,
+  "cooks": 20312,
+  "cook_share_pct": 20.68
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "gỏi/salad",
+  "views": 92159,
+  "cooks": 11069,
+  "cook_share_pct": 11.27
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "bánh",
+  "views": 84105,
+  "cooks": 7743,
+  "cook_share_pct": 7.88
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 47622,
+  "cooks": 5234,
+  "cook_share_pct": 5.33
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "chè/tráng miệng",
+  "views": 45709,
+  "cooks": 3715,
+  "cook_share_pct": 3.78
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 28501,
+  "cooks": 3054,
+  "cook_share_pct": 3.11
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "đồ uống",
+  "views": 38170,
+  "cooks": 3026,
+  "cook_share_pct": 3.08
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "ăn vặt",
+  "views": 11073,
+  "cooks": 1181,
+  "cook_share_pct": 1.2
+ },
+ {
+  "month": "2026-04",
+  "dish_category": "lẩu",
+  "views": 7958,
+  "cooks": 1151,
+  "cook_share_pct": 1.17
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "món chính",
+  "views": 352601,
+  "cooks": 43072,
+  "cook_share_pct": 40.58
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "canh/súp",
+  "views": 75718,
+  "cooks": 21835,
+  "cook_share_pct": 20.57
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "gỏi/salad",
+  "views": 117815,
+  "cooks": 14341,
+  "cook_share_pct": 13.51
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "bánh",
+  "views": 84834,
+  "cooks": 7798,
+  "cook_share_pct": 7.35
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 48810,
+  "cooks": 5480,
+  "cook_share_pct": 5.16
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "chè/tráng miệng",
+  "views": 55656,
+  "cooks": 4706,
+  "cook_share_pct": 4.43
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "đồ uống",
+  "views": 45296,
+  "cooks": 3776,
+  "cook_share_pct": 3.56
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 27809,
+  "cooks": 2991,
+  "cook_share_pct": 2.82
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "ăn vặt",
+  "views": 10900,
+  "cooks": 1168,
+  "cook_share_pct": 1.1
+ },
+ {
+  "month": "2026-05",
+  "dish_category": "lẩu",
+  "views": 6179,
+  "cooks": 976,
+  "cook_share_pct": 0.92
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "món chính",
+  "views": 339335,
+  "cooks": 40066,
+  "cook_share_pct": 40.25
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "canh/súp",
+  "views": 72085,
+  "cooks": 20536,
+  "cook_share_pct": 20.63
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "gỏi/salad",
+  "views": 115142,
+  "cooks": 13825,
+  "cook_share_pct": 13.89
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "bánh",
+  "views": 80749,
+  "cooks": 7332,
+  "cook_share_pct": 7.36
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 45865,
+  "cooks": 4873,
+  "cook_share_pct": 4.89
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "chè/tráng miệng",
+  "views": 54099,
+  "cooks": 4488,
+  "cook_share_pct": 4.51
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "đồ uống",
+  "views": 44297,
+  "cooks": 3688,
+  "cook_share_pct": 3.7
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 26899,
+  "cooks": 2896,
+  "cook_share_pct": 2.91
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "ăn vặt",
+  "views": 10484,
+  "cooks": 1080,
+  "cook_share_pct": 1.08
+ },
+ {
+  "month": "2026-06",
+  "dish_category": "lẩu",
+  "views": 5408,
+  "cooks": 769,
+  "cook_share_pct": 0.77
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "món chính",
+  "views": 382757,
+  "cooks": 45720,
+  "cook_share_pct": 43.18
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "canh/súp",
+  "views": 73292,
+  "cooks": 21164,
+  "cook_share_pct": 19.99
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "gỏi/salad",
+  "views": 95358,
+  "cooks": 11647,
+  "cook_share_pct": 11.0
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "bánh",
+  "views": 94647,
+  "cooks": 8538,
+  "cook_share_pct": 8.06
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 52413,
+  "cooks": 5698,
+  "cook_share_pct": 5.38
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "chè/tráng miệng",
+  "views": 46841,
+  "cooks": 3919,
+  "cook_share_pct": 3.7
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 31428,
+  "cooks": 3415,
+  "cook_share_pct": 3.23
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "đồ uống",
+  "views": 40386,
+  "cooks": 3311,
+  "cook_share_pct": 3.13
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "ăn vặt",
+  "views": 12321,
+  "cooks": 1289,
+  "cook_share_pct": 1.22
+ },
+ {
+  "month": "2026-07",
+  "dish_category": "lẩu",
+  "views": 9172,
+  "cooks": 1183,
+  "cook_share_pct": 1.12
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "món chính",
+  "views": 394772,
+  "cooks": 48435,
+  "cook_share_pct": 43.15
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "canh/súp",
+  "views": 75751,
+  "cooks": 22215,
+  "cook_share_pct": 19.79
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "gỏi/salad",
+  "views": 98072,
+  "cooks": 12140,
+  "cook_share_pct": 10.82
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "bánh",
+  "views": 98393,
+  "cooks": 9270,
+  "cook_share_pct": 8.26
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 55908,
+  "cooks": 6305,
+  "cook_share_pct": 5.62
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "chè/tráng miệng",
+  "views": 47949,
+  "cooks": 4083,
+  "cook_share_pct": 3.64
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 32434,
+  "cooks": 3601,
+  "cook_share_pct": 3.21
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "đồ uống",
+  "views": 41220,
+  "cooks": 3531,
+  "cook_share_pct": 3.15
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "ăn vặt",
+  "views": 12811,
+  "cooks": 1353,
+  "cook_share_pct": 1.21
+ },
+ {
+  "month": "2026-08",
+  "dish_category": "lẩu",
+  "views": 10288,
+  "cooks": 1309,
+  "cook_share_pct": 1.17
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "món chính",
+  "views": 410270,
+  "cooks": 48877,
+  "cook_share_pct": 46.05
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "canh/súp",
+  "views": 72764,
+  "cooks": 21377,
+  "cook_share_pct": 20.14
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "bánh",
+  "views": 102006,
+  "cooks": 9256,
+  "cook_share_pct": 8.72
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "gỏi/salad",
+  "views": 63253,
+  "cooks": 7716,
+  "cook_share_pct": 7.27
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "bún/phở/mì/miến",
+  "views": 57125,
+  "cooks": 6262,
+  "cook_share_pct": 5.9
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "cơm/xôi/cháo",
+  "views": 34815,
+  "cooks": 3789,
+  "cook_share_pct": 3.57
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "chè/tráng miệng",
+  "views": 35897,
+  "cooks": 2964,
+  "cook_share_pct": 2.79
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "đồ uống",
+  "views": 31733,
+  "cooks": 2730,
+  "cook_share_pct": 2.57
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "lẩu",
+  "views": 13690,
+  "cooks": 1756,
+  "cook_share_pct": 1.65
+ },
+ {
+  "month": "2026-09",
+  "dish_category": "ăn vặt",
+  "views": 13075,
+  "cooks": 1409,
+  "cook_share_pct": 1.33
+ }
+]

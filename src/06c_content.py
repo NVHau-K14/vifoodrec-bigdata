@@ -28,6 +28,7 @@ Dau ra  : /data/models/content_pipeline
 
 Chay tren cum:  python src/06c_content.py
 Chay thu local: python src/06c_content.py --local
+Do hieu nang:   python src/06c_content.py --fixed   (D17: bo vong so sanh MinHash)
 """
 import os
 import sys
@@ -45,6 +46,8 @@ if not args.local:
     spark.conf.set("spark.sql.shuffle.partitions", "64")    # join tuong tu + goi y cho ~50k user
 T = R.Timer()
 report = {"mode": "local" if args.local else "cluster"}
+if args.fixed:
+    report["fixed"] = True
 N_SIM, N_HIST, N_REC = 50, 30, 100
 
 # Tu dung: tu noi, tu chung cua ten mon (khong mang thong tin ve mon)
@@ -161,23 +164,24 @@ with T("exact_similarity"):
 # ===========================================================================
 # 3. MinHashLSH (xap xi Jaccard) - recall@20 va thoi gian so voi cach tinh chinh xac
 # ===========================================================================
-with T("minhash"):
-    mh_in = vec.filter(F.size(F.col("tokens")) > 0).select("food_id", "tf")
-    report["minhash"] = []
-    for nh in ((3,) if args.quick else (3, 5, 10)):
-        t0 = time.time()
-        mh = MinHashLSH(inputCol="tf", outputCol="hashes", numHashTables=nh, seed=R.SEED).fit(mh_in)
-        cand = (mh.approxSimilarityJoin(mh_in, mh_in, 0.9, distCol="dist")
-                .select(F.col("datasetA.food_id").alias("user_id"), F.col("datasetB.food_id").alias("food_id"),
-                        (-F.col("dist")).alias("score"))
-                .filter(F.col("user_id") != F.col("food_id")).persist())
-        n_cand = cand.count()
-        top = R.top_n(cand, 20).select(F.col("user_id").alias("i"), F.col("food_id").alias("j"))
-        hit = top.join(exact_jac20, ["i", "j"]).count()
-        report["minhash"].append({"numHashTables": nh, "candidate_pairs": n_cand, "recall@20": round(hit / n_exact, 4),
-                                  "seconds": round(time.time() - t0, 1)})
-        print(f"[06] minhash {report['minhash'][-1]}", flush=True)
-        cand.unpersist()
+if not args.fixed:      # --fixed (D17): bo thi nghiem so sanh MinHash (khong dung cho goi y)
+    with T("minhash"):
+        mh_in = vec.filter(F.size(F.col("tokens")) > 0).select("food_id", "tf")
+        report["minhash"] = []
+        for nh in ((3,) if args.quick else (3, 5, 10)):
+            t0 = time.time()
+            mh = MinHashLSH(inputCol="tf", outputCol="hashes", numHashTables=nh, seed=R.SEED).fit(mh_in)
+            cand = (mh.approxSimilarityJoin(mh_in, mh_in, 0.9, distCol="dist")
+                    .select(F.col("datasetA.food_id").alias("user_id"), F.col("datasetB.food_id").alias("food_id"),
+                            (-F.col("dist")).alias("score"))
+                    .filter(F.col("user_id") != F.col("food_id")).persist())
+            n_cand = cand.count()
+            top = R.top_n(cand, 20).select(F.col("user_id").alias("i"), F.col("food_id").alias("j"))
+            hit = top.join(exact_jac20, ["i", "j"]).count()
+            report["minhash"].append({"numHashTables": nh, "candidate_pairs": n_cand, "recall@20": round(hit / n_exact, 4),
+                                      "seconds": round(time.time() - t0, 1)})
+            print(f"[06] minhash {report['minhash'][-1]}", flush=True)
+            cand.unpersist()
 
 # Vi du mon tuong tu (de doc kiem tra bang mat)
 sim = R.load(spark, P, "item_sim").cache()
