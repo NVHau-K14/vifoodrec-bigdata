@@ -1,0 +1,31 @@
+/* goi-y.css - bo cuc rieng cua trang Goi y mon */
+.mode-bar{margin-bottom:var(--gap)}
+.demo-users{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.demo-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.demo-row .k{min-width:120px;font-size:13px;color:var(--muted)}
+.demo-row .k small{display:block;font-size:11px}
+.persona-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.persona{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.persona span{min-width:100px}
+.user-btn{min-height:40px;padding:0 12px;border-radius:var(--radius-pill);border:1px solid var(--line-2);background:var(--surface);cursor:pointer;font-size:13px}
+.user-btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--on-dark)}
+.profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px 14px;margin-bottom:14px;font-size:13px}
+.profile-grid dt{color:var(--muted);font-size:12px}
+.profile-grid dd{margin:0;font-weight:600}
+.recs-body{margin-top:16px}
+.search-field{flex:1 1 280px}
+.search-field input{width:100%}
+.search-results{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.result-btn{display:flex;align-items:center;gap:8px;min-height:44px;padding:4px 12px 4px 4px;border:1px solid var(--line-2);border-radius:var(--radius-btn);background:var(--surface);cursor:pointer;font-size:13px;text-align:left}
+.result-btn img{width:44px;height:34px;border-radius:6px;object-fit:cover;background:var(--track)}
+.result-btn:disabled{opacity:.55;cursor:default}
+.chosen{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chosen-chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 6px 0 14px;border-radius:var(--radius-pill);background:var(--herb-soft);color:var(--herb-dark);font-size:13px;font-weight:500}
+.chosen-chip button{width:30px;height:30px;border:0;border-radius:50%;background:transparent;cursor:pointer;color:var(--herb-dark);font-size:16px;line-height:1}
+.chosen-chip button:hover{background:var(--surface)}
+.detail{display:flex;flex-wrap:wrap;gap:var(--gap)}
+.detail-main{flex:1 1 280px;max-width:420px}
+.detail-main .dish-img{border-radius:var(--radius-tile);overflow:hidden}
+.detail-side{flex:2 1 360px;min-width:0}
+.ing{margin:0;padding-left:18px;font-size:13px;color:var(--ink-2);columns:2 180px}
+.detail-text{font-size:14px;color:var(--ink-2);max-width:75ch}

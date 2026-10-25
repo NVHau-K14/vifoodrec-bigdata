@@ -1,0 +1,7 @@
+# Service api (buoc 08, D15): FastAPI doc MongoDB, phuc vu ca /api va web/ tinh cung origin.
+# Ma nguon khong copy vao image: thu muc du an duoc mount vao /home/jovyan/work (giong cac service khac).
+FROM python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+COPY api/requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+WORKDIR /home/jovyan/work

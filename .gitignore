@@ -23,3 +23,6 @@ desktop.ini
 
 # Spark event log (History Server), sinh lai moi lan chay job
 logs/
+
+# pytest (buoc 08)
+.pytest_cache/

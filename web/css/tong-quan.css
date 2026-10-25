@@ -1,0 +1,10 @@
+/* tong-quan.css - chi bo cuc rieng cua trang Tong quan (mau lay tu bien cua theme.css) */
+.arch{width:100%;min-width:620px;height:auto;display:block}
+.arch-box rect{fill:var(--surface);stroke:var(--line-2);stroke-width:1.5}
+.arch-box.hl rect{fill:var(--herb-soft);stroke:var(--herb-mid)}
+.arch-box text{font-family:var(--font);font-size:14px;font-weight:600;fill:var(--ink);text-anchor:middle}
+.arch-box text.s{font-size:11px;font-weight:400;fill:var(--muted)}
+.arch-arrow path{stroke:var(--slate);stroke-width:1.6;fill:none;marker-end:url(#arrow)}
+.arch-head{fill:var(--slate)}
+.notes{margin:0;padding-left:18px;font-size:14px;color:var(--ink-2);display:flex;flex-direction:column;gap:6px;max-width:90ch}
+.funnel-foot{margin-top:14px;font-size:13px;color:var(--ink-2)}

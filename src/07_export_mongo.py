@@ -156,15 +156,16 @@ def insert_docs(coll, docs):
     return dup
 
 
-def make_partition_writer(uri, db_name, coll_name):
-    """Ham chay tren executor: moi partition 1 MongoClient, ghi theo lo 1.000 doc."""
+def make_partition_writer(uri, db_name, coll_name, transform=None):
+    """Ham chay tren executor: moi partition 1 MongoClient, ghi theo lo 1.000 doc. transform(doc) sua doc truoc khi ghi."""
     def write(rows):
         from pymongo import MongoClient as MC
         c = MC(uri)
         coll = c[db_name][coll_name]
         buf, dup = [], 0
         for r in rows:
-            buf.append(to_doc(r))
+            d = to_doc(r)
+            buf.append(transform(d) if transform else d)
             if len(buf) >= BATCH:
                 dup += insert_docs(coll, buf)
                 buf = []
@@ -183,7 +184,7 @@ def coll_stats(name):
             "compression_ratio": round(s["size"] / s["storageSize"], 2) if s["storageSize"] else None}
 
 
-def export(name, df=None, docs=None, indexes=(), big=False):
+def export(name, df=None, docs=None, indexes=(), big=False, transform=None):
     """Ghi vao <name>__staging -> kiem tra so doc -> tao index -> doi ten (nguyen tu). Ghi so lieu vao report."""
     if not want(name):
         return
@@ -194,7 +195,7 @@ def export(name, df=None, docs=None, indexes=(), big=False):
     if big:
         df = fix_types(df)
         expected = df.count()
-        df.repartition(N_PARTS).foreachPartition(make_partition_writer(MONGO_URI, DB_NAME, stg))
+        df.repartition(N_PARTS).foreachPartition(make_partition_writer(MONGO_URI, DB_NAME, stg, transform))
     else:
         if docs is None:
             docs = [to_doc(r) for r in fix_types(df).collect()]
@@ -271,11 +272,25 @@ export("dishes", dishes, indexes=[
 # ===========================================================================
 # 3. RECS, SIMILAR
 # ===========================================================================
-recs = (recs_final.groupBy("user_id")
+# because_cooked (D15): chi phan tu content_slot co truong nay. 06f da ghi vao cau ly do
+# ("Giong mon X ban da nau" / "... ban da xem"), bang recs_final khong giu co because_is_cooked
+recs = (recs_final
+        .withColumn("because_cooked", F.when(F.col("source") == "content_slot",
+                                             F.col("reason").endswith(" bạn đã nấu")))
+        .groupBy("user_id")
         .agg(F.sort_array(F.collect_list(F.struct(F.col("rank").cast("int").alias("rank"), "food_id", "score",
-                                                  "source", "because_food_id"))).alias("items"))
+                                                  "source", "because_food_id", "because_cooked"))).alias("items"))
         .withColumnRenamed("user_id", "_id"))
-export("recs", recs, big=True)
+
+
+def drop_null_because_cooked(doc):
+    for it in doc["items"]:
+        if it.get("because_cooked") is None:
+            it.pop("because_cooked", None)
+    return doc
+
+
+export("recs", recs, big=True, transform=drop_null_because_cooked)
 
 similar = (item_sim.groupBy("food_id")
            .agg(F.sort_array(F.collect_list(F.struct("rank", F.col("sim_food_id").alias("food_id"),
@@ -486,6 +501,15 @@ if want("recs"):
         grp = ug.where(F.col("user_id") == u).first()["group"]
         sample_res.append({"user_id": u, "group": grp, "n_items": len(m), "identical": m == h})
     C["recs_sample_users"] = sample_res
+    # because_cooked (D15): chi co o content_slot; ty le true phai bang content_slot_because_cooked_pct cua 06f
+    bc = list(db["recs"].aggregate([{"$unwind": "$items"},
+                                    {"$group": {"_id": {"source": "$items.source",
+                                                        "has": {"$ne": [{"$type": "$items.because_cooked"}, "missing"]},
+                                                        "val": "$items.because_cooked"}, "n": {"$sum": 1}}}]))
+    # $group bo khoa "val" khi truong khong ton tai -> dien None
+    C["recs_because_cooked"] = sorted([{"source": x["_id"]["source"], "has": x["_id"]["has"],
+                                        "val": x["_id"].get("val"), "n": x["n"]} for x in bc],
+                                      key=lambda x: (x["source"], str(x["val"])))
 
 if want("similar"):
     agg = list(db["similar"].aggregate([{"$project": {"n": {"$size": "$items"}}},
@@ -560,6 +584,18 @@ for name, info in report["collections"].items():
             f"index {info['total_index_bytes'] / 1e6:.1f}MB")
 report["timings_s"]["total"] = round(time.time() - T0, 1)
 out = os.path.join(P.output_local, "export_report.json")
+# --only: gop vao report cu cua cung database (giu so lieu cac collection khong chay lai), ghi lai lan chay nay
+if ONLY and os.path.exists(out):
+    with open(out, encoding="utf-8") as fh:
+        old = json.load(fh)
+    if old.get("db") == DB_NAME:
+        for k in ("collections", "checks", "explain"):
+            report[k] = {**old.get(k, {}), **report[k]}
+        report["source_rows"] = {**old.get("source_rows", {}), **report["source_rows"]}
+        report["partial_runs"] = old.get("partial_runs", []) + [
+            {"only": sorted(ONLY), "at": datetime.datetime.now().isoformat(timespec="seconds"),
+             "timings_s": report["timings_s"]}]
+        report["timings_s"] = old.get("timings_s", report["timings_s"])
 with open(out, "w", encoding="utf-8") as fh:
     json.dump(report, fh, ensure_ascii=False, indent=2, default=str)
 log(f"xong sau {report['timings_s']['total']}s -> {out}")

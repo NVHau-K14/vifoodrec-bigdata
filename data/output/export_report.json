@@ -30,19 +30,19 @@
     "recs": {
       "docs": 50000,
       "expected": 50000,
-      "write_s": 11.8,
-      "total_s": 11.8,
+      "write_s": 13.6,
+      "total_s": 13.6,
       "method": "foreachPartition (8 partition)",
       "indexes": [
         "_id_"
       ],
       "count": 50000,
-      "size_bytes": 202624870,
-      "avg_obj_bytes": 4052,
-      "storage_bytes": 50335744,
-      "total_index_bytes": 843776,
+      "size_bytes": 204262752,
+      "avg_obj_bytes": 4085,
+      "storage_bytes": 49725440,
+      "total_index_bytes": 606208,
       "n_indexes": 1,
-      "compression_ratio": 4.03
+      "compression_ratio": 4.11
     },
     "similar": {
       "docs": 5499,
@@ -549,7 +549,33 @@
         "dish_name": "Mực ống hấp củ đậu",
         "name_search": "muc ong hap cu dau"
       }
-    }
+    },
+    "recs_because_cooked": [
+      {
+        "source": "als",
+        "has": false,
+        "val": null,
+        "n": 2312304
+      },
+      {
+        "source": "content_slot",
+        "has": true,
+        "val": false,
+        "n": 3209
+      },
+      {
+        "source": "content_slot",
+        "has": true,
+        "val": true,
+        "n": 93137
+      },
+      {
+        "source": "pop",
+        "has": false,
+        "val": null,
+        "n": 91350
+      }
+    ]
   },
   "explain": {
     "recs_theo_user": {
@@ -612,72 +638,16 @@
     "item_sim": 274950,
     "companion": 677
   },
-  "overview": {
-    "exported_at": "2026-10-25T01:29:40+07:00",
-    "mode": "cluster",
-    "n_dishes": 5499,
-    "n_users": 50000,
-    "n_events": 23205143,
-    "events_by_type": {
-      "cook": 2382842,
-      "view": 18637934,
-      "rate": 798895,
-      "favorite": 1385472
-    },
-    "event_months": [
-      "2025-10",
-      "2025-11",
-      "2025-12",
-      "2026-01",
-      "2026-02",
-      "2026-03",
-      "2026-04",
-      "2026-05",
-      "2026-06",
-      "2026-07",
-      "2026-08",
-      "2026-09"
-    ],
-    "n_recs_rows": 2500000,
-    "hdfs": {
-      "raw": {
-        "bytes": 19930427,
-        "bytes_with_replicas": 39860854,
-        "files": 4
-      },
-      "curated": {
-        "bytes": 5512186,
-        "bytes_with_replicas": 11024372,
-        "files": 18
-      },
-      "features": {
-        "bytes": 200169,
-        "bytes_with_replicas": 400338,
-        "files": 9
-      },
-      "events": {
-        "bytes": 274494226,
-        "bytes_with_replicas": 548988452,
-        "files": 17
-      },
-      "results": {
-        "bytes": 567333277,
-        "bytes_with_replicas": 1134666554,
-        "files": 243
-      },
-      "models": {
-        "bytes": 31268560,
-        "bytes_with_replicas": 62537120,
-        "files": 67
+  "partial_runs": [
+    {
+      "only": [
+        "recs"
+      ],
+      "at": "2026-10-25T06:30:27",
+      "timings_s": {
+        "checks": 12.7,
+        "total": 40.3
       }
-    },
-    "reference_date": "2026-09-01",
-    "notes": [
-      "Dữ liệu hành vi (sự kiện, user, persona) là MÔ PHỎNG; danh mục món là món thật (Cooky, Món Ngon Mỗi Ngày).",
-      "dishes.stats là thống kê cả năm mô phỏng (10/2025–09/2026, gồm cả tháng val và test), chỉ để mô tả, không phải dữ liệu mô hình đã thấy.",
-      "Gợi ý (recs), users.history và users.profile dùng lịch sử đến hết 08/2026; mốc của dashboard là 01/09/2026.",
-      "dishes.nutrition là số ngẫu nhiên của dữ liệu gốc: lưu lại nhưng không hiển thị.",
-      "users.truth (persona thật) chỉ để kiểm chứng phân cụm; endpoint gợi ý không trả trường này."
-    ]
-  }
+    }
+  ]
 }

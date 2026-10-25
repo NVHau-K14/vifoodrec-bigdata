@@ -12,7 +12,7 @@ Skill này chốt **một** bộ quy ước để mọi trang trông như cùng 
 ## 1. Công nghệ và cấu trúc
 
 - HTML + CSS + JavaScript thuần (ES2020, không framework, không bước build). Biểu đồ: **ECharts 5**.
-- Không phụ thuộc mạng khi demo: để `echarts.min.js` (bản 5.5.x) trong `web/vendor/`, font Be Vietnam Pro (400/500/600/700, subset vietnamese) trong `web/fonts/`. Không dùng CDN.
+- Không phụ thuộc mạng khi demo: để `echarts.min.js` (bản **5.5.1**) trong `web/vendor/`, font Be Vietnam Pro (400/500/600/700, **3 subset latin, latin-ext, vietnamese**, khai báo `unicode-range` cho từng subset) trong `web/fonts/`. Subset vietnamese chỉ có các chữ có dấu, chữ a–z và số nằm trong latin, nên phải có đủ 3. Tải bằng `scripts/08_fetch_vendor.sh`. Không dùng CDN.
 - FastAPI phục vụ `web/` tĩnh và API dưới `/api/...` cùng origin (không cần CORS).
 
 ```
@@ -24,6 +24,7 @@ web/
   js/api.js             # hàm fetch dùng chung, xử lý lỗi, định dạng số
   js/charts.js          # đăng ký theme ECharts "vifood" + hàm vẽ dùng chung (heatmap, cột, thanh ngang)
   js/layout.js          # dựng thanh bên + đánh dấu trang hiện tại
+  js/components.js      # thành phần dùng chung (mục 4): thẻ món, thanh lọc, viên trạng thái, khung tải/lỗi/rỗng
   js/<trang>.js
   vendor/ fonts/ img/placeholder-dish.svg
 ```
@@ -95,12 +96,15 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);
 | `source` | Chấm | Chú giải | Câu lý do (API sinh, đúng mẫu 06f) |
 |---|---|---|---|
 | `als` | `--herb` | Khẩu vị giống bạn (ALS) | "Người có khẩu vị giống bạn cũng hay nấu món này" |
-| `content_slot` | `--chili` | Khám phá (content) | "Giống món {tên because_food_id} bạn đã nấu" (không có thì "…bạn đã xem") |
-| `pop` | `--neutral` | Phổ biến | "Đang được nấu nhiều vào bữa {bữa} ở {vùng}" / khi bù lọc: "Đang được nấu nhiều ở vùng của bạn" |
+| `content_slot` | `--chili` | Khám phá (content) | "Giống món {tên because_food_id} bạn đã nấu" khi `because_cooked = true`, ngược lại "…bạn đã xem" |
+| `pop` | `--neutral` | Phổ biến | "Đang được nhiều người {tuổi} tuổi ở miền {vùng} nấu" (phổ biến theo vùng-tuổi, câu của 06f) |
+| `fill` (món bù khi lọc) | `--neutral` | Phổ biến | "Được nấu nhiều trong danh mục"; có bộ lọc thì nêu bộ lọc, vd "Món chay, món nhanh được nấu nhiều trong danh mục" |
+
+- Món bù xếp theo `stats.cook_rank` của **toàn danh mục, cả năm mô phỏng**, không theo vùng hay bữa, nên câu lý do không được nói "ở vùng của bạn".
 
 - Luôn hiện chú giải 3 màu dưới danh sách. Không hiện điểm số thô cho người xem.
 - Bộ lọc: chay / món nhanh / không cay / bữa / nhóm món. **Không** có lọc calo hay thời gian nấu, **không** hiển thị `nutrition` (số ngẫu nhiên).
-- Thiếu món sau khi lọc: bù bằng `dishes` cùng bộ lọc xếp theo `stats.cook_rank`, gắn `source="pop"`.
+- Thiếu món sau khi lọc: bù bằng `dishes` cùng bộ lọc xếp theo `stats.cook_rank`, gắn `source="fill"` (chấm `--neutral`).
 - Không bao giờ hiển thị `truth` (persona thật) ở trang Gợi ý; chỉ trang Phân khúc được dùng, có ghi "chỉ để kiểm chứng".
 
 ## 6. Biểu đồ ECharts

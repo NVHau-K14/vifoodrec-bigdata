@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tổng quan · ViFoodRec</title>
+<link rel="icon" href="img/placeholder-dish.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/tong-quan.css">
+<script src="vendor/echarts.min.js"></script>
+<script type="module" src="js/layout.js"></script>
+<script type="module" src="js/tong-quan.js"></script>
+</head>
+<body>
+<div class="shell">
+  <nav id="nav"></nav>
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <p class="eyebrow">Tổng quan</p>
+        <h1>Dữ liệu đi từ HDFS đến bữa ăn gợi ý như thế nào?</h1>
+      </div>
+      <div class="head-pills" id="head-pills"></div>
+    </header>
+
+    <div class="kpis" id="kpis" data-state="loading"><div class="slot" aria-hidden="true"></div></div>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Giờ nấu trong tuần</h2><span class="card-note">lượt nấu theo giờ × thứ</span></div>
+        <div class="card-body" id="heatmap"></div>
+        <p class="source">Nguồn: <code>analysis_heatmap_hour_dow</code> (bước 05), 12 tháng mô phỏng.</p>
+      </article>
+      <article class="card" style="flex:2 1 320px">
+        <div class="card-head"><h2>Phễu chuyển đổi</h2><span class="card-note">theo cặp người dùng–món</span></div>
+        <div class="card-body" id="funnel"></div>
+        <p class="source">Nguồn: <code>analysis_funnel_by_category</code> (bước 05).</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Lượt nấu theo tháng</h2><span class="card-note">tháng 8 là val, tháng 9 là test</span></div>
+        <div class="card-body" id="monthly"></div>
+        <p class="source">Nguồn: <code>analysis_trend_month_category</code>, <code>analysis_season_month</code> (bước 05).</p>
+      </article>
+      <article class="card" style="flex:2 1 320px">
+        <div class="card-head"><h2>Tỷ trọng nhóm món</h2><span class="card-note">% lượt nấu cả năm</span></div>
+        <div class="card-body" id="categories"></div>
+        <p class="source">Nguồn: <code>analysis_trend_month_category</code>.</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:2 1 320px">
+        <div class="card-head"><h2>Món được nấu nhiều nhất</h2><span class="card-note">cả năm mô phỏng</span></div>
+        <div class="card-body" id="top-dishes"></div>
+        <p class="source">Nguồn: <code>dishes.stats.cook_rank</code>. <a href="mon-an.html">Xem trang Món ăn</a></p>
+      </article>
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Mô hình nào gợi ý trúng hơn</h2><span class="card-note">NDCG@10 trên tháng test</span></div>
+        <div class="card-body" id="models"></div>
+        <p class="source">Nguồn: <code>metrics</code> (bước 06). <a href="danh-gia.html">Xem trang Đánh giá mô hình</a></p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Kiến trúc hệ thống</h2><span class="card-note">dữ liệu đi từ trái sang phải</span></div>
+        <div class="scroll-x"><svg class="arch" viewBox="0 0 760 210" role="img" aria-labelledby="arch-desc">
+          <desc id="arch-desc">CSV món ăn được nạp vào HDFS. Spark làm sạch, tạo đặc trưng, sinh hành vi mô phỏng, phân tích và huấn luyện mô hình, ghi kết quả về HDFS. Bước 07 xuất kết quả sang MongoDB, FastAPI đọc MongoDB và phục vụ dashboard này.</desc>
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arch-head" d="M0 0L10 5L0 10z"/></marker></defs>
+          <g class="arch-box"><rect x="4" y="70" width="104" height="64" rx="12"/><text x="56" y="98">CSV món ăn</text><text class="s" x="56" y="116">món thật</text></g>
+          <g class="arch-box hl"><rect x="148" y="20" width="150" height="164" rx="12"/><text x="223" y="48">HDFS</text><text class="s" x="223" y="68">namenode +</text><text class="s" x="223" y="84">2 datanode</text><text class="s" x="223" y="112">raw · curated</text><text class="s" x="223" y="128">events · results</text><text class="s" x="223" y="144">models</text></g>
+          <g class="arch-box hl"><rect x="338" y="20" width="150" height="164" rx="12"/><text x="413" y="48">Spark 4.2</text><text class="s" x="413" y="68">master +</text><text class="s" x="413" y="84">2 worker</text><text class="s" x="413" y="112">02–05 làm sạch,</text><text class="s" x="413" y="128">mô phỏng, phân tích</text><text class="s" x="413" y="144">06 ALS, LSH, FP-Growth</text><text class="s" x="413" y="160">K-means, hybrid</text></g>
+          <g class="arch-box"><rect x="528" y="70" width="100" height="64" rx="12"/><text x="578" y="98">MongoDB</text><text class="s" x="578" y="116">bước 07</text></g>
+          <g class="arch-box"><rect x="656" y="70" width="100" height="64" rx="12"/><text x="706" y="98">FastAPI</text><text class="s" x="706" y="116">+ dashboard</text></g>
+          <g class="arch-arrow"><path d="M108 102h36"/><path d="M298 92h36"/><path d="M334 116h-36"/><path d="M488 102h36"/><path d="M628 102h24"/></g>
+        </svg></div>
+        <p class="source">HDFS lưu 2 bản sao. Spark đọc và ghi Parquet trên HDFS; MongoDB chỉ giữ kết quả đã tính để phục vụ dashboard.</p>
+      </article>
+      <article class="card" style="flex:2 1 320px">
+        <div class="card-head"><h2>Tiến độ pipeline</h2><span class="card-note">thời gian chạy trên cụm</span></div>
+        <div class="card-body" id="pipeline"></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2>Ghi chú về dữ liệu</h2></div>
+        <div class="card-body" id="notes"></div>
+      </article>
+    </section>
+  </main>
+</div>
+</body>
+</html>

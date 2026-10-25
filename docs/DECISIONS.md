@@ -289,3 +289,43 @@ Bản đề xuất ở LAST_RUN ngày 25/10, chốt với 7 câu trả lời và
 - `storageSize` ngay sau khi ghi bằng 0, vì WiredTiger chưa checkpoint. Do đó `collStats` được đọc ở cuối job, sau lệnh `fsync`.
 - Không xuất `dish_type` (nhãn gốc không đáng tin, đã có `dish_type_fixed`). Trong `metrics`, document con `metrics` bỏ 4 khóa lặp lại với document cha (`view, model, variant, group`).
 - `users` thực tế là 1.075 B/doc (53,8 MB), lớn hơn con số 858 B trong bản thiết kế, vì có thêm `group`, `test_cooks` và `truth`.
+
+## D15. Thiết kế bước 08: FastAPI + dashboard (25/10)
+Bản đề xuất ở LAST_RUN ngày 25/10 (mục A–H), chốt với 5 câu trả lời và 2 chỉnh sửa của người dùng.
+
+**Nguyên tắc (giữ như bản đề xuất):**
+- Một service `api` (FastAPI, image `python:3.12-slim`, cổng 8000, RAM 512 MB) phục vụ cả `/api/...` và `web/` tĩnh cùng origin, nên không cần CORS. Tài liệu schema ở `/docs` (OpenAPI).
+- API chỉ đọc MongoDB. Database lấy từ `MONGO_DB` (compose: `API_DB`, mặc định `vifood`; phát triển dùng `vifood_local`).
+- API trả số thô, frontend định dạng. Không trả `score` của gợi ý, không trả `nutrition`. Endpoint gợi ý và hồ sơ user (E18, E19, E20) **không trả `truth`**.
+- Collection nhỏ được cache trong RAM (TTL 10 phút). `recs`, `users`, bù món, tìm món, `similar` luôn đọc MongoDB.
+- Bộ lọc món: chay, món nhanh, không cay, bữa (`meal_types`: sáng, trưa, tối, ăn vặt), nhóm món. Bữa mặc định "Tất cả", không tự đặt theo `pref_slot` (có "khuya", không khớp `meal_types`).
+- Tìm món: chuẩn hóa NFC → chữ thường → `VN_FROM`/`VN_TO` của 07 → `[^a-z0-9]+` thành dấu cách, rồi `re.escape` và `$regex` trên `name_search`.
+- Claude viết toàn bộ code, chia 2 đợt (LAST_RUN mục H). Tên thành viên không xuất hiện trong code, API, dashboard (quy tắc trong CLAUDE.md).
+
+**Các câu trả lời:**
+1. **`because_cooked`:** 07 thêm trường `because_cooked` (bool) vào phần tử `content_slot` của `recs.items`, chỉ phần tử này có trường đó. Giá trị lấy từ câu lý do của `recs_final` (06f ghi "… bạn đã nấu" khi món lý do là món đã nấu). Chạy lại `07 --only recs`.
+2. **Câu lý do:**
+   - `als`: "Người có khẩu vị giống bạn cũng hay nấu món này";
+   - `content_slot`: "Giống món {tên} bạn đã nấu" (`because_cooked = true`) hoặc "Giống món {tên} bạn đã xem";
+   - `pop`: "Đang được nhiều người {tuổi} tuổi ở miền {vùng} nấu" (đúng câu 06f, vì `pop` là phổ biến theo vùng-tuổi);
+   - `fill` (món bù khi lọc): "Được nấu nhiều trong danh mục"; có bộ lọc thì nêu bộ lọc, vd "Món chay, món nhanh được nấu nhiều trong danh mục". Món bù xếp theo `stats.cook_rank` toàn danh mục, nên không nói "ở vùng của bạn".
+3. **Thư viện:** ECharts 5.5.1; font Be Vietnam Pro 400/500/600/700 với đủ 3 subset latin, latin-ext, vietnamese (`@fontsource/be-vietnam-pro@5.2.8`), tải bằng `scripts/08_fetch_vendor.sh` và commit vào git.
+4. **Thêm `web/js/components.js`** cho thẻ món, thanh lọc, viên trạng thái, khung tải/lỗi/rỗng.
+5. **Mục tiêu độ trễ giữ nguyên** (cache p95 < 10 ms; E12, E13, E18, E19 p95 < 50 ms; E20 p95 < 80 ms). Báo cáo ghi số đo thật.
+
+Skill `vifood-dashboard` đã sửa theo câu 2, 3, 4 (mục 1 và mục 5).
+
+**Chỉnh sửa:**
+- **a. Trang Tổng quan giữ bố cục bản mẫu canvas:** KPI, heatmap giờ × thứ, phễu, lượt nấu theo tháng (Tết, val, test), tỷ trọng nhóm món, top 5 món, NDCG@10 các mô hình, kiến trúc và tiến độ pipeline. Trang dùng lại E1, E2, E3, E6, E23, và E14 cho top 5 món (xếp theo `stats.cook_rank`, cả năm mô phỏng). Các trang chi tiết vẫn có bản đầy đủ.
+- **b. User mẫu theo persona:** E17 trả thêm 2 user cho mỗi `persona_main` (8 persona), kèm `verify_only: true`. Trang Gợi ý có hàng nút chọn user mẫu theo persona. E18 và E19 vẫn không trả `truth`. `test_privacy` chỉ cho phép E15 và E17 có persona.
+
+**Khi cài đặt đợt 1 (25/10):**
+- **`because_cooked` lấy từ câu lý do của `recs_final`**, vì bảng này không giữ cờ `because_is_cooked` của 06f. Không phải chạy lại 06f. Trên cụm: 93.137 true, 3.209 false (96,67%, khớp `content_slot_because_cooked_pct` 96,7% của 06f). `recs` tăng từ 202,6 lên 204,3 MB.
+- **`07 --only` gộp report:** chạy một phần thì `export_report.json` gộp vào report cũ của cùng database (thêm `partial_runs`), không ghi đè số liệu của 25 collection còn lại.
+- **Câu lý do món bù rút gọn:** "Món chay, bữa sáng, đồ uống được nấu nhiều trong danh mục" thay cho "món cho bữa sáng, món nhóm đồ uống" (quá dài trên thẻ món).
+- **E17 bỏ 5 user mẫu theo hash** của bước 07. Chỉ giữ 3 user/nhóm và 2 user/persona, chọn theo `user_id` nhỏ nhất (có ≥ 3 món trong `history`, trừ nhóm lạnh).
+- **Top 5 món ở Tổng quan dùng E14** (`/api/dishes?limit=5`, xếp theo `stats.cook_rank`, ghi "cả năm mô phỏng").
+- **Khoảng tin cậy ở trang Đánh giá hiện bằng bảng**, không vẽ biểu đồ: 7 phép so sánh có độ lớn chênh nhau tới 30 lần nên biểu đồ điểm–vạch không đọc được. Chú thích ghi đúng cách tính của `rec_common.paired_ci`: hiệu ghép cặp theo user, ±1,96 × sai số chuẩn (không phải bootstrap).
+- **Recall món mới** lấy từ `model_hybrid_report.cold_items.by_source` (tên nguồn đổi sang tên mô hình: als → als_implicit, rep → nau_lai). Các mô hình phổ biến không có số này.
+- **4 trang của đợt 2 là trang khung** ghi "Trang đang được xây dựng", để liên kết trên thanh bên không trả 404.
+- **pytest:** 2 phép so khớp chính xác giữa các collection (tổng lượt nấu theo tháng bằng `overview`; NDCG của hybrid bằng `models_metrics`) chỉ chạy với `--db vifood`. Ở `vifood_local`, các bảng `analysis_*` lệch `overview` 1.145 lượt nấu (235.981 so với 237.126), và `reports` là file của lần chạy trên cụm trong khi `metrics` là kết quả local (NDCG hybrid 0,1588 so với 0,1577).

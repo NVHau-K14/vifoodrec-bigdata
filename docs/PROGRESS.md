@@ -1,21 +1,21 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **25/10/2026**, sau khi chốt thiết kế bước 07 (D14), viết `src/07_export_mongo.py`, thêm `mongo-express` và xuất MongoDB trên cụm.
+> Cập nhật lần cuối: **25/10/2026**, sau khi chốt thiết kế bước 08 (D15) và làm xong đợt 1 (service `api`, Tổng quan, Gợi ý món, Đánh giá mô hình, pytest).
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
 
 | Bước | Trạng thái | Kết quả chính |
 |---|---|---|
-| Hạ tầng Docker | ✅ Xong | 10 container: HDFS 1+2, Spark 1+2, Spark History (:18080), Jupyter, MongoDB, mongo-express (:8090). Đã chạy test 2 worker. |
+| Hạ tầng Docker | ✅ Xong | 11 container: HDFS 1+2, Spark 1+2, Spark History (:18080), Jupyter, MongoDB, mongo-express (:8090), api (:8000). Đã chạy test 2 worker. |
 | 01 Nạp HDFS | ✅ Xong | 4 CSV trong `/data/raw`. Script `scripts/01_ingest.sh` mới viết, chưa chạy lại trên cụm. |
 | 02 Làm sạch (clean v2) | ✅ Xong | `foods` 5.499 món (3.996 giữ id cũ, 1.503 món mới id 4001–5503); `ratings_original` 182.556 dòng |
 | 03 Đặc trưng món | ✅ Xong (sửa 24/10) | `dish_features` 5.499 dòng, khớp từng giá trị với lần chạy local. Loại món: mặn 3.448, ngọt 1.236, chay 580, đồ uống 235. Đã sửa "hào" (D10) |
 | 04 Sinh hành vi | ✅ Xong (100%, chạy lại 24/10) | 50.000 user (49.815 có hoạt động); **23.205.143 sự kiện**; Parquet 261MB; chạy 9 phút. `zipf_offset = 30`, món đứng đầu 1,44% (D11) |
 | 05 Phân tích hành vi | ✅ Xong | `src/05_analysis.py`, 14 bảng trong `/data/results/analysis` và JSON trong `data/output/analysis/`; chạy trên cụm 104 giây |
 | 06 Mô hình + đánh giá | ✅ Xong | Trên test (39.012 user), NDCG@10: hybrid **0,1588**, hybrid + content 2 vị trí 0,1495 (dùng cho `recs_final`), ALS implicit 0,1539 (alpha 1, rank 128), nấu lại 0,1317. RMSE: ALS 0,684, bias 0,737. Dashboard dùng k = 8. D12, D13 |
-| 07 Xuất MongoDB | ✅ Xong | Database `vifood`: 26 collection (25 có dữ liệu, `trending` để trống). Size 290,5 MB, storage 85,2 MB (nén 3,41 lần), index 4,1 MB. `recs` 50.000 doc, 202,6 MB. Chạy trên cụm 66,1 giây. Mọi kiểm tra đạt. D14 |
-| 08 FastAPI + dashboard | ⬜ Chưa | |
+| 07 Xuất MongoDB | ✅ Xong | Database `vifood`: 26 collection (25 có dữ liệu, `trending` để trống). Size 290,5 MB, storage 85,2 MB (nén 3,41 lần), index 4,1 MB. `recs` 50.000 doc, 204,3 MB sau khi thêm `because_cooked` (D15). Chạy trên cụm 66,1 giây. Mọi kiểm tra đạt. D14 |
+| 08 FastAPI + dashboard | 🟨 Đợt 1 xong | Service `api` (FastAPI, :8000, RAM đang dùng 65,5 MB / 512 MB) phục vụ `/api` + `web/`. 16 endpoint (E0–E3, E6, E12–E14, E17–E20, E22–E24, E26). 3 trang đầy đủ: Tổng quan, Gợi ý món, Đánh giá mô hình; 4 trang khung. pytest 39/39 đạt trên `vifood` (37 đạt + 2 bỏ qua trên `vifood_local`). D15 |
 | Nâng cao: Structured Streaming | ⬜ Chưa | |
 | Đo hiệu năng (1 vs 2 worker, 10/50/100%) | ⬜ Chưa | |
 | Báo cáo Word + slide | ⬜ Chưa | |
@@ -79,19 +79,13 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Bước 08: THIẾT KẾ TRƯỚC, CHƯA VIẾT CODE.** Ghi bản đề xuất vào `docs/LAST_RUN.md` để chat claude.ai góp ý, chốt thì ghi D15 rồi mới viết code. Bản thiết kế cần có:
-   - **Danh sách endpoint FastAPI** (`api/`), mỗi endpoint đọc collection nào (bảng trang ↔ collection ở D14 và DATA_DICTIONARY mục MongoDB).
-     - Gợi ý cho user có sẵn: đọc `recs` + `dishes` (`$in`), áp bộ lọc chay / món nhanh / không cay / bữa / nhóm món.
-       - Thiếu dưới 10 món thì bù bằng `dishes` cùng bộ lọc, `$nin` các món đã có, xếp theo `stats.cook_rank` (D14 d).
-       - Câu lý do sinh từ `source` + tên `because_food_id`, chỉ khi `source = "content_slot"`.
-       - **Không trả `users.truth`.**
-     - Gợi ý cho user mới: cộng `sim` từ `similar` của các món đã chọn, thiếu thì bù bằng `popular`.
-     - Tìm món: `$regex` trên `name_search`, chuỗi gõ vào chuẩn hóa giống Spark (chữ thường, bỏ dấu, "đ" → "d"; xem `VN_FROM`/`VN_TO` trong `src/07_export_mongo.py`).
-     - Các trang còn lại: Tổng quan (`overview`), Hành vi (`analysis_*`), Món ăn (`dishes` aggregation, `ingredient_edges`), Phân khúc (`clusters`, `users`), Đánh giá (`metrics`, `reports`).
-   - **Service `api` trong compose:** image, cổng, đọc `MONGO_URI` từ `.env`. Phục vụ luôn `web/` tĩnh hay tách riêng.
-   - **Cấu trúc `web/`:** HTML + CSS + JS thuần, ECharts. Danh sách trang và biểu đồ của từng trang. Claude viết toàn bộ code, chia 2 đợt (xem LAST_RUN mục H).
-   - Khi phát triển dùng database `vifood_local` (biến môi trường), demo dùng `vifood`.
-2. **Structured Streaming (nâng cao):** ghi vào collection `trending` (đã có index `window_end`). Thiết kế sau bước 08.
+1. **Bước 08, đợt 2** (thiết kế ở LAST_RUN ngày 25/10 mục B, C, G; quy ước ở skill `vifood-dashboard`):
+   - API: E4, E5, E7 (Hành vi), E8, E10, E11 (Món ăn), E15, E16 + `labels.py` cho nhãn và chiến lược cụm (Phân khúc), E25 (Thời gian thực). E15 có `persona_kiem_chung` kèm `verify_only`; thêm E15 vào `PERSONA_ALLOWED` của `api/tests/test_privacy.py`.
+   - Trang: thay 4 trang khung `hanh-vi.html`, `mon-an.html`, `phan-khuc.html`, `thoi-gian-thuc.html` bằng bản đầy đủ (dùng lại `components.js`, `charts.js`).
+   - Test: `test_consistency` cho các endpoint mới, `test_privacy` với đủ E0–E26.
+   - Đo độ trễ: viết `api/bench_latency.py` (200 lần tuần tự mỗi endpoint, E19 thêm 10 luồng × 100 lần), chạy trên `vifood` và `vifood_local`, ghi `data/output/api_report.json` và `docker stats api`. Mục tiêu: cache p95 < 10 ms; E12, E13, E18, E19 p95 < 50 ms; E20 p95 < 80 ms.
+   - Kết thúc: chụp 7 trang ở 1440px và 390px vào `docs/images/`.
+2. **Structured Streaming (nâng cao):** ghi vào collection `trending` (đã có index `window_end`), rồi làm E25 và trang Thời gian thực theo dữ liệu thật. Thiết kế sau đợt 2.
 3. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy.
 
 ## Việc còn treo
@@ -106,7 +100,9 @@
 - [ ] Notebook hoặc biểu đồ cho bước 06 từ `data/output/models_metrics.json` và `model_*_report.json`: bảng so sánh mô hình, khoảng tin cậy, lưới dò ALS, Silhouette theo k, recall của LSH. Dùng cho trang "Đánh giá mô hình".
 - [ ] Thư mục checkpoint của ALS (`hdfs:///tmp/checkpoint`) có thể xóa sau khi chốt bước 06.
 - [ ] Nhắn giảng viên về việc dùng dữ liệu hành vi mô phỏng (kế hoạch mục 2.2 khuyến nghị). Chưa rõ đã nhắn hay chưa.
-- [x] `mongo-express` đã có trong compose (cổng 8090, tài khoản trong `.env`). Còn thiếu service `api` (bước 08).
+- [x] `mongo-express` đã có trong compose (cổng 8090, tài khoản trong `.env`). Service `api` đã có (cổng 8000).
+- [ ] `vifood_local` không đồng bộ: các bảng `analysis_*` lệch `overview` 1.145 lượt nấu, `reports` là file của lần chạy trên cụm. Nếu cần bản local khớp thì chạy lại `05 --local` rồi `07 --local` (nhớ sao lưu `export_report.json` của cụm).
+- [ ] Ảnh món từ `image.cooky.vn`, `monngonmoingay.com` không tải được trong trình duyệt của Claude và qua curl trên máy này. Cần mở http://localhost:8000 bằng trình duyệt thường để xem ảnh có hiện không.
 - [ ] `.env` đang được commit và có mật khẩu `admin123`. Nếu đưa repo lên GitHub công khai thì chuyển sang `.env.example`.
 - [ ] Database `vifood_local` (bản 10%, 22,8 MB) giữ lại để phát triển API; xóa khi không cần nữa.
 - [ ] Ảnh chụp cho báo cáo: thêm `mongo-express` và các `explain()` trong `export_report.json`.
@@ -143,3 +139,4 @@
 - **25/10:** chốt 3 câu hỏi của bước 06. Mở rộng lưới ALS một lần (chọn alpha 1, rank 128), thêm hybrid + content 2 vị trí cho `recs_final`, dashboard dùng k = 8 (có thêm k = 3 và k = 11). Chạy lại 06b, 06f, 06e trên cụm. Bước 07 sẽ làm theo kiểu thiết kế trước.
 - **25/10 (tiếp):** viết bản đề xuất thiết kế bước 07 vào LAST_RUN. Đã đo kích thước BSON trên mẫu thật: `recs` 1 doc/user bỏ chuỗi lý do còn 4.052 B/user, so với 8.956 B khi giữ chuỗi. MongoDB đang trống, `pymongo` 4.19.0 có sẵn trong image.
 - **25/10 (tối):** chốt bước 07 (D14). Thêm `mongo-express` (:8090). Viết `07_export_mongo.py`, chạy local 3 lần rồi chạy trên cụm 66 giây: 26 collection, 290,5 MB, nén 3,41 lần. 5 user mẫu khớp `recs_final`, không có `food_id` nào thiếu trong `dishes`. Kiểm tra múi giờ phải đổi sang giờ bắt đầu phiên, vì sự kiện trong phiên lấn sang giờ sau. Việc tiếp theo là thiết kế bước 08.
+- **25/10 (khuya):** cài skill `frontend-design`, thêm quy tắc không ghi tên thành viên ngoài báo cáo. Đề xuất thiết kế bước 08 rồi chốt (D15): thêm `because_cooked` vào `recs` (chạy lại `07 --only recs`), sửa skill `vifood-dashboard`. Đợt 1: dựng service `api`, 16 endpoint, 3 trang (Tổng quan, Gợi ý món, Đánh giá mô hình), pytest 39/39 đạt trên `vifood`.

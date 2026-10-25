@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gợi ý món · ViFoodRec</title>
+<link rel="icon" href="img/placeholder-dish.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/goi-y.css">
+<script type="module" src="js/layout.js"></script>
+<script type="module" src="js/goi-y.js"></script>
+</head>
+<body>
+<div class="shell">
+  <nav id="nav"></nav>
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <p class="eyebrow">Gợi ý món</p>
+        <h1>Hôm nay nấu gì?</h1>
+      </div>
+      <div class="head-pills" id="head-pills"></div>
+    </header>
+
+    <div class="mode-bar"><div id="mode"></div></div>
+
+    <!-- Nguoi dung co san -->
+    <section class="row" id="existing">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Chọn người dùng</h2><span class="card-note">gợi ý tính đến hết 08/2026</span></div>
+        <form class="inline" id="user-form">
+          <label class="field"><span>Mã người dùng</span><input id="user-input" type="number" min="1" inputmode="numeric" required></label>
+          <button class="btn btn-primary" type="submit">Xem gợi ý</button>
+        </form>
+        <div id="demo-users" class="demo-users"></div>
+      </article>
+      <article class="card" style="flex:2 1 320px">
+        <div class="card-head"><h2>Hồ sơ</h2><span class="card-note" id="profile-note"></span></div>
+        <div class="card-body" id="profile"></div>
+      </article>
+    </section>
+
+    <!-- Nguoi dung moi -->
+    <section class="row" id="newuser" hidden>
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2>Chọn món bạn thích</h2><span class="card-note">tối đa 10 món</span></div>
+        <div class="inline">
+          <label class="field search-field"><span>Tìm món theo tên</span>
+            <input id="search" type="search" placeholder="ví dụ: canh chua, đậu hũ" autocomplete="off" maxlength="60"></label>
+          <label class="field"><span>Vùng (không bắt buộc)</span><select id="nu-region"><option value="">Không chọn</option></select></label>
+          <label class="field"><span>Tuổi (không bắt buộc)</span><select id="nu-age"><option value="">Không chọn</option></select></label>
+        </div>
+        <div id="search-results" class="search-results" aria-live="polite"></div>
+        <div id="chosen" class="chosen"></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2 id="recs-title">Món gợi ý</h2></div>
+        <div id="filters"></div>
+        <div class="card-body recs-body" id="recs"></div>
+        <div id="legend"></div>
+        <p class="source" id="recs-foot"></p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%" id="detail-card" hidden>
+        <div class="card-head"><h2 id="detail-title">Chi tiết món</h2><span class="card-note">bấm một thẻ món để xem</span></div>
+        <div class="card-body" id="detail"></div>
+      </article>
+    </section>
+  </main>
+</div>
+</body>
+</html>

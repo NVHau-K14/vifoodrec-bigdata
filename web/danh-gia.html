@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đánh giá mô hình · ViFoodRec</title>
+<link rel="icon" href="img/placeholder-dish.svg">
+<link rel="stylesheet" href="css/theme.css">
+<script src="vendor/echarts.min.js"></script>
+<script type="module" src="js/layout.js"></script>
+<script type="module" src="js/danh-gia.js"></script>
+</head>
+<body>
+<div class="shell">
+  <nav id="nav"></nav>
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <p class="eyebrow">Đánh giá mô hình</p>
+        <h1>Mô hình nào gợi ý trúng hơn?</h1>
+      </div>
+      <div class="head-pills" id="head-pills"></div>
+    </header>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>So sánh các mô hình xếp hạng</h2><span class="card-note" id="rank-note"></span></div>
+        <div class="filters" id="rank-controls">
+          <div id="seg-view"></div>
+          <div id="seg-group"></div>
+          <label class="field"><span class="sr-only">Độ đo</span><select id="metric"></select></label>
+        </div>
+        <div class="card-body" id="ranking" style="margin-top:16px"></div>
+        <p class="source">Đánh giá trên tháng mô hình chưa thấy (val: 08/2026, test: 09/2026). Màu xanh: mô hình chính; màu xám: mốc so sánh. Nguồn: <code>metrics</code> (bước 06f).</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2>Khác biệt có thật không?</h2><span class="card-note">hiệu NDCG@10, KTC 95%</span></div>
+        <div class="card-body" id="ci"></div>
+        <p class="source">Hiệu ghép cặp theo từng người dùng của tháng test, khoảng tin cậy xấp xỉ chuẩn (±1,96 × sai số chuẩn). Khoảng không chứa 0 nghĩa là khác biệt có ý nghĩa.</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2>Ngoài độ chính xác</h2><span class="card-note">tháng test, top 10</span></div>
+        <div class="card-body scroll-x" id="beyond"></div>
+        <p class="source">Coverage: tỷ lệ món của danh mục xuất hiện trong gợi ý. Novelty: món càng ít phổ biến càng cao. Diversity: các món trong một danh sách càng khác nhau càng cao. Biến thể khám phá: chỉ chấm các món người dùng chưa từng nấu.</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 320px">
+        <div class="card-head"><h2>Dự đoán điểm chấm (RMSE)</h2><span class="card-note">thấp hơn là tốt hơn</span></div>
+        <div class="card-body" id="rmse"></div>
+      </article>
+      <article class="card" style="flex:2 1 480px">
+        <div class="card-head"><h2>Dò tham số ALS implicit</h2><span class="card-note">NDCG@10 trên tập val</span></div>
+        <div class="card-body" id="als"></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 320px">
+        <div class="card-head"><h2>Content: MinHashLSH</h2><span class="card-note">recall@20 so với tính chính xác</span></div>
+        <div class="card-body" id="lsh"></div>
+      </article>
+      <article class="card" style="flex:1 1 320px">
+        <div class="card-head"><h2>Món ăn kèm (FP-Growth)</h2><span class="card-note">hit rate@3 trên phiên nấu test</span></div>
+        <div class="card-body" id="fp"></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Thí nghiệm đối chứng: ratings gốc và dữ liệu mô phỏng</h2><span class="card-note">RMSE, thấp hơn là tốt hơn</span></div>
+        <div class="card-body" id="control"></div>
+      </article>
+      <article class="card" style="flex:2 1 320px">
+        <div class="card-head"><h2>Thời gian chạy trên cụm</h2><span class="card-note">2 worker, 4 core</span></div>
+        <div class="card-body" id="timings"></div>
+      </article>
+    </section>
+  </main>
+</div>
+</body>
+</html>

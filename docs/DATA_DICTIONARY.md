@@ -162,7 +162,7 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 | `analysis/explain.txt` | Kế hoạch thực thi của truy vấn phễu và truy vấn lọc theo tháng (dùng cho báo cáo) |
 | `model_split_report.json`, `model_als_report.json`, `model_content_report.json`, `model_hybrid_report.json`, `model_fpgrowth_report.json`, `model_kmeans_report.json`, `model_control_report.json` | Report từng file của bước 06 |
 | `models_metrics.json` | Bảng tổng hợp độ đo xếp hạng (chính, khám phá, ngoài độ chính xác) và khoảng tin cậy 95% |
-| `export_report.json` | Bước 07: số doc, cách ghi, thời gian ghi, `collStats` (size, storageSize, index) từng collection, các kiểm tra (múi giờ, toàn vẹn tham chiếu, 5 user mẫu), `explain()` của 4 truy vấn tiêu biểu, nội dung `overview` |
+| `export_report.json` | Bước 07: số doc, cách ghi, thời gian ghi, `collStats` (size, storageSize, index) từng collection, các kiểm tra (múi giờ, toàn vẹn tham chiếu, 5 user mẫu), `explain()` của 4 truy vấn tiêu biểu, nội dung `overview`. Chạy `--only` thì gộp vào report cũ cùng database và thêm `partial_runs [{only, at, timings_s}]`; kiểm tra `recs_because_cooked` đếm phần tử theo `source` và `because_cooked` |
 
 ## MongoDB – database `vifood` (bước 07, D14)
 Ghi bằng `src/07_export_mongo.py`. Chạy `--local` thì ghi vào database `vifood_local`, cùng cấu trúc. Xem dữ liệu ở http://localhost:8090 (mongo-express, tài khoản trong `.env`).
@@ -172,7 +172,7 @@ Ngày giờ lưu dạng chuỗi theo giờ Việt Nam (`"yyyy-MM-dd"`, `"yyyy-MM
 | Collection | `_id` | Số doc | Trường chính | Index (ngoài `_id`) |
 |---|---|---|---|---|
 | `dishes` | `food_id` | 5.499 | Các cột của `foods` (bỏ `dish_type`, `cooking_time`, `source_stt`, `in_original_clean`, `dup_name_group`) và `dish_features`; `name_search` (tên chữ thường, không dấu, "đ" → "d"); `nutrition {calories, fat, fiber, sugar, protein}` (**số ngẫu nhiên, không hiển thị**); `stats {views, favorites, cooks, rates, avg_rating, cook_rank}` (**cả năm mô phỏng**, chỉ để mô tả); `companions [{rank, food_id, confidence, lift}]` (≤ 3 món, 656 món có) | text `text_ten_mon` (`name_search`, `dish_name`, `default_language: none`); `name_search`; `{is_vegetarian, stats.cook_rank}`; `{is_quick, stats.cook_rank}`; `{meal_types, stats.cook_rank}`; `{dish_category, stats.cook_rank}`; `stats.cook_rank` |
-| `recs` | `user_id` | 50.000 | `items [{rank, food_id, score, source, because_food_id}]`, đúng 50 món theo `rank`. `source` ∈ als, rep, pop, content_slot. Không có chuỗi lý do: API sinh câu lý do từ `source` và `because_food_id` (chỉ dùng với `content_slot`) | – |
+| `recs` | `user_id` | 50.000 | `items [{rank, food_id, score, source, because_food_id, because_cooked?}]`, đúng 50 món theo `rank`. `source` ∈ als, rep, pop, content_slot (bản cụm không có `rep`; bản local có). `because_cooked` (bool, D15) **chỉ có ở phần tử `content_slot`**: true khi món lý do là món đã nấu (cụm: 93.137 true, 3.209 false). Không có chuỗi lý do: API sinh câu lý do từ `source`, `because_food_id` và `because_cooked` | – |
 | `similar` | `food_id` | 5.499 | `items [{rank, food_id, sim, jaccard}]`, 50 món tương tự (cosine TF-IDF) | – |
 | `users` | `user_id` | 50.000 | `region, age_group, gender, device, signup_date`; `group` (lạnh/ít/ấm); `cluster_k3/k8/k11` (null với 3.870 user); `profile {n_events, n_cook, n_rate, avg_rating, share_chay, share_haisan, share_ngot, share_nhanh, share_cay, pref_slot}`; `history [{food_id, n_cook, last_cook}]` (≤ 10 món, xếp theo `n_cook` rồi `last_cook` giảm dần); `test_cooks [food_id]` (món nấu tháng 09/2026, chỉ 39.012 user có); `truth {persona_main, persona_sub}` (**chỉ để kiểm chứng, endpoint gợi ý không trả trường này**) | `cluster_k8`; `{region, age_group}`; `truth.persona_main` |
 | `popular` | `"chung"`, `"2 tháng cuối"`, `"vùng-tuổi\|<vùng>\|<tuổi>"` | 14 | `kind, region, age_group, items [{rank, food_id, cooks}]` (top 100 của `pop_test`) | – |
@@ -185,3 +185,31 @@ Ngày giờ lưu dạng chuỗi theo giờ Việt Nam (`"yyyy-MM-dd"`, `"yyyy-MM
 | `reports` | tên file (vd `model_als_report`) | 12 | `file, content` (nội dung JSON; dấu chấm trong tên trường đổi thành dấu phẩy, vd `"4,0"`) | – |
 | `overview` | `"overview"` | 1 | `n_dishes, n_users, n_events, events_by_type, event_months, n_recs_rows, hdfs {thư mục: bytes, bytes_with_replicas, files}, reference_date, exported_at, notes` | – |
 | `trending` | | 0 | Để dành cho Structured Streaming | `window_end -1` |
+
+## API bước 08 (`api/`, D15)
+FastAPI đọc MongoDB (database `MONGO_DB`), phục vụ `/api/...` và `web/` tĩnh trên http://localhost:8000. Schema đầy đủ ở http://localhost:8000/docs.
+Mọi response có header `Server-Timing: app;dur=<ms>, db;dur=<ms>`. Lỗi: 404 (không có user/món/endpoint), 422 (tham số sai), 503 (không kết nối được MongoDB).
+Bộ lọc món **F** (query): `veg`, `quick`, `not_spicy` (bool), `meal` ∈ sáng, trưa, tối, ăn vặt, `category` ∈ 10 nhóm món.
+**DishCard**: `food_id, dish_name, image_link, dish_category, dish_type_fixed, is_vegetarian, is_quick, is_spicy, meal_types` (không có `nutrition`).
+
+| # | Endpoint | Collection | Đợt |
+|---|---|---|---|
+| E0 | `GET /api/health` | `ping`, số doc `dishes/users/recs` | 1 |
+| E1 | `GET /api/overview` | `overview`, `reports` (tiến độ pipeline suy ra từ report), `trending` | 1 |
+| E2 | `GET /api/behavior/heatmap?metric=cooks\|views\|events` | `analysis_heatmap_hour_dow` | 1 |
+| E3 | `GET /api/behavior/monthly?region=` | `analysis_trend_month_category`, `analysis_season_month`, `reports.model_split_report` | 1 |
+| E6 | `GET /api/behavior/funnel` | `analysis_funnel_by_category`, `reports.analysis_report` | 1 |
+| E12 | `GET /api/dishes/search?q=&limit=` | `dishes` (`$regex` trên `name_search`) | 1 |
+| E13 | `GET /api/dishes/{food_id}?n_similar=` | `dishes`, `similar` | 1 |
+| E14 | `GET /api/dishes?F&skip&limit` | `dishes` (xếp theo `stats.cook_rank`) | 1 |
+| E17 | `GET /api/users/demo` | `users` (3 user/nhóm, 2 user/persona kèm `verify_only: true`) | 1 |
+| E18 | `GET /api/users/{user_id}` | `users` (projection `{truth: 0}`), không có persona | 1 |
+| E19 | `GET /api/recs/{user_id}?F&limit` | `recs`, `users`, `dishes` (`$in` + F, bù món `$nin` + `stats.cook_rank`) | 1 |
+| E20 | `POST /api/recs/new-user` body `{food_ids, region?, age_group?, limit?, F}` | `similar`, `dishes`, `popular` | 1 |
+| E22 | `GET /api/meta/filters` | `distinct` trên `dishes`, `users` | 1 |
+| E23 | `GET /api/eval/ranking?view&variant&group` | `metrics`, `reports.models_metrics` | 1 |
+| E24 | `GET /api/eval/details` | `reports` (ALS, content, FP-Growth, đối chứng, hybrid, K-means, thời gian) | 1 |
+| E26 | `GET /api/reports/{name}` | `reports` | 1 |
+| E4, E5, E7, E8, E10, E11, E15, E16, E25 | xem LAST_RUN ngày 25/10 mục B | | 2 |
+
+**RecItem** (E19, E20) = DishCard + `rank, rec_rank, source (als|content_slot|pop|fill|rep|content), dot (herb|chili|neutral), reason, because {food_id, dish_name}?, hit`. `summary {from_recs, from_fill, from_popular, hits, n_test_cooks}`.

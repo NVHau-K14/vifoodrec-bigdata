@@ -1,0 +1,16 @@
+# echarts@5.5.1, @fontsource/be-vietnam-pro@5.2.8 (tai tu https://cdn.jsdelivr.net/npm)
+e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf  1030855 bytes  web/vendor/echarts.min.js
+634293835b43a6dd2094fa39182a3d9a6b9ca43b7fdb9ac354e8037af2a3093a  11990 bytes  web/vendor/LICENSE-echarts.txt
+0bd4db1cda123af9d91794b0f98324b7d7d81aef0fcaf78c433160153f2c6f25  6476 bytes  web/fonts/OFL.txt
+03d1b589cff172e1a670b3573e731d3380bc326f80cf83b0d3504e3188e2e074  21168 bytes  web/fonts/be-vietnam-pro-latin-400-normal.woff2
+b621f77d35f777023aa11ca524462d511b4b28a813adbc0e9d15a10fc61dfe4e  21892 bytes  web/fonts/be-vietnam-pro-latin-500-normal.woff2
+9503dec2a7c532c8331e9600bcafea287a4fd208573b8668d85ab8d8de1863c7  22032 bytes  web/fonts/be-vietnam-pro-latin-600-normal.woff2
+a193dd87699bd2e18ddf72dc271493ea82a23dad9f5c334d9f2a257b1e05fc30  22152 bytes  web/fonts/be-vietnam-pro-latin-700-normal.woff2
+f7a2811e471c2973a1179ce39da3ad6bb8082381aa8d1535ccfcbc3d6d78a052  13056 bytes  web/fonts/be-vietnam-pro-latin-ext-400-normal.woff2
+947d592eb7676914507ff68fc11fcf2cfdecd6ebaf0fa2af6047f66a63ea7d0f  13548 bytes  web/fonts/be-vietnam-pro-latin-ext-500-normal.woff2
+20cc75daeaaaa0fa8af2b616b2de2b2900f0ce14ae8e9faa47d272cedd93827f  13608 bytes  web/fonts/be-vietnam-pro-latin-ext-600-normal.woff2
+33d57e5bd840b03921568e08d2be1082d453e55f1ba55f421e41a1aa54e12601  13852 bytes  web/fonts/be-vietnam-pro-latin-ext-700-normal.woff2
+dc085e2fba3414e5c5bf1e6172f921a9f81c5859946a4ed3d63c1e470d96a9e2  11532 bytes  web/fonts/be-vietnam-pro-vietnamese-400-normal.woff2
+86341610cbe907eecf461c9159c168d5efb52bb1a33963813a08f520555d8e66  12172 bytes  web/fonts/be-vietnam-pro-vietnamese-500-normal.woff2
+97658c6f9a384f29a3005c3d96e2a0d1c810192cf68979071c290f5a377a9f99  12176 bytes  web/fonts/be-vietnam-pro-vietnamese-600-normal.woff2
+4f58af2d1c3e28a9ba14c51c82db2751d78344b75bdcb34de24a1031ebe59da6  12468 bytes  web/fonts/be-vietnam-pro-vietnamese-700-normal.woff2
