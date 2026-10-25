@@ -69,6 +69,7 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);
 
 - Hàng flex `flex-wrap: wrap`: thanh bên `flex: 1 1 232px` (nền `--nav`), nội dung `flex: 999 1 560px; min-width:0; padding: 32px 40px 56px`. Ở màn hẹp thanh bên tự xuống trên cùng. Không `position: sticky`, không `100vh` cho thanh bên.
 - Thanh bên: logo (biểu tượng bát canh, nét `--nav-dot`) + "ViFoodRec" + dòng phụ "Hành vi ăn uống & gợi ý món"; 7 mục theo đúng thứ tự: Tổng quan, Hành vi ăn uống, Món ăn, Phân khúc người dùng, Gợi ý món, Đánh giá mô hình, Thời gian thực. Mục hiện tại: nền `--nav-hover`, chấm `--nav-dot`, `aria-current="page"`. Cuối thanh bên luôn có hộp "Dữ liệu hành vi mô phỏng".
+- Khi thanh bên nằm trên cùng (màn < 792px): 7 mục xếp thành hàng chip xuống dòng (vẫn cao 44px, chữ 13px, chỉ mục hiện tại có chấm), hộp mô phỏng gọn lại. Mục tiêu: ở 390px, nội dung chính (vd danh sách gợi ý) bắt đầu trong khoảng 900px đầu.
 - Đầu trang: nhãn nhỏ viết hoa màu herb (tên trang) + tiêu đề H1 32px/700 dạng **một câu nói điều trang trả lời** (vd "Hôm nay nấu gì?"), bên phải là các viên thông tin: "Mốc dữ liệu: 01/09/2026" và viên cam "Hành vi mô phỏng".
 - Nội dung chia thành các hàng `section` flex-wrap, mỗi thẻ `flex: <tỷ lệ> 1 <min>px`. Thẻ: nền `--surface`, viền 1px `--line`, bo `--radius-card`, padding 22px, tiêu đề H2 17px/600, dòng chú thích 12px `--muted` canh phải tiêu đề.
 - Hàng thẻ số liệu (KPI): grid `repeat(auto-fit, minmax(170px,1fr))`, nhãn 13px muted, số 28px/700, dòng phụ 12px.
@@ -77,13 +78,37 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);
 ## 4. Thành phần dùng chung
 
 **Thẻ món** (trang Gợi ý, Món ăn, top món):
-- Ảnh tỷ lệ 4:3 `object-fit:cover`, lấy từ `image_link`; `loading="lazy"`, `referrerpolicy="no-referrer"`; lỗi tải hoặc null thì dùng `img/placeholder-dish.svg` trên nền màu theo nhóm món (mục 6). Có 19 món không có ảnh.
+- Ảnh tỷ lệ 4:3 `object-fit:cover`, lấy từ `image_link`; `loading="lazy"`, `referrerpolicy="no-referrer"`. Dùng `dishImg(d)` / `dishThumb(d)` của `components.js`, không tự viết `<img>` cho ảnh món.
+- **Ảnh thay thế** (khi ảnh lỗi, `image_link` null, hoặc tải quá **4 giây**, `IMG_TIMEOUT_MS`):
+  - Khung ảnh luôn vẽ sẵn ảnh thay thế ở dưới; ảnh thật phủ lên (mờ dần) khi tải xong. Lỗi hoặc quá hạn thì bỏ ảnh thật (gỡ `src`), không chờ trình duyệt hết thời gian.
+  - Đếm 4 giây từ lúc ảnh sắp vào màn hình (IntersectionObserver, `rootMargin` 200px), để ảnh lazy ở dưới không bị bỏ oan.
+  - Ảnh thay thế = nền màu theo nhóm món + biểu tượng SVG nét mảnh (`stroke` 1,6, `currentColor`) + tên nhóm (`dish_category`, viết hoa chữ đầu). Ảnh nhỏ (`thumb`, 56 × 42) chỉ có biểu tượng.
+  - 10 nhóm, mỗi nhóm một biểu tượng; màu chỉ dùng 3 tông có sẵn (không thêm màu):
+
+    | Nhóm | Biểu tượng | Tông |
+    |---|---|---|
+    | canh/súp | bát có hơi nóng | herb (`--herb-soft` / `--herb-dark`) |
+    | món chính | đĩa, dao, nĩa | chili (`--chili-soft` / `--chili-dark`) |
+    | gỏi/salad | lá | herb |
+    | bánh | miếng bánh | slate (`--chip` / `--slate`) |
+    | bún/phở/mì/miến | bát sợi, đũa | chili |
+    | cơm/xôi/cháo | bát cơm đầy | slate |
+    | chè/tráng miệng | ly chè nhiều lớp | chili |
+    | đồ uống | cốc có ống hút | herb |
+    | lẩu | nồi có quai, hơi nóng | chili |
+    | ăn vặt | xiên que | slate |
+    | (thiếu nhóm) | bát có hơi nóng, chữ "Món ăn" | slate |
+
+  - `wireImgFallback(document.body)` được gọi một lần trong `layout.js`, trang không cần gọi lại. Có 19 món không có ảnh; ảnh `image.cooky.vn` (4.291/5.499 món) có thể không tải được ở một số mạng, ảnh `monngonmoingay.com` thì tải được.
 - Góc trái trên: số hạng (vòng tròn 26px nền ink chữ trắng). Góc phải trên (nếu có): nhãn "Đã nấu T9" nền herb (món nằm trong `test_cooks`).
 - Thân: tên món 15px/600 (tối đa 2 dòng), chip nhỏ nền `#F0F2EE` chữ 11px: "Chay", "Món nhanh", "Cay", các bữa nối bằng " · ".
+- Món người dùng đã nấu (E19 `n_cook_before`, chỉ có khi món nằm trong `history` 10 món): chip đầu tiên "Bạn đã nấu N lần" nền `--herb-soft` chữ `--herb-dark` đậm. Giữ nguyên chấm màu theo nguồn. Nguồn `rep` không có chip này vì câu lý do đã nói.
 - Dòng lý do: chấm 8px màu theo nguồn + câu lý do 12px (mục 5).
 - Cả thẻ là một `<button>` (chọn món để xem chi tiết); thẻ đang chọn có viền 2px herb.
 
-**Bộ lọc**: chip bật/tắt (`aria-pressed`) cao ≥40px — tắt: nền trắng viền `--line-2`; bật: nền ink chữ trắng. Bữa là nhóm nút phân đoạn trên nền `--chip`. Bên phải ghi tóm tắt: "N món từ gợi ý cá nhân · M món bù từ danh mục phổ biến".
+**Bộ lọc** (`filterBar()`): chip bật/tắt (`aria-pressed`) cao ≥40px — tắt: nền trắng viền `--line-2`; bật: nền ink chữ trắng. Bữa là nhóm nút phân đoạn trên nền `--chip` ("Mọi bữa", Sáng…). Bên phải ghi tóm tắt: "N món từ gợi ý cá nhân · M món bù từ danh mục phổ biến". Màn ≤ 640px: các điều khiển thu vào nút "Bộ lọc · N đang bật" (`aria-expanded`), để danh sách lên cao.
+
+**Chú giải biểu đồ**: viết bằng HTML (`.legend` + ô màu `.sw`), ví dụ `MONTH_LEGEND`. **Không** tạo series rỗng chỉ để có chú giải: series cột rỗng vẫn chiếm một chỗ trong nhóm cột, làm cột mảnh và lệch trái (`test_web_rules.test_no_empty_bar_series`). Nếu bắt buộc dùng thì đặt `barGap: '-100%'`.
 
 **Thanh ngang** (tỷ trọng, độ đo mô hình): grid `nhãn | thanh | số`, thanh cao 12px trên nền `--track`.
 
@@ -102,6 +127,7 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);
 
 - Món bù xếp theo `stats.cook_rank` của **toàn danh mục, cả năm mô phỏng**, không theo vùng hay bữa, nên câu lý do không được nói "ở vùng của bạn".
 
+- **Bố cục trang Gợi ý:** hàng đầu gọn (chế độ · ô mã người dùng · menu "User mẫu" nhóm theo ấm/ít/lạnh và theo persona, ghi "chỉ để kiểm chứng", tên persona viết hoa chữ đầu · nút "Xem gợi ý"); ngay sau là bộ lọc và danh sách; hồ sơ và "Món hay nấu" ở cột phải (màn hẹp thì xuống dưới danh sách). Ở 1440 × 1000 hàng thẻ đầu tiên phải nằm trong màn hình đầu.
 - Luôn hiện chú giải 3 màu dưới danh sách. Không hiện điểm số thô cho người xem.
 - Bộ lọc: chay / món nhanh / không cay / bữa / nhóm món. **Không** có lọc calo hay thời gian nấu, **không** hiển thị `nutrition` (số ngẫu nhiên).
 - Thiếu món sau khi lọc: bù bằng `dishes` cùng bộ lọc xếp theo `stats.cook_rank`, gắn `source="fill"` (chấm `--neutral`).

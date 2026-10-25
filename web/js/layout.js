@@ -1,6 +1,7 @@
 // layout.js - dung thanh ben (7 muc, dung thu tu skill muc 3) va vien thong tin o dau trang
 
 import { getJSON, fmtDate } from './api.js';
+import { wireImgFallback } from './components.js';
 
 export const PAGES = [
   { href: 'index.html', label: 'Tổng quan' },
@@ -56,3 +57,5 @@ export async function buildHeadPills() {
 
 buildNav();
 buildHeadPills();
+// Anh mon tren moi trang: hien khi tai xong, loi hoac qua 4 giay thi ve anh thay the theo nhom mon
+wireImgFallback(document.body);

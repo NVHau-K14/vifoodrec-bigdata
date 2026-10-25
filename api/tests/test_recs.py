@@ -47,7 +47,8 @@ def test_recs_invariants(client, db, sample_users, flt):
         rec = db.recs.find_one({"_id": uid})
         user = db.users.find_one({"_id": uid}, {"region": 1, "age_group": 1, "test_cooks": 1, "history": 1})
         rec_ids = [x["food_id"] for x in rec["items"]]
-        hist = {h["food_id"] for h in user.get("history") or []}
+        n_hist = {h["food_id"]: h["n_cook"] for h in user.get("history") or []}
+        hist = set(n_hist)
         test_cooks = set(user.get("test_cooks") or [])
         ids = [x["food_id"] for x in items]
         assert len(ids) == len(set(ids)), "trung mon"
@@ -65,6 +66,8 @@ def test_recs_invariants(client, db, sample_users, flt):
         for x in items:
             check_item_reason(x, user)
             assert x["hit"] == (x["food_id"] in test_cooks)
+            # Chip "Ban da nau N lan": dung so lan trong history, mon ngoai history (ke ca mon bu) la null
+            assert x["n_cook_before"] == n_hist.get(x["food_id"])
         s = body["summary"]
         assert s["from_recs"] == len(from_recs) and s["from_fill"] == len(fills)
         assert s["hits"] == sum(x["hit"] for x in items)

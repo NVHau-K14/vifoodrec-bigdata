@@ -96,9 +96,11 @@ def recs_for_user(user_id: int, f: DishFilter = Depends(dish_filter), limit: int
             reason = reasons.rep_reason(n_hist.get(x["food_id"]))
         else:
             reason = reasons.ALS
+        # Mon da nau (nau lai duoc tinh la trung o buoc 06): the mon hien chip "Ban da nau N lan".
+        # history chi giu 10 mon nau nhieu nhat, mon nau it hon thi null.
         out.append({**card(d), "rank": len(out) + 1, "rec_rank": x["rank"], "source": src,
                     "dot": reasons.DOT.get(src, "herb"), "reason": reason, "because": because,
-                    "hit": x["food_id"] in test_cooks})
+                    "hit": x["food_id"] in test_cooks, "n_cook_before": n_hist.get(x["food_id"])})
     n_recs = len(out)
     if n_recs < limit:
         reason = reasons.fill_reason(f.label())

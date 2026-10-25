@@ -212,4 +212,4 @@ Bộ lọc món **F** (query): `veg`, `quick`, `not_spicy` (bool), `meal` ∈ s�
 | E26 | `GET /api/reports/{name}` | `reports` | 1 |
 | E4, E5, E7, E8, E10, E11, E15, E16, E25 | xem LAST_RUN ngày 25/10 mục B | | 2 |
 
-**RecItem** (E19, E20) = DishCard + `rank, rec_rank, source (als|content_slot|pop|fill|rep|content), dot (herb|chili|neutral), reason, because {food_id, dish_name}?, hit`. `summary {from_recs, from_fill, from_popular, hits, n_test_cooks}`.
+**RecItem** (E19, E20) = DishCard + `rank, rec_rank, source (als|content_slot|pop|fill|rep|content), dot (herb|chili|neutral), reason, because {food_id, dish_name}?, hit, n_cook_before`. `n_cook_before` (chỉ E19): số lần đã nấu trước 01/09/2026 nếu món nằm trong `users.history` (10 món nấu nhiều nhất), không thì null; dashboard hiện chip "Bạn đã nấu N lần". `summary {from_recs, from_fill, from_popular, hits, n_test_cooks}`.

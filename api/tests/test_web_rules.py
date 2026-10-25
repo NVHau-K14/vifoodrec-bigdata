@@ -53,6 +53,51 @@ def test_img_have_alt():
             assert "alt=" in m.group(0), f"{f.name}: {m.group(0)[:60]}"
 
 
+def enclosing_object(src, pos):
+    """Doan {...} nho nhat bao quanh vi tri pos (dem ngoac nhon, du cho JS cua du an)."""
+    depth, i = 0, pos
+    while i >= 0:
+        if src[i] == "}":
+            depth += 1
+        elif src[i] == "{":
+            if depth == 0:
+                break
+            depth -= 1
+        i -= 1
+    depth, j = 0, i
+    while j < len(src):
+        if src[j] == "{":
+            depth += 1
+        elif src[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return src[i:j + 1]
+        j += 1
+    return src[i:]
+
+
+def bar_series(src):
+    return [enclosing_object(src, m.start()) for m in re.finditer(r"type:\s*'bar'", src)]
+
+
+def test_no_empty_bar_series():
+    # Series cot rong (data: []) chi de lam chu giai van chiem 1 cho trong nhom cot -> cot manh, lech trai.
+    # Chu giai viet bang HTML (vd MONTH_LEGEND), hoac series do phai dat barGap: '-100%'.
+    bad = []
+    for f in files("js/*.js"):
+        for obj in bar_series(f.read_text(encoding="utf-8")):
+            if re.search(r"data:\s*\[\s*\]", obj) and not re.search(r"barGap:\s*'-100%'", obj):
+                bad.append(f"{f.name}: {' '.join(obj.split())[:70]}")
+    assert bad == []
+
+
+def test_empty_bar_rule_catches_legend_series():
+    # Kiem tra chinh luat tren: ban monthlyBars cu (3 series rong de lam chu giai) phai bi bat
+    old = "series: [{ name: 'Lượt nấu', type: 'bar', data: xs }, { name: 'Train', type: 'bar', data: [], itemStyle: { color: c } }]"
+    objs = bar_series(old)
+    assert len(objs) == 2 and re.search(r"data:\s*\[\s*\]", objs[1]) and not re.search(r"data:\s*\[\s*\]", objs[0])
+
+
 def test_charts_use_vifood_theme():
     js = (WEB / "js" / "charts.js").read_text(encoding="utf-8")
     assert "registerTheme('vifood'" in js and "echarts.init(el, 'vifood', { renderer: 'svg' })" in js

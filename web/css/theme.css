@@ -111,6 +111,8 @@ section.row{display:flex;flex-wrap:wrap;gap:var(--gap);margin-bottom:var(--gap)}
 .seg button{min-height:38px;padding:0 14px;border:0;border-radius:8px;background:transparent;cursor:pointer;font-size:14px;font-weight:500;color:var(--ink-2)}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 0 0 1px var(--line-2)}
 .filters{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.filters-body{display:contents}
+.filters-toggle{display:none}
 .filters-summary{margin-left:auto;font-size:13px;color:var(--muted)}
 .field{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
 .field input,.field select{min-height:44px;padding:0 12px;border:1px solid var(--line-2);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);font-size:14px}
@@ -144,18 +146,28 @@ section.row{display:flex;flex-wrap:wrap;gap:var(--gap);margin-bottom:var(--gap)}
 .dish{position:relative;display:flex;flex-direction:column;text-align:left;padding:0;border:1px solid var(--line);border-radius:var(--radius-tile);background:var(--surface);overflow:hidden;cursor:pointer}
 .dish:hover{border-color:var(--line-2)}
 .dish[aria-pressed="true"]{border:2px solid var(--herb)}
-.dish-img{position:relative;aspect-ratio:4/3;background:var(--track)}
-.dish-img img{width:100%;height:100%;object-fit:cover;display:block}
-.dish-img.ph-chay{background:var(--herb-soft)}
-.dish-img.ph-man{background:var(--chili-soft)}
-.dish-img.ph-ngot,.dish-img.ph-uong{background:var(--chip)}
-.dish-img img.ph{object-fit:contain;padding:22%}
+.dish-top{position:relative;display:block}
+/* Khung anh 4:3: anh thay the (nen + bieu tuong + ten nhom) nam duoi, anh that phu len khi tai xong */
+.dish-img{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--track)}
+.dish-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .2s}
+.dish-img img.ok{opacity:1}
+.dish-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;text-align:center}
+.dish-ph svg{width:34%;max-width:64px;height:auto}
+.ph-name{font-size:12px;font-weight:600;line-height:1.2}
+.tone-herb{background:var(--herb-soft);color:var(--herb-dark)}
+.tone-chili{background:var(--chili-soft);color:var(--chili-dark)}
+.tone-slate{background:var(--chip);color:var(--slate)}
+.dish-img.thumb{width:56px;height:42px;aspect-ratio:auto;border-radius:8px;flex:none}
+.dish-img.thumb .dish-ph{padding:0}
+.dish-img.thumb .dish-ph svg{width:26px}
+.dish-img.thumb .ph-name{display:none}
 .dish-rank{position:absolute;top:8px;left:8px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--on-dark);font-size:12px;font-weight:700;display:grid;place-items:center}
 .dish-tag{position:absolute;top:8px;right:8px;padding:3px 8px;border-radius:var(--radius-pill);background:var(--herb);color:var(--on-dark);font-size:11px;font-weight:600}
 .dish-body{display:flex;flex-direction:column;gap:6px;padding:10px 12px 12px;flex:1}
 .dish-name{font-size:15px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .chips{display:flex;flex-wrap:wrap;gap:4px}
 .chip{padding:2px 7px;border-radius:6px;background:var(--chip-soft);font-size:11px;color:var(--ink-2)}
+.chip-cooked{background:var(--herb-soft);color:var(--herb-dark);font-weight:600}
 .reason{display:flex;gap:7px;align-items:baseline;font-size:12px;color:var(--ink-2);margin-top:auto}
 .sdot{width:8px;height:8px;border-radius:50%;flex:none;transform:translateY(-1px)}
 .sdot.herb{background:var(--herb)}
@@ -163,11 +175,17 @@ section.row{display:flex;flex-wrap:wrap;gap:var(--gap);margin-bottom:var(--gap)}
 .sdot.neutral{background:var(--neutral)}
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-size:12px;color:var(--ink-2)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
+.legend.top{margin:0 0 6px}
+/* O vuong chu giai cho bieu do (chu giai viet bang HTML, khong dung series rong) */
+.sw{width:10px;height:10px;border-radius:3px;flex:none;background:var(--herb)}
+.sw.mid{background:var(--herb-mid)}
+.sw.chili{background:var(--chili)}
+.sw.slate{background:var(--slate)}
+.sw.neutral{background:var(--neutral)}
 
 /* Danh sach nho (top mon, lich su) */
 .mini-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .mini{display:flex;align-items:center;gap:12px}
-.mini img{width:56px;height:42px;border-radius:8px;object-fit:cover;background:var(--track);flex:none}
 .mini .t{font-size:14px;font-weight:500;line-height:1.3}
 .mini .s{font-size:12px;color:var(--muted)}
 .mini .n{margin-left:auto;font-weight:600;font-size:13px;white-space:nowrap}
@@ -185,9 +203,21 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13px}
 .steps .k{width:26px;color:var(--muted);font-size:12px}
 .steps .sec{margin-left:auto;font-size:12px;color:var(--muted)}
 
+/* Thanh ben nam tren cung (khi khong du 232 + 560px): muc xep thanh hang chip, hop mo phong gon lai */
+@media (max-width:791px){
+  .nav{padding:16px;gap:14px}
+  .nav-list{flex-direction:row;flex-wrap:wrap;gap:4px}
+  .nav-list a{padding:0 11px;gap:6px;font-size:13px;border:1px solid var(--nav-hover)}
+  .nav-list a:not([aria-current="page"]) .dot{display:none}
+  .nav-note{padding:10px 12px}
+}
 @media (max-width:640px){
-  .main{padding:24px 16px 40px}
+  .main{padding:20px 16px 40px}
+  .page-head{margin-bottom:18px;gap:10px}
   .page-head h1{font-size:26px}
   .card{padding:18px}
-  .filters-summary{margin-left:0}
+  .filters-summary{margin-left:0;flex:1 1 150px;font-size:12px}
+  .filters-toggle{display:inline-flex;align-items:center}
+  .filters.open .filters-body{display:flex;flex-wrap:wrap;gap:10px;width:100%}
+  .filters:not(.open) .filters-body{display:none}
 }

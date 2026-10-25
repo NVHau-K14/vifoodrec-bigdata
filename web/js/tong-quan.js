@@ -1,7 +1,7 @@
 // tong-quan.js - trang Tong quan (bo cuc ban mau canvas, D15 chinh sua a): E1, E2, E3, E6, E14, E23
 
 import { getJSON, shared, fmtInt, fmtShort, fmtBytes, fmtPct, fmtFixed, fmtSeconds } from './api.js';
-import { load, hbars, statusPill, miniList, esc, wireImgFallback } from './components.js';
+import { load, hbars, statusPill, miniList, esc, MONTH_LEGEND } from './components.js';
 import { heatmapHourDow, monthlyBars } from './charts.js';
 
 const $ = (id) => document.getElementById(id);
@@ -48,8 +48,8 @@ const monthly = shared('/behavior/monthly');
 load($('monthly'), async (el) => {
   const m = await monthly();
   el.dataset.state = 'ready';
-  el.innerHTML = '<div class="chart"></div>';
-  monthlyBars(el.firstElementChild, m.months, m.tet_month);
+  el.innerHTML = `${MONTH_LEGEND}<div class="chart"></div>`;
+  monthlyBars(el.lastElementChild, m.months, m.tet_month);
 }, 280);
 
 load($('categories'), async (el) => {
@@ -66,9 +66,8 @@ load($('categories'), async (el) => {
 load($('top-dishes'), async (el) => {
   const d = await getJSON('/dishes?limit=5');
   el.dataset.state = 'ready';
-  el.innerHTML = miniList(d.items.map((x, i) => ({ img: x.image_link, title: `${i + 1}. ${x.dish_name}`,
+  el.innerHTML = miniList(d.items.map((x, i) => ({ dish: x, title: `${i + 1}. ${x.dish_name}`,
     sub: x.dish_category, num: `${fmtInt(x.cooks)} lượt` })));
-  wireImgFallback(el);
 });
 
 load($('models'), async (el) => {

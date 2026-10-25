@@ -60,14 +60,15 @@ export function heatmapHourDow(el, cells, valueName) {
   return ch;
 }
 
-// Cot theo thang (truc tu 0): train herbMid, thang Tet chili, val/test slate
+// Cot theo thang (truc tu 0): train herbMid, thang Tet chili, val/test slate.
+// Chu giai 3 mau viet bang HTML (MONTH_LEGEND trong components.js): series rong de lam chu giai
+// se chiem cho trong nhom cot, lam cot manh va lech trai.
 export function monthlyBars(el, months, tetMonth) {
   const color = (m) => (m.month === tetMonth ? C.chili : m.split === 'train' ? C.herbMid : C.slate);
   const label = (s) => { const [y, m] = s.split('-'); return `${m}/${y.slice(2)}`; };
   const ch = initChart(el);
   ch.setOption({
-    grid: { left: 8, right: 8, top: 36, bottom: 8, containLabel: true },
-    legend: { top: 0, left: 0, data: ['Train', 'Tháng có Tết', 'Val / test'], selectedMode: false },
+    grid: { left: 8, right: 8, top: 16, bottom: 8, containLabel: true },
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
                formatter: (ps) => { const m = months[ps[0].dataIndex];
                  const tag = m.split === 'train' ? 'train' : m.split;
@@ -75,12 +76,8 @@ export function monthlyBars(el, months, tetMonth) {
     xAxis: { type: 'category', data: months.map((m) => label(m.month)) },
     yAxis: { type: 'value', min: 0, axisLabel: { formatter: (v) => (v >= 1000 ? `${nfmt(v / 1000)}k` : v) } },
     series: [
-      { name: 'Lượt nấu', type: 'bar', barMaxWidth: 34,
+      { name: 'Lượt nấu', type: 'bar', barWidth: '58%', barMaxWidth: 40,
         data: months.map((m) => ({ value: m.cooks, itemStyle: { color: color(m) } })) },
-      // series rong chi de hien chu giai 3 mau
-      { name: 'Train', type: 'bar', data: [], itemStyle: { color: C.herbMid } },
-      { name: 'Tháng có Tết', type: 'bar', data: [], itemStyle: { color: C.chili } },
-      { name: 'Val / test', type: 'bar', data: [], itemStyle: { color: C.slate } },
     ],
   });
   return ch;

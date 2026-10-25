@@ -96,22 +96,42 @@ export function toggleChip(label, pressed, onChange) {
 
 // ---------- Bo loc mon (chay / mon nhanh / khong cay / bua / nhom mon) ----------
 // state {veg, quick, not_spicy, meal, category}; meta tu /api/meta/filters
+// Man hep (<= 640px): cac dieu khien thu vao nut "Bo loc" (aria-expanded) de danh sach len cao hon.
+let filterSeq = 0;
 export function filterBar(el, state, meta, onChange) {
   el.className = 'filters';
   el.innerHTML = '';
-  const fire = () => onChange({ ...state });
-  el.append(toggleChip('Chay', state.veg, (v) => { state.veg = v; fire(); }));
-  el.append(toggleChip('Món nhanh', state.quick, (v) => { state.quick = v; fire(); }));
-  el.append(toggleChip('Không cay', state.not_spicy, (v) => { state.not_spicy = v; fire(); }));
+  const id = `filters-body-${++filterSeq}`;
+  const tog = document.createElement('button');
+  tog.type = 'button';
+  tog.className = 'btn filters-toggle';
+  tog.setAttribute('aria-expanded', 'false');
+  tog.setAttribute('aria-controls', id);
+  const nOn = () => [state.veg, state.quick, state.not_spicy, state.meal, state.category].filter(Boolean).length;
+  const label = () => { const n = nOn(); tog.textContent = n ? `Bộ lọc · ${n} đang bật` : 'Bộ lọc'; };
+  tog.addEventListener('click', () => {
+    const open = !el.classList.contains('open');
+    el.classList.toggle('open', open);
+    tog.setAttribute('aria-expanded', String(open));
+  });
+  const body = document.createElement('div');
+  body.className = 'filters-body';
+  body.id = id;
+  const fire = () => { label(); onChange({ ...state }); };
+  body.append(toggleChip('Chay', state.veg, (v) => { state.veg = v; fire(); }));
+  body.append(toggleChip('Món nhanh', state.quick, (v) => { state.quick = v; fire(); }));
+  body.append(toggleChip('Không cay', state.not_spicy, (v) => { state.not_spicy = v; fire(); }));
   const seg = document.createElement('div');
-  const meals = [{ value: '', label: 'Tất cả bữa' }, ...meta.meal_types.map((m) => ({ value: m, label: m[0].toUpperCase() + m.slice(1) }))];
+  const meals = [{ value: '', label: 'Mọi bữa' }, ...meta.meal_types.map((m) => ({ value: m, label: m[0].toUpperCase() + m.slice(1) }))];
   segmented(seg, meals, state.meal || '', (v) => { state.meal = v || null; fire(); }, 'Bữa');
-  el.append(seg);
+  body.append(seg);
   const wrap = document.createElement('label');
   wrap.className = 'field';
   wrap.innerHTML = `<span class="sr-only">Nhóm món</span><select><option value="">Mọi nhóm món</option>${meta.categories.map((c) => `<option value="${esc(c)}"${c === state.category ? ' selected' : ''}>${esc(c)}</option>`).join('')}</select>`;
   wrap.querySelector('select').addEventListener('change', (e) => { state.category = e.target.value || null; fire(); });
-  el.append(wrap);
+  body.append(wrap);
+  label();
+  el.append(tog, body);
   const sum = document.createElement('span');
   sum.className = 'filters-summary';
   sum.setAttribute('aria-live', 'polite');
@@ -119,9 +139,45 @@ export function filterBar(el, state, meta, onChange) {
   return sum;
 }
 
-// ---------- The mon ----------
-const PH = { 'Món chay': 'ph-chay', 'Món mặn': 'ph-man', 'Món ngọt': 'ph-ngot', 'Đồ uống': 'ph-uong' };
-const PLACEHOLDER = 'img/placeholder-dish.svg';
+// ---------- Anh mon va anh thay the (skill muc 4) ----------
+// Anh thay the theo nhom mon (dish_category): nen mau + bieu tuong SVG net manh + ten nhom.
+// Chi 3 tong mau tu token (herb / chili / slate tren nen chip), bieu tuong moi nhom mot khac.
+const S = (d) => `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICON = {
+  canh: S('<path d="M8 22h32a16 16 0 0 1-32 0Z"/><path d="M19 41h10"/><path d="M18 16c-2-2.5 2-4 0-7M24 16c-2-2.5 2-4 0-7M30 16c-2-2.5 2-4 0-7"/>'),
+  chinh: S('<circle cx="25" cy="25" r="11"/><circle cx="25" cy="25" r="6.5"/><path d="M6 12v8a3 3 0 0 0 6 0v-8M9 12v26"/><path d="M42 38V12c-2.6 1.8-3.8 5.5-3.8 9.5 0 3 1.4 4.5 3.8 4.5"/>'),
+  goi: S('<path d="M9 39c0-16 11-27 30-29 0 18-11 29-27 29Z"/><path d="M9 39c6-8 13-15 22-21"/><path d="M20 28l-1-7M25 24l5 1"/>'),
+  banh: S('<path d="M8 22 34 12l6 10Z"/><path d="M8 22v16h32V22"/><path d="M8 30h32"/><circle cx="30" cy="8" r="2.2"/>'),
+  bun: S('<path d="M7 25h34a17 17 0 0 1-34 0Z"/><path d="M18 43h12"/><path d="M26 21 38 5M31 22 43 8"/><path d="M12 25c1.5-4 4-4 5.5 0M18.5 25c1.5-4 4-4 5.5 0"/>'),
+  com: S('<path d="M8 26h32a16 16 0 0 1-32 0Z"/><path d="M11 26c1-8 6.5-12 13-12s12 4 13 12"/><path d="M19 43h10"/><path d="M20 20.5h.01M25.5 18.5h.01M29 22h.01M17 24h.01"/>'),
+  che: S('<path d="M9 11h30l-6 24H15Z"/><path d="M11.5 19h25M13.5 27h21"/><path d="M19 35v5h10v-5"/><path d="M16 44h16"/>'),
+  uong: S('<path d="M13 15h22l-2.6 24.4a3 3 0 0 1-3 2.6h-10.8a3 3 0 0 1-3-2.6Z"/><path d="M26 15 30 5h5"/><path d="M14 23h20"/>'),
+  lau: S('<path d="M8 21h32v11a8 8 0 0 1-8 8H16a8 8 0 0 1-8-8Z"/><path d="M5 21h38M8 26H4M44 26h-4"/><path d="M18 15c-2-2 2-4 0-7M24 15c-2-2 2-4 0-7M30 15c-2-2 2-4 0-7"/>'),
+  anvat: S('<path d="M7 41 41 7"/><circle cx="16" cy="32" r="5"/><circle cx="24" cy="24" r="5"/><circle cx="32" cy="16" r="5"/>'),
+};
+const PH_GROUP = {
+  'canh/súp': ['canh', 'herb'], 'món chính': ['chinh', 'chili'], 'gỏi/salad': ['goi', 'herb'],
+  'bánh': ['banh', 'slate'], 'bún/phở/mì/miến': ['bun', 'chili'], 'cơm/xôi/cháo': ['com', 'slate'],
+  'chè/tráng miệng': ['che', 'chili'], 'đồ uống': ['uong', 'herb'], 'lẩu': ['lau', 'chili'], 'ăn vặt': ['anvat', 'slate'],
+};
+const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
+export const IMG_TIMEOUT_MS = 4000;
+
+function dishPh(d) {
+  const [icon, tone] = PH_GROUP[d.dish_category] || ['canh', 'slate'];
+  return `<span class="dish-ph tone-${tone}" aria-hidden="true">${ICON[icon]}<span class="ph-name">${esc(cap(d.dish_category) || 'Món ăn')}</span></span>`;
+}
+
+// Khung anh 4:3: anh thay the nam duoi, anh that phu len khi tai xong (class "ok").
+// Loi, thieu image_link hoac qua IMG_TIMEOUT_MS -> bo anh that, chi con anh thay the.
+export function dishImg(d, cls = '') {
+  const img = d.image_link
+    ? `<img src="${esc(d.image_link)}" alt="" loading="lazy" referrerpolicy="no-referrer" data-ph>` : '';
+  return `<span class="dish-img ${cls}">${dishPh(d)}${img}</span>`;
+}
+
+// Anh nho trong danh sach (56 x 42): cung co che, khong hien ten nhom
+export const dishThumb = (d) => dishImg(d, 'thumb');
 
 export function dishChips(d) {
   const c = [];
@@ -132,34 +188,60 @@ export function dishChips(d) {
   return c.map((x) => `<span class="chip">${esc(x)}</span>`).join('');
 }
 
-export function dishImg(d, cls = '') {
-  const src = d.image_link || PLACEHOLDER;
-  const ph = d.image_link ? '' : ' class="ph"';
-  return `<div class="dish-img ${PH[d.dish_type_fixed] || ''} ${cls}"><img src="${esc(src)}"${ph} alt="" loading="lazy" referrerpolicy="no-referrer" data-ph></div>`;
+const dropImg = (img) => { img.removeAttribute('src'); img.remove(); };
+const armed = new WeakSet();
+const nearView = typeof IntersectionObserver === 'function' ? new IntersectionObserver((es) => {
+  for (const e of es) {
+    if (!e.isIntersecting) continue;
+    const img = e.target;
+    nearView.unobserve(img);
+    // Bat dau dem khi anh sap vao man hinh (anh lazy chua tai thi chua tinh)
+    if (!img.classList.contains('ok')) img._t = setTimeout(() => { if (!img.classList.contains('ok')) dropImg(img); }, IMG_TIMEOUT_MS);
+  }
+}, { rootMargin: '200px' }) : null;
+
+function arm(img) {
+  if (armed.has(img)) return;
+  armed.add(img);
+  if (img.complete && img.naturalWidth) img.classList.add('ok');
+  else if (nearView) nearView.observe(img);
 }
 
-// Anh loi -> placeholder (gan 1 lan cho ca vung chua)
+// Goi 1 lan cho ca trang (layout.js): anh tai xong thi hien, loi / qua han thi ve anh thay the
 export function wireImgFallback(root) {
+  if (armed.has(root)) return;
+  armed.add(root);
+  root.addEventListener('load', (e) => {
+    const img = e.target;
+    if (img.tagName === 'IMG' && img.hasAttribute('data-ph')) { clearTimeout(img._t); img.classList.add('ok'); }
+  }, true);
   root.addEventListener('error', (e) => {
     const img = e.target;
-    if (img.tagName === 'IMG' && img.hasAttribute('data-ph') && !img.src.endsWith(PLACEHOLDER)) {
-      img.src = PLACEHOLDER;
-      img.classList.add('ph');
-    }
+    if (img.tagName === 'IMG' && img.hasAttribute('data-ph')) { clearTimeout(img._t); dropImg(img); }
   }, true);
+  const scan = (n) => {
+    if (n.nodeType !== 1) return;
+    if (n.matches('img[data-ph]')) arm(n);
+    n.querySelectorAll('img[data-ph]').forEach(arm);
+  };
+  scan(root);
+  new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(scan))).observe(root, { childList: true, subtree: true });
 }
 
-// item: DishCard (+ rank, reason, dot, hit). Ca the la 1 <button>
+// item: DishCard (+ rank, reason, dot, hit, n_cook_before). Ca the la 1 <button>
 export function dishCard(item, { selected = false, showRank = true } = {}) {
+  // Chip "Ban da nau N lan" (E19 n_cook_before); nguon rep da noi dieu nay trong cau ly do
+  const cooked = item.n_cook_before && item.source !== 'rep'
+    ? `<span class="chip chip-cooked">Bạn đã nấu ${item.n_cook_before} lần</span>` : '';
   return `<button type="button" class="dish" data-id="${item.food_id}" aria-pressed="${selected}">
-    <div style="position:relative">${dishImg(item)}
+    <span class="dish-top">${dishImg(item)}
       ${showRank && item.rank ? `<span class="dish-rank" aria-label="Hạng ${item.rank}">${item.rank}</span>` : ''}
-      ${item.hit ? '<span class="dish-tag">Đã nấu T9</span>' : ''}</div>
-    <div class="dish-body">
+      ${item.hit ? '<span class="dish-tag">Đã nấu T9</span>' : ''}</span>
+    <span class="dish-body">
       <span class="dish-name">${esc(item.dish_name)}</span>
-      <span class="chips">${dishChips(item)}</span>
+      <span class="chips">${cooked}${dishChips(item)}</span>
       ${item.reason ? `<span class="reason"><span class="sdot ${item.dot || 'herb'}" aria-hidden="true"></span>${esc(item.reason)}</span>` : ''}
-    </div></button>`;
+    </span></button>`;
 }
 
 export const SOURCE_LEGEND = `<div class="legend" aria-label="Chú giải nguồn gợi ý">
@@ -167,10 +249,15 @@ export const SOURCE_LEGEND = `<div class="legend" aria-label="Chú giải nguồ
   <span><span class="sdot chili" aria-hidden="true"></span>Khám phá (content)</span>
   <span><span class="sdot neutral" aria-hidden="true"></span>Phổ biến</span></div>`;
 
-// Danh sach nho co anh: [{img, title, sub, num}]
+// Chu giai cua bieu do cot theo thang (charts.monthlyBars)
+export const MONTH_LEGEND = `<div class="legend top" aria-label="Chú giải màu cột">
+  <span><span class="sw mid" aria-hidden="true"></span>Train</span>
+  <span><span class="sw chili" aria-hidden="true"></span>Tháng có Tết</span>
+  <span><span class="sw slate" aria-hidden="true"></span>Val / test</span></div>`;
+
+// Danh sach nho co anh: [{dish (DishCard), title, sub, num}]
 export function miniList(rows) {
-  return `<ul class="mini-list">${rows.map((r) => `<li class="mini">
-      <img src="${esc(r.img || PLACEHOLDER)}" alt="" loading="lazy" referrerpolicy="no-referrer" data-ph>
+  return `<ul class="mini-list">${rows.map((r) => `<li class="mini">${dishThumb(r.dish)}
       <span><span class="t">${esc(r.title)}</span><br><span class="s">${esc(r.sub || '')}</span></span>
       ${r.num ? `<span class="n">${esc(r.num)}</span>` : ''}</li>`).join('')}</ul>`;
 }

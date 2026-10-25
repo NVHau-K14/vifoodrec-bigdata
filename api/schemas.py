@@ -46,6 +46,8 @@ class RecItem(DishCard):
     reason: str
     because: Optional[Because] = None
     hit: Optional[bool] = Field(None, description="món có trong lượt nấu tháng 9/2026 (test_cooks)")
+    n_cook_before: Optional[int] = Field(None, description="số lần đã nấu trước 01/09/2026 nếu món nằm trong "
+                                                           "history (10 món nấu nhiều nhất); null nếu không")
 
 
 class RecSummary(BaseModel):
