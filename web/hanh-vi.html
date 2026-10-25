@@ -6,7 +6,9 @@
 <title>Hành vi ăn uống · ViFoodRec</title>
 <link rel="icon" href="img/placeholder-dish.svg">
 <link rel="stylesheet" href="css/theme.css">
+<script src="vendor/echarts.min.js"></script>
 <script type="module" src="js/layout.js"></script>
+<script type="module" src="js/hanh-vi.js"></script>
 </head>
 <body>
 <div class="shell">
@@ -19,11 +21,73 @@
       </div>
       <div class="head-pills" id="head-pills"></div>
     </header>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Giờ nấu trong tuần</h2><span class="card-note">theo giờ × thứ, 12 tháng</span></div>
+        <div class="ctrl" id="heat-metric"></div>
+        <div class="card-body" id="heatmap"></div>
+        <p class="source" id="heat-top"></p>
+      </article>
+      <article class="card" style="flex:2 1 320px">
+        <div class="card-head"><h2>Phễu chuyển đổi</h2><span class="card-note">theo cặp người dùng–món</span></div>
+        <div class="card-body" id="funnel"></div>
+        <p class="source">Nguồn: <code>analysis_funnel_by_category</code> (bước 05).</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Lượt nấu theo tháng</h2><span class="card-note">tháng 8 là val, tháng 9 là test</span></div>
+        <div class="card-body" id="monthly"></div>
+        <p class="source">Nguồn: <code>analysis_trend_month_category</code> (bước 05). Trục bắt đầu từ 0.</p>
+      </article>
+      <article class="card" style="flex:2 1 360px">
+        <div class="card-head"><h2>Món theo mùa</h2><span class="card-note">% lượt nấu mỗi tháng</span></div>
+        <div class="ctrl" id="season-region"></div>
+        <div class="card-body" id="season"></div>
+        <p class="source">Nguồn: <code>analysis_season_month</code>. Mùa của món lấy từ cột <code>season</code> (bước 03).</p>
+      </article>
+    </section>
+
     <section class="row">
       <article class="card" style="flex:1 1 100%">
-        <div class="card-head"><h2>Trang đang được xây dựng</h2><span class="status status-todo">Chưa</span></div>
-        <p class="lead">Trang này sẽ có: heatmap giờ × thứ, lượt nấu theo tháng và theo mùa, món nấu nhiều theo bữa, khác biệt giữa các nhóm người dùng (lift), phễu chuyển đổi và thói quen nấu.</p>
-        <p class="lead">Trong lúc chờ, xem <a href="index.html">Tổng quan</a>, <a href="goi-y.html">Gợi ý món</a> hoặc <a href="danh-gia.html">Đánh giá mô hình</a>.</p>
+        <div class="card-head"><h2>Nhóm món theo tháng</h2><span class="card-note">% lượt nấu của từng nhóm; bấm chú giải để bật nhóm khác</span></div>
+        <div class="card-body" id="cat-trend"></div>
+        <p class="source">Nguồn: <code>analysis_trend_month_category</code>. Mặc định hiện 4 nhóm có nhiều lượt nấu nhất.</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:2 1 360px">
+        <div class="card-head"><h2>Món nấu nhiều theo bữa</h2><span class="card-note" id="slot-note"></span></div>
+        <div class="ctrl"><div id="slot-seg"></div><div id="slot-by"></div></div>
+        <div class="card-body" id="slot-dishes"></div>
+        <p class="source">Nguồn: <code>analysis_top_dish_by_slot</code>. "Đặc trưng" xếp theo lift: món được nấu ở bữa này nhiều hơn hẳn mức chung của món.</p>
+      </article>
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Nhóm người dùng khác nhau ở đâu</h2><span class="card-note">lift &gt; 1: nấu nhiều hơn mức chung</span></div>
+        <div class="ctrl">
+          <label class="field"><span>So sánh theo</span><select id="lift-group"></select></label>
+          <label class="field"><span>Thuộc tính món</span><select id="lift-attr"></select></label>
+        </div>
+        <div class="card-body scroll-x" id="lift"></div>
+        <p class="source">Nguồn: <code>analysis_lift_by_group</code>. Lift = tỷ trọng trong nhóm ÷ tỷ trọng chung. Ô dưới 1.000 lượt nấu để trống.</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2>Tỷ lệ chuyển đổi theo nhóm món</h2><span class="card-note">theo cặp người dùng–món</span></div>
+        <div class="card-body scroll-x" id="funnel-table"></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2>Thói quen nấu</h2><span class="card-note">12 tháng mô phỏng</span></div>
+        <div class="card-body" id="habits"></div>
+        <p class="source">Nguồn: <code>analysis_session_size</code>, <code>analysis_repeat_by_category</code>, <code>analysis_user_activity</code>, <code>analysis_rating_dist</code> (bước 05).</p>
       </article>
     </section>
   </main>

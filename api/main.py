@@ -22,7 +22,7 @@ from pymongo.errors import ConnectionFailure
 
 from .db import db_micros
 from .dishes_common import cards
-from .routers import behavior, dishes, evaluation, overview, recs
+from .routers import behavior, dishes, evaluation, overview, realtime, recs, segments
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
 log = logging.getLogger("uvicorn.error")
@@ -80,7 +80,8 @@ async def mongo_down(request: Request, exc: ConnectionFailure):
 
 
 api = APIRouter(prefix="/api")
-for r in (overview.router, behavior.router, dishes.router, recs.router, evaluation.router):
+for r in (overview.router, behavior.router, dishes.router, dishes.ing_router, segments.router, recs.router,
+          evaluation.router, realtime.router):
     api.include_router(r)
 
 

@@ -1,6 +1,8 @@
 // components.js - thanh phan dung chung (skill muc 4): the mon, chip loc, thanh ngang, vien trang thai,
 // khung tai / loi / rong. Khong co ma mau: moi mau qua class trong theme.css.
 
+import { fmtInt, fmtNum, fmtRatio } from './api.js';
+
 export function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
@@ -49,9 +51,10 @@ export async function load(body, loader, height) {
 
 // ---------- Thanh ngang: nhan | thanh | so ----------
 // rows [{label, value, text, note, tone}]; max mac dinh = gia tri lon nhat
-export function hbars(rows, { max } = {}) {
+// wrap = true: nhan dai duoc xuong dong (cot nhan khong chiem het cho cua thanh)
+export function hbars(rows, { max, wrap = false } = {}) {
   const m = max ?? Math.max(...rows.map((r) => r.value), 0);
-  return `<div class="hbars">${rows.map((r) => {
+  return `<div class="hbars${wrap ? ' wrap' : ''}">${rows.map((r) => {
     const w = m > 0 ? Math.max(0, Math.min(100, (r.value / m) * 100)) : 0;
     return `<span class="lbl">${esc(r.label)}</span>
       <span class="bar" role="img" aria-label="${esc(r.label)}: ${esc(r.text)}"><span class="fill ${r.tone || ''}" style="width:${w.toFixed(1)}%"></span></span>
@@ -228,7 +231,7 @@ export function wireImgFallback(root) {
   new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(scan))).observe(root, { childList: true, subtree: true });
 }
 
-// item: DishCard (+ rank, reason, dot, hit, n_cook_before). Ca the la 1 <button>
+// item: DishCard (+ rank, reason, dot, hit, n_cook_before, note). Ca the la 1 <button>
 export function dishCard(item, { selected = false, showRank = true } = {}) {
   // Chip "Ban da nau N lan" (E19 n_cook_before); nguon rep da noi dieu nay trong cau ly do
   const cooked = item.n_cook_before && item.source !== 'rep'
@@ -241,6 +244,7 @@ export function dishCard(item, { selected = false, showRank = true } = {}) {
       <span class="dish-name">${esc(item.dish_name)}</span>
       <span class="chips">${cooked}${dishChips(item)}</span>
       ${item.reason ? `<span class="reason"><span class="sdot ${item.dot || 'herb'}" aria-hidden="true"></span>${esc(item.reason)}</span>` : ''}
+      ${item.note ? `<span class="dish-note">${esc(item.note)}</span>` : ''}
     </span></button>`;
 }
 
@@ -260,4 +264,25 @@ export function miniList(rows) {
   return `<ul class="mini-list">${rows.map((r) => `<li class="mini">${dishThumb(r.dish)}
       <span><span class="t">${esc(r.title)}</span><br><span class="s">${esc(r.sub || '')}</span></span>
       ${r.num ? `<span class="n">${esc(r.num)}</span>` : ''}</li>`).join('')}</ul>`;
+}
+
+// ---------- Chi tiet mon (E13): anh, chip, thong ke ca nam mo phong, nguyen lieu, mon tuong tu, mon an kem ----------
+export function dishDetail(d) {
+  const st = d.stats || {};
+  return `<div class="detail">
+      <div class="detail-main">${dishImg(d)}
+        <p class="chips" style="margin-top:10px">${dishChips(d)}<span class="chip">${esc(d.dish_category)}</span></p>
+        <p class="sub-h">Cả năm mô phỏng</p>
+        <p class="detail-text">${fmtInt(st.cooks)} lượt nấu, ${fmtInt(st.views)} lượt xem, điểm trung bình ${fmtNum(st.avg_rating, 2)} (${fmtInt(st.rates)} lượt chấm). Hạng ${fmtInt(st.cook_rank)} về lượt nấu.</p>
+        <p class="sub-h">Nguyên liệu</p>
+        <ul class="ing">${d.ingredient_list.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+      </div>
+      <div class="detail-side">
+        <p class="sub-h">Món tương tự</p>
+        <div class="dish-grid">${d.similar.map((s) => dishCard(s, { showRank: false })).join('') || '<p class="state-msg">Chưa có món tương tự.</p>'}</div>
+        <p class="sub-h">Món hay nấu cùng (FP-Growth)</p>
+        ${d.companions.length ? miniList(d.companions.map((c) => ({ dish: c, title: c.dish_name,
+            sub: `độ tin cậy ${fmtRatio(c.confidence)}, lift ${fmtNum(c.lift, 1)}`, num: '' })))
+          : '<p class="state-msg">Món này chưa có luật món ăn kèm từ FP-Growth.</p>'}
+      </div></div>`;
 }

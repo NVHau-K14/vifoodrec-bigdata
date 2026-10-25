@@ -6,7 +6,9 @@
 <title>Phân khúc người dùng · ViFoodRec</title>
 <link rel="icon" href="img/placeholder-dish.svg">
 <link rel="stylesheet" href="css/theme.css">
+<script src="vendor/echarts.min.js"></script>
 <script type="module" src="js/layout.js"></script>
+<script type="module" src="js/phan-khuc.js"></script>
 </head>
 <body>
 <div class="shell">
@@ -19,11 +21,44 @@
       </div>
       <div class="head-pills" id="head-pills"></div>
     </header>
+
+    <section class="row">
+      <article class="card" style="flex:2 1 360px">
+        <div class="card-head"><h2>Chọn số cụm</h2><span class="card-note">K-means trên 18 đặc trưng hành vi</span></div>
+        <div class="ctrl" id="k-seg"></div>
+        <div class="card-body" id="k-note"></div>
+      </article>
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Chất lượng phân cụm theo k</h2><span class="card-note">K-means, k = 2…12</span></div>
+        <div class="card-body" id="quality"></div>
+        <p class="source">Nguồn: <code>model_kmeans_report.search</code> (bước 06e). ARI và NMI so với persona thật, chỉ để kiểm chứng.</p>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:2 1 360px">
+        <div class="card-head"><h2>Quy mô cụm</h2><span class="card-note">số người dùng</span></div>
+        <div class="card-body" id="sizes"></div>
+      </article>
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Hồ sơ cụm</h2><span class="card-note">màu: độ lệch so với trung bình các cụm</span></div>
+        <div class="card-body scroll-x" id="profile"></div>
+        <p class="source">Mỗi cột chuẩn hóa riêng (z giữa các cụm). Rê chuột để xem giá trị thật. Nguồn: <code>clusters</code>.</p>
+      </article>
+    </section>
+
     <section class="row">
       <article class="card" style="flex:1 1 100%">
-        <div class="card-head"><h2>Trang đang được xây dựng</h2><span class="status status-todo">Chưa</span></div>
-        <p class="lead">Trang này sẽ có: chất lượng phân cụm theo k, quy mô và hồ sơ từng cụm, đề xuất chiến lược và người dùng mẫu trong cụm.</p>
-        <p class="lead">Trong lúc chờ, xem <a href="index.html">Tổng quan</a>, <a href="goi-y.html">Gợi ý món</a> hoặc <a href="danh-gia.html">Đánh giá mô hình</a>.</p>
+        <div class="card-head"><h2>Từng cụm và đề xuất</h2><span class="card-note">nhãn và đề xuất sinh theo luật từ đặc trưng của cụm</span></div>
+        <div class="card-body" id="cluster-cards"></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%">
+        <div class="card-head"><h2>Người dùng trong cụm</h2><span class="card-note">k = 8, cụm đang có index trong MongoDB</span></div>
+        <div class="ctrl"><label class="field"><span>Cụm</span><select id="cluster-select"></select></label></div>
+        <div class="card-body" id="members"></div>
       </article>
     </section>
   </main>

@@ -335,3 +335,38 @@ Skill `vifood-dashboard` đã sửa theo câu 2, 3, 4 (mục 1 và mục 5).
 - **Ảnh món:** không tải sẵn. Trình duyệt thường trên máy tải được `monngonmoingay.com`, còn `image.cooky.vn` (4.291/5.499 món) hết thời gian chờ. Thay vào đó: ảnh thay thế theo 10 nhóm món (nền 3 tông có sẵn + biểu tượng SVG nét mảnh + tên nhóm), bỏ ảnh thật khi lỗi hoặc quá 4 giây kể từ lúc ảnh sắp vào màn hình. Quy cách ở skill mục 4.
 - **Biểu đồ theo tháng:** bỏ 3 series rỗng dùng làm chú giải (chúng chiếm chỗ trong nhóm cột, làm cột mảnh và lệch trái), chú giải viết bằng HTML (`MONTH_LEGEND`). `test_web_rules` có luật chặn series cột rỗng.
 - **Bố cục trang Gợi ý:** hàng đầu gọn (chế độ, ô mã, menu "User mẫu" theo nhóm và theo persona "chỉ để kiểm chứng", nút "Xem gợi ý"), rồi bộ lọc và danh sách; hồ sơ và món hay nấu ở cột phải. Màn hẹp: thanh bên xếp mục thành hàng chip, bộ lọc thu vào nút "Bộ lọc". Đo được: ở 1440 × 1000 hàng thẻ đầu kết thúc ở 740px; ở 390px danh sách bắt đầu ở 843px.
+
+## D16. Bước 08 đợt 2: 4 trang còn lại, nhãn cụm theo luật, đo độ trễ (25/10)
+Làm theo mục H của bản thiết kế (D15). 9 endpoint mới: E4, E5, E7 (Hành vi), E8, E10, E11 (Món ăn), E15, E16 (Phân khúc), E25 (Thời gian thực). Đủ 25 endpoint E0–E26 (không có E9, E21).
+
+**Nhãn và đề xuất cho cụm (E15, `api/labels.py`), sinh theo luật, không viết tay cho từng cụm:**
+- Với mỗi k, tính z của từng đặc trưng giữa các cụm: (giá trị của cụm − trung bình các cụm) ÷ độ lệch chuẩn các cụm (không trọng số).
+- **Nhãn** = 2 đặc trưng có |z| lớn nhất, mỗi đặc trưng có cụm từ "cao" và "thấp" (vd `share_lau` cao → "hay nấu lẩu", `cook_per_view` thấp → "xem nhiều, ít nấu"). 3 đặc trưng |z| lớn nhất được hiện ở thẻ cụm.
+- **Đề xuất**: đi theo đặc trưng có |z| giảm dần, chỉ xét |z| ≥ 0,5, lấy tối đa 2 câu từ bảng luật dưới; không câu nào khớp thì "Giữ gợi ý cá nhân hybrid mặc định".
+
+  | Đặc trưng | Hướng | Đề xuất |
+  |---|---|---|
+  | `share_chay` | cao | Ưu tiên bộ sưu tập món chay, thêm món chay mới vào gợi ý |
+  | `share_nhanh` | cao | Gợi ý món nhanh cho bữa trưa ngày thường |
+  | `share_haisan` | cao | Đẩy món hải sản và món ăn kèm (luật FP-Growth) |
+  | `share_cay` | cao | Gợi ý món cay, món nhậu vào buổi tối và cuối tuần |
+  | `share_ngot` | cao | Gợi ý chè, bánh, đồ uống cho bữa phụ |
+  | `share_canh` | cao | Gợi ý mâm cơm: món mặn kèm canh (luật FP-Growth) |
+  | `share_lau` | cao | Gợi ý lẩu vào cuối tuần |
+  | `slot_0` / `slot_1` / `slot_2` / `slot_3` | cao | Gửi gợi ý bữa sáng vào đầu ngày / bữa trưa trước giờ nấu trưa / bữa tối vào buổi chiều / món ăn khuya, món nhanh vào buổi tối muộn |
+  | `share_weekend` | cao | Tập trung gợi ý vào cuối tuần |
+  | `log_events`, `log_sessions` | thấp | Kích hoạt lại: gợi ý món phổ biến theo vùng-tuổi |
+  | `cook_per_view` | thấp | Xem nhiều nấu ít: ưu tiên món dễ làm, ít nguyên liệu |
+  | `log_events` | cao | Người dùng tích cực: giới thiệu món mới trong danh mục trước |
+  | `cat_entropy` | cao / thấp | Khẩu vị đa dạng: tăng tỷ trọng món khám phá (content) / Ít loại món: gợi ý món cùng nhóm, mở rộng dần sang nhóm gần |
+  | `rate_per_cook` | cao | Hay chấm điểm: mời đánh giá để cải thiện gợi ý |
+
+- Kết quả k = 8 khớp khá tốt với persona kiểm chứng (chỉ để kiểm chứng): "Nhiều món chay · ít chấm điểm" ↔ ăn chay; "Hay nấu lẩu · thích cay" ↔ thích cay/nhậu; "Chuộng món nhanh · nấu bữa tối" ↔ bận rộn; "Nhiều món ngọt, đồ uống · ít hải sản" ↔ hảo ngọt; "Xem là nấu · nhiều canh/súp" ↔ gia đình truyền thống. 3 cụm còn lại (nhãn về bữa và mức hoạt động) khó đối chiếu hơn. Luật không đọc persona.
+
+**Các quyết định khác khi cài đặt:**
+- **E15 `n_users` cộng từ `clusters`**, không lấy `model_kmeans_report.users`, để đúng với cả `vifood_local` (ở đó `reports` là file của cụm). Phép so với report chỉ chạy với `--db vifood`.
+- **E26 được có chữ "persona"**: E26 trả nguyên file report (để gỡ lỗi, trang không gọi), và report 04, 06e có thống kê persona gộp theo cụm hoặc toàn bộ, không có persona của từng user. `test_privacy` vẫn cấm khóa `truth` ở E26.
+- **E16 đọc MongoDB mỗi lần** (aggregation `$facet` trên `cluster_k8`), như thiết kế, để thể hiện index. Độ trễ tăng theo cỡ cụm (p95 56,8 ms trên `vifood`, 10,1 ms trên `vifood_local`); không có mục tiêu riêng.
+- **Tra cứu món ở trang Món ăn:** khi có chữ tìm thì dùng E12 (không có bộ lọc), lọc lại 30 kết quả đầu ở trình duyệt theo đúng nghĩa bộ lọc của E14; không gõ thì dùng E14, 12 món một lần, nút "Xem thêm".
+- **Đo độ trễ `vifood_local`** bằng một uvicorn tạm ở cổng 8001 trong chính container `api` (`MONGO_DB=vifood_local`), không phải dựng lại service; đo xong thì tắt.
+- **Ảnh chụp 7 trang** (`docs/images/08_*_{1440,390}.png`) chụp bằng Chrome headless điều khiển qua DevTools Protocol (giả lập thiết bị, chụp toàn trang). `--window-size=390` không dùng được vì Chrome headless dựng trang rộng hơn rồi mới cắt ảnh.

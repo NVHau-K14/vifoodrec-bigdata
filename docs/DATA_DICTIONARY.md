@@ -162,6 +162,7 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 | `analysis/explain.txt` | Kế hoạch thực thi của truy vấn phễu và truy vấn lọc theo tháng (dùng cho báo cáo) |
 | `model_split_report.json`, `model_als_report.json`, `model_content_report.json`, `model_hybrid_report.json`, `model_fpgrowth_report.json`, `model_kmeans_report.json`, `model_control_report.json` | Report từng file của bước 06 |
 | `models_metrics.json` | Bảng tổng hợp độ đo xếp hạng (chính, khám phá, ngoài độ chính xác) và khoảng tin cậy 95% |
+| `api_report.json` | Bước 08: `latency.<database>` (do `api/bench_latency.py` ghi: p50/p95/p99/max, req/s, `server_app_p95_ms`, `server_db_mean_ms` từng endpoint, mục tiêu p95 và `pass`, vòng E19 10 luồng × 100), `docker_stats_api`, `page_load_1440` (thời gian tải 7 trang), `screenshots` |
 | `export_report.json` | Bước 07: số doc, cách ghi, thời gian ghi, `collStats` (size, storageSize, index) từng collection, các kiểm tra (múi giờ, toàn vẹn tham chiếu, 5 user mẫu), `explain()` của 4 truy vấn tiêu biểu, nội dung `overview`. Chạy `--only` thì gộp vào report cũ cùng database và thêm `partial_runs [{only, at, timings_s}]`; kiểm tra `recs_because_cooked` đếm phần tử theo `source` và `because_cooked` |
 
 ## MongoDB – database `vifood` (bước 07, D14)
@@ -210,6 +211,14 @@ Bộ lọc món **F** (query): `veg`, `quick`, `not_spicy` (bool), `meal` ∈ s�
 | E23 | `GET /api/eval/ranking?view&variant&group` | `metrics`, `reports.models_metrics` | 1 |
 | E24 | `GET /api/eval/details` | `reports` (ALS, content, FP-Growth, đối chứng, hybrid, K-means, thời gian) | 1 |
 | E26 | `GET /api/reports/{name}` | `reports` | 1 |
-| E4, E5, E7, E8, E10, E11, E15, E16, E25 | xem LAST_RUN ngày 25/10 mục B | | 2 |
+| E4 | `GET /api/behavior/top-dishes?slot=sáng\|trưa\|tối\|khuya&by=cooks\|lift&limit≤10` | `analysis_top_dish_by_slot` (cache), thẻ món từ `dishes` | 2 |
+| E5 | `GET /api/behavior/lift?group_type&attribute&min_cooks` | `analysis_lift_by_group` (cache). `cells[].lift` = null khi `cooks < min_cooks` (mặc định 1.000) | 2 |
+| E7 | `GET /api/behavior/habits` | `analysis_session_size`, `analysis_repeat_by_category`, `analysis_user_activity`, `analysis_rating_dist`, `reports.analysis_report` (cache) | 2 |
+| E8 | `GET /api/dishes/summary` | `$facet` trên `dishes` (cache) + `analysis_catalog_vs_cooked`, `analysis_long_tail_curve`, `reports.analysis_report` | 2 |
+| E10 | `GET /api/ingredients/top?limit≤50&seasoning` | `analysis_top_ingredients` (index `cook_rank`) | 2 |
+| E11 | `GET /api/ingredients/graph?variant=bỏ gia vị\|giữ gia vị&limit≤150` | `ingredient_edges` (index `variant, lift -1`) | 2 |
+| E15 | `GET /api/segments?k=3\|8\|11` | `clusters` (cache), `reports.model_kmeans_report`. Mỗi cụm: `features`, `z` (độ lệch giữa các cụm), `label`, `top_features`, `strategy` (luật D16), `persona_kiem_chung` + `verify_only` | 2 |
+| E16 | `GET /api/segments/8/{cluster}?sample≤12` | `users` (`$match cluster_k8` theo index + `$facet`), không có persona | 2 |
+| E25 | `GET /api/trending?limit&windows` | `trending` (index `window_end -1`); rỗng thì `status = "chưa chạy"` | 2 |
 
 **RecItem** (E19, E20) = DishCard + `rank, rec_rank, source (als|content_slot|pop|fill|rep|content), dot (herb|chili|neutral), reason, because {food_id, dish_name}?, hit, n_cook_before`. `n_cook_before` (chỉ E19): số lần đã nấu trước 01/09/2026 nếu món nằm trong `users.history` (10 món nấu nhiều nhất), không thì null; dashboard hiện chip "Bạn đã nấu N lần". `summary {from_recs, from_fill, from_popular, hits, n_test_cooks}`.

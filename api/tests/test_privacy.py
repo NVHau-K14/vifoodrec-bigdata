@@ -4,16 +4,26 @@ import json
 
 from .conftest import find_key
 
-# E15 (phan khuc) se them o dot 2
-PERSONA_ALLOWED = {"/api/users/demo"}
+# Chi E17 (user mau) va E15 (phan khuc) duoc co persona, kem verify_only.
+# E26 tra nguyen file report (go loi, trang khong goi): report 04 va 06e co thong ke persona GOP theo cum / toan bo,
+# khong co persona cua tung user -> cho phep chu "persona", nhung van cam khoa truth.
+PERSONA_ALLOWED = {"/api/users/demo", "/api/segments", "/api/segments?k=3", "/api/segments?k=11",
+                   "/api/reports/model_kmeans_report"}
 
 
 def endpoints(db):
     uid = db.users.find_one({"group": "ấm", "history.2": {"$exists": True}}, {"_id": 1})["_id"]
     fid = db.dishes.find_one({}, {"_id": 1})["_id"]
-    return ["/api/health", "/api/overview", "/api/meta/filters", "/api/behavior/heatmap", "/api/behavior/monthly",
-            "/api/behavior/funnel", "/api/dishes?limit=5", "/api/dishes/search?q=canh", f"/api/dishes/{fid}",
-            "/api/users/demo", f"/api/users/{uid}", f"/api/recs/{uid}", "/api/eval/ranking", "/api/eval/details"]
+    # Du E0-E26 (tru E20 la POST, kiem tra rieng o test_new_user_no_persona; E9, E21 khong co)
+    return ["/api/health", "/api/overview", "/api/meta/filters",                                   # E0, E1, E22
+            "/api/behavior/heatmap", "/api/behavior/monthly", "/api/behavior/top-dishes",            # E2, E3, E4
+            "/api/behavior/lift", "/api/behavior/funnel", "/api/behavior/habits",                    # E5, E6, E7
+            "/api/dishes/summary", "/api/ingredients/top", "/api/ingredients/graph",                 # E8, E10, E11
+            "/api/dishes/search?q=canh", f"/api/dishes/{fid}", "/api/dishes?limit=5",                # E12, E13, E14
+            "/api/segments", "/api/segments?k=3", "/api/segments?k=11", "/api/segments/8/0",         # E15, E16
+            "/api/users/demo", f"/api/users/{uid}", f"/api/recs/{uid}",                              # E17, E18, E19
+            "/api/eval/ranking", "/api/eval/details", "/api/trending",                               # E23, E24, E25
+            "/api/reports/model_kmeans_report"]                                                      # E26
 
 
 def test_no_truth_outside_allowed(client, db):
@@ -53,3 +63,20 @@ def test_demo_users_persona_marked(client, db):
             assert db.users.find_one({"_id": u["user_id"]})["truth"]["persona_main"] == p["persona"]
     for g, us in body["by_group"].items():
         assert len(us) == 3 and all(u["group"] == g for u in us)
+
+
+def test_segments_persona_marked(client):
+    """E15: persona chi o truong persona_kiem_chung cua tung cum, kem verify_only."""
+    for k in (3, 8, 11):
+        body = client.get("/api/segments", params={"k": k}).json()
+        assert body["verify_only"] is True
+        for c in body["clusters"]:
+            assert c["verify_only"] is True
+            assert {key for key in c if "persona" in key} == {"persona_kiem_chung", "persona_share"}
+
+
+def test_segment_users_no_truth(client, db):
+    """E16 chi tra thong tin cong khai cua user mau, khong co persona."""
+    personas = [x for x in db.users.distinct("truth.persona_main") if x]
+    text = json.dumps(client.get("/api/segments/8/0").json(), ensure_ascii=False)
+    assert not any(f'"{p}"' in text for p in personas)

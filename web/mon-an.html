@@ -6,7 +6,9 @@
 <title>Món ăn · ViFoodRec</title>
 <link rel="icon" href="img/placeholder-dish.svg">
 <link rel="stylesheet" href="css/theme.css">
+<script src="vendor/echarts.min.js"></script>
 <script type="module" src="js/layout.js"></script>
+<script type="module" src="js/mon-an.js"></script>
 </head>
 <body>
 <div class="shell">
@@ -19,11 +21,54 @@
       </div>
       <div class="head-pills" id="head-pills"></div>
     </header>
+
+    <div class="kpis" id="kpis" data-state="loading"><div class="slot" aria-hidden="true"></div></div>
+
+    <section class="row">
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Danh mục và lượt nấu</h2><span class="card-note">% số món so với % lượt nấu</span></div>
+        <div class="ctrl" id="cvc-attr"></div>
+        <div class="card-body" id="cvc"></div>
+        <p class="source">Nguồn: <code>analysis_catalog_vs_cooked</code> (bước 05). Thanh xanh dài hơn thanh xám: nhóm được nấu nhiều hơn so với số món của nó.</p>
+      </article>
+      <article class="card" style="flex:2 1 360px">
+        <div class="card-head"><h2>Đuôi dài</h2><span class="card-note">% lượt nấu tích lũy theo % món</span></div>
+        <div class="card-body" id="longtail"></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:2 1 360px">
+        <div class="card-head"><h2>Nguyên liệu phổ biến</h2><span class="card-note">lượt nấu của các món có nguyên liệu này</span></div>
+        <div class="ctrl" id="ing-ctrl"></div>
+        <div class="card-body" id="ingredients"></div>
+        <p class="source">Nguồn: <code>analysis_top_ingredients</code> (bước 05), cả năm mô phỏng.</p>
+      </article>
+      <article class="card" style="flex:3 1 520px">
+        <div class="card-head"><h2>Nguyên liệu hay đi cùng nhau</h2><span class="card-note">luật FP-Growth trên công thức, cạnh dày = lift cao</span></div>
+        <div class="ctrl" id="graph-variant"></div>
+        <div class="card-body" id="graph"></div>
+        <p class="source">Nguồn: <code>ingredient_edges</code> (bước 06d). Kéo để di chuyển, cuộn để phóng to.</p>
+      </article>
+    </section>
+
     <section class="row">
       <article class="card" style="flex:1 1 100%">
-        <div class="card-head"><h2>Trang đang được xây dựng</h2><span class="status status-todo">Chưa</span></div>
-        <p class="lead">Trang này sẽ có: phân bố danh mục so với lượt nấu, đuôi dài, nguyên liệu phổ biến, đồ thị nguyên liệu hay đi cùng nhau (FP-Growth) và tra cứu món.</p>
-        <p class="lead">Trong lúc chờ, xem <a href="index.html">Tổng quan</a>, <a href="goi-y.html">Gợi ý món</a> hoặc <a href="danh-gia.html">Đánh giá mô hình</a>.</p>
+        <div class="card-head"><h2>Tra cứu món</h2><span class="card-note" id="lookup-note">xếp theo lượt nấu cả năm mô phỏng</span></div>
+        <div class="ctrl">
+          <label class="field search-field"><span class="sr-only">Tìm món theo tên</span>
+            <input id="search" type="search" placeholder="Tìm món theo tên, ví dụ: canh chua, đậu hũ" autocomplete="off" maxlength="60"></label>
+        </div>
+        <div id="filters"></div>
+        <div class="card-body recs-body" id="dishes"></div>
+        <div class="ctrl" style="margin-top:14px"><button class="btn" type="button" id="more" hidden>Xem thêm</button></div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="card" style="flex:1 1 100%" id="detail-card" hidden>
+        <div class="card-head"><h2 id="detail-title">Chi tiết món</h2><span class="card-note">không hiển thị dinh dưỡng (số liệu gốc là số ngẫu nhiên)</span></div>
+        <div class="card-body" id="detail"></div>
       </article>
     </section>
   </main>

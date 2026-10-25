@@ -1,7 +1,7 @@
 // goi-y.js - trang Goi y mon: E17 user mau, E18 ho so, E19 goi y user co san, E20 user moi, E12 tim mon, E13 chi tiet
 
-import { getJSON, shared, postJSON, qs, fmtInt, fmtRatio, fmtNum } from './api.js';
-import { load, showEmpty, showLoading, showError, segmented, filterBar, dishCard, dishImg, dishThumb, dishChips,
+import { getJSON, shared, postJSON, qs, fmtInt, fmtRatio } from './api.js';
+import { load, showEmpty, showLoading, showError, segmented, filterBar, dishCard, dishThumb, dishDetail,
          hbars, miniList, SOURCE_LEGEND, esc } from './components.js';
 
 const $ = (id) => document.getElementById(id);
@@ -241,24 +241,8 @@ function showDetail(id) {
   load($('detail'), async (el) => {
     const d = await getJSON(`/dishes/${id}`);
     $('detail-title').textContent = d.dish_name;
-    const st = d.stats || {};
     el.dataset.state = 'ready';
-    el.innerHTML = `<div class="detail">
-      <div class="detail-main">${dishImg(d)}
-        <p class="chips" style="margin-top:10px">${dishChips(d)}<span class="chip">${esc(d.dish_category)}</span></p>
-        <p class="sub-h">Cả năm mô phỏng</p>
-        <p class="detail-text">${fmtInt(st.cooks)} lượt nấu, ${fmtInt(st.views)} lượt xem, điểm trung bình ${fmtNum(st.avg_rating, 2)} (${fmtInt(st.rates)} lượt chấm). Hạng ${fmtInt(st.cook_rank)} về lượt nấu.</p>
-        <p class="sub-h">Nguyên liệu</p>
-        <ul class="ing">${d.ingredient_list.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-      </div>
-      <div class="detail-side">
-        <p class="sub-h">Món tương tự</p>
-        <div class="dish-grid">${d.similar.map((s) => dishCard(s, { showRank: false })).join('') || '<p class="state-msg">Chưa có món tương tự.</p>'}</div>
-        <p class="sub-h">Món hay nấu cùng (FP-Growth)</p>
-        ${d.companions.length ? miniList(d.companions.map((c) => ({ dish: c, title: c.dish_name,
-            sub: `độ tin cậy ${fmtRatio(c.confidence)}, lift ${fmtNum(c.lift, 1)}`, num: '' })))
-          : '<p class="state-msg">Món này chưa có luật món ăn kèm từ FP-Growth.</p>'}
-      </div></div>`;
+    el.innerHTML = dishDetail(d);
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 240);
 }

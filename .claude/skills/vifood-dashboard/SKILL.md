@@ -159,6 +159,8 @@ echarts.registerTheme('vifood', {
 - **Cột theo tháng**: trục giá trị **bắt đầu từ 0**. Màu: train `#9CC7B0`, tháng có Tết `#C2481B`, val/test `#3F4B45`, kèm chú giải.
 - **Mô hình**: thanh ngang; mô hình chính (hybrid, ALS, hybrid + content) màu herb, baseline màu neutral; kèm KTC 95% khi có.
 - Đồ thị mạng nguyên liệu: `series.type:'graph'` layout `force`, nút herb-soft viền herb, cạnh `#CDD3CB` độ dày theo lift.
+- **Heatmap 2 đầu** (lift theo nhóm, độ lệch z của cụm): `divergingHeatmap()`, thang `C.diverge` thấp = chili → nền → cao = herb. Lift tô theo log2(lift) kẹp trong [−1, 1] (0,5…2), ô ghi số lift thật; ô quá ít dữ liệu để trống.
+- Hàm vẽ dùng chung trong `charts.js`: `heatmapHourDow`, `monthlyBars`, `lines` (có `yMin`, `markX`), `multiLines` (legend bật/tắt, `shown`), `stacked100`, `divergingHeatmap`, `hGroupedBars`, `simpleBars`, `groupedBars`, `forceGraph`. Trang không gọi `echarts.init` trực tiếp; nhiều series thì lấy màu từ `SERIES`.
 - Một biểu đồ = một ý; chú thích nguồn số liệu (12px muted) dưới mỗi biểu đồ. Gọi `chart.resize()` khi cửa sổ đổi cỡ.
 
 ## 7. Số liệu và chữ

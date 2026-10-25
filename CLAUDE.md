@@ -34,7 +34,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 | 05 Phân tích hành vi | `src/05_analysis.py` | `/data/events`, `dish_features`, `foods` | `/data/results/analysis/*` (14 bảng) | `analysis_report.json`, `analysis/*.json` |
 | 06 Mô hình | `src/06a_split.py` … `06g_control.py`, dùng chung `src/rec_common.py` | `/data/events`, `dish_features`, `foods`, `ratings_original` | `/data/results/models/*`, `/data/models/*` | `model_*_report.json`, `models_metrics.json` |
 | 07 Xuất MongoDB | `src/07_export_mongo.py` | kết quả 02–06 trên HDFS, `data/output/*report*.json` | MongoDB `vifood` (26 collection) | `export_report.json` |
-| 08 API + dashboard | `api/main.py` + `api/routers/*`, `web/` (skill `vifood-dashboard`), `scripts/08_fetch_vendor.sh` | MongoDB | – | pytest `api/tests/` |
+| 08 API + dashboard | `api/main.py` + `api/routers/*`, `web/` (skill `vifood-dashboard`), `scripts/08_fetch_vendor.sh`, `api/bench_latency.py` | MongoDB | – | pytest `api/tests/`, `api_report.json` |
 
 Bản sao nhỏ để xem trên máy nằm ở `data/processed/`. Report và mẫu kiểm tra nằm ở `data/output/`.
 
@@ -57,6 +57,8 @@ docker compose up -d --build api
 docker restart api
 # Kiểm thử (mặc định vifood_local; thêm --db vifood để chạy trên bản đủ)
 docker exec api python -m pytest -q -p no:cacheprovider api/tests --db vifood
+# Do do tre (ghi data/output/api_report.json, khoa latency.<database>)
+docker exec -w /home/jovyan/work api python -m api.bench_latency
 ```
 
 ## Quy ước code
@@ -100,4 +102,5 @@ docker exec api python -m pytest -q -p no:cacheprovider api/tests --db vifood
 - Không chạy cùng lúc một job `--local` và một job trên cụm. Cả hai driver đều nằm trong container `jupyter` (local 3GB, cụm 2GB), mà container chỉ có 4GB. Chạy lần lượt.
 - Ảnh món (`image.cooky.vn`, `monngonmoingay.com`) có lúc không tải được từ máy này (curl lỗi 56, trình duyệt `ERR_CONNECTION_TIMED_OUT`). Ô ảnh vẫn có nền màu theo loại món; ảnh lỗi thì thay bằng `img/placeholder-dish.svg`.
 - `07 --only ...` gộp vào `export_report.json` cũ khi cùng database. Bản local và bản cụm ghi chung file này: chạy `--local` thì sao lưu report của cụm trước rồi chép lại.
+- Chrome headless `--window-size=390,...` vẫn dựng trang rộng hơn rồi cắt ảnh (bề rộng cửa sổ tối thiểu). Chụp ảnh mobile phải giả lập bằng DevTools Protocol (`Emulation.setDeviceMetricsOverride`, `mobile: true`), như lần chụp `docs/images/08_*`.
 - Lọc log bằng `grep "^..."` có thể trượt, vì dòng in ra bị dính sau thanh tiến trình của Spark (`\r`). Dùng `grep -ao "\[06\][^[]*"`.
