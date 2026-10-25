@@ -7,7 +7,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 from ..cache import cached
 from ..db import get_db
-from ..labels import FEATURES, cluster_z, describe_cluster
+from ..labels import FEATURES, cluster_z, describe_clusters
 from .overview import reports
 
 router = APIRouter(prefix="/segments", tags=["Phân khúc người dùng"])
@@ -28,9 +28,10 @@ def segments(k: int = Query(8, description="số cụm: 3, 8 hoặc 11")):
     cl = clusters_of(k)
     z, means = cluster_z(cl) if cl else ({}, {})
     km = reports().get("model_kmeans_report", {})
+    desc = describe_clusters(z)
     out = []
     for c in cl:
-        label, top, strategy = describe_cluster(z[c["cluster"]])
+        label, top, strategy = desc[c["cluster"]]
         out.append({"cluster": c["cluster"], "n_users": c["n_users"], "features": c["features"],
                     "z": {f: round(v, 3) for f, v in z[c["cluster"]].items()},
                     "label": label, "top_features": top, "strategy": strategy,

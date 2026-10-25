@@ -341,13 +341,17 @@ Làm theo mục H của bản thiết kế (D15). 9 endpoint mới: E4, E5, E7 (
 
 **Nhãn và đề xuất cho cụm (E15, `api/labels.py`), sinh theo luật, không viết tay cho từng cụm:**
 - Với mỗi k, tính z của từng đặc trưng giữa các cụm: (giá trị của cụm − trung bình các cụm) ÷ độ lệch chuẩn các cụm (không trọng số).
-- **Nhãn** = 2 đặc trưng có |z| lớn nhất, mỗi đặc trưng có cụm từ "cao" và "thấp" (vd `share_lau` cao → "hay nấu lẩu", `cook_per_view` thấp → "xem nhiều, ít nấu"). 3 đặc trưng |z| lớn nhất được hiện ở thẻ cụm.
-- **Đề xuất**: đi theo đặc trưng có |z| giảm dần, chỉ xét |z| ≥ 0,5, lấy tối đa 2 câu từ bảng luật dưới; không câu nào khớp thì "Giữ gợi ý cá nhân hybrid mặc định".
+- **Nhãn** = 2 đặc trưng có |z| lớn nhất, mỗi đặc trưng có cụm từ "cao" và "thấp" (vd `share_lau` cao → "hay nấu lẩu", `cook_per_view` cao → "hay nấu sau khi xem", thấp → "xem nhiều, ít nấu"). 3 đặc trưng |z| lớn nhất được hiện ở thẻ cụm.
+- **Đề xuất (sửa 26/10 theo góp ý của người dùng): mỗi cụm chỉ 1 câu, câu đặc trưng nhất, không cụm nào lặp câu của cụm khác** trong cùng k.
+  - Ứng viên của một cụm: các đặc trưng có |z| ≥ 0,5 khớp một dòng trong bảng luật dưới.
+  - Gán tham lam trên mọi cặp (cụm, câu ứng viên) theo |z| giảm dần: cụm lệch mạnh nhất ở một đặc trưng nhận câu của đặc trưng đó; câu đã gán cho cụm khác thì cụm sau xét câu tiếp theo (`labels.describe_clusters`).
+  - Cụm không còn câu nào thì "Giữ gợi ý cá nhân hybrid mặc định". Với k = 3, 8, 11 hiện chưa cụm nào rơi vào trường hợp này.
+  - Bản đầu lấy tối đa 2 câu mỗi cụm, nên câu "Người dùng tích cực…" và "Kích hoạt lại…" lặp ở nhiều cụm.
 
   | Đặc trưng | Hướng | Đề xuất |
   |---|---|---|
   | `share_chay` | cao | Ưu tiên bộ sưu tập món chay, thêm món chay mới vào gợi ý |
-  | `share_nhanh` | cao | Gợi ý món nhanh cho bữa trưa ngày thường |
+  | `share_nhanh` | cao | Gợi ý món nhanh, ít bước cho ngày bận rộn (bản đầu ghi "cho bữa trưa ngày thường", lệch với cụm k = 8 số 7 nấu nhiều bữa tối) |
   | `share_haisan` | cao | Đẩy món hải sản và món ăn kèm (luật FP-Growth) |
   | `share_cay` | cao | Gợi ý món cay, món nhậu vào buổi tối và cuối tuần |
   | `share_ngot` | cao | Gợi ý chè, bánh, đồ uống cho bữa phụ |
@@ -361,7 +365,7 @@ Làm theo mục H của bản thiết kế (D15). 9 endpoint mới: E4, E5, E7 (
   | `cat_entropy` | cao / thấp | Khẩu vị đa dạng: tăng tỷ trọng món khám phá (content) / Ít loại món: gợi ý món cùng nhóm, mở rộng dần sang nhóm gần |
   | `rate_per_cook` | cao | Hay chấm điểm: mời đánh giá để cải thiện gợi ý |
 
-- Kết quả k = 8 khớp khá tốt với persona kiểm chứng (chỉ để kiểm chứng): "Nhiều món chay · ít chấm điểm" ↔ ăn chay; "Hay nấu lẩu · thích cay" ↔ thích cay/nhậu; "Chuộng món nhanh · nấu bữa tối" ↔ bận rộn; "Nhiều món ngọt, đồ uống · ít hải sản" ↔ hảo ngọt; "Xem là nấu · nhiều canh/súp" ↔ gia đình truyền thống. 3 cụm còn lại (nhãn về bữa và mức hoạt động) khó đối chiếu hơn. Luật không đọc persona.
+- Kết quả k = 8 khớp khá tốt với persona kiểm chứng (chỉ để kiểm chứng): "Nhiều món chay · ít chấm điểm" ↔ ăn chay; "Hay nấu lẩu · thích cay" ↔ thích cay/nhậu; "Chuộng món nhanh · nấu bữa tối" ↔ bận rộn; "Nhiều món ngọt, đồ uống · ít hải sản" ↔ hảo ngọt; "Hay nấu sau khi xem · nhiều canh/súp" ↔ gia đình truyền thống. 3 cụm còn lại (nhãn về bữa và mức hoạt động) khó đối chiếu hơn. Luật không đọc persona.
 
 **Các quyết định khác khi cài đặt:**
 - **E15 `n_users` cộng từ `clusters`**, không lấy `model_kmeans_report.users`, để đúng với cả `vifood_local` (ở đó `reports` là file của cụm). Phép so với report chỉ chạy với `--db vifood`.

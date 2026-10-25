@@ -1,176 +1,236 @@
-# Lần chạy gần nhất – 25/10/2026
+# Lần chạy gần nhất – 26/10/2026
 
 > File này được **ghi đè sau mỗi lần làm xong một yêu cầu** (xem quy tắc trong CLAUDE.md).
 > Người dùng đọc nó ở bên chat claude.ai. Giữ đúng các mục bên dưới, không giới hạn độ dài.
-> Dữ liệu hành vi là **mô phỏng**. Số liệu lấy từ `data/output/api_report.json`, pytest và phép đo trên trình duyệt của lần chạy này.
+> Dữ liệu hành vi là **mô phỏng**. Số liệu lấy từ `data/output/*_report.json` và Spark History Server (event log trong `logs/spark-events/`).
+> Phần đo hiệu năng dưới đây là **bản đề xuất, chưa chạy**. Mọi con số "dự kiến" là ước tính từ thời gian đã đo, ghi rõ là ước tính.
 
 ## Yêu cầu
-Phần 1 (đã xong, commit `f524001`): đồng ý `n_cook_before` và chip "Bạn đã nấu N lần"; ảnh không tải sẵn; sửa 3 lỗi (biểu đồ theo tháng, bố cục trang Gợi ý, ảnh thay thế).
-
-Phần 2 (lần này): **làm đợt 2 theo mục H** của bản thiết kế bước 08, ghi LAST_RUN, chạy `/handoff`. Phạm vi đợt 2:
-- API E4, E5, E7, E8, E10, E11, E15, E16 (kèm nhãn và chiến lược cụm theo luật), E25;
-- thay 4 trang khung (Hành vi, Món ăn, Phân khúc, Thời gian thực) bằng bản đầy đủ;
-- `test_consistency`, `test_privacy` với đủ E0–E26;
-- đo độ trễ (`api/bench_latency.py`) trên `vifood` và `vifood_local`, ghi `api_report.json` và `docker stats api`;
-- chụp 7 trang ở 1440px và 390px vào `docs/images/`.
+Trả lời 3 câu hỏi của lần trước:
+1. Giữ bảng luật cụm, nhưng sửa:
+   - `cook_per_view` cao hiển thị là "Hay nấu sau khi xem" (nhãn cụm 4 thành "Hay nấu sau khi xem · nhiều canh/súp");
+   - mỗi cụm chỉ giữ đề xuất đặc trưng nhất, không lặp câu "Người dùng tích cực…" ở nhiều cụm;
+   - cập nhật D16 và test liên quan.
+2. E16 giữ đọc MongoDB mỗi lần.
+3. Bước tiếp theo là **đo hiệu năng Spark**, theo kiểu thiết kế trước: viết đề xuất vào LAST_RUN, **chưa chạy**. Sau đó mới đến Structured Streaming.
 
 ## Đã làm
-**Phần 1 (tóm tắt, chi tiết ở commit `f524001`):**
-- biểu đồ theo tháng bỏ 3 series rỗng, chú giải bằng HTML; `test_web_rules` có luật chặn series cột rỗng;
-- trang Gợi ý:
-  - hàng đầu gọn; menu "User mẫu" theo nhóm và theo persona ("chỉ để kiểm chứng", tên persona viết hoa chữ đầu);
-  - hồ sơ và "Món hay nấu" ở cột phải;
-  - kết quả đo: ở 1440 × 1000 hàng thẻ đầu kết thúc ở 740px; ở 390px danh sách bắt đầu ở 843px;
-- ảnh thay thế theo 10 nhóm món, bỏ ảnh sau 4 giây; E19 có `n_cook_before`.
+**Câu 1 – nhãn và đề xuất cụm** (`api/labels.py`, `api/routers/segments.py`):
+- `cook_per_view` cao: "hay nấu sau khi xem" (trước là "xem là nấu").
+- **Mỗi cụm 1 câu đề xuất, không cụm nào trùng câu với cụm khác trong cùng k.** Hàm mới `describe_clusters()`:
+  - gom mọi cặp (cụm, câu ứng viên), chỉ lấy đặc trưng có |z| ≥ 0,5 khớp bảng luật;
+  - xếp theo |z| giảm dần rồi gán tham lam: cụm lệch mạnh nhất ở một đặc trưng nhận câu của đặc trưng đó, câu đã gán thì cụm sau xét câu kế tiếp;
+  - cụm không còn câu nào thì dùng "Giữ gợi ý cá nhân hybrid mặc định" (hiện chưa cụm nào rơi vào trường hợp này).
+- Sửa thêm câu luật `share_nhanh`: "Gợi ý món nhanh cho bữa trưa ngày thường" thành "Gợi ý món nhanh, ít bước cho ngày bận rộn". Lý do: cụm k = 8 số 7 có nhãn "nấu bữa tối" nhưng lại nhận câu "bữa trưa".
+- Kết quả k = 8:
 
-**Phần 2 – API (9 endpoint mới, đủ 25 endpoint E0–E26):**
+  | Cụm | Nhãn | Đề xuất | Persona kiểm chứng (chỉ để kiểm chứng) |
+  |---|---|---|---|
+  | 0 | Nấu bữa trưa · ít phiên | Gửi gợi ý bữa trưa trước giờ nấu trưa | gia đình truyền thống |
+  | 1 | Nấu bữa sáng · hoạt động ít | Gửi gợi ý bữa sáng vào đầu ngày | tập gym |
+  | 2 | Nấu đa dạng · nhiều phiên | Khẩu vị đa dạng: tăng tỷ trọng món khám phá (content) | mê hải sản |
+  | 3 | Nhiều món chay · ít chấm điểm | Ưu tiên bộ sưu tập món chay, thêm món chay mới vào gợi ý | ăn chay |
+  | 4 | **Hay nấu sau khi xem** · nhiều canh/súp | Gợi ý mâm cơm: món mặn kèm canh (luật FP-Growth) | gia đình truyền thống |
+  | 5 | Nhiều món ngọt, đồ uống · ít hải sản | Gợi ý chè, bánh, đồ uống cho bữa phụ | hảo ngọt |
+  | 6 | Hay nấu lẩu · thích cay | Gợi ý lẩu vào cuối tuần | thích cay/nhậu |
+  | 7 | Chuộng món nhanh · nấu bữa tối | Gợi ý món nhanh, ít bước cho ngày bận rộn | bận rộn |
 
-| # | Endpoint | Ghi chú |
+  - k = 3 và k = 11 cũng không còn câu trùng.
+  - Câu "Người dùng tích cực…" và "Kích hoạt lại…" không còn xuất hiện ở k = 8.
+  - "Kích hoạt lại…" chỉ còn là ứng viên phụ, vì cụm 0, 1 lệch mạnh hơn ở bữa nấu.
+- **D16** (`docs/DECISIONS.md`): sửa mô tả luật đề xuất, dòng `share_nhanh`, nhãn cụm 4.
+- **Test** (`test_consistency.test_segments`): mỗi cụm đúng 1 câu đề xuất, các câu trong cùng k khác nhau. pytest trên `vifood`: **61 đạt**.
+- Trang Phân khúc không phải sửa (danh sách đề xuất hiện được cả 1 câu).
+
+**Câu 2:** giữ nguyên E16, không sửa gì.
+
+**Câu 3:** khảo sát rồi viết bản đề xuất đo hiệu năng ở mục "Đề xuất đo hiệu năng Spark" bên dưới. Chưa chạy job nào. Các bước khảo sát:
+- đọc tham số dòng lệnh của 02–06, `common.get_spark()`, `Paths`, `rec_common.setup()`;
+- đọc cấu hình worker trong compose; `docker info` cho biết máy ảo Docker có 8 CPU, 17,6 GB RAM;
+- thời gian từng phần trong các report;
+- danh sách ứng dụng và số liệu stage trong History Server.
+
+**Môi trường:** lúc bắt đầu phiên, cả cụm đang tắt. `docker restart api` đã vô tình bật lại `api`, nên tôi bật thêm `mongodb` (để chạy pytest) và `spark-history` (để đọc event log). Cuối phiên đã tắt lại cả 3 container này, cụm trở về trạng thái tắt như lúc đầu.
+
+---
+
+## Đề xuất đo hiệu năng Spark (chưa chạy)
+
+### A. Hiện trạng (khảo sát lần này)
+- **Cụm:** 2 worker, mỗi worker `--cores 2 --memory 3g` (container giới hạn 4 GB RAM, không giới hạn CPU), tức 4 khe task. Driver nằm trong `jupyter` (2 GB).
+- **Cấu hình Spark** (`get_spark()`): executor 2 GB, `spark.sql.shuffle.partitions = 8`, chưa đặt `spark.cores.max`. Ở Standalone, mỗi worker chạy 1 executor 2 core, nên ứng dụng lấy cả 4 core.
+- **Phần cứng thật:** máy chủ có 16 luồng; máy ảo Docker được 8 CPU, 17,6 GB RAM. Mọi container chạy trên **cùng một máy**:
+  - shuffle giữa 2 worker đi qua mạng ảo của Docker, không phải mạng thật;
+  - HDFS datanode là container riêng, nên cả 1 lẫn 2 worker đều không có data locality.
+  Báo cáo phải nêu rõ hai điểm này khi giải thích speedup.
+- **Đường dẫn:** `Paths` cố định gốc HDFS `/data` và report ghi vào `data/output/`. Chạy đo hiệu năng mà không sửa thì sẽ ghi đè dữ liệu thật và report thật, và bước 07 / MongoDB sẽ đọc phải kết quả của mức 10%.
+- **Tham số:** chỉ 04 có `--scale`. 06b–06g có `--quick` (lưới nhỏ để chạy thử), **chưa có `--fixed`**.
+- **History Server REST** (`/api/v1/applications/{id}/stages`) đã thử với 05 (chạy trên cụm ngày 23/10): 250 stage, 836 task, shuffle đọc 337,0 MB / ghi 336,7 MB, spill bộ nhớ 3,76 GB / đĩa 303,5 MB, `executorRunTime` 265,6 giây, GC 7,1 giây. Có cả `shuffleRemoteBytesRead` và `shuffleLocalBytesRead`, nên tách được shuffle qua mạng. API `executors` cho số liệu từng executor (2 executor × 2 core).
+- **Thời gian đã đo** (ở 100%, 2 worker; lấy từ `timings_s` / `total_seconds` của report, trừ 03 lấy từ History Server):
+
+  | Job | Tổng | Phần chiếm nhiều thời gian |
+  |---|---|---|
+  | 02 | **chưa có số** (chạy trước khi bật event log, report không ghi thời gian) | – |
+  | 03 | 45,5 giây (History Server, 23/10) | – |
+  | 04 | 543,3 giây | – |
+  | 05 | 103,7 giây | `load_cache` 28,6 |
+  | 06a | 101,3 giây | – |
+  | 06b | 2.756,1 giây | `val:als_implicit` 1.972,8 (dò lưới), `test:als_implicit` 505,7 |
+  | 06c | 199,5 giây | `minhash` 66,8 (so sánh 3 / 5 / 10 bảng băm) |
+  | 06d | 34,3 giây | – |
+  | 06e | 315,0 giây | `search_k` 292,0 (22 lần fit) |
+  | 06f | 1.385,5 giây | `cold_items` 805,5, `test:explore_beyond` 279,3, `tune_weights` 160,5 (numpy trên driver) |
+  | 06g | 61,4 giây | – |
+
+### B. Đo những job nào
+| Job | Trục số worker (1 / 2) | Trục dữ liệu (10 / 50 / 100%) | Ghi chú |
+|---|---|---|---|
+| 02 Làm sạch | có | không | chỉ xử lý danh mục món (5.499 món), không phụ thuộc số user |
+| 03 Đặc trưng món | có | không | như trên |
+| 04 Sinh hành vi | có | **có** | lần chạy 04 đầu tiên ở mỗi mức cũng là bước sinh dữ liệu cho mức đó |
+| 05 Phân tích | có | **có** | |
+| 06a Chia dữ liệu | có | **có** | |
+| 06b ALS + baseline | có | **có** | `--fixed` |
+| 06c Content | có | **có** | `--fixed` (bỏ so sánh MinHash) |
+| 06d FP-Growth | có | **có** | không có lưới |
+| 06e K-means | có | **có** | `--fixed` (fit k = 3, 8, 11; bỏ dò k = 2…12 và Bisecting) |
+| 06f Hybrid | có | **có** | `--fixed` (trọng số lấy từ report, bỏ `cold_items`, bỏ `explore_beyond`) |
+| 06g Đối chứng | có | không | dùng ratings gốc (182.556 dòng), cố định |
+| 07 Xuất MongoDB | không | không | nút thắt là ghi MongoDB chứ không phải Spark; ghi đè `vifood` |
+
+**Sinh dữ liệu 10% và 50%:**
+- Chạy `04 --scale 0.1` (5.000 user) và `04 --scale 0.5` (25.000 user) trên cụm, mỗi mức ghi vào một gốc HDFS riêng (mục D).
+- Bản 50% **không phải tập con** của bản 100%. Bảng users được sinh tuần tự bằng một RNG chung với kích thước n, nên hồ sơ user 1–25.000 ở hai bản khác nhau; chỉ chuỗi sự kiện của từng user là seed theo (SEED, user_id).
+- Phân bố persona, vùng, tuổi, cách sinh sự kiện thì giống nhau, nên số sự kiện tăng gần tuyến tính theo số user. Đây là cách sinh dữ liệu ở nhiều quy mô mà báo cáo có thể mô tả.
+- Không dùng `data/hdfs_local` (bản 10% của chế độ local), vì dữ liệu đó nằm trên đĩa máy chứ không trên HDFS.
+- **Phương án khác:** lấy mẫu 50% user theo hash từ `events` 100%. Cách này nhanh hơn và cho tập con đúng, nhưng không đo được 04 ở 50% (câu hỏi 6).
+
+### C. Chế độ `--fixed` (chỉ fit một lần với tham số đã chọn)
+Tham số đọc từ report **của bản chạy thật** (`data/output/model_*_report.json`, không phải thư mục report của lần đo), để mọi mức dữ liệu dùng cùng một bộ tham số:
+
+| Job | `--fixed` làm gì | Thời gian dự kiến ở 100%, 2 worker (ước tính từ `timings_s`) |
 |---|---|---|
-| E4 | `/api/behavior/top-dishes` | top 10 theo bữa, xếp theo lượt nấu hoặc lift |
-| E5 | `/api/behavior/lift` | 4 kiểu nhóm × 6 thuộc tính; ô < 1.000 lượt nấu trả `lift = null` |
-| E7 | `/api/behavior/habits` | số món mỗi phiên, nấu lại, lượt nấu mỗi user, phân bố điểm |
-| E8 | `/api/dishes/summary` | aggregation `$facet` trên `dishes` + danh mục so với lượt nấu + đuôi dài |
-| E10 | `/api/ingredients/top` | có hoặc bỏ gia vị |
-| E11 | `/api/ingredients/graph` | cạnh FP-Growth xếp theo lift, nút kèm bậc |
-| E15 | `/api/segments?k=3\|8\|11` | z giữa các cụm, nhãn, 3 đặc trưng nổi bật, đề xuất theo luật; `persona_kiem_chung` kèm `verify_only` |
-| E16 | `/api/segments/8/{cluster}` | `$match cluster_k8` (index) + `$facet`: vùng, tuổi, nhóm, user mẫu |
-| E25 | `/api/trending` | `trending` rỗng → `status = "chưa chạy"` |
+| 06b | bỏ dò `G_BIAS`, `G_EXP`, `G_ALPHA × G_RANK × G_REG`, độ nhạy trọng số. Dùng `best_bias_lambda`, `best_als_explicit`, `best_als_implicit` (alpha 1, rank 128, regParam 0,1). **Chỉ chạy view test** (train + val → test), giống lần fit cuối của bản thật (câu hỏi 1) | khoảng 565 giây (`test:baselines` 40,8 + `test:rating_models` 13,2 + `test:als_implicit` 505,7 + kiểm tra 4,1) |
+| 06c | giữ token, độ giống chính xác (`item_sim`, gợi ý dùng phần này), gợi ý val/test; bỏ vòng MinHash 3 / 5 / 10 bảng băm (chỉ là thí nghiệm so sánh) | khoảng 131 giây |
+| 06e | fit KMeans k = 3, 8, 11 (đúng 3 cột `cluster_k3/k8/k11` cần lưu), bỏ dò k = 2…12 và BisectingKMeans | khoảng 65 giây (giả định mỗi lần fit mất như trung bình 292 / 22 = 13,3 giây) |
+| 06f | trọng số lấy `best_weights` (bỏ `tune_weights`, vốn là numpy trên driver, không phải Spark); bỏ `cold_items` (`--no-cold-items` đã có), bỏ `test:explore_beyond` (câu hỏi 3) | khoảng 140 giây |
+| 06g | lưới rank × regParam thay bằng tham số đã chọn | dưới 61 giây |
 
-- File mới: `api/routers/segments.py`, `api/routers/realtime.py`, `api/bench_latency.py`. File sửa: `behavior.py`, `dishes.py` (thêm `ing_router`), `labels.py` (bảng đặc trưng, luật đề xuất), `main.py`.
-- **Nhãn cụm theo luật** (bảng luật ở D16), k = 8:
+### D. Cách cài đặt (sửa code, chưa làm)
+1. **`common.py`:**
+   - `Paths` đọc biến môi trường `VIFOOD_DATA_ROOT` (mặc định `/data`) và `VIFOOD_OUTPUT_DIR` (mặc định `data/output`);
+   - thêm `P.output_prod` luôn trỏ về `data/output` (để `--fixed` đọc tham số đã chọn);
+   - `raw` luôn đọc `/data/raw` (chỉ đọc); checkpoint theo gốc dữ liệu.
+   - Không đặt biến nào thì mọi thứ chạy như cũ.
+2. **Gốc dữ liệu đo:**
+   - `/perf/s010`, `/perf/s050`, `/perf/s100` cho trục dữ liệu, `/perf/catalog` cho 02, 03, 06g;
+   - trước khi chạy, chép `curated/` (5,5 MB) và `features/` (0,2 MB) từ `/data` sang từng gốc;
+   - report của mỗi lần chạy ghi vào `data/output/perf/<job>_<mức>_w<số worker>_r<lần>/`.
+   - Bản 100% cũng chạy lại 04 vào `/perf/s100`, để không đụng `/data`.
+3. **Tên ứng dụng** gắn nhãn (biến `VIFOOD_RUN_TAG`), ví dụ `06b_als|s100|w1|r2`, để tìm lại trên History Server.
+4. **Giai đoạn:**
+   - `rec_common.Timer` gọi thêm `sc.setJobGroup(<tên giai đoạn>)`, nên số liệu stage gom được theo đúng giai đoạn trong `timings_s`;
+   - thêm Timer cho 02, 03, 04 (hiện các job này không có `timings_s`).
+5. **`--fixed`** thêm vào `rec_common.setup()` và 06b, 06c, 06e, 06f, 06g như mục C.
+6. **`scripts/09_perf.py`:**
+   - chạy trên máy (Python chuẩn, không cần thư viện thêm), chạy lần lượt từng cấu hình bằng `docker exec jupyter ...`;
+   - trước mỗi cấu hình, bật/tắt worker và chờ trang `http://localhost:8080/json/` báo đủ số worker còn sống;
+   - sau mỗi ứng dụng, đọc History Server REST để lấy thời lượng, stage, executor;
+   - ghi nối tiếp `data/output/perf_runs.jsonl`, mỗi dòng một lần chạy (có thể dừng giữa chừng rồi chạy tiếp);
+   - cuối cùng tổng hợp ra `data/output/perf_report.json`;
+   - có `--plan` để in trước danh sách lần chạy và thời gian dự kiến.
 
-  | Cụm | Người dùng | Nhãn | Đề xuất | Persona kiểm chứng (chỉ để kiểm chứng) |
-  |---|---|---|---|---|
-  | 0 | 2.705 | Nấu bữa trưa · ít phiên | Gợi ý bữa trưa; kích hoạt lại | gia đình truyền thống |
-  | 1 | 2.202 | Nấu bữa sáng · hoạt động ít | Gợi ý bữa sáng; kích hoạt lại | tập gym |
-  | 2 | 9.449 | Nấu đa dạng · nhiều phiên | Tăng món khám phá; giới thiệu món mới | mê hải sản |
-  | 3 | 6.729 | Nhiều món chay · ít chấm điểm | Bộ sưu tập món chay | ăn chay |
-  | 4 | 8.108 | Xem là nấu · nhiều canh/súp | Mâm cơm món mặn kèm canh | gia đình truyền thống |
-  | 5 | 5.191 | Nhiều món ngọt, đồ uống · ít hải sản | Chè, bánh, đồ uống cho bữa phụ | hảo ngọt |
-  | 6 | 4.494 | Hay nấu lẩu · thích cay | Lẩu cuối tuần; món cay, món nhậu | thích cay/nhậu |
-  | 7 | 7.252 | Chuộng món nhanh · nấu bữa tối | Món nhanh; gợi ý bữa tối | bận rộn |
+### E. Đổi số worker
+- **Đề xuất: dừng hẳn `spark-worker-2`** (`docker stop spark-worker-2`; chạy lại thì `docker start` và chờ master thấy đủ 2 worker). 1 worker = 1 executor 2 core, 3 GB; 2 worker = 2 executor, 4 core. Đây đúng là phép so sánh "1 nút và 2 nút".
+- **Không dùng `spark.cores.max = 2`:** Standalone mặc định rải executor ra mọi worker (`spreadOut`), nên `cores.max = 2` sẽ cho 2 executor × 1 core trên 2 worker, vẫn có shuffle qua mạng. Đó không phải cụm 1 nút.
+- **Giữ nguyên** `shuffle.partitions = 8`, bộ nhớ executor, driver ở cả hai cấu hình. Với 4 khe, 8 partition chạy 2 đợt; với 2 khe thì 4 đợt.
+- **Rủi ro:** ở 100% với 1 worker, 06b rank 128 chỉ có 1 executor 2 GB, có thể spill nhiều hoặc hết bộ nhớ. Chạy thử cấu hình này một lần trước tiên.
 
-  Luật không đọc persona. Nhãn khớp rõ với persona ở 5 cụm (3, 4, 5, 6, 7). Cụm 0, 1, 2 khó đối chiếu hơn: nhãn nói về bữa và mức hoạt động, không nói về món; cụm 2 là cụm lớn nhất (20,5%).
+### F. Mỗi cấu hình chạy mấy lần, lấy số nào
+- **3 lần mỗi cấu hình, lấy trung vị;** báo cáo ghi thêm khoảng nhỏ nhất – lớn nhất.
+- Xen kẽ thứ tự 2 worker → 1 worker → 2 worker →…, để dao động của máy (nhiệt, tiến trình nền) không dồn vào một cấu hình.
+- Mỗi mức dữ liệu chạy 1 lần làm nóng không tính. Ở 10% và 50%, lần 04 sinh dữ liệu chính là lần làm nóng. Lý do: lần đọc HDFS đầu tiên sau khi bật cụm chậm hơn vì cache đĩa trống.
+- Trước khi đo, tắt kernel các notebook và không chạy job nào khác (quy tắc trong CLAUDE.md). Ghi lại `docker stats` một lần mỗi cấu hình.
 
-**Phần 2 – 4 trang mới** (thay trang khung):
-- **Hành vi ăn uống** (`hanh-vi.html`), 9 thẻ:
-  - heatmap giờ × thứ (Lượt nấu / Lượt xem), phễu;
-  - lượt nấu theo tháng, món theo mùa (chọn vùng, cột chồng 100%);
-  - nhóm món theo tháng (10 đường, mặc định hiện 4 nhóm lớn);
-  - món nấu nhiều theo bữa (sáng/trưa/tối/khuya, nhiều nhất / đặc trưng);
-  - heatmap lift (chọn kiểu nhóm và thuộc tính, màu 2 đầu chili ↔ herb);
-  - bảng tỷ lệ chuyển đổi theo nhóm món;
-  - thói quen nấu (4 biểu đồ nhỏ).
-- **Món ăn** (`mon-an.html`):
-  - KPI; danh mục so với lượt nấu (3 thuộc tính); đuôi dài (có đường chia đều);
-  - nguyên liệu phổ biến (công tắc "Tính cả gia vị"); đồ thị mạng nguyên liệu (force, bỏ / giữ gia vị);
-  - tra cứu món: ô tìm có/không dấu, bộ lọc, "Xem thêm", bấm thẻ để xem chi tiết món (dùng chung `dishDetail()` với trang Gợi ý). Không hiện dinh dưỡng.
-- **Phân khúc người dùng** (`phan-khuc.html`):
-  - chọn k = 3 / 8 / 11, kèm giải thích vì sao dùng 8; đường Silhouette, ARI, NMI theo k (đánh dấu 3, 8, 11);
-  - quy mô cụm; heatmap hồ sơ cụm (18 đặc trưng, màu theo z, tooltip giá trị thật);
-  - thẻ từng cụm (nhãn, 3 đặc trưng nổi bật, đề xuất, dòng "Persona kiểm chứng (chỉ để kiểm chứng)");
-  - người dùng trong cụm (k = 8): vùng, tuổi, nhóm, user mẫu có liên kết sang `goi-y.html?user=`.
-- **Thời gian thực** (`thoi-gian-thuc.html`): trạng thái luồng, đường lượt nấu theo cửa sổ, món thịnh hành. Hiện `trending` rỗng nên cả 3 thẻ ghi trạng thái rỗng có hướng dẫn. Khi có dữ liệu thì gọi lại mỗi 10 giây, dừng khi tab bị ẩn.
-- **Phần dùng chung:**
-  - `charts.js` thêm `multiLines`, `stacked100`, `divergingHeatmap`, `hGroupedBars`, `simpleBars`, `forceGraph`; `lines` có `yMin`, `markX`;
-  - `components.js` thêm `dishDetail()`, `hbars(..., {wrap})`, ghi chú `note` trên thẻ món;
-  - `theme.css` thêm `.ctrl`, `.mini-grid`, thẻ cụm `.cl`.
+### G. Đo gì
+| Chỉ số | Nguồn | Ghi chú |
+|---|---|---|
+| Thời gian ứng dụng (giây) | History Server `duration` | số chính |
+| Thời gian từng giai đoạn | `timings_s` trong report + job group | ví dụ 06b `test:als_implicit` |
+| **Speedup** S = T(1 worker) ÷ T(2 worker) | tính từ trung vị | lý tưởng là 2 |
+| **Efficiency** E = S ÷ 2 | | |
+| Theo dữ liệu: T(50%) ÷ T(10%), T(100%) ÷ T(10%); số sự kiện / giây cho 04, 05 | | so với tỷ lệ dữ liệu 5 và 10 |
+| Shuffle đọc / ghi, phần đọc từ xa (`shuffleRemoteBytesRead`) | REST `stages` | 1 worker thì phần đọc từ xa gần bằng 0 |
+| Spill (bộ nhớ / đĩa), GC, `executorCpuTime ÷ executorRunTime` | REST `stages` | giải thích vì sao speedup dưới 2 |
+| Số task, số stage | REST `stages` | |
+| Dung lượng HDFS mỗi mức | `hdfs dfs -du` | |
 
-**Phần 2 – kiểm thử, đo, ảnh chụp:**
-- `api/tests/test_consistency.py` (18 test, mới); `test_privacy.py` gọi đủ E0–E26 (26 đường dẫn), thêm 2 test cho E15, E16.
-- `bench_latency.py` chạy trên `vifood` (cổng 8000) và `vifood_local` (uvicorn tạm ở cổng 8001 trong container `api`, đã tắt sau khi đo).
-- 14 ảnh toàn trang trong `docs/images/` (`08_<trang>_1440.png`, `08_<trang>_390.png`).
-- **Tài liệu:**
-  - D16 trong DECISIONS (luật nhãn và đề xuất cụm, các quyết định khi cài đặt);
-  - DATA_DICTIONARY: 9 endpoint mới, `api_report.json`;
-  - CLAUDE.md: lệnh đo độ trễ, lỗi Chrome headless khi chụp 390px;
-  - skill mục 6: heatmap 2 đầu, danh sách hàm vẽ dùng chung.
+### H. Bảng, biểu đồ, nơi lưu
+- **File:**
+  - `data/output/perf_runs.jsonl`: dữ liệu thô, mỗi dòng một lần chạy;
+  - `data/output/perf_report.json`: trung vị, min/max, speedup, efficiency, shuffle theo job × mức × số worker, kèm cấu hình máy (8 CPU Docker, 2 × 2 core, executor 2 GB, `shuffle.partitions` 8);
+  - ảnh History Server (Timeline, Executors của 06b ở 1 và 2 worker) trong `docs/images/09_*`.
+- **MongoDB:** collection mới `perf` (1 doc mỗi job × mức × số worker), nạp bằng `07 --only perf`. Bước 07 đọc `perf_report.json`, không đụng các collection khác.
+- **Dashboard:** E24 thêm khóa `perf`. Thẻ "Hiệu năng Spark" ở trang Đánh giá thay viên "Chưa" bằng:
+  - (a) cột nhóm thời gian từng job, 1 và 2 worker, ở 100%;
+  - (b) đường tổng thời gian theo mức dữ liệu 10 / 50 / 100%, 2 đường cho 1 và 2 worker;
+  - (c) thanh ngang speedup từng job, có vạch lý tưởng 2.
+  - Tổng quan: bước "Đo hiệu năng" trong danh sách tiến độ chuyển sang "Xong".
+- **Báo cáo:**
+  - bảng 1: thời gian (trung vị, min–max) job × mức × số worker;
+  - bảng 2: speedup và efficiency ở 100%;
+  - bảng 3: shuffle và spill của 05, 06b, 06f;
+  - biểu đồ (a), (b), (c) như trên, và phân rã giai đoạn của 06b.
+
+### I. Ước tính thời gian và thứ tự chạy
+Ước tính dựa trên thời gian đã đo ở mục A (100%, 2 worker) và mục C. Giả định: 10% tốn khoảng 0,2 lần, 50% khoảng 0,55 lần thời gian ở 100% (có phần chi phí cố định như khởi động JVM, đọc danh mục); 1 worker chậm khoảng 1,8 lần 2 worker. Đây đều là ước tính.
+
+| Phần | 2 worker, 1 lần | 1 worker, 1 lần |
+|---|---|---|
+| Chuỗi 04 → 06f ở 100% (04 543 + 05 104 + 06a 101 + 06b 565 + 06c 131 + 06d 34 + 06e 65 + 06f 140) | khoảng 28 phút | khoảng 50 phút |
+| Chuỗi ở 50% | khoảng 15 phút | khoảng 28 phút |
+| Chuỗi ở 10% | khoảng 6 phút | khoảng 10 phút |
+| 02 + 03 + 06g | khoảng 3 phút (02 chưa có số) | khoảng 5 phút |
+| **Cộng 1 vòng (3 mức + danh mục)** | **khoảng 52 phút** | **khoảng 93 phút** |
+
+- **3 lần lặp:** khoảng 7,3 giờ, cộng khoảng 15 phút làm nóng và chuẩn bị dữ liệu. Có thể chia thành 3 buổi, mỗi buổi một mức dữ liệu.
+- **Phương án gọn hơn (câu hỏi 2):** 3 lần ở 100%, 1 lần ở 10%, 50% và danh mục: khoảng 5,0 giờ (3 × 78 phút + 59 phút + 8 phút).
+
+**Thứ tự đề xuất:**
+1. Sửa code (mục D, C) và kiểm tra bản thường vẫn chạy y như cũ: chạy `--local` 05 và 06 rồi so report với bản trước.
+2. Chạy thử ngắn: 10%, 2 worker, 1 lần cho cả chuỗi; kiểm tra `perf_runs.jsonl` và History Server.
+3. Chạy thử 100%, 1 worker, chỉ 06b `--fixed` (rủi ro bộ nhớ, mục E).
+4. Mức 10% (3 lần, xen kẽ) → mức 50% → mức 100%. 02, 03, 06g chạy kèm ở buổi 10%.
+5. Tổng hợp `perf_report.json`, chụp ảnh History Server, `07 --only perf`, sửa E24 và thẻ trang Đánh giá, pytest.
+6. Giữ `/perf` trên HDFS đến khi viết xong báo cáo; xóa khi cần chỗ. Dung lượng dự kiến khoảng 2,8 GB kể cả bản sao: (0,1 + 0,5 + 1) × 1,75 GB, trong đó 1,75 GB là events + results + models của bản thật tính cả bản sao.
+
+---
 
 ## Số liệu chính
-**Độ trễ** (`api_report.json`, 200 lần tuần tự sau 20 lần khởi động; ms đo ở client qua HTTP):
-
-| Endpoint | Nhóm | p95 `vifood` | p95 `vifood_local` | Mục tiêu p95 | Đạt |
-|---|---|---|---|---|---|
-| E1 overview | cache | 2,87 | 3,30 | < 10 | có |
-| E2 heatmap | cache | 3,46 | 3,65 | < 10 | có |
-| E3 monthly | cache | 3,45 | 3,65 | < 10 | có |
-| E4 top-dishes | cache | 2,66 | 1,70 | < 10 | có |
-| E5 lift | cache | 2,48 | 2,11 | < 10 | có |
-| E6 funnel | cache | 1,84 | 1,78 | < 10 | có |
-| E7 habits | cache | 1,84 | 1,94 | < 10 | có |
-| E8 dishes/summary | cache | 2,80 | 2,77 | < 10 | có |
-| E15 segments | cache | 3,48 | 3,72 | < 10 | có |
-| E17 users/demo | cache | 1,74 | 2,04 | < 10 | có |
-| E22 meta/filters | cache | 1,27 | 1,09 | < 10 | có |
-| E23 eval/ranking | cache | 2,57 | 1,70 | < 10 | có |
-| E24 eval/details | cache | 2,01 | 1,99 | < 10 | có |
-| E10 ingredients/top | MongoDB | 2,75 | 2,98 | – | |
-| E11 ingredients/graph | MongoDB | 4,04 | 7,20 | – | |
-| **E12 dishes/search** | MongoDB | **14,16** | 18,83 | < 50 | có |
-| **E13 dishes/{id}** | MongoDB | **4,16** | 4,23 | < 50 | có |
-| E14 dishes | MongoDB | 6,95 | 7,21 | – | |
-| E16 segments/8/{c} | MongoDB | 56,76 | 10,08 | – | |
-| **E18 users/{id}** | MongoDB | **2,94** | 2,87 | < 50 | có |
-| **E19 recs/{id}** | MongoDB | **5,47** | 5,53 | < 50 | có |
-| **E20 recs/new-user** | MongoDB | **9,13** | 8,98 | < 80 | có |
-| E25 trending | MongoDB | 2,17 | 2,64 | – | |
-
-- **Mọi mục tiêu đều đạt** ở cả hai database (`all_targets_met: true`).
-- **Dữ liệu lớn gấp 10 lần mà độ trễ gần như không đổi**, nhờ index: `vifood` 50.000 user so với `vifood_local` 5.000 user.
-  - E19 p95 5,47 ms so với 5,53 ms; phần MongoDB trung bình 1,54 ms so với 1,50 ms.
-  - Riêng E16 tăng theo cỡ cụm (aggregation trên cả cụm): 56,8 ms so với 10,1 ms, MongoDB trung bình 33,6 ms so với 4,4 ms.
-- **E12** chậm nhất trong nhóm có mục tiêu (p95 14,2 ms; MongoDB 9,9 ms): `$regex` không neo đầu chuỗi phải quét cả index `name_search`.
-- **E19, 10 luồng song song × 100 lần:** `vifood` p50 28,4 ms, p95 37,2 ms, 344,5 req/s; `vifood_local` p95 43,6 ms, 321,7 req/s. Uvicorn chạy 1 worker nên các request xếp hàng.
-- **RAM `api`** sau khi đo: 59,2 MiB / 512 MiB.
-- **Tải trang** (trình duyệt của Claude, 1440 × 1000, bộ nhớ đệm đã có ECharts và font, tức chưa phải lần tải lạnh): `load` 47–62 ms; mọi thẻ hết trạng thái tải sau 104–163 ms (Phân khúc chậm nhất). Mục tiêu là dưới 1,5 giây.
-
-**Kiểm tra trên trình duyệt:**
-- 7 trang ở 1440 và 390: không thẻ nào lỗi.
-- Ở 390px: lần đầu trang Phân khúc tràn ngang (`scrollWidth` 411) vì ô chọn cụm có tên dài. Đã sửa, giờ cả 7 trang đều 390 (ảnh chụp bằng DevTools Protocol, `scrollWidth` = 390).
-- Tạm dừng MongoDB (`docker pause`): trang Món ăn hiện "Không kết nối được MongoDB" kèm "Thử lại" ở 3 thẻ đọc MongoDB trực tiếp, sau 9,2 giây. Các thẻ dùng cache vẫn có số liệu. Đã bỏ dừng, `/api/health` trả ok.
-- Đối chiếu số liệu: trên trang, Gini lượt nấu 0,698 và "1% món đầu chiếm 19%" (report: 19,02%), khớp `analysis_report.long_tail`. Phễu 12.474.894 cặp đã xem, khớp `analysis_funnel_by_category`.
-
-**pytest:**
-
-| Database | Kết quả | Thời gian |
-|---|---|---|
-| `vifood` | **61 đạt** | 6,2 giây |
-| `vifood_local` | 58 đạt, 3 bỏ qua (3 phép so khớp chỉ chạy với `vifood`) | 5,4 giây |
-
-| File | Số test | Mới / sửa ở lần này |
-|---|---|---|
-| `test_consistency.py` | 18 | **mới**: E4 thứ tự hạng và giá trị, `food_id` có trong `dishes`, `limit = 11` trả 422; E5 tỷ trọng mỗi nhóm cộng ~100%, lift = share ÷ overall, ô ít dữ liệu là null; E7 tổng tỷ trọng; E8 KPI đúng bằng đếm trực tiếp, đuôi dài tăng dần tới 100%; E10, E11 thứ tự, bậc nút = 2 × số cạnh; E15 đủ k cụm, z trung bình 0, nhãn, 1–2 đề xuất, k = 5 trả 422; E16 số user khớp `count_documents`, user mẫu đúng cụm, cụm 99 trả 404; E25 rỗng thì "chưa chạy"; với `vifood`: tổng điểm chấm = `overview`, user theo lượt nấu = phễu, `n_users` của E15 = report 06e |
-| `test_privacy.py` | 6 | gọi đủ 26 đường dẫn E0–E26; persona chỉ ở E15, E17 (và E26, xem mục "Lỗi"); E16 không lộ persona |
-| `test_recs.py` | 10 | (phần 1) `n_cook_before` |
-| `test_web_rules.py` | 8 | (phần 1) luật series cột rỗng |
-| `test_overview.py`, `test_static.py`, `test_text.py`, `test_new_user.py`, `test_indexes.py` | 6, 5, 5, 2, 1 | không đổi |
+- **pytest** trên `vifood`: **61 đạt** (6,7 giây), gồm `test_segments[3/8/11]` với luật mới (1 câu mỗi cụm, không trùng câu).
+- **Câu đề xuất k = 8:** 8 cụm, 8 câu khác nhau (bảng ở mục "Đã làm"). k = 3: 3 câu khác nhau; k = 11: 11 câu khác nhau.
+- **Khảo sát cho đo hiệu năng:**
+  - máy ảo Docker: 8 CPU, 17,6 GB RAM; máy chủ 16 luồng; worker 2 × (2 core, 3 GB);
+  - History Server có 38 ứng dụng (từ 23/10 18:12);
+  - 05 (23/10, cụm): 108,7 giây, 250 stage, 836 task, shuffle đọc 337,0 MB, spill đĩa 303,5 MB;
+  - dung lượng HDFS của bản thật (`overview.hdfs`): events 274,5 MB, results 567,3 MB, models 31,3 MB (nhân 2 khi tính bản sao).
 
 ## Lỗi / sự cố và cách xử lý
-- **E15 với `k` kiểu `Literal[3, 8, 11]`** luôn trả 422, vì tham số query là chuỗi. Đã đổi sang `int` và tự kiểm tra; `k` khác 3, 8, 11 trả 422.
-- **`test_privacy` báo E26 có chữ "persona"**: `/api/reports/model_kmeans_report` trả nguyên report 06e, trong đó có persona phổ biến của từng cụm (số liệu gộp). Đã cho phép E26 có persona gộp nhưng vẫn cấm khóa `truth`, và ghi vào D16. E26 chỉ để gỡ lỗi, trang không gọi.
-- **`vifood_local`: 4 test lệch** vì `reports` là file của cụm: tổng user của E15 (4.586 so với 46.130) và user theo lượt nấu (4.979 so với 49.815). Đã cho E15 tự cộng từ `clusters`, và chuyển các phép so với report sang chỉ chạy với `--db vifood`.
-- **`bench_latency.py` lần 1 lỗi** `Client.request() takes 3 positional arguments` ở vòng khởi động. Đã sửa, lần 2 chạy đủ.
-- **Trên trang:**
-  - Biểu đồ mùa: chú giải xuống 2 dòng và đè lên cột. Đã chừa chỗ phía trên khi thẻ hẹp hơn 520px.
-  - "Quy mô cụm": tên cụm dài làm thanh quá ngắn. Thêm `hbars(..., {wrap: true})` để nhãn xuống dòng.
-  - Heatmap hồ sơ cụm: chú giải và nhãn trục bị cắt bên phải. Đã thêm lề phải và thu hẹp cột.
-  - Trang Phân khúc tràn ngang ở 390px. Đã giới hạn bề rộng ô chọn trong `.ctrl`.
-  - Câu đề xuất "Người dùng tích cực" trùng ý với "Khẩu vị đa dạng" (cùng ra món khám phá). Đã đổi thành "giới thiệu món mới trong danh mục trước".
-- **Ảnh chụp 390px:**
-  - Lần 1 dùng Chrome headless `--window-size=390`: trang được dựng rộng hơn rồi bị cắt (tiêu đề cụt).
-  - Lần 2 bọc iframe: `100vh` kéo thanh bên dài bằng cả trang, dữ liệu chưa kịp tải.
-  - Lần 3 điều khiển Chrome qua DevTools Protocol (giả lập thiết bị, cuộn hết trang để ảnh lazy tải, chờ 5 giây, chụp toàn trang): đúng. Đã ghi vào CLAUDE.md.
-- Ảnh `image.cooky.vn` lần này tải được một phần trong trình duyệt của Claude. Ảnh nào không tải được thì sau 4 giây thành ảnh thay thế, nên ảnh chụp có thể lẫn cả hai.
-- Cảnh báo pytest `StarletteDeprecationWarning` vẫn còn (chỉ là thông báo).
+- **Cụm đang tắt khi bắt đầu phiên**, pytest đầu tiên trả 503 "Không kết nối được MongoDB". Đã bật `mongodb` rồi restart `api`. Cuối phiên đã tắt lại `api`, `mongodb`, `spark-history`.
+- **Event log nén zstd** (`events_1_*.zstd`), Python trên máy không có thư viện giải nén. Vì vậy đề xuất đọc số liệu qua REST của History Server thay vì đọc file trực tiếp.
+- **02 chưa có thời gian đo nào:** report không ghi thời gian, và 02 chạy trước khi bật event log. Lần đo sẽ có số này.
+- **Đã kiểm tra lại một giả định:** ban đầu tôi nghĩ bản 50% của 04 là tập con của bản 100%. Đọc `make_users()` thì không phải, nên mục B ghi đúng như vậy.
 
 ## Cần người dùng quyết định
-1. **Bảng luật đề xuất cho cụm (D16)** là bản đầu, chọn theo hiểu biết chung về hành vi nấu ăn chứ không đo hiệu quả. Có muốn sửa câu nào trước khi đưa vào báo cáo không?
-2. **E16 không có mục tiêu độ trễ** và p95 là 56,8 ms trên `vifood` (cụm 2 có 9.449 user). Giữ đọc MongoDB mỗi lần để thể hiện index (như thiết kế), hay cache 10 phút như các bảng nhỏ (sẽ còn khoảng 3 ms)?
-3. **Bước tiếp theo:** thiết kế Structured Streaming (ghi `trending`, rồi E25 và trang Thời gian thực có dữ liệu thật), hay đo hiệu năng Spark (1 và 2 worker, 10/50/100%) trước?
+1. **06b `--fixed`** chỉ chạy view test (khoảng 9,5 phút ở 100%, 2 worker), hay chạy cả val và test với tham số đã chọn (gần gấp đôi)?
+2. **Số lần lặp:** 3 lần cho mọi cấu hình (khoảng 7,3 giờ), hay 3 lần ở 100% và 1 lần ở 10% / 50% (khoảng 5,0 giờ)?
+3. **06f `--fixed`** có bỏ `test:explore_beyond` không (279,3 giây ở 100%; đây là đánh giá thêm coverage / novelty / diversity, không phải bước tạo gợi ý)?
+4. **Đổi số worker** bằng cách dừng `spark-worker-2` (đề xuất), hay muốn thêm cấu hình 1 worker × 4 core để tách ảnh hưởng của "số nút" và "số core"? Cấu hình này phải sửa compose cho worker 1 và khởi động lại worker.
+5. **Gốc dữ liệu riêng `/perf/...`** và 2 biến môi trường mới trong `common.py` (mặc định giữ nguyên hành vi cũ): đồng ý không?
+6. **Sinh 50%:** chạy `04 --scale 0.5` (đo được 04 ở 50%; dân số 25.000 user sinh mới, không phải tập con) hay lấy mẫu 50% user từ bản 100% (tập con đúng, nhanh hơn, nhưng mất điểm đo của 04)?
+7. **Lưu kết quả:** collection `perf` trong MongoDB và thẻ "Hiệu năng Spark" ở trang Đánh giá như mục H: đồng ý không? 07 không nằm trong phép đo (đề xuất không đo).
 
-Việc cần người làm (không đổi): kiểm tra tay 100 món; dựng notebook biểu đồ cho bước 05 và 06; xem 7 trang (có thể xem ảnh trong `docs/images/`).
+Việc cần người làm (không đổi): kiểm tra tay 100 món; dựng notebook biểu đồ cho bước 05 và 06; xem lại trang Phân khúc sau khi sửa đề xuất.
 
 ## Commit
-- `f524001`: sửa biểu đồ theo tháng, bố cục trang Gợi ý, ảnh thay thế, `n_cook_before` (phần 1).
-- Commit của `/handoff` lần này: đợt 2 bước 08 (API, 4 trang, test, `bench_latency.py`, `api_report.json`, 14 ảnh, D16, DATA_DICTIONARY, CLAUDE.md, skill, PROGRESS, file này).
+- `Buoc 08: moi cum 1 de xuat, de xuat do hieu nang` (`api/labels.py`, `api/routers/segments.py`, `api/tests/test_consistency.py`, D16, PROGRESS, file này).

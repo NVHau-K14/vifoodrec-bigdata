@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **25/10/2026**, sau khi làm xong đợt 2 bước 08 (D16): đủ 25 endpoint, 7 trang dashboard, đo độ trễ, 14 ảnh chụp.
+> Cập nhật lần cuối: **26/10/2026**, sau khi sửa đề xuất cụm (D16) và viết bản đề xuất đo hiệu năng Spark (LAST_RUN, chưa chạy).
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -79,10 +79,16 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Chờ người dùng trả lời 3 câu ở LAST_RUN** (luật đề xuất cụm D16; có cache E16 không; streaming hay đo hiệu năng trước).
-2. **Structured Streaming (nâng cao):** viết bản thiết kế trước (kiểu D12/D15) vào LAST_RUN: nguồn sự kiện (phát lại `events` theo thời gian hay sinh mới), cửa sổ, watermark, ghi MongoDB `trending` (đã có index `window_end -1`). E25 hiện đọc dạng `{window_start, window_end, total_cooks, items: [{food_id, cooks}]}` (`api/routers/realtime.py`); chốt schema thì sửa E25 nếu cần. Trang `thoi-gian-thuc.html` đã tự gọi lại mỗi 10 giây khi có dữ liệu.
-3. **Đo hiệu năng Spark** (1 vs 2 worker, 10/50/100%): sinh lại `events_csv` bằng `04 --csv` khi cần; chụp ảnh History Server và HDFS UI cùng lúc (xem "Việc còn treo").
-4. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy.
+1. **Đo hiệu năng Spark:** bản đề xuất ở LAST_RUN ngày 26/10 (mục A–I), **chờ người dùng trả lời 7 câu** rồi mới sửa code. Tóm tắt:
+   - gốc HDFS riêng `/perf/s010|s050|s100|catalog` qua biến `VIFOOD_DATA_ROOT`, report riêng qua `VIFOOD_OUTPUT_DIR`;
+   - `--fixed` cho 06b, 06c, 06e, 06f, 06g, đọc tham số đã chọn từ `data/output/model_*_report.json`;
+   - đổi số worker bằng `docker stop spark-worker-2`; 3 lần mỗi cấu hình, lấy trung vị;
+   - số liệu stage và shuffle lấy qua REST của History Server (event log nén zstd);
+   - `scripts/09_perf.py` chạy trên máy, ghi `perf_runs.jsonl` và `perf_report.json`;
+   - collection `perf` và thẻ "Hiệu năng Spark" ở trang Đánh giá.
+2. **Structured Streaming (nâng cao):** sau khi đo hiệu năng. Viết bản thiết kế trước: nguồn sự kiện, cửa sổ, watermark, ghi `trending` (index `window_end -1`). E25 hiện đọc dạng `{window_start, window_end, total_cooks, items: [{food_id, cooks}]}`.
+3. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy.
+
 ## Việc còn treo
 - [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv`, điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
 - [x] Ratings gốc: đã làm thí nghiệm đối chứng 06g (ALS kém hơn trung bình chung 6%).
@@ -99,7 +105,7 @@
 - [ ] `vifood_local` không đồng bộ: các bảng `analysis_*` lệch `overview` 1.145 lượt nấu, `reports` là file của lần chạy trên cụm. Nếu cần bản local khớp thì chạy lại `05 --local` rồi `07 --local` (nhớ sao lưu `export_report.json` của cụm).
 - [x] Ảnh món: trình duyệt thường tải được `monngonmoingay.com`, `image.cooky.vn` có lúc hết thời gian chờ. Không tải sẵn; dùng ảnh thay thế theo 10 nhóm món, bỏ ảnh sau 4 giây (D15, skill mục 4).
 - [x] Ảnh chụp 7 trang dashboard ở 1440 và 390 (`docs/images/08_*`). Chụp lại sau khi có streaming.
-- [ ] Luật đề xuất cho cụm (D16) là bản đầu: chờ người dùng duyệt câu chữ trước khi đưa vào báo cáo.
+- [x] Luật đề xuất cho cụm (D16): người dùng đã duyệt; mỗi cụm 1 câu, không trùng câu giữa các cụm (26/10).
 - [ ] `.env` đang được commit và có mật khẩu `admin123`. Nếu đưa repo lên GitHub công khai thì chuyển sang `.env.example`.
 - [ ] Database `vifood_local` (bản 10%, 22,8 MB) giữ lại để phát triển API; xóa khi không cần nữa.
 - [ ] Ảnh chụp cho báo cáo: thêm `mongo-express` và các `explain()` trong `export_report.json`.
@@ -139,3 +145,4 @@
 - **25/10 (khuya):** cài skill `frontend-design`, thêm quy tắc không ghi tên thành viên ngoài báo cáo. Đề xuất thiết kế bước 08 rồi chốt (D15): thêm `because_cooked` vào `recs` (chạy lại `07 --only recs`), sửa skill `vifood-dashboard`. Đợt 1: dựng service `api`, 16 endpoint, 3 trang (Tổng quan, Gợi ý món, Đánh giá mô hình), pytest 39/39 đạt trên `vifood`.
 - **25/10 (đêm):** sửa sau khi xem đợt 1: biểu đồ theo tháng (bỏ series rỗng), bố cục trang Gợi ý (hàng đầu gọn, hồ sơ cột phải), ảnh thay thế theo nhóm món, chip "Bạn đã nấu N lần" (`n_cook_before`).
 - **25/10 (đêm, tiếp):** đợt 2 bước 08 (D16): 9 endpoint, 4 trang Hành vi, Món ăn, Phân khúc, Thời gian thực, nhãn và đề xuất cụm theo luật, `test_consistency`, `bench_latency.py` (mọi mục tiêu đạt), 14 ảnh chụp.
+- **26/10:** mỗi cụm 1 đề xuất đặc trưng nhất, không trùng giữa các cụm; `cook_per_view` cao là "hay nấu sau khi xem". Khảo sát và viết bản đề xuất đo hiệu năng Spark (1/2 worker × 10/50/100%, `--fixed`, History Server REST), chờ duyệt.

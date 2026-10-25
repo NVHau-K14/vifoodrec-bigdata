@@ -28,7 +28,7 @@ def model_kind(m):
 FEATURES = {
     "log_events": ("Số sự kiện (log)", "hoạt động nhiều", "hoạt động ít"),
     "log_sessions": ("Số phiên (log)", "nhiều phiên", "ít phiên"),
-    "cook_per_view": ("Tỷ lệ nấu / xem", "xem là nấu", "xem nhiều, ít nấu"),
+    "cook_per_view": ("Tỷ lệ nấu / xem", "hay nấu sau khi xem", "xem nhiều, ít nấu"),
     "rate_per_cook": ("Tỷ lệ chấm / nấu", "hay chấm điểm", "ít chấm điểm"),
     "share_chay": ("Tỷ trọng món chay", "nhiều món chay", "ít món chay"),
     "share_haisan": ("Tỷ trọng hải sản", "nhiều hải sản", "ít hải sản"),
@@ -46,11 +46,11 @@ FEATURES = {
     "avg_rating": ("Điểm chấm trung bình", "chấm điểm cao", "chấm điểm thấp"),
 }
 
-# Bang luat chien luoc: (dac trung, huong +1 = cao / -1 = thap, cau de xuat). Doc theo thu tu do lech giam dan,
-# lay toi da 2 cau. Bang nay duoc chep vao DECISIONS de bao cao trich duoc.
+# Bang luat chien luoc: (dac trung, huong +1 = cao / -1 = thap, cau de xuat). Moi cum chi giu 1 cau dac trung nhat,
+# va trong cung mot k khong cum nao lap cau cua cum khac (describe_clusters). Bang nay chep vao D16 de bao cao trich duoc.
 STRATEGY_RULES = [
     ("share_chay", 1, "Ưu tiên bộ sưu tập món chay, thêm món chay mới vào gợi ý"),
-    ("share_nhanh", 1, "Gợi ý món nhanh cho bữa trưa ngày thường"),
+    ("share_nhanh", 1, "Gợi ý món nhanh, ít bước cho ngày bận rộn"),
     ("share_haisan", 1, "Đẩy món hải sản và món ăn kèm (luật FP-Growth)"),
     ("share_cay", 1, "Gợi ý món cay, món nhậu vào buổi tối và cuối tuần"),
     ("share_ngot", 1, "Gợi ý chè, bánh, đồ uống cho bữa phụ"),
@@ -87,18 +87,31 @@ def cluster_z(clusters):
 
 
 def describe_cluster(z):
-    """(nhan, 3 dac trung noi bat, chien luoc) tu z cua mot cum."""
+    """(nhan, 3 dac trung noi bat, cac cau de xuat ung vien [(|z|, cau)]) tu z cua mot cum."""
     order = sorted(z, key=lambda f: -abs(z[f]))
     top = [{"feature": f, "label": FEATURES[f][0], "z": round(z[f], 2),
             "text": FEATURES[f][1] if z[f] > 0 else FEATURES[f][2]} for f in order[:3]]
     lab = " · ".join(t["text"] for t in top[:2])
-    strategy = []
+    cand = []
     for f in order:
-        if abs(z[f]) < Z_STRONG or len(strategy) >= 2:
+        if abs(z[f]) < Z_STRONG:
             break
         d = 1 if z[f] > 0 else -1
-        for rf, rd, text in STRATEGY_RULES:
-            if rf == f and rd == d and text not in strategy:
-                strategy.append(text)
-                break
-    return lab[:1].upper() + lab[1:], top, strategy or [DEFAULT_STRATEGY]
+        cand += [(abs(z[f]), text) for rf, rd, text in STRATEGY_RULES if rf == f and rd == d]
+    return lab[:1].upper() + lab[1:], top, cand
+
+
+def describe_clusters(zmap):
+    """{cum: (nhan, dac trung noi bat, [1 cau de xuat])} cho cac cum cung k.
+
+    Gan tham lam theo |z| giam dan tren toan bo cac cap (cum, cau ung vien): cum nao lech manh nhat o mot dac trung
+    thi nhan cau cua dac trung do; moi cau chi gan cho 1 cum. Cum khong con cau nao thi dung DEFAULT_STRATEGY.
+    """
+    desc = {c: describe_cluster(z) for c, z in zmap.items()}
+    pairs = sorted(((az, c, text) for c, (_, _, cand) in desc.items() for az, text in cand), key=lambda x: (-x[0], x[1]))
+    chosen, used = {}, set()
+    for _, c, text in pairs:
+        if c not in chosen and text not in used:
+            chosen[c] = text
+            used.add(text)
+    return {c: (lab, top, [chosen.get(c, DEFAULT_STRATEGY)]) for c, (lab, top, _) in desc.items()}

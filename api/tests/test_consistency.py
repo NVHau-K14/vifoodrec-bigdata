@@ -97,8 +97,11 @@ def test_segments(client, db, k):
     for f in FEATURES:
         # z giua cac cum: trung binh 0
         assert abs(sum(c["z"][f] for c in s["clusters"]) / k) < 1e-2, f
+    # Moi cum 1 cau de xuat dac trung nhat; khong cum nao lap cau cua cum khac (D16)
+    strategies = [c["strategy"][0] for c in s["clusters"]]
+    assert len(set(strategies)) == len(strategies), strategies
     for c in s["clusters"]:
-        assert c["label"] and 1 <= len(c["strategy"]) <= 2 and len(c["top_features"]) == 3
+        assert c["label"] and len(c["strategy"]) == 1 and len(c["top_features"]) == 3
         assert c["verify_only"] is True and c["persona_kiem_chung"]
     assert client.get("/api/segments", params={"k": 5}).status_code == 422
 
