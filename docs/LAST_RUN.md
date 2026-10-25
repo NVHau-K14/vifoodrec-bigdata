@@ -5,6 +5,15 @@
 > Dữ liệu hành vi là **mô phỏng**. Số liệu lấy từ MongoDB `vifood` (đọc trực tiếp hôm nay) và `data/output/*.json`.
 
 ## Yêu cầu
+**Lần này:** thêm quy tắc "tên thành viên và phân công chỉ có trong báo cáo Word và slide":
+- ghi quy tắc vào CLAUDE.md, bỏ dòng "Nhóm: … (chia việc 50/50)";
+- bỏ tên trong PROGRESS;
+- commit skill `vifood-dashboard` đã sửa dòng 9;
+- trong thiết kế 08: bỏ chia việc ở mục H, chỉ giữ thứ tự làm chia 2 đợt; bỏ câu hỏi 5 (Claude viết toàn bộ code);
+- giữ nguyên `docs/plan/`;
+- dashboard: trang Tổng quan và thanh bên không có tên nhóm hay thành viên.
+
+**Lần trước (bản thiết kế bên dưới vẫn chờ góp ý, đã sửa theo yêu cầu lần này):**
 1. Cài skill `frontend-design` từ repo `anthropics/skills` vào `.claude/skills/frontend-design/`, commit cùng `.claude/skills/vifood-dashboard/`. Ghi vào CLAUDE.md: mọi việc trong `web/` theo skill `vifood-dashboard`, skill này thắng khi khác `frontend-design`.
 2. Đề xuất thiết kế bước 08 (chưa viết code), tuân theo skill `vifood-dashboard`, gồm:
    - endpoint (method, tham số, schema, collection, index);
@@ -15,6 +24,31 @@
    - kiểm thử bằng pytest và đo độ trễ.
 
 ## Đã làm
+**Lần này:**
+- **Tìm tên người** trong toàn bộ repo, trừ `docs/plan/`. Tên chỉ còn ở 3 file: CLAUDE.md (dòng "Nhóm"), PROGRESS (3 chỗ), LAST_RUN (mục F, mục H, câu hỏi 5, dòng việc cần người làm).
+  - Code (`src/`, `scripts/`), report JSON, DECISIONS, DATA_DICTIONARY và skill không có tên.
+  - Các kết quả "hau" còn lại là "hàu" trong link ảnh món (`canh-hau-thanh-mat`, `Hau-nuong`) và chữ "hậu tố" trong DATA_DICTIONARY và `src/06a_split.py`, không phải tên người.
+  - **MongoDB** (`vifood` và `vifood_local`, mọi collection, mọi document): chỉ 5 món trong `dishes` khớp mẫu tìm. Cả 5 là chữ có sẵn trong dữ liệu món, không phải tên thành viên, nên giữ nguyên:
+    - 61 "Ngọc mực xóc tỏi";
+    - 554 "Cá sapa nhồi ngọc kê nướng";
+    - 2079 "Cơm Chiên Chay Hoàng Hậu";
+    - 2607 "Cơm Chiên Ngọc Bích";
+    - 4401 "Thịt Gà Hầm Thuốc Bắc" (nguyên liệu "ngọc trúc").
+- **CLAUDE.md:**
+  - bỏ dòng "Nhóm: …", chỉ giữ "Mục tiêu: điểm tối đa";
+  - thêm quy tắc đầu tiên ở mục "Quy tắc làm việc": không ghi tên người hay ai làm phần nào trong code, dữ liệu, report, MongoDB, API, dashboard (kể cả trang Tổng quan và thanh bên) và tài liệu làm việc. `docs/plan/` giữ nguyên.
+- **PROGRESS:**
+  - bỏ phần chia số món theo người ở việc "Kiểm tra tay 100 món";
+  - bỏ tên người ở đầu việc "Dựng notebook…";
+  - mục `web/` trong "Việc tiếp theo": thay câu chia việc bằng "Claude viết toàn bộ code, chia 2 đợt".
+- **Skill `vifood-dashboard`:** dòng 9 đã sửa sẵn (bỏ tên), đưa vào commit lần này.
+- **Thiết kế 08:**
+  - mục H chỉ còn thứ tự làm, chia 2 đợt;
+  - mục F: "máy của …" thành "máy khác";
+  - mục C ghi rõ thanh bên và trang Tổng quan không có tên nhóm hay thành viên;
+  - bỏ câu hỏi 5, các câu sau đánh số lại.
+
+**Lần trước:**
 - **Kiểm tra cụm:** đủ 10 container đang chạy. RAM đang dùng khoảng 2,7 GB, trong đó MongoDB 643 MB.
 - **Skill `frontend-design`:**
   - Lấy từ `anthropics/skills`, commit `dbd4588` (09/10/2026), gồm `SKILL.md` và `LICENSE.txt` (Apache 2.0).
@@ -193,7 +227,7 @@ Bộ lọc món dùng chung (gọi là **F**): `veg: bool`, `quick: bool`, `not_
 - 7 endpoint đọc MongoDB trực tiếp mỗi lần gọi: E12, E13, E14, E16, E18, E19, E20. Các endpoint còn lại đọc từ cache.
 
 ## C. Từng trang: thẻ và endpoint
-Mọi trang có chung: thanh bên 7 mục, hộp "Dữ liệu hành vi mô phỏng" ở cuối, đầu trang gồm nhãn nhỏ, H1 dạng câu hỏi và hai viên "Mốc dữ liệu: 01/09/2026" (lấy `reference_date` từ E1) và "Hành vi mô phỏng". Thứ tự thẻ trong bảng là thứ tự trên trang.
+Mọi trang có chung: thanh bên 7 mục (**không có tên nhóm hay thành viên**, ở thanh bên cũng như trang Tổng quan), hộp "Dữ liệu hành vi mô phỏng" ở cuối, đầu trang gồm nhãn nhỏ, H1 dạng câu hỏi và hai viên "Mốc dữ liệu: 01/09/2026" (lấy `reference_date` từ E1) và "Hành vi mô phỏng". Thứ tự thẻ trong bảng là thứ tự trên trang.
 
 ### 1. Tổng quan – `index.html`, H1 "Dữ liệu đi từ HDFS đến bữa ăn gợi ý như thế nào?"
 | Thẻ | Nội dung | Endpoint |
@@ -371,7 +405,7 @@ api/
 Chú thích trong code viết không dấu, theo quy ước của dự án.
 
 ## F. Tải sẵn ECharts và font
-Tải một lần bằng script `scripts/08_fetch_vendor.sh`, chạy trong container `api` hoặc Git Bash trên máy. Sau đó **commit cả file vào git**, để máy của Ngọc hay máy demo không cần mạng.
+Tải một lần bằng script `scripts/08_fetch_vendor.sh`, chạy trong container `api` hoặc Git Bash trên máy. Sau đó **commit cả file vào git**, để máy khác hay máy demo không cần mạng.
 
 ```bash
 # echarts 5.5.1 (skill ghi 5.5.x), kem giay phep Apache 2.0
@@ -420,21 +454,35 @@ curl -fL -o web/fonts/OFL.txt https://cdn.jsdelivr.net/npm/@fontsource/be-vietna
 - Đo cả trên `vifood` (50.000 user) và `vifood_local` (5.000 user), để thấy độ trễ gần như không đổi khi dữ liệu lớn gấp 10 lần, nhờ index.
 - Ghi `docker stats api` (RAM) sau khi đo.
 
-## H. Thứ tự làm và chia việc (đề xuất)
-1. **Khung (Hậu):** Dockerfile, compose, `main.py`, `db.py`, E0, mount `web/`, tải vendor và font. Kiểm tra `http://localhost:8000` hiện một trang trống có font đúng.
-2. **Phần dùng chung của web (Ngọc):** `theme.css`, `layout.js`, `api.js`, `charts.js`, `components.js`. Làm trang Tổng quan trước để chốt giao diện so với bản mẫu canvas.
-3. **API (Hậu):** E1–E26 theo thứ tự trang, mỗi router có test đi kèm.
-4. **Các trang:**
-   - Ngọc: Hành vi, Món ăn, Phân khúc, Gợi ý (theo phân công ở plan mục 9: "Dashboard HTML/ECharts, trang gợi ý món").
-   - Hậu: Đánh giá mô hình (mô hình do Hậu làm) và Thời gian thực (streaming do Hậu làm).
-5. **Kiểm tra cuối:** pytest đủ, đo độ trễ, chụp 7 trang ở 1440px và 390px vào `docs/images/`, ghi D15 và DATA_DICTIONARY (mục API).
+## H. Thứ tự làm (Claude viết toàn bộ code, chia 2 đợt)
+Trước đợt 1: ghi D15 vào DECISIONS và sửa skill theo các câu trả lời (nếu có).
 
-Khi người dùng chốt bản thiết kế, ghi D15 vào DECISIONS, sửa skill theo các câu trả lời (nếu có), rồi mới viết code.
+**Đợt 1: khung + Tổng quan + Gợi ý món + Đánh giá mô hình**
+1. **Khung:**
+   - `docker/Dockerfile.api`, service `api` trong compose, `main.py`, `db.py`, `cache.py`, E0, mount `web/`;
+   - `scripts/08_fetch_vendor.sh` tải ECharts và font.
+   - Kiểm tra: `http://localhost:8000` hiện trang trống có font đúng, `/docs` mở được.
+2. **Phần dùng chung của web:** `theme.css`, `layout.js`, `api.js`, `charts.js`, `components.js`, `img/`.
+3. **Tổng quan:** E1, E22 và trang `index.html`. Đối chiếu giao diện với bản mẫu canvas.
+4. **Gợi ý món:** E12, E13, E17, E18, E19, E20, `text.py`, `reasons.py` và trang `goi-y.html`.
+5. **Đánh giá mô hình:** E23, E24, E26 và trang `danh-gia.html`.
+6. **Test của đợt 1:** `test_text`, `test_recs`, `test_new_user`, `test_privacy` (các endpoint đã có), `test_indexes`, `test_static`, `test_web_rules`.
+7. Kiểm tra 3 trang theo skill mục 9 (1440px và 390px, tắt API, `grep` hex). Ghi LAST_RUN, dừng lại để người dùng xem.
+
+**Đợt 2: các trang còn lại + đo độ trễ**
+1. **Hành vi ăn uống:** E2–E7, trang `hanh-vi.html`.
+2. **Món ăn:** E8, E10, E11, E14, trang `mon-an.html` (E12, E13 đã có từ đợt 1).
+3. **Phân khúc người dùng:** E15, E16, `labels.py` (nhãn và chiến lược cụm), trang `phan-khuc.html`.
+4. **Thời gian thực:** E25, trang `thoi-gian-thuc.html` (trạng thái rỗng cho đến khi có streaming).
+5. **Test còn lại:** `test_consistency`, `test_privacy` với đủ E0–E26.
+6. **Đo độ trễ:** `bench_latency.py` trên `vifood` và `vifood_local`, ghi `data/output/api_report.json` và `docker stats api`.
+7. **Kết thúc bước 08:** chụp 7 trang ở 1440px và 390px vào `docs/images/`; cập nhật DATA_DICTIONARY (mục API), CLAUDE.md (11 container, cổng 8000, dòng 08 của bảng pipeline, lệnh pytest) và PROGRESS.
 
 ---
 
 ## Lỗi / sự cố và cách xử lý
-- Không có lỗi. Máy không có `gh` CLI, nên skill được lấy bằng `git clone --sparse` vào thư mục tạm rồi mới chép vào dự án.
+- **Lần này:** bộ kiểm tra an toàn của Claude Code tạm thời không cho chạy lệnh shell (lỗi tạm thời, không phải bị từ chối). Vì vậy việc tìm tên trong file làm bằng công cụ tìm file. Thử lại sau thì lệnh chạy được, nên đã quét MongoDB và commit bình thường.
+- **Lần trước:** không có lỗi. Máy không có `gh` CLI, nên skill được lấy bằng `git clone --sparse` vào thư mục tạm rồi mới chép vào dự án.
 
 ## Cần người dùng quyết định
 1. **Câu lý do "đã nấu" hay "đã xem" cho `content_slot`.**
@@ -459,13 +507,13 @@ Khi người dùng chốt bản thiết kế, ghi D15 vào DECISIONS, sửa skil
    Đồng ý không?
 3. **Sửa skill mục 1 về font:** đổi "subset vietnamese" thành "3 subset latin, latin-ext, vietnamese" (lý do ở mục F), và ghi rõ ECharts 5.5.1. Đồng ý không?
 4. **Thêm `js/components.js`** (thẻ món, thanh lọc, viên trạng thái, trạng thái tải/lỗi/rỗng), vì 3 trang cùng dùng thẻ món. Skill mục 1 chưa có file này. Nếu đồng ý thì ghi thêm vào skill.
-5. **Chia việc ở mục H:** Ngọc làm phần dùng chung của web và 4 trang (Hành vi, Món ăn, Phân khúc, Gợi ý); Hậu làm API, docker, test, đo độ trễ và 3 trang (Tổng quan khung, Đánh giá, Thời gian thực). Có giữ như vậy không? Hay Claude viết toàn bộ rồi mỗi người nhận phần của mình để đọc hiểu và trình bày?
-6. **Mục tiêu độ trễ ở mục G** (p95 < 50 ms cho gợi ý): giữ như vậy, hay muốn đặt mục tiêu khác để ghi vào báo cáo?
+5. **Mục tiêu độ trễ ở mục G** (p95 < 50 ms cho gợi ý): giữ như vậy, hay muốn đặt mục tiêu khác để ghi vào báo cáo?
 
-Có thể trả lời ngắn, ví dụ "1A, 2 đồng ý, 3 đồng ý, 4 đồng ý, 5 Claude viết hết, 6 giữ".
+Có thể trả lời ngắn, ví dụ "1A, 2 đồng ý, 3 đồng ý, 4 đồng ý, 5 giữ".
 
-Việc cần người làm (không đổi): kiểm tra tay 100 món (Hậu 50, Ngọc 50); Ngọc dựng notebook biểu đồ cho bước 05 và 06.
+Việc cần người làm (không đổi): kiểm tra tay 100 món; dựng notebook biểu đồ cho bước 05 và 06.
 
 ## Commit
 - `563e8ff`: skill `frontend-design` (từ `anthropics/skills`) và `vifood-dashboard`, quy tắc trong CLAUDE.md.
-- Commit của bản đề xuất này: `Buoc 08: de xuat thiet ke (chua code)` (chỉ có `docs/LAST_RUN.md`).
+- `90963df`: đề xuất thiết kế bước 08 (chưa code).
+- Commit lần này: `Quy tac: khong ghi ten thanh vien ngoai bao cao` (CLAUDE.md, PROGRESS, LAST_RUN, skill `vifood-dashboard`).

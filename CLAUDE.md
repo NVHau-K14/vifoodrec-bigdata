@@ -1,7 +1,7 @@
 # ViFoodRec Big Data – hướng dẫn cho AI
 
 Đồ án môn Nhập môn Big Data: **"Phân tích hành vi ăn uống và gợi ý món ăn"**.
-Nhóm: Nguyễn Văn Hậu, Hứa Quách Như Ngọc (chia việc 50/50). Mục tiêu: điểm tối đa.
+Mục tiêu: điểm tối đa.
 Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) và hành vi người dùng **mô phỏng**.
 
 ## Bắt đầu mỗi phiên
@@ -62,6 +62,10 @@ Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bư�
   thêm. **Khi hai skill khác nhau thì `vifood-dashboard` thắng** (token màu, font, bố cục, thành phần đã chốt).
 
 ## Quy tắc làm việc
+- **Không ghi tên người hay ai làm phần nào** trong code, dữ liệu, file report JSON, MongoDB, API, dashboard
+  (kể cả trang Tổng quan và thanh bên) và tài liệu làm việc (`CLAUDE.md`, `docs/PROGRESS.md`, `docs/DECISIONS.md`,
+  `docs/DATA_DICTIONARY.md`, `docs/LAST_RUN.md`, skill). Tên thành viên và phân công chỉ có trong báo cáo Word và slide.
+  `docs/plan/` giữ nguyên, vì đó là tài liệu nguồn cho phần phân công trong báo cáo.
 - **Không** sửa `data/raw/`. **Không** chạy `docker compose down -v` hay xóa volume, vì sẽ mất toàn bộ HDFS.
 - Chạy thử `--local` hoặc `--scale 0.01` trước, rồi mới chạy đủ. Sau khi chạy, đọc report để kiểm tra.
 - Tắt kernel các notebook trước khi chạy job. Cụm chỉ có 4 core, notebook đang giữ executor thì job phải xếp hàng chờ.

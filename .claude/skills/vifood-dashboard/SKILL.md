@@ -6,7 +6,7 @@ description: Quy ước giao diện dashboard ViFoodRec (HTML/CSS/JS thuần + E
 # Dashboard ViFoodRec
 
 Bản mẫu đã duyệt: canvas "ViFoodRec Dashboard – bản mẫu" trên claude.ai (trang Tổng quan + Gợi ý món).
-Skill này chốt **một** bộ quy ước để mọi trang (Hậu và Ngọc làm) trông như cùng một sản phẩm.
+Skill này chốt **một** bộ quy ước để mọi trang trông như cùng một sản phẩm.
 Đọc kèm skill `frontend-design` nếu có; khi hai skill khác nhau thì **skill này thắng**.
 
 ## 1. Công nghệ và cấu trúc

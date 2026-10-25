@@ -89,20 +89,20 @@
      - Tìm món: `$regex` trên `name_search`, chuỗi gõ vào chuẩn hóa giống Spark (chữ thường, bỏ dấu, "đ" → "d"; xem `VN_FROM`/`VN_TO` trong `src/07_export_mongo.py`).
      - Các trang còn lại: Tổng quan (`overview`), Hành vi (`analysis_*`), Món ăn (`dishes` aggregation, `ingredient_edges`), Phân khúc (`clusters`, `users`), Đánh giá (`metrics`, `reports`).
    - **Service `api` trong compose:** image, cổng, đọc `MONGO_URI` từ `.env`. Phục vụ luôn `web/` tĩnh hay tách riêng.
-   - **Cấu trúc `web/`:** HTML + CSS + JS thuần, ECharts. Danh sách trang và biểu đồ của từng trang. Chia việc với Ngọc (dashboard là phần của Ngọc).
+   - **Cấu trúc `web/`:** HTML + CSS + JS thuần, ECharts. Danh sách trang và biểu đồ của từng trang. Claude viết toàn bộ code, chia 2 đợt (xem LAST_RUN mục H).
    - Khi phát triển dùng database `vifood_local` (biến môi trường), demo dùng `vifood`.
 2. **Structured Streaming (nâng cao):** ghi vào collection `trending` (đã có index `window_end`). Thiết kế sau bước 08.
 3. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy.
 
 ## Việc còn treo
-- [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv` (Hậu 50, Ngọc 50), điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
+- [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv`, điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
 - [x] Ratings gốc: đã làm thí nghiệm đối chứng 06g (ALS kém hơn trung bình chung 6%).
 - [ ] Ảnh chụp UI cho báo cáo: **để cuối dự án, làm cùng lúc với đo hiệu năng**. Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
 - [x] Chốt mẫu kiểm tra tay theo hash: đã chạy lại 03 trên cụm (24/10).
 - [x] HDFS replication: `get_spark()` ghi 2 bản sao, đã `setrep -R 2 /data`, fsck HEALTHY (D12).
 - [x] Đã xóa `/data/events/events_csv` (bản cũ). Sinh lại bằng `04 --csv` khi đo hiệu năng.
 - [ ] Repo GitHub và `git config`: tạm chưa làm, theo quyết định của nhóm (tác giả commit đang là `Admin`).
-- [ ] Ngọc: dựng notebook biểu đồ từ `data/output/analysis/*.json`, làm nền cho trang "Hành vi ăn uống" của dashboard.
+- [ ] Dựng notebook biểu đồ từ `data/output/analysis/*.json`, làm nền cho trang "Hành vi ăn uống" của dashboard.
 - [ ] Notebook hoặc biểu đồ cho bước 06 từ `data/output/models_metrics.json` và `model_*_report.json`: bảng so sánh mô hình, khoảng tin cậy, lưới dò ALS, Silhouette theo k, recall của LSH. Dùng cho trang "Đánh giá mô hình".
 - [ ] Thư mục checkpoint của ALS (`hdfs:///tmp/checkpoint`) có thể xóa sau khi chốt bước 06.
 - [ ] Nhắn giảng viên về việc dùng dữ liệu hành vi mô phỏng (kế hoạch mục 2.2 khuyến nghị). Chưa rõ đã nhắn hay chưa.
