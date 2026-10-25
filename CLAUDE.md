@@ -55,6 +55,12 @@ Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bư�
 - Mỗi bước ghi `data/output/<buoc>_report.json` chứa số liệu kiểm tra, để dùng lại cho báo cáo.
 - Dữ liệu lớn (events) chỉ nằm trên HDFS. Ra máy chỉ xuất bảng nhỏ hoặc file mẫu.
 
+## Giao diện (`web/`) và endpoint cho dashboard
+- **Mọi việc trong `web/`** (HTML, CSS, JS, biểu đồ) và việc thiết kế endpoint trả dữ liệu cho dashboard
+  **phải theo skill `vifood-dashboard`** (`.claude/skills/vifood-dashboard/SKILL.md`). Đọc skill này trước khi sửa.
+- Skill `frontend-design` (`.claude/skills/frontend-design/`, lấy từ `anthropics/skills`) chỉ dùng để tham khảo
+  thêm. **Khi hai skill khác nhau thì `vifood-dashboard` thắng** (token màu, font, bố cục, thành phần đã chốt).
+
 ## Quy tắc làm việc
 - **Không** sửa `data/raw/`. **Không** chạy `docker compose down -v` hay xóa volume, vì sẽ mất toàn bộ HDFS.
 - Chạy thử `--local` hoặc `--scale 0.01` trước, rồi mới chạy đủ. Sau khi chạy, đọc report để kiểm tra.
