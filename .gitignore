@@ -10,6 +10,7 @@ data/processed/
 data/hdfs_local/
 data/output/*.csv
 !data/output/features_check_sample.csv
+!data/output/features_check_sample_lan1.csv
 # Giu lai: data/output/*.json (report nho, dung cho bao cao)
 # Do hieu nang (D17): giu report JSON cua tung lan chay, bo ban sao bang va CSV mau
 data/output/perf/*/processed/
