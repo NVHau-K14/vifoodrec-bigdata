@@ -215,13 +215,35 @@ def mongo(browser):
     p.goto("http://localhost:8090/db/vifood/")
     settle(p, 1.5)
     save(p, "mongo_vifood.png", "mongo-express: database vifood (danh sách collection, kích thước)")
-    p.goto("http://localhost:8090/db/vifood/recs")
+    # 1 document: loc theo _id tren trang collection roi mo 3 phan tu dau cua items. Trang /db/<db>/<coll>/<id>
+    # cua mongo-express 1.0.2 lam sap tien trinh khi _id khong phai ObjectId (BSONTypeError), nen khong dung.
+    uid = 8111
+    p.goto(f"http://localhost:8090/db/vifood/recs?key=_id&value={uid}&type=N&query=&projection=")
     settle(p, 1.5)
-    save(p, "mongo_recs.png", "mongo-express: collection recs (1 doc / user, 50 món gợi ý)", full_page=False)
+    expand_items(p, 3)
+    save(p, "mongo_recs.png", f"mongo-express: 1 document của collection recs (user {uid}), mở 3 trong 50 phần tử items")
     p.goto("http://localhost:8090/db/vifood/trending")
     settle(p, 1.5)
     save(p, "mongo_trending.png", "mongo-express: collection trending (Structured Streaming)", full_page=False)
+    wid = "2026-09-27T17:00|all"          # cua so dong nhat cua ngay phat lai, toan quoc
+    p.goto(f"http://localhost:8090/db/vifood/trending?key=_id&value={wid}&type=S&query=&projection=")
+    settle(p, 1.5)
+    expand_items(p, 3)
+    save(p, "mongo_trending_doc.png", f"mongo-express: 1 document của collection trending ({wid}), mở 3 trong 20 phần tử items")
     ctx.close()
+
+
+def expand_items(p, n):
+    """Mo n phan tu dau cua mang items trong bang ket qua (renderjson: nut a.disclosure cua tung object)."""
+    hdr = p.eval_on_selector_all("thead th, table tr:first-child th", "els => els.map(e => e.innerText.trim())")
+    col = hdr.index("items") + 1 if "items" in hdr else 2
+    cell = p.locator("tbody tr").first.locator("td").nth(col - 1)
+    # lay truoc cac nut dang hien "⊕" (moi object co 2 nut: ⊕ khi dong, ⊖ khi mo); bam lan luot n nut dau
+    plus = [h for h in cell.locator("span.object > a.disclosure").element_handles()
+            if h.is_visible() and h.inner_text().strip() == "⊕"]
+    for h in plus[:n]:
+        h.click()
+    time.sleep(0.5)
 
 
 def realtime(browser, stopped=False):

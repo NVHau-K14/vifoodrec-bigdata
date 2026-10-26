@@ -77,7 +77,7 @@ RUN="docker exec -w /home/jovyan/work -e PYTHONPATH=/usr/local/spark/python/lib/
   các bước nặng có `--scale` (vd `--scale 0.01`): nên chạy thử nhỏ trước rồi mới chạy đủ.
 - Mỗi bước ghi `data/output/<bước>_report.json`; đọc report để kiểm tra sau khi chạy.
 - Cụm chỉ có 4 core: tắt kernel notebook trước khi chạy job; không chạy job `--local` cùng lúc với job trên cụm.
-- Kiểm thử API: `docker exec api python -m pytest -q -p no:cacheprovider api/tests --db vifood`.
+- Kiểm thử API: `docker exec api python -m pytest -q -p no:cacheprovider api/tests` (mặc định database `vifood`).
   Đo độ trễ API: `docker exec -w /home/jovyan/work api python -m api.bench_latency`.
 - Biểu đồ cho báo cáo: mở `notebooks/*.ipynb` trong Jupyter rồi *Run All* (không cần Spark), ảnh ghi ra `docs/images/nb_*.png`.
 
@@ -99,7 +99,17 @@ Spark UI của luồng http://localhost:4041/StreamingQuery/. Luồng giữ 2 co
 Kiểm tra đúng / đo: `$RUN src/10c_stream_check.py` (3 kịch bản đến trễ) và `$RUN src/10d_stream_bench.py`
 (độ trễ, thông lượng); cả hai đều reset luồng trước mỗi lần chạy.
 
-## 5. Dữ liệu và giấy phép
+## 5. Nếu công khai repo
+
+Repo hiện để riêng tư. Các commit cũ có file `.env` (từ 26/10 chỉ còn `.env.example`), và `docker/docker-compose.yml`
+ghi mật khẩu MongoDB mặc định (`MONGO_INITDB_ROOT_PASSWORD`). Trước khi công khai repo:
+
+- **đổi mật khẩu MongoDB** (tài khoản `admin`) và **mật khẩu đăng nhập mongo-express** (`ME_CONFIG_BASICAUTH_PASSWORD`),
+  rồi cập nhật `.env` và `MONGO_INITDB_ROOT_PASSWORD` trong compose. Biến `MONGO_INITDB_*` chỉ có tác dụng khi volume
+  `mongodb` còn trống, nên với cụm đang chạy phải đổi mật khẩu ngay trong MongoDB (`db.changeUserPassword`);
+- mật khẩu cũ vẫn đọc được trong lịch sử Git; đổi mật khẩu là đủ, không cần làm sạch lịch sử.
+
+## 6. Dữ liệu và giấy phép
 
 - Dữ liệu món ăn: bộ ViFoodRec (Cooky, Món Ngon Mỗi Ngày). Đặt 4 file `food_dataset_cookyweb.csv`,
   `food_dataset_mnmnweb.csv`, `foods.csv`, `ratings.csv` vào `data/raw/` trước bước 01. Không sửa `data/raw/`.

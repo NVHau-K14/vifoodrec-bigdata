@@ -1,8 +1,8 @@
 """pytest cho API buoc 08 (D15). Goi app ngay trong tien trinh (TestClient), doc MongoDB that.
 
 Chay trong container api (tu /home/jovyan/work):
-  python -m pytest -q api/tests                 (mac dinh database vifood_local, ban 10%)
-  python -m pytest -q api/tests --db vifood     (ban day du dung cho demo)
+  python -m pytest -q api/tests                       (mac dinh database vifood, ban day du dung cho demo)
+  python -m pytest -q api/tests --db vifood_local     (ban 10% do 07 --local ghi; da xoa 26/10, chay 05/07 --local de tao lai)
 Kiem tra la bat bien, dung voi ca hai database.
 """
 import hashlib
@@ -12,7 +12,7 @@ import pytest
 
 
 def pytest_addoption(parser):
-    parser.addoption("--db", default="vifood_local", help="database MongoDB de kiem tra")
+    parser.addoption("--db", default="vifood", help="database MongoDB de kiem tra")
 
 
 def pytest_configure(config):

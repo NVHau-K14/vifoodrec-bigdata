@@ -17,7 +17,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 - Spark 4.2.0 Standalone: `spark-master` (UI :8080), `spark-worker-1/2` (mỗi worker 2 core, 3GB).
 - `jupyter` (http://localhost:8888, token `bigdata`) là driver; Spark UI của job đang chạy ở :4040, của luồng Structured Streaming ở :4041.
 - `spark-history` (http://localhost:18080): xem lại các job đã chạy xong. `get_spark()` ghi event log vào `logs/spark-events/` (đã có trong `.gitignore`).
-- `mongodb` (:27017, admin/admin123), database `vifood` (`vifood_local` khi chạy `--local`).
+- `mongodb` (:27017, admin/admin123), database `vifood`. `07 --local` ghi `vifood_local` (đã xóa 26/10, không còn dùng; pytest mặc định `vifood`).
 - `mongo-express` (http://localhost:8090, tài khoản trong `.env`). Cổng 8081 trên máy là UI của `spark-worker-1`.
 - `api` (FastAPI, image `vifood-api:0.1` từ `docker/Dockerfile.api`): dashboard http://localhost:8000, tài liệu API http://localhost:8000/docs.
   Phục vụ cả `/api/...` và `web/` tĩnh cùng origin. Database theo biến `API_DB` (mặc định `vifood`).
@@ -61,11 +61,11 @@ Biến `VIFOOD_DATA_ROOT`, `VIFOOD_OUTPUT_DIR`, `VIFOOD_RUN_TAG` chỉ dùng cho
 ```bash
 # Bước 08: dựng và chạy service api (trong thư mục docker/)
 docker compose up -d --build api
-# Đổi sang database phát triển (PowerShell): $env:API_DB="vifood_local"; docker compose up -d api
+# Đổi database của API (PowerShell): $env:API_DB="<tên>"; docker compose up -d api   (vifood_local đã xóa 26/10)
 # Sửa api/*.py thì restart (không dùng --reload); sửa web/ chỉ cần tải lại trang
 docker restart api
-# Kiểm thử (mặc định vifood_local; thêm --db vifood để chạy trên bản đủ)
-docker exec api python -m pytest -q -p no:cacheprovider api/tests --db vifood
+# Kiểm thử (mặc định database vifood)
+docker exec api python -m pytest -q -p no:cacheprovider api/tests
 # Do do tre (ghi data/output/api_report.json, khoa latency.<database>)
 docker exec -w /home/jovyan/work api python -m api.bench_latency
 ```

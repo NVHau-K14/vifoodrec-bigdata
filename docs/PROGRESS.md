@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **26/10/2026 (tối)**, sau khi làm xong toàn bộ phần dữ liệu và code: đo lại 04 ở 100% / 1 worker, tách thời gian sink của luồng, notebook biểu đồ, đóng gói (README, requirements, `data/sample/`, `.env.example`), sửa trang Thời gian thực, đợt ảnh cuối (32 ảnh giao diện + 26 biểu đồ notebook). Còn lại: báo cáo Word + slide.
+> Cập nhật lần cuối: **26/10/2026 (khuya)**. **Phần dữ liệu và code đã xong**; bước tiếp theo là báo cáo Word và slide. Lần trước (tối) làm xong: đo lại 04 ở 100% / 1 worker, tách thời gian sink của luồng, notebook biểu đồ, đóng gói (README, requirements, `data/sample/`, `.env.example`), sửa trang Thời gian thực, đợt ảnh cuối (32 ảnh giao diện + 26 biểu đồ notebook). Còn lại: báo cáo Word + slide.
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -80,8 +80,7 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Chờ người dùng trả lời câu hỏi trong LAST_RUN 26/10 (tối)** (`vifood_local`).
-2. **Báo cáo Word + slide.** Số liệu lấy từ `data/output/*report*.json`, D10–D18; biểu đồ `docs/images/nb_*.png`; ảnh giao diện theo `data/output/screenshots.json`.
+1. **Báo cáo Word + slide** (phần dữ liệu và code đã xong 26/10). Số liệu lấy từ `data/output/*report*.json`, D10–D18; biểu đồ `docs/images/nb_*.png`; ảnh giao diện theo `data/output/screenshots.json`.
 
 ## Việc còn treo
 - [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv`, điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
@@ -96,12 +95,13 @@
 - [x] Đã xóa `hdfs:///tmp/checkpoint` (52,7 MB, 26/10). Chạy lại 06 thì Spark tạo lại.
 - [ ] Nhắn giảng viên về việc dùng dữ liệu hành vi mô phỏng (kế hoạch mục 2.2 khuyến nghị). Chưa rõ đã nhắn hay chưa.
 - [x] `mongo-express` đã có trong compose (cổng 8090, tài khoản trong `.env`). Service `api` đã có (cổng 8000).
-- [ ] `vifood_local` không đồng bộ: các bảng `analysis_*` lệch `overview` 1.145 lượt nấu, `reports` là file của lần chạy trên cụm. Nếu cần bản local khớp thì chạy lại `05 --local` rồi `07 --local` (nhớ sao lưu `export_report.json` của cụm).
+- [x] (Đã xóa `vifood_local`, mục này không còn.) `vifood_local` không đồng bộ: các bảng `analysis_*` lệch `overview` 1.145 lượt nấu, `reports` là file của lần chạy trên cụm. Nếu cần bản local khớp thì chạy lại `05 --local` rồi `07 --local` (nhớ sao lưu `export_report.json` của cụm).
+- [x] Ảnh món ăn trên dashboard hiện hay không **không quan trọng**, không cần chụp lại (người dùng chốt 26/10).
 - [x] Ảnh món: trình duyệt thường tải được `monngonmoingay.com`, `image.cooky.vn` có lúc hết thời gian chờ. Không tải sẵn; dùng ảnh thay thế theo 10 nhóm món, bỏ ảnh sau 4 giây (D15, skill mục 4).
 - [x] Ảnh chụp 7 trang dashboard ở 1440 và 390 (`docs/images/08_*`). Chụp lại sau khi có streaming.
 - [x] Luật đề xuất cho cụm (D16): người dùng đã duyệt; mỗi cụm 1 câu, không trùng câu giữa các cụm (26/10).
-- [x] `.env` bỏ khỏi Git (`git rm --cached`, thêm vào `.gitignore`), có `.env.example`. **Lưu ý:** `.env` vẫn còn trong lịch sử các commit cũ, và `docker-compose.yml` vẫn ghi mật khẩu MongoDB (`MONGO_INITDB_ROOT_PASSWORD`). Đưa repo lên GitHub công khai thì phải đổi mật khẩu hoặc làm sạch lịch sử.
-- [ ] Database `vifood_local` (bản 10%, 22,8 MB) giữ lại để phát triển API; xóa khi không cần nữa.
+- [x] `.env` bỏ khỏi Git (`git rm --cached`, thêm vào `.gitignore`), có `.env.example`. **Lưu ý:** `.env` vẫn còn trong lịch sử các commit cũ, và `docker-compose.yml` vẫn ghi mật khẩu MongoDB (`MONGO_INITDB_ROOT_PASSWORD`). Repo để riêng tư (người dùng chọn 26/10); README mục 5 ghi cách xử lý nếu công khai: đổi mật khẩu MongoDB / mongo-express.
+- [x] Đã xóa database `vifood_local` (26/10, người dùng chọn); pytest mặc định `--db vifood` (64/64 đạt).
 - [x] Ảnh `mongo-express` (database, `recs`, `trending`). Các `explain()` vẫn chỉ có trong `export_report.json` (chưa có ảnh).
 - [x] `README.md`, `requirements.txt`, `data/sample/` (26/10).
 - [ ] `/perf` trên HDFS (1,3 GB, 2,5 GB tính cả bản sao): **giữ đến khi viết xong báo cáo** (người dùng chốt 26/10), sau đó xóa bằng `hdfs dfs -rm -r /perf`.
@@ -112,7 +112,9 @@
 - [ ] `data/stream/` (file phát lại, nhật ký từng lần chạy) không đưa lên Git; sinh lại bằng `10a_stream_prep.py`. `/data/stream` trên HDFS giữ đoạn phát lại và đáp án; `reset` chỉ xóa incoming / archive / checkpoint.
 - [ ] MongoDB `vifood` đang giữ kết quả của lượt phát lại cả ngày (06:00–24:00, tốc độ 300, phát lại 26/10 tối sau đợt ảnh), trạng thái "đã dừng" (người dùng chọn giữ). Demo thì `reset` rồi `start`.
 
-## Khác với kế hoạch ban đầu (cần nêu trong báo cáo)
+## Khác với kế hoạch / hạn chế (cần nêu trong báo cáo)
+- **Bộ sinh 04 không có lượt nấu khoảng 14–16h và 1–5h.** Giờ bắt đầu phiên lấy ngẫu nhiên trong khung của bữa (`SLOT_HOURS`: sáng 6–9h, trưa 10–13h, tối 16–20h, khuya 21–24h), nên ngoài các khung này chỉ có sự kiện lấn giờ của phiên bắt đầu trước đó (cả năm: 14h có 89 lượt nấu, 1h có 8, 2–5h và 15h bằng 0). Vì vậy biểu đồ ngày phát lại (bước 10) về 0 ở các cửa sổ kết thúc 15:00–16:00, và heatmap giờ × thứ có các cột trống. Đây là giới hạn của mô phỏng, không phải hành vi thật.
+- **04 ở 50% / 1 worker chậm hơn tính trên mỗi user, qua 3 lần đo:** thời gian task của giai đoạn sinh là 41,1–44,9 ms/user, so với 31,9 và 33,3 ms/user ở 100% / 1 worker (r1, r3). Chưa rõ nguyên nhân (D17). Điều này làm speedup của 04 ở 50% (2,19) cao hơn ở 100% (1,71).
 - Structured Streaming nằm ở `src/10*_*.py` + `src/stream_common.py` thay vì thư mục `src/streaming`. `api/bench_stream.py` trong bản thiết kế được gộp vào `src/10d_stream_bench.py`.
 - Phép lọc loại sự kiện đặt sau phép khử trùng, không ngay sau `withWatermark` như bản thiết kế, vì optimizer đẩy phép lọc xuống dưới EventTimeWatermark và làm tick vô dụng (bài thử 10t, D18).
 - Mã nguồn để phẳng `src/NN_ten.py` thay vì chia `src/ingest`, `src/etl`…
@@ -121,6 +123,7 @@
 - Dữ liệu sự kiện: 261MB Parquet (CSV tương đương 1,38GB), thấp hơn ước tính 1,5–3GB CSV.
 
 ## Nhật ký
+- **26/10 (khuya):** xóa `vifood_local`, pytest mặc định `vifood`. README mục "Nếu công khai repo". Ảnh `mongo_recs` thành 1 document (mở 3 phần tử `items`), thêm `mongo_trending_doc`; trang document riêng của mongo-express 1.0.2 làm sập container khi `_id` không phải ObjectId nên lọc theo `_id` trên trang collection. Bảng so sánh mô hình: sát lề trái, in đậm giá trị tốt nhất từng cột. Ghi 2 hạn chế cho báo cáo. Phần dữ liệu và code xong.
 - **26/10 (tối):** đo 04 ở 100% / 1 worker thêm 2 lần (1.230,1 và 900,4 giây; r2 trùng việc khác trên máy), speedup 04 ở 100% 1,71, chuỗi 1,38. Kiểm tra replayer: tick cuối đã phát sau mọi sự kiện bị giữ, không sửa. `10_stream.py` tách thời gian (a) upsert ô / (b) top 20 + trending; đo lại thông lượng 10d. Notebook 05, 06, 09_10 (26 PNG). Chạy thử 01 vào `/tmp/ingest_test`, xóa `/tmp/checkpoint`. README, requirements, `data/sample/`, `.env.example`. Trang Thời gian thực: cả đoạn phát lại khi dừng, "Cửa sổ chưa đủ 1 giờ dữ liệu", ngày phát lại, 24:00. Đợt ảnh cuối bằng Playwright (32 ảnh).
 - **23/10 sáng:** khảo sát ViFoodRec, lập kế hoạch chi tiết (`docs/plan/`), dựng cụm Docker.
 - **23/10 chiều:**

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-26T15:13:32",
+ "generated_at": "2026-10-26T16:32:43",
  "tool": "Playwright Chromium headless",
  "files": [
   {
@@ -236,11 +236,11 @@
   },
   {
    "file": "docs/images/mongo_recs.png",
-   "desc": "mongo-express: collection recs (1 doc / user, 50 món gợi ý)",
+   "desc": "mongo-express: 1 document của collection recs (user 8111), mở 3 trong 50 phần tử items",
    "width": 1440,
-   "height": 1000,
-   "kb": 59,
-   "at": "2026-10-26T15:08:47"
+   "height": 2990,
+   "kb": 155,
+   "at": "2026-10-26T16:32:38"
   },
   {
    "file": "docs/images/mongo_trending.png",
@@ -248,7 +248,15 @@
    "width": 1440,
    "height": 1000,
    "kb": 75,
-   "at": "2026-10-26T15:08:49"
+   "at": "2026-10-26T16:32:40"
+  },
+  {
+   "file": "docs/images/mongo_trending_doc.png",
+   "desc": "mongo-express: 1 document của collection trending (2026-09-27T17:00|all), mở 3 trong 20 phần tử items",
+   "width": 1440,
+   "height": 2597,
+   "kb": 160,
+   "at": "2026-10-26T16:32:43"
   },
   {
    "file": "docs/images/mongo_vifood.png",
@@ -256,7 +264,7 @@
    "width": 1440,
    "height": 2557,
    "kb": 371,
-   "at": "2026-10-26T15:08:45"
+   "at": "2026-10-26T16:32:34"
   }
  ],
  "problems": []
