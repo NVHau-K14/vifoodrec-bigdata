@@ -47,6 +47,11 @@ export async function buildHeadPills() {
   const box = document.getElementById('head-pills');
   if (!box) return;
   box.innerHTML = '<span class="pill" id="pill-date">Mốc dữ liệu: …</span><span class="pill pill-chili">Hành vi mô phỏng</span>';
+  // trang Thoi gian thuc tu ghi ngay phat lai vao vien nay (data-pill="replay")
+  if (box.dataset.pill === 'replay') {
+    document.getElementById('pill-date').textContent = 'Ngày phát lại: …';
+    return;
+  }
   try {
     const ov = await getJSON('/overview');
     document.getElementById('pill-date').textContent = `Mốc dữ liệu: ${fmtDate(ov.reference_date)}`;

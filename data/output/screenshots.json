@@ -1,0 +1,263 @@
+{
+ "generated_at": "2026-10-26T15:13:32",
+ "tool": "Playwright Chromium headless",
+ "files": [
+  {
+   "file": "docs/images/08_danh-gia_1440.png",
+   "desc": "Dashboard, trang Đánh giá mô hình, rộng 1440px (toàn trang)",
+   "width": 1440,
+   "height": 3874,
+   "kb": 550,
+   "at": "2026-10-26T15:10:32"
+  },
+  {
+   "file": "docs/images/08_danh-gia_390.png",
+   "desc": "Dashboard, trang Đánh giá mô hình, rộng 390px (toàn trang)",
+   "width": 390,
+   "height": 6883,
+   "kb": 514,
+   "at": "2026-10-26T15:10:36"
+  },
+  {
+   "file": "docs/images/08_goi-y_1440.png",
+   "desc": "Dashboard, trang Gợi ý món, rộng 1440px (toàn trang)",
+   "width": 1440,
+   "height": 1805,
+   "kb": 541,
+   "at": "2026-10-26T15:13:05"
+  },
+  {
+   "file": "docs/images/08_goi-y_390.png",
+   "desc": "Dashboard, trang Gợi ý món, rộng 390px (toàn trang)",
+   "width": 390,
+   "height": 5810,
+   "kb": 757,
+   "at": "2026-10-26T15:13:31"
+  },
+  {
+   "file": "docs/images/08_hanh-vi_1440.png",
+   "desc": "Dashboard, trang Hành vi ăn uống, rộng 1440px (toàn trang)",
+   "width": 1440,
+   "height": 3730,
+   "kb": 508,
+   "at": "2026-10-26T15:11:33"
+  },
+  {
+   "file": "docs/images/08_hanh-vi_390.png",
+   "desc": "Dashboard, trang Hành vi ăn uống, rộng 390px (toàn trang)",
+   "width": 390,
+   "height": 6420,
+   "kb": 449,
+   "at": "2026-10-26T15:11:57"
+  },
+  {
+   "file": "docs/images/08_mon-an_1440.png",
+   "desc": "Dashboard, trang Món ăn, rộng 1440px (toàn trang)",
+   "width": 1440,
+   "height": 2887,
+   "kb": 671,
+   "at": "2026-10-26T15:12:23"
+  },
+  {
+   "file": "docs/images/08_mon-an_390.png",
+   "desc": "Dashboard, trang Món ăn, rộng 390px (toàn trang)",
+   "width": 390,
+   "height": 8009,
+   "kb": 494,
+   "at": "2026-10-26T15:12:31"
+  },
+  {
+   "file": "docs/images/08_phan-khuc_1440.png",
+   "desc": "Dashboard, trang Phân khúc người dùng, rộng 1440px (toàn trang)",
+   "width": 1440,
+   "height": 2638,
+   "kb": 473,
+   "at": "2026-10-26T15:12:35"
+  },
+  {
+   "file": "docs/images/08_phan-khuc_390.png",
+   "desc": "Dashboard, trang Phân khúc người dùng, rộng 390px (toàn trang)",
+   "width": 390,
+   "height": 5976,
+   "kb": 473,
+   "at": "2026-10-26T15:12:39"
+  },
+  {
+   "file": "docs/images/08_thoi-gian-thuc_1440.png",
+   "desc": "Trang Thời gian thực khi luồng đang chạy (Giờ mô phỏng 18:03 27/09/2026 · tốc độ 60 lần), rộng 1440px",
+   "width": 1440,
+   "height": 2091,
+   "kb": 735,
+   "at": "2026-10-26T15:03:05"
+  },
+  {
+   "file": "docs/images/08_thoi-gian-thuc_390.png",
+   "desc": "Trang Thời gian thực khi luồng đang chạy (Giờ mô phỏng 18:28 27/09/2026 · tốc độ 60 lần), rộng 390px",
+   "width": 390,
+   "height": 6249,
+   "kb": 942,
+   "at": "2026-10-26T15:03:32"
+  },
+  {
+   "file": "docs/images/08_tong-quan_1440.png",
+   "desc": "Dashboard, trang Tổng quan, rộng 1440px (toàn trang)",
+   "width": 1440,
+   "height": 2386,
+   "kb": 374,
+   "at": "2026-10-26T15:09:33"
+  },
+  {
+   "file": "docs/images/08_tong-quan_390.png",
+   "desc": "Dashboard, trang Tổng quan, rộng 390px (toàn trang)",
+   "width": 390,
+   "height": 4777,
+   "kb": 359,
+   "at": "2026-10-26T15:09:56"
+  },
+  {
+   "file": "docs/images/09_the_hieu_nang.png",
+   "desc": "Thẻ \"Hiệu năng Spark\" ở trang Đánh giá mô hình (1440px)",
+   "width": 1128,
+   "height": 1065,
+   "kb": 166,
+   "at": "2026-10-26T15:10:18"
+  },
+  {
+   "file": "docs/images/10_spark_ui_streaming.png",
+   "desc": "Spark UI của luồng (:4041), tab Structured Streaming: query đang chạy",
+   "width": 1440,
+   "height": 1000,
+   "kb": 47,
+   "at": "2026-10-26T15:03:34"
+  },
+  {
+   "file": "docs/images/10_spark_ui_streaming_stats.png",
+   "desc": "Spark UI của luồng (:4041): thống kê query (tốc độ vào / xử lý, thời gian batch, state)",
+   "width": 1440,
+   "height": 2320,
+   "kb": 149,
+   "at": "2026-10-26T15:03:38"
+  },
+  {
+   "file": "docs/images/10_thoi-gian-thuc_da-dung_1440.png",
+   "desc": "Trang Thời gian thực khi luồng đã dừng (Giờ mô phỏng 24:00 27/09/2026 (hết đoạn phát lại) · tốc độ 300 lần), rộng 1440px",
+   "width": 1440,
+   "height": 2135,
+   "kb": 451,
+   "at": "2026-10-26T15:08:42"
+  },
+  {
+   "file": "docs/images/hdfs_curated.png",
+   "desc": "HDFS NameNode UI: thư mục /data/curated",
+   "width": 1440,
+   "height": 1000,
+   "kb": 33,
+   "at": "2026-10-26T14:57:08"
+  },
+  {
+   "file": "docs/images/hdfs_events.png",
+   "desc": "HDFS NameNode UI: thư mục /data/events",
+   "width": 1440,
+   "height": 1000,
+   "kb": 36,
+   "at": "2026-10-26T14:57:09"
+  },
+  {
+   "file": "docs/images/hdfs_results_analysis.png",
+   "desc": "HDFS NameNode UI: thư mục /data/results/analysis",
+   "width": 1440,
+   "height": 1000,
+   "kb": 75,
+   "at": "2026-10-26T14:57:11"
+  },
+  {
+   "file": "docs/images/hdfs_stream.png",
+   "desc": "HDFS NameNode UI: thư mục /data/stream",
+   "width": 1440,
+   "height": 1000,
+   "kb": 49,
+   "at": "2026-10-26T14:57:13"
+  },
+  {
+   "file": "docs/images/hs_05_sql.png",
+   "desc": "History Server: 05 Phân tích hành vi (100%, 2 worker) — tab SQL / DataFrame (app-20261025161000-0035)",
+   "width": 1440,
+   "height": 1000,
+   "kb": 108,
+   "at": "2026-10-26T14:57:05"
+  },
+  {
+   "file": "docs/images/hs_05_storage.png",
+   "desc": "Spark UI (:4040) của 05 Phân tích hành vi khi đang chạy (100%, 2 worker, gốc đo /perf/s100) — tab Storage: các bảng đang cache",
+   "width": 1440,
+   "height": 1000,
+   "kb": 140,
+   "at": "2026-10-26T14:59:04"
+  },
+  {
+   "file": "docs/images/hs_06b_s100_w1_executors.png",
+   "desc": "History Server: 06b ALS, 100% dữ liệu, 1 worker, lần 1 — Executors (app-20261025145020-0010)",
+   "width": 1440,
+   "height": 1000,
+   "kb": 63,
+   "at": "2026-10-26T14:56:51"
+  },
+  {
+   "file": "docs/images/hs_06b_s100_w1_timeline.png",
+   "desc": "History Server: 06b ALS, 100% dữ liệu, 1 worker, lần 1 — Jobs + Event Timeline (app-20261025145020-0010)",
+   "width": 1440,
+   "height": 6925,
+   "kb": 752,
+   "at": "2026-10-26T14:56:49"
+  },
+  {
+   "file": "docs/images/hs_06b_s100_w2_executors.png",
+   "desc": "History Server: 06b ALS, 100% dữ liệu, 2 worker, lần 1 — Executors (app-20261025161153-0036)",
+   "width": 1440,
+   "height": 1000,
+   "kb": 67,
+   "at": "2026-10-26T14:57:00"
+  },
+  {
+   "file": "docs/images/hs_06b_s100_w2_timeline.png",
+   "desc": "History Server: 06b ALS, 100% dữ liệu, 2 worker, lần 1 — Jobs + Event Timeline (app-20261025161153-0036)",
+   "width": 1440,
+   "height": 5414,
+   "kb": 701,
+   "at": "2026-10-26T14:56:57"
+  },
+  {
+   "file": "docs/images/hs_danh_sach_app.png",
+   "desc": "Spark History Server: danh sách ứng dụng đã chạy",
+   "width": 1440,
+   "height": 1000,
+   "kb": 123,
+   "at": "2026-10-26T14:56:43"
+  },
+  {
+   "file": "docs/images/mongo_recs.png",
+   "desc": "mongo-express: collection recs (1 doc / user, 50 món gợi ý)",
+   "width": 1440,
+   "height": 1000,
+   "kb": 59,
+   "at": "2026-10-26T15:08:47"
+  },
+  {
+   "file": "docs/images/mongo_trending.png",
+   "desc": "mongo-express: collection trending (Structured Streaming)",
+   "width": 1440,
+   "height": 1000,
+   "kb": 75,
+   "at": "2026-10-26T15:08:49"
+  },
+  {
+   "file": "docs/images/mongo_vifood.png",
+   "desc": "mongo-express: database vifood (danh sách collection, kích thước)",
+   "width": 1440,
+   "height": 2557,
+   "kb": 371,
+   "at": "2026-10-26T15:08:45"
+  }
+ ],
+ "problems": []
+}

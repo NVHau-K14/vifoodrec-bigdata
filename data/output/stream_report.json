@@ -252,11 +252,12 @@
         "cells_written": 104146
       }
     },
-    "generated_at": "2026-10-26T06:26:34",
+    "generated_at": "2026-10-26T07:47:34",
     "notes": [
       "Độ trễ = độ trễ của sự kiện MỚI NHẤT trong batch (lúc ghi MongoDB xong − emit_ts). Sự kiện cũ nhất trong batch chờ thêm tối đa 1 chu kỳ trigger + 1 giây (độ mịn của file) → cận trên latency_bound_s.",
       "API → dashboard: trang Thời gian thực gọi lại E25 mỗi 5 giây, cộng thêm tối đa 5 giây (không đo ở đây).",
       "Thông lượng: file ghi sẵn trước khi bật luồng, 2 file / trigger; mỗi lần chạy reset checkpoint vì Spark giữ số partition của state store trong checkpoint.",
+      "sink_breakdown_s: mongo = mongo_cells_upsert (a: upsert trending_cells) + mongo_trending (b: đọc lại ô, tính top 20 + tăng nhanh, ghi trending).",
       "Dữ liệu hành vi là MÔ PHỎNG (phát lại sự kiện của bước 04)."
     ],
     "lat300": {
@@ -440,8 +441,8 @@
       ],
       "trigger_s": 1.0,
       "times_s": {
-        "replayer_s": 13.0,
-        "stream_s": 111.6
+        "replayer_s": 9.3,
+        "stream_s": 79.0
       },
       "events_replayed": 488741,
       "files": 15,
@@ -450,43 +451,47 @@
       "batches_with_data": 8,
       "batch_duration_s": {
         "n": 8,
-        "p50": 14.409,
-        "p95": 20.141,
-        "max": 20.141,
-        "mean": 13.165
+        "p50": 8.943,
+        "p95": 14.364,
+        "max": 14.364,
+        "mean": 9.221
       },
       "batches_over_trigger": 8,
       "input_rows_per_s": {
         "n": 7,
-        "p50": 5049.1,
-        "p95": 6321.3,
-        "max": 6321.3,
-        "mean": 4199.971
+        "p50": 7014.6,
+        "p95": 9836.4,
+        "max": 9836.4,
+        "mean": 6215.143
       },
       "processed_rows_per_s": {
         "n": 8,
-        "p50": 4196.7,
-        "p95": 6315.8,
-        "max": 6315.8,
-        "mean": 4202.125
-      },
-      "rows_in": 490570,
-      "data_seconds": 105.4,
-      "rows_per_s_overall": 4654,
-      "durations_ms_median": {
-        "addBatch": 14226.5,
-        "getBatch": 28.5,
-        "latestOffset": 29.0,
-        "queryPlanning": 120.5,
-        "walCommit": 39.5,
-        "commitOffsets": 33.0,
-        "triggerExecution": 14565.5
+        "p50": 6582.2,
+        "p95": 8026.2,
+        "max": 8026.2,
+        "mean": 6016.413
       },
       "sink_breakdown_s": {
-        "trigger_total": 105.3,
-        "collect": 30.0,
-        "mongo": 66.4,
-        "cells_written": 1159191
+        "trigger_total": 73.8,
+        "collect": 20.5,
+        "mongo": 47.3,
+        "cells_written": 1159191,
+        "mongo_cells_upsert": 36.6,
+        "mongo_trending": 10.6,
+        "ratio_cells_to_trending": 3.45,
+        "share_cells_of_mongo": 0.775
+      },
+      "rows_in": 490570,
+      "data_seconds": 73.8,
+      "rows_per_s_overall": 6645,
+      "durations_ms_median": {
+        "addBatch": 8804.0,
+        "getBatch": 19.0,
+        "latestOffset": 20.5,
+        "queryPlanning": 73.5,
+        "walCommit": 28.5,
+        "commitOffsets": 21.5,
+        "triggerExecution": 9023.5
       }
     },
     "thr_c4": {
@@ -512,8 +517,8 @@
       ],
       "trigger_s": 1.0,
       "times_s": {
-        "replayer_s": 10.6,
-        "stream_s": 113.5
+        "replayer_s": 8.0,
+        "stream_s": 69.5
       },
       "events_replayed": 488741,
       "files": 15,
@@ -522,43 +527,47 @@
       "batches_with_data": 8,
       "batch_duration_s": {
         "n": 8,
-        "p50": 13.71,
-        "p95": 23.438,
-        "max": 23.438,
-        "mean": 13.489
+        "p50": 8.377,
+        "p95": 13.186,
+        "max": 13.186,
+        "mean": 8.287
       },
-      "batches_over_trigger": 8,
+      "batches_over_trigger": 7,
       "input_rows_per_s": {
         "n": 7,
-        "p50": 4575.0,
-        "p95": 7384.6,
-        "max": 7384.6,
-        "mean": 4203.257
+        "p50": 8175.1,
+        "p95": 10392.7,
+        "max": 10392.7,
+        "mean": 6824.986
       },
       "processed_rows_per_s": {
         "n": 8,
-        "p50": 4293.7,
-        "p95": 6788.8,
-        "max": 6788.8,
-        "mean": 4211.962
-      },
-      "rows_in": 490570,
-      "data_seconds": 108.0,
-      "rows_per_s_overall": 4543,
-      "durations_ms_median": {
-        "addBatch": 13467.5,
-        "getBatch": 32.0,
-        "latestOffset": 29.0,
-        "queryPlanning": 136.5,
-        "walCommit": 43.5,
-        "commitOffsets": 34.0,
-        "triggerExecution": 13710.5
+        "p50": 7671.5,
+        "p95": 9271.7,
+        "max": 9271.7,
+        "mean": 6669.838
       },
       "sink_breakdown_s": {
-        "trigger_total": 107.9,
-        "collect": 29.0,
-        "mongo": 70.0,
-        "cells_written": 1159191
+        "trigger_total": 66.3,
+        "collect": 16.5,
+        "mongo": 44.5,
+        "cells_written": 1159191,
+        "mongo_cells_upsert": 34.9,
+        "mongo_trending": 9.6,
+        "ratio_cells_to_trending": 3.64,
+        "share_cells_of_mongo": 0.785
+      },
+      "rows_in": 490570,
+      "data_seconds": 66.3,
+      "rows_per_s_overall": 7394,
+      "durations_ms_median": {
+        "addBatch": 8133.5,
+        "getBatch": 17.0,
+        "latestOffset": 19.5,
+        "queryPlanning": 62.0,
+        "walCommit": 25.0,
+        "commitOffsets": 19.5,
+        "triggerExecution": 8509.5
       }
     }
   }

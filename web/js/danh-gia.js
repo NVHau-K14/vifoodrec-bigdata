@@ -148,6 +148,14 @@ load($('perf'), async (el) => {
   const bs = p.speedup_by_scale || [];
   const bsAt = (key, level) => bs.find((b) => b.key === key && b.level === level)?.speedup ?? null;
   const bsChain = levelsAll.map((l) => bsAt('chain', l));
+  // cau hinh chay nhieu lan (lay trung vi), suy tu rows: "05 ở 100% (1 và 2 worker)"
+  const reps = {};
+  p.rows.filter((r) => r.n_runs > 1).forEach((r) => {
+    const k = `${r.job}|${r.level}`;
+    (reps[k] = reps[k] || { job: r.job, level: r.level, n: r.n_runs, w: [] }).w.push(r.workers);
+  });
+  const repText = (lv) => Object.values(reps).filter((x) => !lv || x.level === lv)
+    .map((x) => `${x.job} ở ${LEVEL[x.level]} (${x.w.sort().join(' và ')} worker, ${x.n} lần)`).join('; ');
   el.dataset.state = 'ready';
   el.innerHTML = `<p class="lead">${c1 && c2 ? `Ở 100% dữ liệu, chuỗi 04 → 06f mất ${fmtSeconds(c2.total_s)} với 2 worker và
       ${fmtSeconds(c1.total_s)} với 1 worker (speedup ${fmtFixed(c1.total_s / c2.total_s, 2)}, lý tưởng là 2).` : ''}
@@ -156,7 +164,7 @@ load($('perf'), async (el) => {
       ${bsChain.map((v, i) => `${fmtFixed(v, 2)} ở ${LEVEL[levelsAll[i]]}`).join(', ')}.` : ''}</p>
     <div class="mini-grid">
       <div><h3>Thời gian từng job ở 100%</h3><div class="chart" id="perf-jobs"></div>
-        <p class="source">Phút, theo Spark History Server. 05 và 06b: trung vị 3 lần; job khác: 1 lần.</p></div>
+        <p class="source">Phút, theo Spark History Server. Trung vị nhiều lần: ${esc(repText('s100'))}; còn lại 1 lần.</p></div>
       <div><h3>Tổng chuỗi 04 → 06f theo quy mô dữ liệu</h3><div class="chart" id="perf-scale"></div>
         <p class="source">10% và 50% là dân số sinh mới (04 --scale), không phải tập con của bản 100%.</p></div>
     </div>
@@ -166,8 +174,8 @@ load($('perf'), async (el) => {
           (khởi động, đọc danh mục, lập lịch task) chiếm phần lớn thời gian nên thêm worker không có lợi.</p></div>
       <div><h3>Speedup theo quy mô dữ liệu</h3><div class="chart chart-tall" id="perf-by-scale"></div>
         <p class="source">${esc(['04', '05', '06b'].map((k) => bs.find((b) => b.key === k)?.step || k).join(' · '))}.
-          T(1 worker) ÷ T(2 worker) ở từng mức; vạch đứt là mức lý tưởng 2. Trung vị 3 lần: 05 và 06b ở
-          100%, 04 ở 50% / 1 worker; còn lại 1 lần mỗi cấu hình.</p></div>
+          T(1 worker) ÷ T(2 worker) ở từng mức; vạch đứt là mức lý tưởng 2. Trung vị nhiều lần: ${esc(repText())};
+          còn lại 1 lần mỗi cấu hình.</p></div>
     </div>
     <p class="source">06b, 06c, 06e, 06f, 06g chạy --fixed (fit một lần với tham số đã chọn). Dữ liệu hành vi mô phỏng.
       ${failed.length ? `Lần lỗi: ${esc(failed.join('; '))}.` : ''}</p>`;

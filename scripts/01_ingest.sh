@@ -4,10 +4,12 @@
 # Chay trong container namenode (thu muc du an duoc mount vao /home/jovyan/work):
 #   docker exec namenode bash /home/jovyan/work/scripts/01_ingest.sh
 # Them --force de ghi de file da co tren HDFS.
+# Chay thu vao thu muc khac (vd kiem tra script ma khong dung /data/raw):
+#   docker exec -e INGEST_DST=/tmp/ingest_test namenode bash /home/jovyan/work/scripts/01_ingest.sh
 set -euo pipefail
 
 SRC=/home/jovyan/work/data/raw
-DST=/data/raw
+DST=${INGEST_DST:-/data/raw}
 FILES="food_dataset_cookyweb.csv food_dataset_mnmnweb.csv foods.csv ratings.csv"
 PUT_OPT=""
 [ "${1:-}" = "--force" ] && PUT_OPT="-f"

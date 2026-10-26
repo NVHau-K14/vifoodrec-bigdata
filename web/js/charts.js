@@ -215,7 +215,7 @@ export function hGroupedBars(el, cats, series, { xFmt = (v) => `${nfmt(v, 1)}%`,
     series: series.map((s, i) => ({ name: s.name, type: 'bar', barMaxWidth: 12, barGap: '20%', data: s.data,
                                  itemStyle: { color: s.color, borderRadius: [0, 4, 4, 0] },
                                  label: { show: true, position: 'right', fontSize: 10, color: C.muted, formatter: (p) => xFmt(p.value) },
-                                 markLine: i === 0 && markX ? { symbol: 'none', silent: true, label: { color: C.muted, fontSize: 11, formatter: (p) => xFmt(p.value) },
+                                 markLine: i === 0 && markX ? { symbol: 'none', silent: true, label: { color: C.muted, fontSize: 11, position: 'start', formatter: (p) => `lý tưởng ${xFmt(p.value)}` },
                                    lineStyle: { color: C.line2, type: 'dashed' }, data: markX.map((x) => ({ xAxis: x })) } : undefined })),
   }, true);
   return ch;

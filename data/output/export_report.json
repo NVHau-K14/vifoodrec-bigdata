@@ -457,15 +457,15 @@
       "docs": 55,
       "expected": 55,
       "write_s": 0.0,
-      "total_s": 0.0,
+      "total_s": 0.1,
       "method": "collect + insert_many",
       "indexes": [
         "_id_",
         "kind_1_level_1_workers_1"
       ],
       "count": 55,
-      "size_bytes": 213521,
-      "avg_obj_bytes": 3882,
+      "size_bytes": 213575,
+      "avg_obj_bytes": 3883,
       "storage_bytes": 73728,
       "total_index_bytes": 40960,
       "n_indexes": 2,
@@ -697,6 +697,16 @@
       "timings_s": {
         "checks": 11.2,
         "total": 28.3
+      }
+    },
+    {
+      "only": [
+        "perf"
+      ],
+      "at": "2026-10-26T07:43:49",
+      "timings_s": {
+        "checks": 9.9,
+        "total": 23.6
       }
     }
   ]

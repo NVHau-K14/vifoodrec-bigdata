@@ -1,0 +1,300 @@
+user_id,persona_main,persona_sub,sessions_per_year,rate_prob,churned,last_active_date
+167,thích cay/nhậu,gia đình truyền thống,21.6,0.595,False,2026-09-30
+334,hảo ngọt,ăn chay,156.7,0.67,False,2026-09-30
+501,gia đình truyền thống,tập gym,91.4,0.24,False,2026-09-30
+668,hảo ngọt,ăn chay,185.2,0.51,False,2026-09-30
+835,hảo ngọt,gia đình truyền thống,22.6,0.267,True,2026-09-30
+1002,gia đình truyền thống,thích cay/nhậu,69.4,0.378,True,2026-03-21
+1169,hảo ngọt,thích cay/nhậu,163.6,0.436,False,2026-09-30
+1336,gia đình truyền thống,hảo ngọt,113.2,0.849,False,2026-09-30
+1503,gia đình truyền thống,tập gym,35.8,0.416,False,2026-09-30
+1670,gia đình truyền thống,bận rộn,29.6,0.434,False,2026-09-30
+1837,ăn chay,gia đình truyền thống,47.2,0.489,False,2026-09-30
+2004,tập gym,ăn kiêng,50.2,0.214,False,2026-09-30
+2171,ăn chay,hảo ngọt,244.0,0.92,True,2026-01-20
+2338,gia đình truyền thống,thích cay/nhậu,207.0,0.465,False,2026-09-30
+2505,gia đình truyền thống,thích cay/nhậu,112.9,0.282,False,2026-09-30
+2672,gia đình truyền thống,tập gym,673.6,0.7,False,2026-09-30
+2839,ăn kiêng,mê hải sản,77.6,0.205,False,2026-09-30
+3006,hảo ngọt,bận rộn,85.1,0.138,False,2026-09-30
+3173,mê hải sản,hảo ngọt,113.1,0.677,False,2026-09-30
+3340,thích cay/nhậu,gia đình truyền thống,175.6,0.436,False,2026-09-30
+3507,bận rộn,gia đình truyền thống,262.9,0.319,False,2026-09-30
+3674,thích cay/nhậu,hảo ngọt,168.3,0.7,False,2026-09-30
+3841,ăn kiêng,bận rộn,52.4,0.328,False,2026-09-30
+4008,bận rộn,gia đình truyền thống,60.2,0.224,False,2026-09-30
+4175,bận rộn,gia đình truyền thống,160.9,0.17,True,2026-04-02
+4342,hảo ngọt,bận rộn,63.6,0.448,False,2026-09-30
+4509,tập gym,ăn chay,11.2,0.471,False,2026-09-30
+4676,hảo ngọt,bận rộn,231.4,0.716,False,2026-09-30
+4843,bận rộn,thích cay/nhậu,127.6,0.612,True,2026-04-18
+5010,gia đình truyền thống,thích cay/nhậu,30.4,0.792,False,2026-09-30
+5177,gia đình truyền thống,ăn kiêng,152.4,0.357,False,2026-09-30
+5344,bận rộn,tập gym,110.4,0.147,False,2026-09-30
+5511,hảo ngọt,bận rộn,33.6,0.209,False,2026-09-30
+5678,ăn chay,hảo ngọt,41.7,0.165,False,2026-09-30
+5845,tập gym,mê hải sản,65.6,0.632,False,2026-09-30
+6012,gia đình truyền thống,hảo ngọt,352.0,0.391,False,2026-09-30
+6179,bận rộn,hảo ngọt,33.6,0.103,False,2026-09-30
+6346,gia đình truyền thống,bận rộn,209.7,0.146,False,2026-09-30
+6513,thích cay/nhậu,hảo ngọt,130.1,0.57,False,2026-09-30
+6680,hảo ngọt,gia đình truyền thống,67.0,0.262,False,2026-09-30
+6847,ăn kiêng,gia đình truyền thống,85.9,0.395,False,2026-09-30
+7014,mê hải sản,bận rộn,103.2,0.281,False,2026-09-30
+7181,ăn chay,tập gym,348.8,0.48,False,2026-09-30
+7348,gia đình truyền thống,tập gym,117.3,0.361,False,2026-09-30
+7515,gia đình truyền thống,ăn kiêng,92.4,0.665,True,2026-07-08
+7682,bận rộn,tập gym,124.8,0.268,False,2026-09-30
+7849,bận rộn,tập gym,257.2,0.3,False,2026-09-30
+8016,ăn chay,hảo ngọt,73.6,0.126,False,2026-09-30
+8183,gia đình truyền thống,ăn chay,153.5,0.463,False,2026-09-30
+8350,ăn chay,gia đình truyền thống,191.3,0.494,False,2026-09-30
+8517,thích cay/nhậu,hảo ngọt,192.9,0.735,False,2026-09-30
+8684,bận rộn,gia đình truyền thống,125.7,0.223,False,2026-09-30
+8851,bận rộn,gia đình truyền thống,151.2,0.757,True,2026-01-26
+9018,tập gym,mê hải sản,133.2,0.278,True,2026-08-08
+9185,ăn kiêng,bận rộn,78.8,0.178,False,2026-09-30
+9352,hảo ngọt,tập gym,29.1,0.195,False,2026-09-30
+9519,hảo ngọt,bận rộn,239.7,0.3,False,2026-09-30
+9686,gia đình truyền thống,thích cay/nhậu,66.6,0.422,False,2026-09-30
+9853,bận rộn,ăn kiêng,57.0,0.224,False,2026-09-30
+10020,hảo ngọt,mê hải sản,77.1,0.258,False,2026-09-30
+10187,bận rộn,mê hải sản,167.0,0.507,False,2026-09-30
+10354,ăn kiêng,bận rộn,95.2,0.166,False,2026-09-30
+10521,bận rộn,mê hải sản,88.0,0.406,False,2026-09-30
+10688,bận rộn,hảo ngọt,108.5,0.602,False,2026-09-30
+10855,gia đình truyền thống,ăn chay,116.0,0.614,False,2026-09-30
+11022,thích cay/nhậu,tập gym,111.9,0.384,True,2026-08-19
+11189,thích cay/nhậu,gia đình truyền thống,273.3,0.658,False,2026-09-30
+11356,bận rộn,thích cay/nhậu,48.0,0.711,True,2026-05-12
+11523,bận rộn,hảo ngọt,125.1,0.035,False,2026-09-30
+11690,ăn kiêng,gia đình truyền thống,31.9,0.213,False,2026-09-30
+11857,thích cay/nhậu,tập gym,34.6,0.067,False,2026-09-30
+12024,ăn chay,gia đình truyền thống,118.8,0.471,False,2026-09-30
+12191,gia đình truyền thống,ăn chay,172.9,0.612,False,2026-09-30
+12358,hảo ngọt,bận rộn,38.4,0.683,True,2026-01-15
+12525,ăn chay,bận rộn,102.7,0.569,False,2026-09-30
+12692,ăn chay,gia đình truyền thống,131.7,0.578,False,2026-09-30
+12859,bận rộn,mê hải sản,99.7,0.027,True,2026-08-25
+13026,hảo ngọt,ăn chay,287.2,0.517,False,2026-09-30
+13193,mê hải sản,hảo ngọt,177.6,0.409,False,2026-09-30
+13360,thích cay/nhậu,gia đình truyền thống,68.4,0.249,False,2026-09-30
+13527,thích cay/nhậu,gia đình truyền thống,269.1,0.408,False,2026-09-30
+13694,hảo ngọt,bận rộn,118.2,0.219,True,2026-01-12
+13861,ăn kiêng,thích cay/nhậu,163.9,0.386,False,2026-09-30
+14028,bận rộn,gia đình truyền thống,33.5,0.178,False,2026-09-30
+14195,mê hải sản,bận rộn,46.6,0.467,False,2026-09-30
+14362,tập gym,bận rộn,55.6,0.503,False,2026-09-30
+14529,ăn chay,bận rộn,70.2,0.712,False,2026-09-30
+14696,gia đình truyền thống,ăn kiêng,267.9,0.501,True,2026-07-06
+14863,ăn chay,tập gym,275.0,0.73,True,2026-09-11
+15030,mê hải sản,ăn kiêng,116.1,0.389,False,2026-09-30
+15197,gia đình truyền thống,ăn kiêng,180.3,0.323,True,2026-07-16
+15364,thích cay/nhậu,bận rộn,306.3,0.542,False,2026-09-30
+15531,bận rộn,mê hải sản,117.2,0.125,False,2026-09-30
+15698,thích cay/nhậu,ăn kiêng,128.4,0.246,False,2026-09-30
+15865,bận rộn,mê hải sản,221.3,0.218,False,2026-09-30
+16032,ăn kiêng,gia đình truyền thống,91.2,0.153,False,2026-09-30
+16199,bận rộn,tập gym,158.1,0.091,False,2026-09-30
+16366,thích cay/nhậu,tập gym,75.9,0.366,False,2026-09-30
+16533,ăn chay,bận rộn,67.6,0.199,False,2026-09-30
+16700,mê hải sản,gia đình truyền thống,47.4,0.61,False,2026-09-30
+16867,mê hải sản,ăn kiêng,82.3,0.091,False,2026-09-30
+17034,mê hải sản,hảo ngọt,312.4,0.597,False,2026-09-30
+17201,thích cay/nhậu,ăn kiêng,34.8,0.252,False,2026-09-30
+17368,ăn chay,bận rộn,146.5,0.888,False,2026-09-30
+17535,gia đình truyền thống,hảo ngọt,58.1,0.598,False,2026-09-30
+17702,gia đình truyền thống,ăn kiêng,62.2,0.548,False,2026-09-30
+17869,tập gym,thích cay/nhậu,68.9,0.089,False,2026-09-30
+18036,gia đình truyền thống,bận rộn,43.8,0.351,False,2026-09-30
+18203,bận rộn,ăn kiêng,120.4,0.566,False,2026-09-30
+18370,thích cay/nhậu,hảo ngọt,32.4,0.603,True,2026-01-14
+18537,hảo ngọt,gia đình truyền thống,63.9,0.501,False,2026-09-30
+18704,gia đình truyền thống,bận rộn,64.9,0.4,True,2026-01-15
+18871,bận rộn,hảo ngọt,95.3,0.046,False,2026-09-30
+19038,thích cay/nhậu,ăn kiêng,216.4,0.735,False,2026-09-30
+19205,mê hải sản,bận rộn,179.7,0.825,False,2026-09-30
+19372,tập gym,hảo ngọt,308.8,0.879,False,2026-09-30
+19539,bận rộn,gia đình truyền thống,74.6,0.347,False,2026-09-30
+19706,hảo ngọt,gia đình truyền thống,69.1,0.272,False,2026-09-30
+19873,bận rộn,gia đình truyền thống,75.2,0.138,False,2026-09-30
+20040,gia đình truyền thống,bận rộn,44.0,0.567,False,2026-09-30
+20207,bận rộn,thích cay/nhậu,49.1,0.5,False,2026-09-30
+20374,hảo ngọt,thích cay/nhậu,38.3,0.24,False,2026-09-30
+20541,ăn kiêng,hảo ngọt,175.3,0.413,True,2026-05-07
+20708,ăn chay,gia đình truyền thống,40.8,0.256,True,2026-05-13
+20875,ăn kiêng,bận rộn,36.4,0.461,False,2026-09-30
+21042,thích cay/nhậu,gia đình truyền thống,42.7,0.078,False,2026-09-30
+21209,hảo ngọt,tập gym,137.3,0.685,False,2026-09-30
+21376,ăn chay,ăn kiêng,148.4,0.55,False,2026-09-30
+21543,ăn kiêng,thích cay/nhậu,106.4,0.649,True,2026-03-26
+21710,tập gym,mê hải sản,62.3,0.389,False,2026-09-30
+21877,gia đình truyền thống,mê hải sản,104.3,0.659,True,2026-06-06
+22044,hảo ngọt,tập gym,30.9,0.242,True,2026-06-21
+22211,gia đình truyền thống,thích cay/nhậu,47.1,0.407,False,2026-09-30
+22378,thích cay/nhậu,bận rộn,87.7,0.755,False,2026-09-30
+22545,thích cay/nhậu,mê hải sản,97.1,0.175,False,2026-09-30
+22712,gia đình truyền thống,ăn chay,356.1,0.633,False,2026-09-30
+22879,tập gym,mê hải sản,39.8,0.44,True,2025-12-20
+23046,thích cay/nhậu,mê hải sản,113.3,0.699,False,2026-09-30
+23213,tập gym,ăn kiêng,58.6,0.287,False,2026-09-30
+23380,hảo ngọt,thích cay/nhậu,99.5,0.378,False,2026-09-30
+23547,gia đình truyền thống,tập gym,22.0,0.45,False,2026-09-30
+23714,gia đình truyền thống,mê hải sản,26.7,0.588,False,2026-09-30
+23881,tập gym,gia đình truyền thống,218.5,0.181,False,2026-09-30
+24048,thích cay/nhậu,gia đình truyền thống,15.0,0.501,False,2026-09-30
+24215,mê hải sản,bận rộn,41.5,0.606,False,2026-09-30
+24382,mê hải sản,thích cay/nhậu,76.7,0.496,False,2026-09-30
+24549,hảo ngọt,gia đình truyền thống,107.3,0.043,False,2026-09-30
+24716,gia đình truyền thống,bận rộn,160.7,0.194,False,2026-09-30
+24883,hảo ngọt,thích cay/nhậu,124.1,0.177,False,2026-09-30
+25050,hảo ngọt,ăn kiêng,282.7,0.152,False,2026-09-30
+25217,thích cay/nhậu,gia đình truyền thống,220.8,0.587,False,2026-09-30
+25384,mê hải sản,bận rộn,75.1,0.463,False,2026-09-30
+25551,gia đình truyền thống,bận rộn,33.3,0.414,False,2026-09-30
+25718,tập gym,thích cay/nhậu,200.1,0.202,False,2026-09-30
+25885,mê hải sản,gia đình truyền thống,58.1,0.208,False,2026-09-30
+26052,ăn chay,bận rộn,118.9,0.141,False,2026-09-30
+26219,bận rộn,thích cay/nhậu,68.2,0.483,False,2026-09-30
+26386,ăn chay,tập gym,435.5,0.494,False,2026-09-30
+26553,bận rộn,ăn kiêng,136.2,0.535,False,2026-09-30
+26720,hảo ngọt,gia đình truyền thống,162.9,0.092,False,2026-09-30
+26887,ăn kiêng,bận rộn,108.4,0.424,False,2026-09-30
+27054,mê hải sản,gia đình truyền thống,54.3,0.389,True,2026-09-30
+27221,mê hải sản,thích cay/nhậu,248.2,0.543,False,2026-09-30
+27388,bận rộn,ăn kiêng,59.0,0.301,True,2026-09-20
+27555,thích cay/nhậu,tập gym,173.7,0.295,False,2026-09-30
+27722,hảo ngọt,bận rộn,37.2,0.523,False,2026-09-30
+27889,bận rộn,gia đình truyền thống,131.3,0.484,False,2026-09-30
+28056,tập gym,ăn kiêng,57.4,0.091,False,2026-09-30
+28223,ăn kiêng,thích cay/nhậu,76.9,0.708,True,2026-04-26
+28390,thích cay/nhậu,bận rộn,133.2,0.567,False,2026-09-30
+28557,bận rộn,tập gym,181.3,0.108,False,2026-09-30
+28724,gia đình truyền thống,hảo ngọt,214.6,0.799,False,2026-09-30
+28891,ăn kiêng,tập gym,78.8,0.18,False,2026-09-30
+29058,gia đình truyền thống,tập gym,58.6,0.844,False,2026-09-30
+29225,gia đình truyền thống,bận rộn,63.5,0.282,False,2026-09-30
+29392,thích cay/nhậu,bận rộn,127.1,0.698,False,2026-09-30
+29559,ăn kiêng,thích cay/nhậu,99.9,0.213,False,2026-09-30
+29726,ăn kiêng,mê hải sản,74.5,0.422,False,2026-09-30
+29893,gia đình truyền thống,ăn chay,113.0,0.116,False,2026-09-30
+30060,hảo ngọt,bận rộn,180.4,0.577,False,2026-09-30
+30227,ăn kiêng,gia đình truyền thống,54.4,0.387,False,2026-09-30
+30394,gia đình truyền thống,mê hải sản,69.3,0.275,False,2026-09-30
+30561,thích cay/nhậu,gia đình truyền thống,77.2,0.408,False,2026-09-30
+30728,bận rộn,gia đình truyền thống,201.3,0.179,False,2026-09-30
+30895,gia đình truyền thống,tập gym,114.3,0.44,False,2026-09-30
+31062,bận rộn,ăn kiêng,117.3,0.706,False,2026-09-30
+31229,bận rộn,ăn chay,111.5,0.113,False,2026-09-30
+31396,hảo ngọt,tập gym,41.0,0.644,True,2026-03-20
+31563,ăn kiêng,thích cay/nhậu,133.2,0.404,False,2026-09-30
+31730,gia đình truyền thống,hảo ngọt,266.0,0.219,False,2026-09-30
+31897,ăn kiêng,bận rộn,72.6,0.305,True,2026-05-18
+32064,hảo ngọt,tập gym,50.9,0.497,False,2026-09-30
+32231,gia đình truyền thống,thích cay/nhậu,152.5,0.259,True,2026-07-11
+32398,mê hải sản,hảo ngọt,95.4,0.335,False,2026-09-30
+32565,thích cay/nhậu,bận rộn,37.5,0.595,False,2026-09-30
+32732,tập gym,ăn kiêng,102.5,0.813,False,2026-09-30
+32899,gia đình truyền thống,bận rộn,33.2,0.389,False,2026-09-30
+33066,ăn kiêng,gia đình truyền thống,50.9,0.32,False,2026-09-30
+33233,ăn kiêng,gia đình truyền thống,460.9,0.044,False,2026-09-30
+33400,bận rộn,ăn chay,48.7,0.544,False,2026-09-30
+33567,hảo ngọt,mê hải sản,320.4,0.486,False,2026-09-30
+33734,hảo ngọt,bận rộn,113.1,0.565,False,2026-09-30
+33901,gia đình truyền thống,ăn chay,96.4,0.603,False,2026-09-30
+34068,ăn chay,bận rộn,227.0,0.332,False,2026-09-30
+34235,bận rộn,gia đình truyền thống,247.9,0.339,True,2026-01-28
+34402,gia đình truyền thống,bận rộn,53.8,0.751,False,2026-09-30
+34569,gia đình truyền thống,mê hải sản,36.8,0.159,False,2026-09-30
+34736,hảo ngọt,tập gym,95.4,0.114,False,2026-09-30
+34903,bận rộn,ăn kiêng,156.9,0.394,True,2026-06-18
+35070,hảo ngọt,bận rộn,44.8,0.589,False,2026-09-30
+35237,hảo ngọt,gia đình truyền thống,164.4,0.292,False,2026-09-30
+35404,hảo ngọt,gia đình truyền thống,70.7,0.837,True,2026-06-13
+35571,bận rộn,hảo ngọt,184.7,0.586,False,2026-09-30
+35738,mê hải sản,bận rộn,439.8,0.27,False,2026-09-30
+35905,thích cay/nhậu,bận rộn,57.0,0.722,False,2026-09-30
+36072,thích cay/nhậu,ăn kiêng,50.3,0.416,False,2026-09-30
+36239,bận rộn,tập gym,78.5,0.465,False,2026-09-30
+36406,hảo ngọt,tập gym,96.9,0.452,False,2026-09-30
+36573,bận rộn,mê hải sản,153.6,0.817,False,2026-09-30
+36740,bận rộn,ăn chay,24.4,0.679,True,2026-06-07
+36907,mê hải sản,ăn kiêng,50.2,0.339,False,2026-09-30
+37074,hảo ngọt,ăn chay,64.4,0.508,False,2026-09-30
+37241,ăn kiêng,bận rộn,61.3,0.053,False,2026-09-30
+37408,gia đình truyền thống,thích cay/nhậu,110.6,0.749,False,2026-09-30
+37575,tập gym,thích cay/nhậu,65.7,0.527,False,2026-09-30
+37742,ăn chay,bận rộn,34.1,0.096,True,2026-08-09
+37909,ăn chay,tập gym,110.5,0.041,False,2026-09-30
+38076,hảo ngọt,bận rộn,140.0,0.328,False,2026-09-30
+38243,hảo ngọt,ăn kiêng,45.8,0.043,False,2026-09-30
+38410,hảo ngọt,tập gym,261.7,0.326,True,2026-02-26
+38577,bận rộn,thích cay/nhậu,178.5,0.664,False,2026-09-30
+38744,ăn kiêng,thích cay/nhậu,70.7,0.719,False,2026-09-30
+38911,gia đình truyền thống,bận rộn,30.3,0.531,False,2026-09-30
+39078,tập gym,bận rộn,74.4,0.976,False,2026-09-30
+39245,hảo ngọt,bận rộn,57.4,0.267,False,2026-09-30
+39412,ăn kiêng,bận rộn,107.8,0.08,False,2026-09-30
+39579,gia đình truyền thống,ăn kiêng,73.8,0.308,False,2026-09-30
+39746,ăn kiêng,thích cay/nhậu,105.2,0.386,False,2026-09-30
+39913,gia đình truyền thống,ăn chay,366.9,0.233,True,2026-01-09
+40080,ăn kiêng,gia đình truyền thống,29.5,0.287,False,2026-09-30
+40247,gia đình truyền thống,tập gym,29.1,0.563,False,2026-09-30
+40414,gia đình truyền thống,tập gym,69.2,0.327,False,2026-09-30
+40581,bận rộn,gia đình truyền thống,106.4,0.434,False,2026-09-30
+40748,tập gym,hảo ngọt,33.2,0.205,False,2026-09-30
+40915,hảo ngọt,mê hải sản,55.8,0.299,False,2026-09-30
+41082,hảo ngọt,bận rộn,39.3,0.409,False,2026-09-30
+41249,ăn chay,gia đình truyền thống,119.9,0.343,False,2026-09-30
+41416,hảo ngọt,ăn kiêng,189.4,0.49,False,2026-09-30
+41583,ăn kiêng,bận rộn,77.7,0.303,False,2026-09-30
+41750,bận rộn,mê hải sản,195.2,0.366,False,2026-09-30
+41917,gia đình truyền thống,hảo ngọt,76.6,0.532,True,2026-03-31
+42084,thích cay/nhậu,ăn kiêng,76.8,0.239,False,2026-09-30
+42251,thích cay/nhậu,hảo ngọt,86.2,0.121,False,2026-09-30
+42418,gia đình truyền thống,mê hải sản,193.2,0.164,False,2026-09-30
+42585,gia đình truyền thống,bận rộn,32.3,0.567,True,2026-06-04
+42752,gia đình truyền thống,tập gym,244.2,0.382,False,2026-09-30
+42919,hảo ngọt,ăn chay,88.6,0.125,False,2026-09-30
+43086,bận rộn,mê hải sản,67.0,0.667,False,2026-09-30
+43253,ăn chay,gia đình truyền thống,18.0,0.24,False,2026-09-30
+43420,bận rộn,tập gym,105.9,0.358,False,2026-09-30
+43587,mê hải sản,thích cay/nhậu,44.5,0.513,True,2026-05-17
+43754,mê hải sản,ăn kiêng,214.8,0.341,False,2026-09-30
+43921,bận rộn,gia đình truyền thống,126.3,0.098,False,2026-09-30
+44088,tập gym,hảo ngọt,35.0,0.39,True,2026-03-08
+44255,bận rộn,gia đình truyền thống,60.3,0.359,False,2026-09-30
+44422,bận rộn,hảo ngọt,130.5,0.826,True,2026-05-03
+44589,ăn kiêng,bận rộn,37.8,0.745,False,2026-09-30
+44756,thích cay/nhậu,mê hải sản,71.7,0.557,False,2026-09-30
+44923,hảo ngọt,mê hải sản,283.1,0.757,False,2026-09-30
+45090,mê hải sản,hảo ngọt,97.6,0.405,True,2026-03-20
+45257,tập gym,ăn chay,23.4,0.341,False,2026-09-30
+45424,tập gym,hảo ngọt,42.4,0.338,False,2026-09-30
+45591,thích cay/nhậu,mê hải sản,138.8,0.337,False,2026-09-30
+45758,tập gym,gia đình truyền thống,160.8,0.383,True,2026-06-20
+45925,gia đình truyền thống,ăn kiêng,133.6,0.62,True,2026-07-06
+46092,tập gym,thích cay/nhậu,152.0,0.032,False,2026-09-30
+46259,ăn chay,gia đình truyền thống,63.2,0.323,False,2026-09-30
+46426,mê hải sản,gia đình truyền thống,101.8,0.259,False,2026-09-30
+46593,mê hải sản,bận rộn,61.8,0.307,False,2026-09-30
+46760,mê hải sản,gia đình truyền thống,40.0,0.167,False,2026-09-30
+46927,bận rộn,thích cay/nhậu,149.2,0.606,False,2026-09-30
+47094,tập gym,gia đình truyền thống,401.2,0.352,False,2026-09-30
+47261,thích cay/nhậu,tập gym,185.5,0.188,False,2026-09-30
+47428,bận rộn,ăn chay,62.5,0.255,False,2026-09-30
+47595,bận rộn,thích cay/nhậu,34.4,0.377,False,2026-09-30
+47762,mê hải sản,gia đình truyền thống,166.7,0.701,False,2026-09-30
+47929,hảo ngọt,bận rộn,103.8,0.639,False,2026-09-30
+48096,bận rộn,thích cay/nhậu,47.9,0.489,False,2026-09-30
+48263,bận rộn,gia đình truyền thống,54.9,0.518,False,2026-09-30
+48430,thích cay/nhậu,bận rộn,63.7,0.075,False,2026-09-30
+48597,hảo ngọt,ăn kiêng,87.9,0.305,False,2026-09-30
+48764,gia đình truyền thống,ăn chay,70.0,0.679,False,2026-09-30
+48931,thích cay/nhậu,ăn kiêng,70.9,0.066,False,2026-09-30
+49098,ăn kiêng,gia đình truyền thống,49.8,0.282,False,2026-09-30
+49265,gia đình truyền thống,hảo ngọt,73.9,0.347,False,2026-09-30
+49432,ăn chay,bận rộn,128.0,0.374,False,2026-09-30
+49599,bận rộn,thích cay/nhậu,96.1,0.77,False,2026-09-30
+49766,thích cay/nhậu,gia đình truyền thống,137.1,0.794,False,2026-09-30
+49933,ăn kiêng,hảo ngọt,53.9,0.426,False,2026-09-30

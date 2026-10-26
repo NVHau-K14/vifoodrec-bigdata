@@ -102,6 +102,8 @@ def build_plan(with_quick=False):
             add("s100", w, ["05", "06b"], rep)
     for rep in (2, 3):                       # 04 o 50% / 1 worker cham bat thuong o lan 1 -> do them 2 lan (26/10)
         add("s050", 1, ["04"], rep)
+    for rep in (2, 3):                       # kiem tra lai 04 o 100% / 1 worker (lan 1 nhanh nhat moi cau hinh, 26/10)
+        add("s100", 1, ["04"], rep)
     if with_quick:
         for rep in (1, 2, 3):
             for w in (2, 1):
@@ -534,7 +536,7 @@ def summarize():
         "cluster": {**host, "worker_cores": 2, "worker_memory": "3g", "executor_memory": "2g",
                     "driver_memory": "2g", "shuffle_partitions_default": 8,
                     "configs": {"1 worker": "1 executor × 2 core, 2 GB", "2 worker": "2 executor × 2 core, 2 GB mỗi executor"}},
-        "plan": {"chain": CHAIN, "catalog": CATALOG, "repeats_100pct": {"05": 3, "06b": 3}, "repeats_50pct_1w": {"04": 3},
+        "plan": {"chain": CHAIN, "catalog": CATALOG, "repeats_100pct": {"05": 3, "06b": 3}, "repeats_50pct_1w": {"04": 3}, "repeats_100pct_1w": {"04": 3},
                  "levels": {k: v for k, v in LEVELS.items()}},
         "data": level_data,
         "rows": rows, "speedup": speedup, "speedup_by_scale": by_scale, "chain_totals": chain, "scaling_2w": scaling,

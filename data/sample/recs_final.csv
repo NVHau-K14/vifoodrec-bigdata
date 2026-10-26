@@ -1,0 +1,301 @@
+user_id,rank,food_id,score,source,reason_type,because_food_id,reason
+167,1,499,0.016393,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,2,732,0.014516,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,3,4065,0.014286,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,4,2045,0.014063,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,5,4896,0.013846,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,6,795,0.013636,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,7,615,0.013433,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,8,4319,0.013235,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,9,5328,0.008259,content_slot,content_slot,499.0,Giống món Thịt nướng ớt chuông bạn đã nấu
+167,10,3509,,content_slot,content_slot,499.0,Giống món Thịt nướng ớt chuông bạn đã nấu
+167,11,1353,0.013043,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,12,1277,0.012857,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,13,2125,0.012751,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,14,1246,0.012676,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,15,909,0.0125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,16,4107,0.012329,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,17,787,0.012162,als,als,499.0,Người có khẩu vị giống bạn cũng hay nấu món này
+167,18,2564,0.012,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,19,565,0.011688,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,20,205,0.011538,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,21,322,0.011476,als,als,732.0,Người có khẩu vị giống bạn cũng hay nấu món này
+167,22,3496,0.011392,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,23,3695,0.01125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,24,648,0.011111,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,25,3894,0.010976,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,26,4545,0.010871,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,27,2761,0.010714,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,28,2245,0.010588,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,29,369,0.010465,als,als,499.0,Người có khẩu vị giống bạn cũng hay nấu món này
+167,30,2076,0.010345,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,31,114,0.010227,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,32,525,0.010112,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,33,3257,0.01,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,34,520,0.009783,als,als,732.0,Người có khẩu vị giống bạn cũng hay nấu món này
+167,35,646,0.009724,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,36,1022,0.009677,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,37,4411,0.009574,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,38,5206,0.009474,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,39,395,0.009375,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,40,4886,0.009278,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,41,813,0.009184,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,42,1886,0.009091,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,43,1397,0.009037,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,44,1366,0.009,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,45,1880,0.008824,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,46,4871,0.008738,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,47,4439,0.008698,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,48,5142,0.008654,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,49,4525,0.008571,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+167,50,769,0.008491,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,1,1748,0.016163,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,2,4335,0.015282,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,3,3904,0.014952,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,4,2054,0.014638,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,5,2898,0.014516,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,6,4924,0.014395,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,7,5155,0.014239,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,8,4495,0.013942,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,9,5151,0.009677,content_slot,content_slot,5365.0,Giống món Bánh Truffle Chocolate Tẩm Dừa bạn đã nấu
+334,10,3865,,content_slot,content_slot,4335.0,Giống món Bánh Mì Đen bạn đã nấu
+334,11,2984,0.013846,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,12,5425,0.013636,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,13,4445,0.013235,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,14,3291,0.012857,als,als,5432.0,Người có khẩu vị giống bạn cũng hay nấu món này
+334,15,1531,0.012837,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,16,5432,0.012658,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,17,3240,0.0125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,18,4615,0.012483,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,19,5502,0.012162,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,20,3680,0.012,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,21,3031,0.011842,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,22,4506,0.011688,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,23,5028,0.01125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,24,4402,0.011111,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,25,5381,0.010976,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,26,5050,0.010714,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,27,4980,0.010588,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,28,5300,0.010465,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,29,894,0.010345,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,30,4734,0.010227,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,31,4760,0.010112,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,32,4842,0.01,als,als,5478.0,Người có khẩu vị giống bạn cũng hay nấu món này
+334,33,3647,0.00989,als,als,3026.0,Người có khẩu vị giống bạn cũng hay nấu món này
+334,34,3200,0.009783,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,35,5350,0.009748,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,36,4498,0.009674,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,37,5374,0.009661,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,38,3808,0.009574,als,als,5478.0,Người có khẩu vị giống bạn cũng hay nấu món này
+334,39,506,0.009474,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,40,4922,0.009375,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,41,5181,0.009278,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,42,2950,0.009184,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,43,5495,0.009091,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,44,4152,0.009,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,45,4106,0.008911,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,46,3972,0.008824,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,47,3862,0.008808,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,48,5428,0.008738,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,49,531,0.008687,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+334,50,4268,0.008654,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,1,2235,0.016079,als,als,2479.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,2,2861,0.016053,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,3,2440,0.015276,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,4,2244,0.015066,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,5,5426,0.01499,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,6,886,0.014452,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,7,679,0.01431,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,8,2727,0.014063,als,als,3819.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,9,4619,0.012522,content_slot,content_slot,2523.0,Giống món Canh Cá Nấu Măng Chua bạn đã nấu
+501,10,2731,,content_slot,content_slot,4455.0,Giống món Cá Hồi Sốt Chanh bạn đã nấu
+501,11,2558,0.013537,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,12,4455,0.013291,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,13,3639,0.013235,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,14,1599,0.01319,als,als,957.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,15,529,0.013075,als,als,2440.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,16,4751,0.01289,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,17,4526,0.012676,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,18,3716,0.012604,als,als,2440.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,19,1477,0.0125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,20,1395,0.012383,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,21,3760,0.012162,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,22,508,0.01194,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,23,1053,0.011885,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,24,377,0.011017,als,als,2244.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,25,2559,0.010976,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,26,322,0.010943,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,27,987,0.010714,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,28,336,0.010694,als,als,2235.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,29,767,0.010588,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,30,847,0.010465,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,31,4558,0.010434,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,32,3819,0.010408,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,33,1567,0.010345,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,34,27,0.010227,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,35,2764,0.010169,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,36,3764,0.010112,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,37,2575,0.00989,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,38,921,0.009574,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,39,3448,0.009538,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,40,746,0.009375,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,41,422,0.009278,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,42,2355,0.009091,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,43,900,0.009004,als,als,1599.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,44,3793,0.009,als,als,1599.0,Người có khẩu vị giống bạn cũng hay nấu món này
+501,45,3351,0.008911,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,46,5201,0.008738,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,47,3550,0.0087,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,48,511,0.00861,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,49,2110,0.008571,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+501,50,3561,0.008491,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,1,3942,0.016183,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,2,3126,0.015735,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,3,570,0.015625,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,4,2556,0.015317,als,als,1883.0,Người có khẩu vị giống bạn cũng hay nấu món này
+668,5,3525,0.015072,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,6,3469,0.014774,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,7,2025,0.014516,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,8,1883,0.014263,als,als,2556.0,Người có khẩu vị giống bạn cũng hay nấu món này
+668,9,3803,0.007826,content_slot,content_slot,3942.0,Giống món Nếp Cẩm Sữa Chua bạn đã nấu
+668,10,4824,,content_slot,content_slot,4371.0,Giống món Chè Bưởi Nấu Đậu Xanh bạn đã nấu
+668,11,1768,0.013636,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,12,5471,0.013571,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,13,1674,0.013043,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,14,3200,0.012857,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,15,5374,0.012529,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,16,5379,0.0125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,17,3028,0.012329,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,18,4335,0.012,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,19,4268,0.011842,als,als,1471.0,Người có khẩu vị giống bạn cũng hay nấu món này
+668,20,1245,0.01184,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,21,5428,0.011688,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,22,3031,0.011538,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,23,2661,0.011428,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,24,3862,0.01125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,25,4378,0.011235,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,26,3229,0.011111,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,27,5381,0.010976,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,28,2898,0.010843,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,29,1606,0.010714,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,30,3680,0.010588,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,31,2856,0.010465,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,32,3024,0.010345,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,33,4924,0.00989,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,34,2413,0.009783,als,als,3739.0,Người có khẩu vị giống bạn cũng hay nấu món này
+668,35,4371,0.009781,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,36,5050,0.009677,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,37,1976,0.009574,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,38,3008,0.009515,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,39,2852,0.009474,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,40,4512,0.009375,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,41,5181,0.009299,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,42,3855,0.009278,als,als,3525.0,Người có khẩu vị giống bạn cũng hay nấu món này
+668,43,1748,0.009184,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,44,3475,0.009172,als,als,3572.0,Người có khẩu vị giống bạn cũng hay nấu món này
+668,45,3651,0.009091,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,46,1730,0.009,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,47,4482,0.008911,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,48,170,0.008897,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,49,2628,0.008824,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+668,50,1576,0.008738,als,als,1245.0,Người có khẩu vị giống bạn cũng hay nấu món này
+835,1,511,0.016393,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,2,5164,0.016129,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,3,360,0.015873,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,4,2204,0.015625,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,5,240,0.015385,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,6,5328,0.015152,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,7,2244,0.014925,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,8,679,0.014706,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,9,4046,0.014493,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,10,1008,0.014286,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,11,2235,0.014085,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,12,1053,0.013889,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,13,2082,0.013699,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,14,72,0.013514,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,15,4787,0.013333,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,16,2901,0.013158,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,17,2040,0.012987,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,18,1719,0.012821,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,19,738,0.012658,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,20,2100,0.0125,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,21,1872,0.012346,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,22,2713,0.012195,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,23,4581,0.012048,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,24,1588,0.011905,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,25,48,0.011765,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,26,239,0.011628,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,27,987,0.011494,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,28,3904,0.011364,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,29,5217,0.011236,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,30,2861,0.011111,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,31,4495,0.010989,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,32,74,0.01087,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,33,1270,0.010753,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,34,5417,0.010638,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,35,4164,0.010526,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,36,851,0.010417,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,37,2048,0.010309,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,38,4619,0.010204,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,39,4055,0.010101,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,40,441,0.01,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,41,4545,0.009901,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,42,2205,0.009804,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,43,508,0.009709,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,44,746,0.009615,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,45,2558,0.009524,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,46,2124,0.009434,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,47,5286,0.009346,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,48,1743,0.009259,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,49,529,0.009174,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+835,50,646,0.009091,pop,pop,,Đang được nhiều người 25-34 tuổi ở miền Nam nấu
+1002,1,2244,0.015829,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,2,422,0.015751,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,3,511,0.015435,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,4,4619,0.015276,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,5,322,0.015023,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,6,1137,0.014396,als,als,2602.0,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,7,2593,0.014063,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,8,987,0.013733,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,9,291,0.008108,content_slot,content_slot,1137.0,Giống món Cá bông lau kho tộ bạn đã nấu
+1002,10,2927,,content_slot,content_slot,2367.0,Giống món Thịt Rang Cháy Cạnh bạn đã nấu
+1002,11,2235,0.013656,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,12,173,0.013433,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,13,738,0.013426,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,14,679,0.013393,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,15,185,0.013301,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,16,2440,0.013235,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,17,46,0.013097,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,18,1053,0.012842,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,19,449,0.012629,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,20,529,0.012247,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,21,2861,0.012082,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,22,528,0.011815,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,23,1008,0.011767,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,24,2804,0.011538,als,als,1137.0,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,25,2355,0.011378,als,als,422.0,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,26,508,0.011376,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,27,680,0.01125,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,28,393,0.010976,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,29,2575,0.010843,als,als,1137.0,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,30,5426,0.010589,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,31,161,0.010465,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,32,3992,0.010345,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,33,1754,0.010115,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,34,304,0.010042,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,35,1306,0.01,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,36,708,0.00989,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,37,4558,0.009677,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,38,164,0.009574,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,39,3639,0.009401,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,40,395,0.009278,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,41,3054,0.009184,als,als,422.0,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,42,2558,0.009109,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,43,1463,0.009091,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,44,4413,0.009,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,45,18,0.008911,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,46,758,0.008824,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,47,1482,0.008738,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,48,4729,0.008654,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,49,31,0.008571,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này
+1002,50,2215,0.008491,als,als,,Người có khẩu vị giống bạn cũng hay nấu món này

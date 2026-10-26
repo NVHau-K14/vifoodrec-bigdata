@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **26/10/2026 (chiều)**, sau khi làm xong Structured Streaming (bước 10, D18): replayer, luồng, 3 kịch bản kiểm tra đều đạt, đo độ trễ và thông lượng, trang Thời gian thực. Đo thêm 04 ở 50% / 1 worker (64 lần chạy).
+> Cập nhật lần cuối: **26/10/2026 (tối)**, sau khi làm xong toàn bộ phần dữ liệu và code: đo lại 04 ở 100% / 1 worker, tách thời gian sink của luồng, notebook biểu đồ, đóng gói (README, requirements, `data/sample/`, `.env.example`), sửa trang Thời gian thực, đợt ảnh cuối (32 ảnh giao diện + 26 biểu đồ notebook). Còn lại: báo cáo Word + slide.
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -8,7 +8,7 @@
 | Bước | Trạng thái | Kết quả chính |
 |---|---|---|
 | Hạ tầng Docker | ✅ Xong | 11 container: HDFS 1+2, Spark 1+2, Spark History (:18080), Jupyter, MongoDB, mongo-express (:8090), api (:8000). Đã chạy test 2 worker. |
-| 01 Nạp HDFS | ✅ Xong | 4 CSV trong `/data/raw`. Script `scripts/01_ingest.sh` mới viết, chưa chạy lại trên cụm. |
+| 01 Nạp HDFS | ✅ Xong | 4 CSV trong `/data/raw`. `scripts/01_ingest.sh` đã chạy thử vào `/tmp/ingest_test` (26/10): md5 khớp `/data/raw` và file trên máy, replication 2, chạy lại thì bỏ qua, `--force` ghi đè; đã xóa thư mục thử. |
 | 02 Làm sạch (clean v2) | ✅ Xong | `foods` 5.499 món (3.996 giữ id cũ, 1.503 món mới id 4001–5503); `ratings_original` 182.556 dòng |
 | 03 Đặc trưng món | ✅ Xong (sửa 24/10) | `dish_features` 5.499 dòng, khớp từng giá trị với lần chạy local. Loại món: mặn 3.448, ngọt 1.236, chay 580, đồ uống 235. Đã sửa "hào" (D10) |
 | 04 Sinh hành vi | ✅ Xong (100%, chạy lại 24/10) | 50.000 user (49.815 có hoạt động); **23.205.143 sự kiện**; Parquet 261MB; chạy 9 phút. `zipf_offset = 30`, món đứng đầu 1,44% (D11) |
@@ -16,8 +16,9 @@
 | 06 Mô hình + đánh giá | ✅ Xong | Trên test (39.012 user), NDCG@10: hybrid **0,1588**, hybrid + content 2 vị trí 0,1495 (dùng cho `recs_final`), ALS implicit 0,1539 (alpha 1, rank 128), nấu lại 0,1317. RMSE: ALS 0,684, bias 0,737. Dashboard dùng k = 8. D12, D13 |
 | 07 Xuất MongoDB | ✅ Xong | Database `vifood`: 26 collection (25 có dữ liệu, `trending` để trống). Size 290,5 MB, storage 85,2 MB (nén 3,41 lần), index 4,1 MB. `recs` 50.000 doc, 204,3 MB sau khi thêm `because_cooked` (D15). Chạy trên cụm 66,1 giây. Mọi kiểm tra đạt. D14 |
 | 08 FastAPI + dashboard | ✅ Xong (2 đợt) | Service `api` (:8000) phục vụ 25 endpoint E0–E26 và 7 trang đầy đủ. pytest 61/61 đạt trên `vifood` (58 đạt + 3 bỏ qua trên `vifood_local`). Độ trễ p95 (`api_report.json`, `vifood`): endpoint cache 1,3–3,5 ms; E12 14,2; E13 4,2; E18 2,9; E19 5,5; E20 9,1 ms, mọi mục tiêu đạt ở cả 2 database; E19 10 luồng p95 37,2 ms, 344,5 req/s. RAM 59,2 MiB / 512 MiB. Ảnh 7 trang ở `docs/images/08_*`. D15, D16 |
-| 09 Đo hiệu năng (1 vs 2 worker, 10/50/100%) | ✅ Xong | `scripts/09_perf.py`, 64/64 lần OK. Speedup cả chuỗi 04 → 06f: **0,88 / 1,59 / 1,36** ở 10/50/100% (100%: 2.309,2 → 1.702,9 giây). 04: 1,03 / 2,19 / 1,64 (04 ở 50% / 1 worker chạy 3 lần: 575,8–631,8 giây, không phải nhiễu); 06b: 1,01 / 1,56 / 1,32. `perf_report.json` (`speedup_by_scale`), collection `perf` (55 doc), thẻ 4 biểu đồ ở trang Đánh giá. D17 |
-| 10 Nâng cao: Structured Streaming | ✅ Xong | Phát lại CN 27/09/2026 (92.893 sự kiện) qua file JSONL trên HDFS, cửa sổ 60/15 phút, watermark 10 phút, khử trùng, join `users`, `foreachBatch` → `trending` (idempotent). 10c: 3 kịch bản đều đạt (s1, s2 khớp tuyệt đối 205.920 ô). Độ trễ sự kiện → API p95 2,85 giây ở tốc độ 60. Thông lượng khoảng 4.600 dòng/giây (nút thắt là ghi MongoDB trên driver). `scripts/10_stream.sh`, Spark UI :4041. D18 |
+| 09 Đo hiệu năng (1 vs 2 worker, 10/50/100%) | ✅ Xong | `scripts/09_perf.py`, 66/66 lần OK. Speedup cả chuỗi 04 → 06f: **0,88 / 1,59 / 1,38** ở 10/50/100% (100%: 2.345,2 → 1.702,9 giây). 04: 1,03 / 2,19 / **1,71** (04 ở 1 worker chạy 3 lần ở cả 50% và 100%; 100%: 864,4 / 1.230,1 / 900,4 giây, r2 chạy trùng việc khác trên máy); 06b: 1,01 / 1,56 / 1,32. `perf_report.json`, collection `perf` (55 doc), thẻ 4 biểu đồ ở trang Đánh giá. D17 |
+| 10 Nâng cao: Structured Streaming | ✅ Xong | Phát lại CN 27/09/2026 (92.893 sự kiện) qua file JSONL trên HDFS, cửa sổ 60/15 phút, watermark 10 phút, khử trùng, join `users`, `foreachBatch` → `trending` (idempotent). 10c: 3 kịch bản đều đạt (s1, s2 khớp tuyệt đối 205.920 ô). Độ trễ sự kiện → API p95 2,85 giây ở tốc độ 60; tốc độ 300 bền vững, 1.200 chạm trần. Thông lượng (đo lại 26/10 chiều) 6.645 / 7.394 dòng/giây với 2 / 4 core; ghi MongoDB 64–67% thời gian batch, trong đó upsert `trending_cells` gấp 3,45–3,64 lần phần top 20 + `trending`. `scripts/10_stream.sh`, Spark UI :4041. D18 |
+| Đóng gói + ảnh | ✅ Xong (26/10) | `README.md`, `requirements.txt`, `.env.example` (`.env` bỏ khỏi Git), `data/sample/` (11 file, 299–500 dòng), 3 notebook biểu đồ (26 PNG `docs/images/nb_*`), 32 ảnh giao diện (`data/output/screenshots.json`) |
 | Báo cáo Word + slide | ⬜ Chưa | |
 
 ### Số liệu bước 06 (cụm, chạy lại 25/10; chi tiết trong `data/output/models_metrics.json` và `model_*_report.json`)
@@ -79,39 +80,37 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Chờ người dùng trả lời các câu trong LAST_RUN 26/10 (chiều).**
-2. **Ảnh chụp cuối dự án** (đợt chung, xem mục "Việc còn treo"): 7 trang dashboard ở 1440 và 390 (trang Thời gian thực khi luồng đang chạy: `bash scripts/10_stream.sh reset`, rồi `start --from 16:00 --speed 60`), Spark UI :4041 tab Structured Streaming, History Server, HDFS UI, mongo-express.
-3. **Báo cáo Word + slide.** Số liệu lấy từ `data/output/*report*.json`, D10–D18.
-4. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy.
+1. **Chờ người dùng trả lời câu hỏi trong LAST_RUN 26/10 (tối)** (`vifood_local`).
+2. **Báo cáo Word + slide.** Số liệu lấy từ `data/output/*report*.json`, D10–D18; biểu đồ `docs/images/nb_*.png`; ảnh giao diện theo `data/output/screenshots.json`.
 
 ## Việc còn treo
 - [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv`, điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
 - [x] Ratings gốc: đã làm thí nghiệm đối chứng 06g (ALS kém hơn trung bình chung 6%).
-- [ ] Ảnh chụp UI cho báo cáo: **để cuối dự án** (người dùng đã chọn 26/10, gồm cả ảnh History Server). Thêm: History Server Timeline + Executors của 06b ở 1 và 2 worker (`06b_als|s100|w1|r1`, `06b_als|s100|w2|r1`), thẻ "Hiệu năng Spark". Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
+- [x] Ảnh chụp UI cho báo cáo (26/10 tối): 32 ảnh, danh sách trong LAST_RUN và `data/output/screenshots.json`. Ghi chú cũ: **để cuối dự án** (người dùng đã chọn 26/10, gồm cả ảnh History Server). Thêm: History Server Timeline + Executors của 06b ở 1 và 2 worker (`06b_als|s100|w1|r1`, `06b_als|s100|w2|r1`), thẻ "Hiệu năng Spark". Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
 - [x] Chốt mẫu kiểm tra tay theo hash: đã chạy lại 03 trên cụm (24/10).
 - [x] HDFS replication: `get_spark()` ghi 2 bản sao, đã `setrep -R 2 /data`, fsck HEALTHY (D12).
 - [x] Đã xóa `/data/events/events_csv` (bản cũ). Sinh lại bằng `04 --csv` khi đo hiệu năng.
 - [ ] Repo GitHub và `git config`: tạm chưa làm, theo quyết định của nhóm (tác giả commit đang là `Admin`).
-- [ ] Dựng notebook biểu đồ từ `data/output/analysis/*.json`, làm nền cho trang "Hành vi ăn uống" của dashboard.
-- [ ] Notebook hoặc biểu đồ cho bước 06 từ `data/output/models_metrics.json` và `model_*_report.json`: bảng so sánh mô hình, khoảng tin cậy, lưới dò ALS, Silhouette theo k, recall của LSH. Dùng cho trang "Đánh giá mô hình".
-- [ ] Thư mục checkpoint của ALS (`hdfs:///tmp/checkpoint`) có thể xóa sau khi chốt bước 06.
+- [x] Dựng notebook biểu đồ từ `data/output/analysis/*.json` (`notebooks/05_hanh_vi.ipynb`, 10 PNG).
+- [x] Notebook `notebooks/06_mo_hinh.ipynb` (9 PNG) và `09_10_hieu_nang_luong.ipynb` (7 PNG). Ghi chú cũ: notebook hoặc biểu đồ cho bước 06 từ `data/output/models_metrics.json` và `model_*_report.json`: bảng so sánh mô hình, khoảng tin cậy, lưới dò ALS, Silhouette theo k, recall của LSH. Dùng cho trang "Đánh giá mô hình".
+- [x] Đã xóa `hdfs:///tmp/checkpoint` (52,7 MB, 26/10). Chạy lại 06 thì Spark tạo lại.
 - [ ] Nhắn giảng viên về việc dùng dữ liệu hành vi mô phỏng (kế hoạch mục 2.2 khuyến nghị). Chưa rõ đã nhắn hay chưa.
 - [x] `mongo-express` đã có trong compose (cổng 8090, tài khoản trong `.env`). Service `api` đã có (cổng 8000).
 - [ ] `vifood_local` không đồng bộ: các bảng `analysis_*` lệch `overview` 1.145 lượt nấu, `reports` là file của lần chạy trên cụm. Nếu cần bản local khớp thì chạy lại `05 --local` rồi `07 --local` (nhớ sao lưu `export_report.json` của cụm).
 - [x] Ảnh món: trình duyệt thường tải được `monngonmoingay.com`, `image.cooky.vn` có lúc hết thời gian chờ. Không tải sẵn; dùng ảnh thay thế theo 10 nhóm món, bỏ ảnh sau 4 giây (D15, skill mục 4).
 - [x] Ảnh chụp 7 trang dashboard ở 1440 và 390 (`docs/images/08_*`). Chụp lại sau khi có streaming.
 - [x] Luật đề xuất cho cụm (D16): người dùng đã duyệt; mỗi cụm 1 câu, không trùng câu giữa các cụm (26/10).
-- [ ] `.env` đang được commit và có mật khẩu `admin123`. Nếu đưa repo lên GitHub công khai thì chuyển sang `.env.example`.
+- [x] `.env` bỏ khỏi Git (`git rm --cached`, thêm vào `.gitignore`), có `.env.example`. **Lưu ý:** `.env` vẫn còn trong lịch sử các commit cũ, và `docker-compose.yml` vẫn ghi mật khẩu MongoDB (`MONGO_INITDB_ROOT_PASSWORD`). Đưa repo lên GitHub công khai thì phải đổi mật khẩu hoặc làm sạch lịch sử.
 - [ ] Database `vifood_local` (bản 10%, 22,8 MB) giữ lại để phát triển API; xóa khi không cần nữa.
-- [ ] Ảnh chụp cho báo cáo: thêm `mongo-express` và các `explain()` trong `export_report.json`.
-- [ ] `README.md`, `requirements.txt`, `data/sample/`: làm lúc nộp bài.
+- [x] Ảnh `mongo-express` (database, `recs`, `trending`). Các `explain()` vẫn chỉ có trong `export_report.json` (chưa có ảnh).
+- [x] `README.md`, `requirements.txt`, `data/sample/` (26/10).
 - [ ] `/perf` trên HDFS (1,3 GB, 2,5 GB tính cả bản sao): **giữ đến khi viết xong báo cáo** (người dùng chốt 26/10), sau đó xóa bằng `hdfs dfs -rm -r /perf`.
 - [ ] Lần 03 / danh mục / 1 worker để lại event log không đóng (2 lần liên tiếp, chưa rõ nguyên nhân); thời lượng lấy từ job cuối (D17).
 - [x] Biểu đồ (a) thẻ Hiệu năng: nhãn số trên cột ẩn khi thẻ hẹp hơn 520px (26/10).
 - [x] 04 chạy phần sinh sự kiện 2 lần (`repartitionByRange` lấy mẫu chạy lại mapInPandas): người dùng chọn chỉ ghi vào báo cáo (26/10).
-- [ ] Thêm vào đợt ảnh cuối: trang Thời gian thực khi luồng đang chạy, Spark UI http://localhost:4041/StreamingQuery/, `data/output/stream/statestore_sample.txt` (state store của phép khử trùng và phép tổng hợp).
+- [x] Đợt ảnh cuối có trang Thời gian thực khi luồng đang chạy, Spark UI :4041 (danh sách query + thống kê). `data/output/stream/statestore_sample.txt` là file văn bản, dán thẳng vào báo cáo.
 - [ ] `data/stream/` (file phát lại, nhật ký từng lần chạy) không đưa lên Git; sinh lại bằng `10a_stream_prep.py`. `/data/stream` trên HDFS giữ đoạn phát lại và đáp án; `reset` chỉ xóa incoming / archive / checkpoint.
-- [ ] MongoDB `vifood` đang giữ kết quả của lượt phát lại cả ngày (06:00–24:00, tốc độ 300), trạng thái "đã dừng". Demo thì `reset` rồi `start`.
+- [ ] MongoDB `vifood` đang giữ kết quả của lượt phát lại cả ngày (06:00–24:00, tốc độ 300, phát lại 26/10 tối sau đợt ảnh), trạng thái "đã dừng" (người dùng chọn giữ). Demo thì `reset` rồi `start`.
 
 ## Khác với kế hoạch ban đầu (cần nêu trong báo cáo)
 - Structured Streaming nằm ở `src/10*_*.py` + `src/stream_common.py` thay vì thư mục `src/streaming`. `api/bench_stream.py` trong bản thiết kế được gộp vào `src/10d_stream_bench.py`.
@@ -122,6 +121,7 @@
 - Dữ liệu sự kiện: 261MB Parquet (CSV tương đương 1,38GB), thấp hơn ước tính 1,5–3GB CSV.
 
 ## Nhật ký
+- **26/10 (tối):** đo 04 ở 100% / 1 worker thêm 2 lần (1.230,1 và 900,4 giây; r2 trùng việc khác trên máy), speedup 04 ở 100% 1,71, chuỗi 1,38. Kiểm tra replayer: tick cuối đã phát sau mọi sự kiện bị giữ, không sửa. `10_stream.py` tách thời gian (a) upsert ô / (b) top 20 + trending; đo lại thông lượng 10d. Notebook 05, 06, 09_10 (26 PNG). Chạy thử 01 vào `/tmp/ingest_test`, xóa `/tmp/checkpoint`. README, requirements, `data/sample/`, `.env.example`. Trang Thời gian thực: cả đoạn phát lại khi dừng, "Cửa sổ chưa đủ 1 giờ dữ liệu", ngày phát lại, 24:00. Đợt ảnh cuối bằng Playwright (32 ảnh).
 - **23/10 sáng:** khảo sát ViFoodRec, lập kế hoạch chi tiết (`docs/plan/`), dựng cụm Docker.
 - **23/10 chiều:**
   - clean v2, làm ở cuộc trò chuyện "Bộ dữ liệu vifoodrec";

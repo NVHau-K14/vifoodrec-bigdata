@@ -1,6 +1,7 @@
 // thoi-gian-thuc.js - trang Thoi gian thuc: E25 mon thinh hanh theo cua so (Structured Streaming, D18).
 // "1 gio qua" = cua so gan nhat co window_end <= gio mo phong; cua so dang dien ra gan nhan "dang cap nhat".
 // Goi lai moi 5 giay khi luong dang chay, moi 15 giay khi chua chay / da dung (de thay luong vua bat); dung khi tab an.
+// Luong da dung: bieu do ve ca doan phat lai (API bo gioi han so cua so), moc 00:00 ngay sau ghi la 24:00.
 
 import { getJSON, fmtInt, fmtNum } from './api.js';
 import { load, showEmpty, dishCard, miniList, segmented, esc } from './components.js';
@@ -16,6 +17,8 @@ const SCOPES = [{ value: 'all', label: 'Toàn quốc' }, { value: 'Bắc', label
 let scope = 'all';
 let timer = null;
 const hhmm = (s) => (s ? s.slice(11, 16) : '–');
+// moc ket thuc cua so / doan phat lai: 00:00 cua ngay sau ghi la 24:00 cua ngay truoc
+const hhmmEnd = (s) => (s && s.slice(11, 16) === '00:00' ? '24:00' : hhmm(s));
 const dmy = (s) => (s ? `${s.slice(8, 10)}/${s.slice(5, 7)}/${s.slice(0, 4)}` : '–');
 const secs = (v) => (v == null ? '–' : `${fmtNum(v, 1)} giây`);
 const START_HINT = 'Bật luồng bằng: bash scripts/10_stream.sh start --from 16:00 --speed 60';
@@ -28,7 +31,9 @@ function kpis(d) {
   const label = { 'đang chạy': 'Đang chạy', 'đã dừng': 'Đã dừng', 'chưa chạy': 'Chưa chạy' }[d.status];
   const k = [
     { label: 'Trạng thái luồng', value: label, sub: s.batch_id != null ? `batch ${fmtInt(s.batch_id)} · trigger ${fmtNum(s.trigger_s, 1)} giây` : 'chưa có batch' },
-    { label: 'Giờ mô phỏng', value: hhmm(s.sim_now), sub: s.replay ? `${dmy(s.sim_now)} · tốc độ ${esc(s.replay.speed)} lần` : '' },
+    s.at_end
+      ? { label: 'Giờ mô phỏng', value: hhmmEnd(s.replay_end), sub: `${dmy(s.replay.day)} (hết đoạn phát lại) · tốc độ ${esc(s.replay.speed)} lần` }
+      : { label: 'Giờ mô phỏng', value: hhmm(s.sim_now), sub: s.replay ? `${dmy(s.sim_now)} · tốc độ ${esc(s.replay.speed)} lần` : '' },
     // da dung: so cua batch cuoi (thuong chi co tick cuoi) khong co nghia
     d.status === 'đang chạy'
       ? { label: 'Sự kiện xử lý / giây', value: fmtInt(s.processed_rows_per_s), sub: `nhận vào ${fmtInt(s.input_rows_per_s)} / giây` }
@@ -66,8 +71,9 @@ function windowsChart(el, d) {
     return;
   }
   el.dataset.state = 'ready';
-  el.innerHTML = '<div class="chart"></div><p class="source">Mỗi điểm là tổng lượt nấu của cửa sổ 1 giờ kết thúc lúc đó. Toàn quốc = tổng 3 vùng.</p>';
-  lines(el.firstElementChild, sr.windows.map(hhmm), [
+  const whole = d.status !== 'đang chạy' ? ' Luồng đã dừng: vẽ cả đoạn phát lại.' : '';
+  el.innerHTML = `<div class="chart"></div><p class="source">Mỗi điểm là tổng lượt nấu của cửa sổ 1 giờ kết thúc lúc đó. Toàn quốc = tổng 3 vùng.${whole}</p>`;
+  lines(el.firstElementChild, sr.windows.map(hhmmEnd), [
     { name: 'Toàn quốc', data: sr.all, color: C.herb, width: 3 },
     { name: 'Bắc', data: sr['Bắc'], color: C.chili },
     { name: 'Trung', data: sr.Trung, color: C.slate },
@@ -83,7 +89,7 @@ function trendingCard(d) {
     showEmpty($('rising'), 'Chưa có dữ liệu.');
     return;
   }
-  $('trend-note').textContent = `${hhmm(cur.window_start)}–${hhmm(cur.window_end)}${cur.meal_slot ? `, bữa ${cur.meal_slot}` : ''} · ${cur.final ? 'đã chốt' : 'chưa chốt (còn nhận sự kiện trễ)'}`;
+  $('trend-note').textContent = `${hhmm(cur.window_start)}–${hhmmEnd(cur.window_end)}${cur.meal_slot ? `, bữa ${cur.meal_slot}` : ''} · ${cur.final ? 'đã chốt' : 'chưa chốt (còn nhận sự kiện trễ)'}`;
   $('scope-note').textContent = `${fmtInt(cur.total_cooks)} lượt nấu, ${fmtInt(cur.n_dishes)} món được nấu`;
   $('trending').dataset.state = 'ready';
   $('trending').innerHTML = cur.items.length
@@ -99,9 +105,11 @@ function trendingCard(d) {
 function progressList(d) {
   const ip = d.in_progress;
   // luong da dung: cac cua so nay chi co mot phan du lieu (doan phat lai ket thuc giua cua so)
-  const live = d.status === 'đang chạy' ? 'đang cập nhật' : 'chưa đủ 1 giờ';
+  const running = d.status === 'đang chạy';
+  const live = running ? 'đang cập nhật' : 'chưa đủ 1 giờ';
+  $('progress-title').textContent = running ? 'Cửa sổ đang cập nhật' : 'Cửa sổ chưa đủ 1 giờ dữ liệu';
   $('progress').innerHTML = ip.length
-    ? `<ul class="steps">${ip.map((w) => `<li><span>${esc(hhmm(w.window_start))}–${esc(hhmm(w.window_end))}</span>
+    ? `<ul class="steps">${ip.map((w) => `<li><span>${esc(hhmm(w.window_start))}–${esc(hhmmEnd(w.window_end))}</span>
         <span class="sec">${fmtInt(w.total_cooks)} lượt nấu</span><span class="rt-live">${live}</span></li>`).join('')}</ul>`
     : '<p class="state-msg">Không có cửa sổ nào đang diễn ra.</p>';
 }
@@ -117,6 +125,8 @@ async function refresh() {
     statusCard(el, data);
   });
   if (!data) return;
+  const day = data.stream?.replay?.day;
+  $('pill-date').textContent = `Ngày phát lại: ${day ? dmy(day) : 'chưa có'}`;
   kpis(data);
   if (data.status === 'chưa chạy') {
     showEmpty($('windows'), 'Biểu đồ sẽ hiện khi luồng ghi cửa sổ đầu tiên.');

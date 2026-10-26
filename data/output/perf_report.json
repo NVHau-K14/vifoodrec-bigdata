@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T12:22:49",
+  "generated_at": "2026-10-26T14:42:46",
   "cluster": {
     "docker_cpus": 8,
     "docker_mem_gb": 18.9,
@@ -34,6 +34,9 @@
       "06b": 3
     },
     "repeats_50pct_1w": {
+      "04": 3
+    },
+    "repeats_100pct_1w": {
       "04": 3
     },
     "levels": {
@@ -6947,24 +6950,26 @@
       "level": "s100",
       "level_pct": 100,
       "workers": 1,
-      "n_runs": 1,
-      "n_ok": 1,
+      "n_runs": 3,
+      "n_ok": 3,
       "failed": [],
-      "median_s": 864.4,
+      "median_s": 900.4,
       "min_s": 864.4,
-      "max_s": 864.4,
+      "max_s": 1230.1,
       "runs_s": [
-        864.4
+        864.4,
+        900.4,
+        1230.1
       ],
-      "wall_median_s": 868.7,
-      "median_rep": 1,
-      "app_id": "app-20261025162906-0041",
+      "wall_median_s": 904.5,
+      "median_rep": 3,
+      "app_id": "app-20261026072710-0025",
       "timings_s": {
-        "dish_matrix": 5.4,
-        "users_driver": 1.7,
-        "generate_write": 801.4,
-        "users_write": 1.2,
-        "checks": 40.8,
+        "dish_matrix": 5.8,
+        "users_driver": 1.9,
+        "generate_write": 836.7,
+        "users_write": 1.3,
+        "checks": 42.0,
         "export_local": 9.2
       },
       "spark": {
@@ -6974,10 +6979,10 @@
         "stages": 74,
         "tasks": 264,
         "failed_tasks": 0,
-        "executor_run_s": 1665.7,
-        "executor_cpu_s": 119.1,
-        "cpu_ratio": 0.072,
-        "gc_s": 4.1,
+        "executor_run_s": 1738.3,
+        "executor_cpu_s": 124.0,
+        "cpu_ratio": 0.071,
+        "gc_s": 4.3,
         "input_mb": 1713.0,
         "output_mb": 271.8,
         "shuffle_read_mb": 494.4,
@@ -6993,9 +6998,9 @@
           "stages": 6,
           "tasks": 10,
           "failed_tasks": 0,
-          "executor_run_s": 7.4,
-          "executor_cpu_s": 5.1,
-          "cpu_ratio": 0.692,
+          "executor_run_s": 6.4,
+          "executor_cpu_s": 4.3,
+          "cpu_ratio": 0.672,
           "gc_s": 0.1,
           "input_mb": 525.6,
           "output_mb": 10.0,
@@ -7011,10 +7016,10 @@
           "stages": 60,
           "tasks": 107,
           "failed_tasks": 0,
-          "executor_run_s": 62.6,
-          "executor_cpu_s": 58.7,
-          "cpu_ratio": 0.938,
-          "gc_s": 1.5,
+          "executor_run_s": 65.0,
+          "executor_cpu_s": 60.7,
+          "cpu_ratio": 0.935,
+          "gc_s": 1.6,
           "input_mb": 1187.2,
           "output_mb": 0.0,
           "shuffle_read_mb": 124.9,
@@ -7029,9 +7034,9 @@
           "stages": 2,
           "tasks": 2,
           "failed_tasks": 0,
-          "executor_run_s": 0.2,
+          "executor_run_s": 0.3,
           "executor_cpu_s": 0.2,
-          "cpu_ratio": 0.726,
+          "cpu_ratio": 0.782,
           "gc_s": 0.0,
           "input_mb": 0.0,
           "output_mb": 0.7,
@@ -7047,10 +7052,10 @@
           "stages": 4,
           "tasks": 142,
           "failed_tasks": 0,
-          "executor_run_s": 1592.7,
-          "executor_cpu_s": 54.0,
+          "executor_run_s": 1663.2,
+          "executor_cpu_s": 57.1,
           "cpu_ratio": 0.034,
-          "gc_s": 2.4,
+          "gc_s": 2.5,
           "input_mb": 0.0,
           "output_mb": 261.1,
           "shuffle_read_mb": 368.2,
@@ -7065,9 +7070,9 @@
           "stages": 2,
           "tasks": 3,
           "failed_tasks": 0,
-          "executor_run_s": 2.8,
-          "executor_cpu_s": 1.2,
-          "cpu_ratio": 0.443,
+          "executor_run_s": 3.4,
+          "executor_cpu_s": 1.6,
+          "cpu_ratio": 0.471,
           "gc_s": 0.1,
           "input_mb": 0.2,
           "output_mb": 0.0,
@@ -7088,8 +7093,8 @@
           "max_memory_mb": 1048.8,
           "tasks": 264,
           "failed_tasks": 0,
-          "task_time_s": 1672.5,
-          "gc_s": 4.1,
+          "task_time_s": 1745.1,
+          "gc_s": 4.3,
           "shuffle_read_mb": 494.4,
           "shuffle_write_mb": 491.7,
           "remove_reason": null
@@ -7101,7 +7106,7 @@
           "max_memory_mb": 1048.8,
           "tasks": 0,
           "failed_tasks": 0,
-          "task_time_s": 864.4,
+          "task_time_s": 900.4,
           "gc_s": 0.0,
           "shuffle_read_mb": 0.0,
           "shuffle_write_mb": 0.0,
@@ -7110,31 +7115,31 @@
       ],
       "docker_stats_peak": {
         "spark-worker-1": {
-          "mem_mib": 3109.9,
-          "cpu_pct": 241.4
+          "mem_mib": 3147.8,
+          "cpu_pct": 253.6
         },
         "spark-worker-2": {
           "mem_mib": 0.0,
           "cpu_pct": 0.0
         },
         "jupyter": {
-          "mem_mib": 1545.2,
-          "cpu_pct": 169.9
+          "mem_mib": 1316.9,
+          "cpu_pct": 254.8
         },
         "namenode": {
-          "mem_mib": 514.4,
-          "cpu_pct": 1.1
+          "mem_mib": 461.2,
+          "cpu_pct": 2.2
         },
         "datanode1": {
-          "mem_mib": 798.8,
-          "cpu_pct": 9.5
+          "mem_mib": 930.7,
+          "cpu_pct": 2.7
         },
         "datanode2": {
-          "mem_mib": 801.8,
-          "cpu_pct": 7.6
+          "mem_mib": 936.9,
+          "cpu_pct": 3.8
         }
       },
-      "events_per_s": 26845
+      "events_per_s": 25772
     },
     {
       "job": "04",
@@ -11561,10 +11566,10 @@
       "level": "s100",
       "job": "04",
       "step": "04 Sinh hành vi",
-      "t_1w_s": 864.4,
+      "t_1w_s": 900.4,
       "t_2w_s": 527.5,
-      "speedup": 1.64,
-      "efficiency": 0.82
+      "speedup": 1.71,
+      "efficiency": 0.85
     },
     {
       "level": "s100",
@@ -11683,10 +11688,10 @@
       "step": "Chuỗi 04 → 06f",
       "level": "s100",
       "level_pct": 100,
-      "t_1w_s": 2309.2,
+      "t_1w_s": 2345.2,
       "t_2w_s": 1702.9,
-      "speedup": 1.36,
-      "efficiency": 0.68
+      "speedup": 1.38,
+      "efficiency": 0.69
     },
     {
       "key": "04",
@@ -11713,10 +11718,10 @@
       "step": "04 Sinh hành vi",
       "level": "s100",
       "level_pct": 100,
-      "t_1w_s": 864.4,
+      "t_1w_s": 900.4,
       "t_2w_s": 527.5,
-      "speedup": 1.64,
-      "efficiency": 0.82
+      "speedup": 1.71,
+      "efficiency": 0.85
     },
     {
       "key": "05",
@@ -11822,10 +11827,10 @@
       "level": "s100",
       "level_pct": 100,
       "workers": 1,
-      "total_s": 2309.2,
+      "total_s": 2345.2,
       "complete": true,
       "missing": [],
-      "ratio_vs_10pct": 4.88
+      "ratio_vs_10pct": 4.96
     },
     {
       "level": "s100",
@@ -11835,7 +11840,7 @@
       "complete": true,
       "missing": [],
       "ratio_vs_10pct": 3.18,
-      "speedup": 1.36
+      "speedup": 1.38
     }
   ],
   "scaling_2w": [
@@ -11912,7 +11917,7 @@
       "ratio_100_10": 2.26
     }
   ],
-  "runs_total": 64,
+  "runs_total": 66,
   "runs_failed": 0,
   "notes": [
     "Dữ liệu hành vi là MÔ PHỎNG (bước 04). Danh mục món là món thật.",

@@ -32,3 +32,6 @@ logs/
 
 # Structured Streaming (buoc 10): file phat lai sinh lai bang 10a, nhat ky tung lan chay
 data/stream/
+
+# Bien moi truong co mat khau: chi giu .env.example tren Git
+.env

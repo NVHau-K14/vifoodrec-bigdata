@@ -9,6 +9,9 @@ dong ho mo phong, watermark, do tre). Khong cache: trang goi lai moi 5 giay.
   - "Tang nhanh" so [t-60, t) voi [t-120, t-60) (hai cua so khong chong nhau), luong tinh san (prev_cooks).
 Trang thai: "đang chạy" khi heartbeat moi hon 30 giay; "đã dừng" khi con du lieu ma khong con heartbeat;
 "chưa chạy" khi trong.
+Series: luong dang chay -> `windows` cua so gan nhat; da dung -> ca doan phat lai (bo qua `windows`).
+Luoi cua so 15 phut lien tuc; cua so khong co doc trong trending (khong co su kien nao duoc dem) ghi 0.
+stream.replay_end / at_end: moc ket thuc doan phat lai (vd 24:00 = 00:00 ngay sau) va gio mo phong da cham moc do chua.
 """
 from datetime import datetime, timedelta, timezone
 from typing import Literal
@@ -47,11 +50,13 @@ def trending(scope: Literal["all", "Bắc", "Trung", "Nam"] = "all",
     status = "đang chạy" if st.get("state") == "đang chạy" and age is not None and age < HEARTBEAT_S else "đã dừng"
     sim_now, wm = st.get("sim_now"), st.get("watermark")
     rp = st.get("replay") or {}
-    if sim_now is not None and rp.get("day") and rp.get("to"):
-        # tick cuoi (gio ket thuc + 75 phut) day max(ts) vuot qua doan phat lai: gio mo phong khong qua moc ket thuc
+    end = None
+    if rp.get("day") and rp.get("to"):
         h, m = (int(x) for x in rp["to"].split(":"))
         end = (datetime.fromisoformat(rp["day"]) + timedelta(days=rp.get("days", 1) - 1, hours=h, minutes=m)
                - timedelta(hours=7))                                      # gio VN -> UTC khong mui gio (nhu pymongo)
+    if sim_now is not None and end is not None:
+        # tick cuoi (gio ket thuc + 75 phut) day max(ts) vuot qua doan phat lai: gio mo phong khong qua moc ket thuc
         sim_now = min(sim_now, end)
     if sim_now is None:
         last = db.trending.find_one({}, {"window_end": 1}, sort=[("window_end", -1)])
@@ -61,11 +66,18 @@ def trending(scope: Literal["all", "Bắc", "Trung", "Nam"] = "all",
 
     proj = {"_id": 0, "window_start": 1, "window_end": 1, "scope": 1, "meal_slot": 1, "total_cooks": 1,
             "total_views": 1, "n_dishes": 1, "items": 1, "rising": 1, "batch_id": 1, "updated_at": 1}
+    live = status == "đang chạy"
     done = list(db.trending.find({"window_end": {"$lte": sim_now}}, {"_id": 0, "window_end": 1, "scope": 1, "total_cooks": 1})
-                .sort("window_end", -1).limit(windows * len(SCOPES)))
-    ends = sorted({d["window_end"] for d in done})[-windows:]
+                .sort("window_end", -1).limit(windows * len(SCOPES) if live else 0))
+    ends = sorted({d["window_end"] for d in done})
+    if ends:
+        # luoi 15 phut lien tuc: cua so khong co doc nao (khong co su kien duoc dem, vd 14-16h) = 0 luot nau
+        step = timedelta(minutes=15)
+        ends = [ends[0] + i * step for i in range(int((ends[-1] - ends[0]) / step) + 1)]
+    if live:
+        ends = ends[-windows:]
     tot = {(d["window_end"], d["scope"]): d["total_cooks"] for d in done}
-    series = {"windows": [vn(e) for e in ends], **{s: [tot.get((e, s)) for e in ends] for s in SCOPES}}
+    series = {"windows": [vn(e) for e in ends], **{s: [tot.get((e, s), 0) for e in ends] for s in SCOPES}}
 
     cs = cards()
     cur = db.trending.find_one({"scope": scope, "window_end": {"$lte": sim_now}}, proj, sort=[("window_end", -1)])
@@ -91,7 +103,8 @@ def trending(scope: Literal["all", "Bắc", "Trung", "Nam"] = "all",
     stream = {k: st.get(k) for k in STATUS_KEYS}
     stream.update({"batch_id": st.get("last_batch_id"), "data_batch_id": st.get("data_batch_id"),
                    "newest_emit": vn(st.get("newest_emit")),
-                   "sim_now": vn(sim_now), "watermark": vn(wm), "started_at": vn(st.get("started_at")),
+                   "sim_now": vn(sim_now), "watermark": vn(wm), "replay_end": vn(end),
+                   "at_end": bool(end is not None and sim_now >= end), "started_at": vn(st.get("started_at")),
                    "updated_at": vn(st.get("updated_at")), "heartbeat_age_s": round(age, 1) if age is not None else None})
     return {"status": status, "stream": stream, "scope": scope, "scopes": SCOPES, "current": current,
             "in_progress": in_prog, "series": series, "updated_at": vn(st.get("updated_at"))}

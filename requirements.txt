@@ -1,0 +1,27 @@
+# Thu vien Python cua du an. Khi chay bang Docker thi KHONG can cai tren may:
+#   - image vifood-spark:4.2.0 (docker/Dockerfile.spark, tu quay.io/jupyter/pyspark-notebook:spark-4.2.0, Python 3.13)
+#     da co pyspark, pandas, numpy, pyarrow, matplotlib, jupyterlab, nbconvert; them pymongo
+#   - image vifood-api:0.1 (docker/Dockerfile.api, Python 3.12) cai theo api/requirements.txt
+# Phien ban duoi day la phien ban dang chay trong container (26/10/2026).
+# Cai tren may (vd chay --local ngoai Docker, can Java 17+):  pip install -r requirements.txt
+
+# Spark job (src/, scripts/make_sample.py)
+pyspark==4.2.0
+pandas==2.3.3
+numpy==2.5.4
+pyarrow==25.0.0
+pymongo==4.19.0
+requests==2.34.2
+
+# Notebook bieu do (notebooks/)
+matplotlib==3.11.2
+nbconvert==7.17.1
+jupyterlab==4.6.4
+
+# API + dashboard (api/, giong api/requirements.txt)
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+pytest==9.1.1
+httpx==0.28.1
+
+# scripts/09_perf.py chi dung thu vien chuan (chay tren may, goi docker)

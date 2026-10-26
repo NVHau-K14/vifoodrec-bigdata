@@ -86,6 +86,8 @@ def save():
         "API → dashboard: trang Thời gian thực gọi lại E25 mỗi 5 giây, cộng thêm tối đa 5 giây (không đo ở đây).",
         "Thông lượng: file ghi sẵn trước khi bật luồng, 2 file / trigger; mỗi lần chạy reset checkpoint vì Spark giữ số "
         "partition của state store trong checkpoint.",
+        "sink_breakdown_s: mongo = mongo_cells_upsert (a: upsert trending_cells) + mongo_trending (b: đọc lại ô, tính "
+        "top 20 + tăng nhanh, ghi trending).",
         "Dữ liệu hành vi là MÔ PHỎNG (phát lại sự kiện của bước 04).",
     ]
     report["bench"] = bench
@@ -133,6 +135,12 @@ for name, cfg in RUNS.items():
     trig_total = sum(p["durationMs"]["triggerExecution"] for p in data) / 1000
     r["sink_breakdown_s"] = {"trigger_total": round(trig_total, 1), "collect": round(sum(b["collect_ms"] for b in wb) / 1000, 1),
                              "mongo": round(sum(b["mongo_ms"] for b in wb) / 1000, 1), "cells_written": sum(b["rows"] for b in wb)}
+    if all("cells_ms" in b for b in wb):
+        # ghi MongoDB tach lam 2: (a) upsert trending_cells, (b) doc lai o + top 20 + ghi trending
+        ca, cb = sum(b["cells_ms"] for b in wb) / 1000, sum(b["trending_ms"] for b in wb) / 1000
+        r["sink_breakdown_s"].update({"mongo_cells_upsert": round(ca, 1), "mongo_trending": round(cb, 1),
+                                      "ratio_cells_to_trending": round(ca / cb, 2) if cb else None,
+                                      "share_cells_of_mongo": round(ca / (ca + cb), 3) if ca + cb else None})
     lat = [b["latency_s"] for b in batches if b.get("latency_s") is not None]
     if cfg.get("poll"):
         r["latency_event_to_mongo_s"] = summary(lat)

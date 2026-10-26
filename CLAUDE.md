@@ -39,12 +39,16 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 | 10 Structured Streaming | `src/10a_stream_prep.py`, `10b_replayer.py`, `10_stream.py`, `10c_stream_check.py`, `10d_stream_bench.py`, `10t_stream_semantics.py`, dùng chung `src/stream_common.py`; bật/tắt bằng `scripts/10_stream.sh` (D18) | `/data/events`, `/data/stream/incoming` | `/data/stream/{replay,truth,checkpoint,archive}`; MongoDB `trending`, `trending_cells`, `stream_status` | `stream_prep_report.json`, `stream_semantics_report.json`, `stream_report.json` |
 
 Bản sao nhỏ để xem trên máy nằm ở `data/processed/`. Report và mẫu kiểm tra nằm ở `data/output/`.
+Đóng gói và báo cáo: `README.md` (dựng cụm, chạy 01→10, demo), `requirements.txt`, `.env.example` (`.env` không lên Git),
+`data/sample/` (`scripts/make_sample.py`, chạy trên cụm), notebook biểu đồ `notebooks/{05_hanh_vi,06_mo_hinh,09_10_hieu_nang_luong}.ipynb`
+(không chạy Spark, ảnh `docs/images/nb_*.png`, kiểu chung `notebooks/nb_style.py`), ảnh giao diện `scripts/capture_screens.py`
+(Playwright trên máy, danh sách ảnh `data/output/screenshots.json`).
 
 ## Cách chạy
 ```bash
 # Khởi động cụm (PowerShell, trong thư mục docker/)
 docker compose up -d
-# Bước 01 (chỉ khi HDFS trống)
+# Bước 01 (chỉ khi HDFS trống). Chạy thử vào thư mục khác: thêm -e INGEST_DST=/tmp/ingest_test
 docker exec namenode bash /home/jovyan/work/scripts/01_ingest.sh
 # Chạy một bước trên cụm (từ máy host). Cần -e PYTHONPATH, xem "Lỗi môi trường đã gặp"
 docker exec -w /home/jovyan/work -e PYTHONPATH=/usr/local/spark/python/lib/py4j-0.10.9.9-src.zip:/usr/local/spark/python jupyter python src/04_simulate.py --scale 0.01
@@ -112,4 +116,7 @@ docker exec -w /home/jovyan/work api python -m api.bench_latency
 - Sửa file bằng Python trên máy (Windows) với `open(p, 'w')` sẽ đổi xuống dòng thành CRLF. Ghi bằng `newline=''` (đọc cũng `newline=''`), hoặc chạy `sed -i 's/\r$//' <file>` sau khi sửa.
 - Heredoc của Bash tool (Git Bash) làm hỏng dấu `\` trong chuỗi Python (vd `"\n"`), nên `assert old in s` trượt. Sửa file có dấu `\` thì dùng Edit, hoặc ghi script Python ra file rồi chạy.
 - `docker compose up -d jupyter` (vd sau khi thêm cổng) khởi động lại cả `spark-master` và `mongodb`. Dữ liệu vẫn còn; đợi khoảng 10 giây cho worker đăng ký lại với master.
+- Đang đo hiệu năng (09) thì không chạy gì khác trên cụm hay trong container `jupyter` (notebook, lệnh HDFS): lần 04 / 100% / 1 worker r2 chậm hơn 37% vì vậy (D17).
+- Chạy notebook không cần Spark: `docker exec -w /home/jovyan/work/notebooks jupyter jupyter nbconvert --to notebook --execute --inplace <file>.ipynb`. Container không có locale `vi_VN`; dấu phẩy thập phân trên trục do `nb_style.py` tự đổi.
+- Tab Storage của History Server trống với 05 (05 bỏ cache trước khi kết thúc). Ảnh Storage chụp ở :4040 lúc 05 đang chạy vào gốc đo `/perf/s100` (`capture_screens.py --only live05`).
 - History Server có lúc không coi ứng dụng là đã kết thúc dù job xong (event log còn file `appstatus_*`, gặp ở 03 với 1 worker). `scripts/09_perf.py --summarize` tra lại theo tên và lấy thời lượng từ job cuối (D17).

@@ -115,13 +115,14 @@ def sink(df, batch_id):
         print(f"[10] bo qua batch {batch_id} (da ghi, query {state['query_id']})", flush=True)
         return
     rows = [r.asDict() for r in df.collect()]
-    t_collect = time.time()
+    t_collect = t_cells = time.time()
     if rows:
         db.trending_cells.bulk_write([
             UpdateOne({"_id": S.cell_id(r["ws"], r["region"], r["food_id"])},
                       {"$set": {"ws": r["ws"], "region": r["region"], "food_id": r["food_id"],
                                 **{k: r[k] for k in S.CELL_COUNTS}, "last_emit_ms": r["last_emit_ms"]}},
                       upsert=True) for r in rows], ordered=False)
+        t_cells = time.time()                # (a) upsert trending_cells xong; (b) = doc lai o + top 20 + ghi trending
         touched = sorted({r["ws"] for r in rows})
         need = sorted(set(touched) | {ws - S.WINDOW_MIN * 60 for ws in touched})
         by_ws = {}
@@ -139,6 +140,7 @@ def sink(df, batch_id):
     newest = max((r["last_emit_ms"] for r in rows if r["last_emit_ms"]), default=None)
     rec = {"batch_id": batch_id, "rows": len(rows), "windows": len({r["ws"] for r in rows}),
            "collect_ms": round((t_collect - t_start) * 1000), "mongo_ms": round((t_done - t_collect) * 1000),
+           "cells_ms": round((t_cells - t_collect) * 1000), "trending_ms": round((t_done - t_cells) * 1000),
            "done_at_ms": round(t_done * 1000)}
     if newest:
         # Do tre cua su kien MOI NHAT trong batch: tu luc replayer ghi file den luc ghi MongoDB xong.
