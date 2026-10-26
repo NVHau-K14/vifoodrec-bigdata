@@ -570,6 +570,8 @@ Người dùng kiểm tay xong 100 món của mẫu theo hash (D11) trong `data/
   - 1 món máy ghi cay nhưng chỉ có ớt chuông (dòng 76, Vịt Xào Ớt Chuông);
   - 1 món máy ghi cay nhưng không có nguyên liệu cay nào, chỉ có mù tạt vàng (dòng 89, Salad cam tình yêu). Món này người kiểm cũng chấm sai ở bản cuối.
 
+**Chốt cách báo cáo (người dùng, 26/10):** số chính theo món là **đúng cả 7 thuộc tính, 59%**; ghi thêm **60% khi bỏ `season`** vì mẫu `season` nhỏ (27/100 món khác "không"). `is_spicy` cách (b) tính cả dòng 89: **84,0%, 16 lỗi**.
+
 **Phát hiện (không sửa, xem hướng phát triển trong PROGRESS):**
 - **`is_spicy`:**
   - bỏ sót ớt tươi đứng riêng: `SPICY_ING` chỉ có ớt bột, ớt khô, ớt hiểm, ớt xiêm, dầu ớt…, không có "ớt", "ớt băm", "ớt sừng";

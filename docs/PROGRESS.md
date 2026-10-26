@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **26/10/2026 (khuya, sau kiểm tay)**. **Phần dữ liệu và code đã xong**, kiểm tay 100 món xong (D19: món đúng cả 7 thuộc tính 59%); bước tiếp theo là báo cáo Word và slide. Lần trước (tối) làm xong: đo lại 04 ở 100% / 1 worker, tách thời gian sink của luồng, notebook biểu đồ, đóng gói (README, requirements, `data/sample/`, `.env.example`), sửa trang Thời gian thực, đợt ảnh cuối (32 ảnh giao diện + 26 biểu đồ notebook). Còn lại: báo cáo Word + slide.
+> Cập nhật lần cuối: **26/10/2026 (khuya, chốt kiểm tay)**. **Phần dữ liệu và code đã xong hoàn toàn, kể cả kiểm tay 100 món** (D19: món đúng cả 7 thuộc tính 59%, 60% khi bỏ `season`). **Không còn việc nào cần chạy trên cụm.** Bước tiếp theo là báo cáo Word và slide. Lần trước (tối) làm xong: đo lại 04 ở 100% / 1 worker, tách thời gian sink của luồng, notebook biểu đồ, đóng gói (README, requirements, `data/sample/`, `.env.example`), sửa trang Thời gian thực, đợt ảnh cuối (32 ảnh giao diện + 26 biểu đồ notebook). Còn lại: báo cáo Word + slide.
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -80,11 +80,11 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Báo cáo Word + slide** (phần dữ liệu và code đã xong 26/10). Số liệu lấy từ `data/output/*report*.json`, D10–D18; biểu đồ `docs/images/nb_*.png`; ảnh giao diện theo `data/output/screenshots.json`.
+1. **Báo cáo Word + slide.** Phần dữ liệu và code đã xong hoàn toàn (26/10), kể cả kiểm tay; không còn việc nào cần chạy trên cụm. Số liệu lấy từ `data/output/*report*.json`, D10–D19 (độ chính xác đặc trưng món: đúng cả 7 thuộc tính 59%, ghi thêm 60% khi bỏ `season` vì mẫu `season` nhỏ; `is_spicy` cách (b) 84,0%, 16 lỗi, ước tính); biểu đồ `docs/images/nb_*.png`; ảnh giao diện theo `data/output/screenshots.json`.
 
 ## Việc còn treo
 - [x] Kiểm tra tay 100 món (26/10): bản cuối `features_check_sample.csv` và bản lần 1 `features_check_sample_lan1.csv` đã commit; độ chính xác trong `features_check_report.json` (`scripts/eval_features_check.py`) và D19. **Không sửa luật 03, không chạy lại pipeline** (người dùng chốt). Không chạy lại 03 khi chưa sao lưu file đã điền.
-- [ ] `data/features_check_sample.csv` (thư mục `data/`, ngày 24/10, cột `kiem_tra` trống, chưa đưa lên Git) là bản trống cũ, không phải file đã điền. Để nguyên, người dùng tự quyết.
+- [x] `data/features_check_sample.csv` (thư mục `data/`, ngày 24/10, cột `kiem_tra` trống, chưa đưa lên Git) là bản trống cũ, không phải file đã điền. **Người dùng chốt: để nguyên, không động tới** (không xóa, không commit).
 - [x] Ratings gốc: đã làm thí nghiệm đối chứng 06g (ALS kém hơn trung bình chung 6%).
 - [x] Ảnh chụp UI cho báo cáo (26/10 tối): 32 ảnh, danh sách trong LAST_RUN và `data/output/screenshots.json`. Ghi chú cũ: **để cuối dự án** (người dùng đã chọn 26/10, gồm cả ảnh History Server). Thêm: History Server Timeline + Executors của 06b ở 1 và 2 worker (`06b_als|s100|w1|r1`, `06b_als|s100|w2|r1`), thẻ "Hiệu năng Spark". Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
 - [x] Chốt mẫu kiểm tra tay theo hash: đã chạy lại 03 trên cụm (24/10).
@@ -132,6 +132,7 @@ Từ kiểm tay 100 món (D19). **Mỗi thay đổi dưới đây phải chạy 
 - Dữ liệu sự kiện: 261MB Parquet (CSV tương đương 1,38GB), thấp hơn ước tính 1,5–3GB CSV.
 
 ## Nhật ký
+- **26/10 (khuya, chốt):** người dùng chốt cách báo cáo kiểm tay (đúng cả 7 thuộc tính 59%, thêm 60% khi bỏ `season`; `is_spicy` (b) 84,0%, 16 lỗi, tính cả dòng 89), để nguyên bản trống cũ `data/features_check_sample.csv`. Phần dữ liệu và code xong hoàn toàn; không còn việc nào cần chạy trên cụm.
 - **26/10 (khuya, tiếp):** người dùng kiểm tay xong 100 món. Commit bản cuối và bản lần 1 ngay; `scripts/eval_features_check.py` → `features_check_report.json`; D19 (độ chính xác, phát hiện); DATA_DICTIONARY (`is_spicy`, `is_vegetarian`, `season`); hướng phát triển. Không sửa luật 03, không chạy lại pipeline.
 - **26/10 (khuya):** xóa `vifood_local`, pytest mặc định `vifood`. README mục "Nếu công khai repo". Ảnh `mongo_recs` thành 1 document (mở 3 phần tử `items`), thêm `mongo_trending_doc`; trang document riêng của mongo-express 1.0.2 làm sập container khi `_id` không phải ObjectId nên lọc theo `_id` trên trang collection. Bảng so sánh mô hình: sát lề trái, in đậm giá trị tốt nhất từng cột. Ghi 2 hạn chế cho báo cáo. Phần dữ liệu và code xong.
 - **26/10 (tối):** đo 04 ở 100% / 1 worker thêm 2 lần (1.230,1 và 900,4 giây; r2 trùng việc khác trên máy), speedup 04 ở 100% 1,71, chuỗi 1,38. Kiểm tra replayer: tick cuối đã phát sau mọi sự kiện bị giữ, không sửa. `10_stream.py` tách thời gian (a) upsert ô / (b) top 20 + trending; đo lại thông lượng 10d. Notebook 05, 06, 09_10 (26 PNG). Chạy thử 01 vào `/tmp/ingest_test`, xóa `/tmp/checkpoint`. README, requirements, `data/sample/`, `.env.example`. Trang Thời gian thực: cả đoạn phát lại khi dừng, "Cửa sổ chưa đủ 1 giờ dữ liệu", ngày phát lại, 24:00. Đợt ảnh cuối bằng Playwright (32 ảnh).
