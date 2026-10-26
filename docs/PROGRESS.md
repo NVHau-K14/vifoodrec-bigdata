@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **26/10/2026 (khuya)**. **Phần dữ liệu và code đã xong**; bước tiếp theo là báo cáo Word và slide. Lần trước (tối) làm xong: đo lại 04 ở 100% / 1 worker, tách thời gian sink của luồng, notebook biểu đồ, đóng gói (README, requirements, `data/sample/`, `.env.example`), sửa trang Thời gian thực, đợt ảnh cuối (32 ảnh giao diện + 26 biểu đồ notebook). Còn lại: báo cáo Word + slide.
+> Cập nhật lần cuối: **26/10/2026 (khuya, sau kiểm tay)**. **Phần dữ liệu và code đã xong**, kiểm tay 100 món xong (D19: món đúng cả 7 thuộc tính 59%); bước tiếp theo là báo cáo Word và slide. Lần trước (tối) làm xong: đo lại 04 ở 100% / 1 worker, tách thời gian sink của luồng, notebook biểu đồ, đóng gói (README, requirements, `data/sample/`, `.env.example`), sửa trang Thời gian thực, đợt ảnh cuối (32 ảnh giao diện + 26 biểu đồ notebook). Còn lại: báo cáo Word + slide.
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -10,7 +10,7 @@
 | Hạ tầng Docker | ✅ Xong | 11 container: HDFS 1+2, Spark 1+2, Spark History (:18080), Jupyter, MongoDB, mongo-express (:8090), api (:8000). Đã chạy test 2 worker. |
 | 01 Nạp HDFS | ✅ Xong | 4 CSV trong `/data/raw`. `scripts/01_ingest.sh` đã chạy thử vào `/tmp/ingest_test` (26/10): md5 khớp `/data/raw` và file trên máy, replication 2, chạy lại thì bỏ qua, `--force` ghi đè; đã xóa thư mục thử. |
 | 02 Làm sạch (clean v2) | ✅ Xong | `foods` 5.499 món (3.996 giữ id cũ, 1.503 món mới id 4001–5503); `ratings_original` 182.556 dòng |
-| 03 Đặc trưng món | ✅ Xong (sửa 24/10) | `dish_features` 5.499 dòng, khớp từng giá trị với lần chạy local. Loại món: mặn 3.448, ngọt 1.236, chay 580, đồ uống 235. Đã sửa "hào" (D10) |
+| 03 Đặc trưng món | ✅ Xong (sửa 24/10) | `dish_features` 5.499 dòng, khớp từng giá trị với lần chạy local. Loại món: mặn 3.448, ngọt 1.236, chay 580, đồ uống 235. Đã sửa "hào" (D10). Kiểm tay 100 món (D19): `main_protein` 90%, `main_method` 79%, `dish_category` 95%, `dish_type_fixed` 97%, `is_vegetarian` 90%, `is_spicy` 99% (cách (b) mở rộng 84%, ước tính), `season` 99%; đúng cả 7: 59% |
 | 04 Sinh hành vi | ✅ Xong (100%, chạy lại 24/10) | 50.000 user (49.815 có hoạt động); **23.205.143 sự kiện**; Parquet 261MB; chạy 9 phút. `zipf_offset = 30`, món đứng đầu 1,44% (D11) |
 | 05 Phân tích hành vi | ✅ Xong | `src/05_analysis.py`, 14 bảng trong `/data/results/analysis` và JSON trong `data/output/analysis/`; chạy trên cụm 104 giây |
 | 06 Mô hình + đánh giá | ✅ Xong | Trên test (39.012 user), NDCG@10: hybrid **0,1588**, hybrid + content 2 vị trí 0,1495 (dùng cho `recs_final`), ALS implicit 0,1539 (alpha 1, rank 128), nấu lại 0,1317. RMSE: ALS 0,684, bias 0,737. Dashboard dùng k = 8. D12, D13 |
@@ -83,7 +83,8 @@
 1. **Báo cáo Word + slide** (phần dữ liệu và code đã xong 26/10). Số liệu lấy từ `data/output/*report*.json`, D10–D18; biểu đồ `docs/images/nb_*.png`; ảnh giao diện theo `data/output/screenshots.json`.
 
 ## Việc còn treo
-- [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv`, điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
+- [x] Kiểm tra tay 100 món (26/10): bản cuối `features_check_sample.csv` và bản lần 1 `features_check_sample_lan1.csv` đã commit; độ chính xác trong `features_check_report.json` (`scripts/eval_features_check.py`) và D19. **Không sửa luật 03, không chạy lại pipeline** (người dùng chốt). Không chạy lại 03 khi chưa sao lưu file đã điền.
+- [ ] `data/features_check_sample.csv` (thư mục `data/`, ngày 24/10, cột `kiem_tra` trống, chưa đưa lên Git) là bản trống cũ, không phải file đã điền. Để nguyên, người dùng tự quyết.
 - [x] Ratings gốc: đã làm thí nghiệm đối chứng 06g (ALS kém hơn trung bình chung 6%).
 - [x] Ảnh chụp UI cho báo cáo (26/10 tối): 32 ảnh, danh sách trong LAST_RUN và `data/output/screenshots.json`. Ghi chú cũ: **để cuối dự án** (người dùng đã chọn 26/10, gồm cả ảnh History Server). Thêm: History Server Timeline + Executors của 06b ở 1 và 2 worker (`06b_als|s100|w1|r1`, `06b_als|s100|w2|r1`), thẻ "Hiệu năng Spark". Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
 - [x] Chốt mẫu kiểm tra tay theo hash: đã chạy lại 03 trên cụm (24/10).
@@ -112,6 +113,14 @@
 - [ ] `data/stream/` (file phát lại, nhật ký từng lần chạy) không đưa lên Git; sinh lại bằng `10a_stream_prep.py`. `/data/stream` trên HDFS giữ đoạn phát lại và đáp án; `reset` chỉ xóa incoming / archive / checkpoint.
 - [ ] MongoDB `vifood` đang giữ kết quả của lượt phát lại cả ngày (06:00–24:00, tốc độ 300, phát lại 26/10 tối sau đợt ảnh), trạng thái "đã dừng" (người dùng chọn giữ). Demo thì `reset` rồi `start`.
 
+## Hướng phát triển (cần nêu trong báo cáo)
+Từ kiểm tay 100 món (D19). **Mỗi thay đổi dưới đây phải chạy lại 03 → 07** (đặc trưng, sinh hành vi, phân tích, mô hình, MongoDB) nên không làm trong phạm vi hiện tại.
+- Thêm ớt tươi vào luật cay ("ớt" đứng riêng, ớt băm, ớt sừng, ớt trái), trừ ớt chuông; không lấy chữ "ớt" trong tên món làm căn cứ khi đó là ớt chuông; bỏ mù tạt khỏi luật cay.
+- Thêm sữa, bơ, kem, phô mai, mật ong, gelatine (và mayonnaise) vào danh sách nguyên liệu động vật của luật chay; xử lý hạt nêm không ghi "chay".
+- Luật mùa cho đồ uống ấm: trà nóng, trà quế, trà thảo mộc… không gán "nóng".
+- Thêm nhóm món / cách làm còn thiếu: gia vị / xốt, cuốn, ủ / ngâm.
+- Dùng các bước nấu (công thức) để gán `main_method`, thay vì chỉ dựa vào tên món và nguyên liệu (độ chính xác hiện 79%, thấp nhất).
+
 ## Khác với kế hoạch / hạn chế (cần nêu trong báo cáo)
 - **Bộ sinh 04 không có lượt nấu khoảng 14–16h và 1–5h.** Giờ bắt đầu phiên lấy ngẫu nhiên trong khung của bữa (`SLOT_HOURS`: sáng 6–9h, trưa 10–13h, tối 16–20h, khuya 21–24h), nên ngoài các khung này chỉ có sự kiện lấn giờ của phiên bắt đầu trước đó (cả năm: 14h có 89 lượt nấu, 1h có 8, 2–5h và 15h bằng 0). Vì vậy biểu đồ ngày phát lại (bước 10) về 0 ở các cửa sổ kết thúc 15:00–16:00, và heatmap giờ × thứ có các cột trống. Đây là giới hạn của mô phỏng, không phải hành vi thật.
 - **04 ở 50% / 1 worker chậm hơn tính trên mỗi user, qua 3 lần đo:** thời gian task của giai đoạn sinh là 41,1–44,9 ms/user, so với 31,9 và 33,3 ms/user ở 100% / 1 worker (r1, r3). Chưa rõ nguyên nhân (D17). Điều này làm speedup của 04 ở 50% (2,19) cao hơn ở 100% (1,71).
@@ -123,6 +132,7 @@
 - Dữ liệu sự kiện: 261MB Parquet (CSV tương đương 1,38GB), thấp hơn ước tính 1,5–3GB CSV.
 
 ## Nhật ký
+- **26/10 (khuya, tiếp):** người dùng kiểm tay xong 100 món. Commit bản cuối và bản lần 1 ngay; `scripts/eval_features_check.py` → `features_check_report.json`; D19 (độ chính xác, phát hiện); DATA_DICTIONARY (`is_spicy`, `is_vegetarian`, `season`); hướng phát triển. Không sửa luật 03, không chạy lại pipeline.
 - **26/10 (khuya):** xóa `vifood_local`, pytest mặc định `vifood`. README mục "Nếu công khai repo". Ảnh `mongo_recs` thành 1 document (mở 3 phần tử `items`), thêm `mongo_trending_doc`; trang document riêng của mongo-express 1.0.2 làm sập container khi `_id` không phải ObjectId nên lọc theo `_id` trên trang collection. Bảng so sánh mô hình: sát lề trái, in đậm giá trị tốt nhất từng cột. Ghi 2 hạn chế cho báo cáo. Phần dữ liệu và code xong.
 - **26/10 (tối):** đo 04 ở 100% / 1 worker thêm 2 lần (1.230,1 và 900,4 giây; r2 trùng việc khác trên máy), speedup 04 ở 100% 1,71, chuỗi 1,38. Kiểm tra replayer: tick cuối đã phát sau mọi sự kiện bị giữ, không sửa. `10_stream.py` tách thời gian (a) upsert ô / (b) top 20 + trending; đo lại thông lượng 10d. Notebook 05, 06, 09_10 (26 PNG). Chạy thử 01 vào `/tmp/ingest_test`, xóa `/tmp/checkpoint`. README, requirements, `data/sample/`, `.env.example`. Trang Thời gian thực: cả đoạn phát lại khi dừng, "Cửa sổ chưa đủ 1 giờ dữ liệu", ngày phát lại, 24:00. Đợt ảnh cuối bằng Playwright (32 ảnh).
 - **23/10 sáng:** khảo sát ViFoodRec, lập kế hoạch chi tiết (`docs/plan/`), dựng cụm Docker.

@@ -89,6 +89,7 @@ docker exec -w /home/jovyan/work api python -m api.bench_latency
   (kể cả trang Tổng quan và thanh bên) và tài liệu làm việc (`CLAUDE.md`, `docs/PROGRESS.md`, `docs/DECISIONS.md`,
   `docs/DATA_DICTIONARY.md`, `docs/LAST_RUN.md`, skill). Tên thành viên và phân công chỉ có trong báo cáo Word và slide.
   `docs/plan/` giữ nguyên, vì đó là tài liệu nguồn cho phần phân công trong báo cáo.
+- **Không chạy lại 03 khi chưa sao lưu** `data/output/features_check_sample.csv` (bản kiểm tay đã điền, D19): 03 ghi đè file này.
 - **Không** sửa `data/raw/`. **Không** chạy `docker compose down -v` hay xóa volume, vì sẽ mất toàn bộ HDFS.
 - Chạy thử `--local` hoặc `--scale 0.01` trước, rồi mới chạy đủ. Sau khi chạy, đọc report để kiểm tra.
 - Tắt kernel các notebook trước khi chạy job. Cụm chỉ có 4 core, notebook đang giữ executor thì job phải xếp hàng chờ.

@@ -67,12 +67,12 @@ Chạy `--local` thì cùng cấu trúc đó nằm trong `data/hdfs_local/`. Cá
 | `main_method` | string | hầm/nấu, chiên, nướng, xào, kho/rim, hấp, trộn/gỏi, luộc, pha/xay, khác |
 | `dish_category` | string | món chính, bánh, chè/tráng miệng, bún/phở/mì/miến, canh/súp, gỏi/salad, cơm/xôi/cháo, đồ uống, lẩu, ăn vặt |
 | `dish_type_fixed` | string | Món mặn, Món ngọt, Món chay, Đồ uống |
-| `is_vegetarian` | boolean | Không có nguyên liệu động vật. Món ngọt và đồ uống cũng có thể là true |
-| `is_spicy` | boolean | Có ớt, tiêu… |
+| `is_vegetarian` | boolean | Tên hoặc tags có "chay", hoặc không có nguyên liệu động vật trong danh sách của luật (thịt, cá, hải sản, trứng, nước mắm, mỡ, huyết…). Món ngọt và đồ uống cũng có thể là true. **Giới hạn (D19):** luật chưa coi sữa, bơ, kem, phô mai, mật ong, gelatine, mayonnaise là động vật, và coi hạt nêm thường là chay; độ chính xác kiểm tay 90% |
+| `is_spicy` | boolean | Tên món có "cay", "ớt", "sa tế", "kim chi"…, tags có "cay", hoặc nguyên liệu có ớt khô, ớt bột, ớt hiểm, ớt xiêm, sa tế, kim chi, dầu ớt…; món ngọt và đồ uống luôn false. Hạt tiêu, tương ớt (thường) không tính. **Giới hạn (D19):** luật chưa nhận "ớt" tươi đứng riêng (ớt, ớt băm, ớt sừng) và nhận nhầm ớt chuông khi tên món có chữ "ớt", mù tạt vàng |
 | `n_ingredients` | int | Số nguyên liệu |
 | `method_words` | int | Số chữ trong phần cách làm, đo độ phức tạp |
 | `is_quick` | boolean | Món nhanh, xếp hạng trong từng nguồn (D05) |
-| `season` | string | không, nóng, lạnh, tết |
+| `season` | string | không, nóng, lạnh, tết. Chỉ khoảng 1/4 số món khác "không"; "nóng" gán cho cả trà uống ấm (D19) |
 | `meal_types` | array<string> | sáng, trưa, tối, ăn vặt |
 
 ## users – `/data/events/users` (50.000 dòng). Mô hình **được** dùng
@@ -171,7 +171,9 @@ Mỗi lần chạy có thư mục `data/stream/runs/<run_id>/`: `replayer.json` 
 |---|---|
 | `clean_report.json` | Số liệu từng bước làm sạch; `timings_s` (giai đoạn, từ 26/10), `total_seconds` |
 | `features_report.json` | Độ phủ và phân bố từng thuộc tính món; `timings_s`, `total_seconds` (từ 26/10) |
-| `features_check_sample.csv` | 100 món để kiểm tra tay (cột `kiem_tra`, `ghi_chu`) |
+| `features_check_sample.csv` | 100 món kiểm tra tay, **bản cuối đã điền** (cột `kiem_tra`: "đúng" hoặc danh sách thuộc tính sai; `ghi_chu`: nhãn đúng). Chạy lại 03 sẽ ghi đè file này: sao lưu trước |
+| `features_check_sample_lan1.csv` | Bản điền lần 1, trước khi chốt cách chấm `is_spicy` (10 món chưa kết luận, `kiem_tra` trống) |
+| `features_check_report.json` | D19, `scripts/eval_features_check.py`: `final`, `lan1` (độ chính xác từng thuộc tính `per_attribute {correct, n, accuracy_pct, wrong_food_ids}`, theo món `per_dish`), `is_spicy_b` (cách (b) tự đếm từ nguyên liệu, ước tính: định nghĩa, số lỗi theo loại, danh sách món lỗi), `season_non_default` |
 | `simulate_report.json` | Số sự kiện, phễu, rating, kiểm tra persona, mùa, dung lượng HDFS; `timings_s` (từ 26/10) |
 | `simulate_config.json` | Toàn bộ tham số và trọng số persona |
 | `events_sample.csv` | Toàn bộ sự kiện của 200 user |

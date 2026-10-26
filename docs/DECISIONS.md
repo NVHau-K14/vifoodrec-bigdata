@@ -540,3 +540,48 @@ Người dùng chọn phương án đề xuất cho 10 câu của bản thiết 
 
   - Ghi MongoDB vẫn chiếm phần lớn thời gian batch (64% và 67%), trong đó **upsert 1,16 triệu ô** là phần nặng nhất, gấp khoảng 3,5 lần phần tính top 20 và ghi `trending`. Muốn tăng thông lượng thì phải giảm hoặc song song hóa phần (a) trước (ghi từ executor bằng `foreachPartition`, hoặc bỏ các ô không có `cooks`).
   - Lần này nhanh hơn lần đo buổi sáng (4.654 và 4.543 dòng/giây; ghi MongoDB 66,4 và 70,0 giây). Code đọc / tính không đổi, chỉ thêm 2 mốc thời gian; khác biệt nằm chủ yếu ở phần ghi MongoDB (47,3 so với 66,4 giây ở 2 core), nên số tuyệt đối dao động theo tải của máy giữa các lần chạy. Kết luận về nút thắt không đổi. Với 4 core, phần collect giảm 20,5 → 16,5 giây nên lần này 4 core nhanh hơn 11%, còn phần ghi MongoDB gần như không đổi.
+
+## D19. Kiểm tra tay 100 món: độ chính xác của đặc trưng món (26/10)
+Người dùng kiểm tay xong 100 món của mẫu theo hash (D11) trong `data/output/features_check_sample.csv`: cột `kiem_tra` là "đúng" hoặc danh sách thuộc tính sai, `ghi_chu` ghi nhãn đúng. Có 2 bản:
+- **bản cuối** `features_check_sample.csv`, chấm sau khi chốt cách chấm `is_spicy`: chỉ coi là cay khi món thật sự cay, không suy ra cay chỉ vì danh sách nguyên liệu có ớt hoặc tiêu;
+- **bản lần 1** `features_check_sample_lan1.csv`, chấm trước khi chốt (coi có ớt là cay), còn 10 món chưa kết luận (bỏ khỏi mẫu số, n = 90).
+
+**Quyết định: không sửa luật 03, không chạy lại pipeline.** Các lỗi tìm thấy ghi thành hướng phát triển (PROGRESS). Lý do: mỗi thay đổi luật phải chạy lại 03 → 07 (đặc trưng, sinh hành vi, phân tích, mô hình, MongoDB), và chạy lại 03 sẽ ghi đè file kiểm tra tay. Hai file kiểm tra tay đã commit; không chạy lại 03 khi chưa sao lưu chúng (CLAUDE.md).
+
+**Độ chính xác** (`scripts/eval_features_check.py` → `data/output/features_check_report.json`; dữ liệu món là món thật):
+
+| Thuộc tính | Bản cuối (n = 100) | Bản lần 1 (n = 90) |
+|---|---|---|
+| `main_protein` | 90,0% | 92,2% |
+| `main_method` | **79,0%** | 85,6% |
+| `dish_category` | 95,0% | 93,3% |
+| `dish_type_fixed` | 97,0% | 96,7% |
+| `is_vegetarian` | 90,0% | 88,9% |
+| `is_spicy` | 99,0% | 58,9% |
+| `is_spicy`, cách (b) (ước tính) | 84,0% | – |
+| `season` | 99,0% (chỉ 27/100 món khác "không") | 100,0% |
+| Món đúng cả 7 thuộc tính | **59%** | 33,3% |
+| Món đúng 6 thuộc tính, bỏ `season` / bỏ `is_spicy` | 60% / 60% | 33,3% / 66,7% |
+
+- Bản cuối: 59 món đúng hết, 33 món sai 1 thuộc tính, 6 món sai 2, 2 món sai 3. Trung bình 7 thuộc tính 92,7%.
+- `is_spicy` của bản lần 1 thấp (58,9%) chỉ vì cách chấm khác (có ớt là cay), không phải luật đổi: nhãn của máy giống hệt nhau ở hai bản.
+- **`is_spicy` cách (b), định nghĩa mở rộng, ước tính tự đếm từ `nguyen_lieu`, chưa kiểm từng món:** cay nếu có ớt tươi ("ớt" đứng riêng, ớt băm, ớt sừng, ớt hiểm, ớt trái), ớt khô, ớt bột, sa tế, kim chi; không tính ớt chuông, tương ớt, tiêu, mù tạt vàng. Theo (b) có 29 món cay, máy gắn cay 17 món; lệch 16 món:
+  - 14 món máy ghi không cay nhưng có ớt (dòng 2, 20, 37, 39, 43, 45, 49, 55, 57, 81, 83, 94, 95, 97);
+  - 1 món máy ghi cay nhưng chỉ có ớt chuông (dòng 76, Vịt Xào Ớt Chuông);
+  - 1 món máy ghi cay nhưng không có nguyên liệu cay nào, chỉ có mù tạt vàng (dòng 89, Salad cam tình yêu). Món này người kiểm cũng chấm sai ở bản cuối.
+
+**Phát hiện (không sửa, xem hướng phát triển trong PROGRESS):**
+- **`is_spicy`:**
+  - bỏ sót ớt tươi đứng riêng: `SPICY_ING` chỉ có ớt bột, ớt khô, ớt hiểm, ớt xiêm, dầu ớt…, không có "ớt", "ớt băm", "ớt sừng";
+  - nhận nhầm ớt chuông khi tên món có chữ "ớt" (`SPICY_NAME` có "ớt", dòng 76);
+  - nhận nhầm mù tạt vàng (`SPICY_ING` có "mù tạt", dòng 89).
+- **`is_vegetarian`:** cả 10 lỗi đều là máy ghi "chay" cho món có sản phẩm từ động vật mà luật không xét: mật ong (4 món), sữa / sữa đặc / sữa chua / sữa tươi, bơ, kem / whipping cream, phô mai, gelatine, mayonnaise. D05 định nghĩa chay là "không có nguyên liệu động vật", nhưng danh sách `ANIMAL` chỉ gồm thịt, cá, trứng, nước mắm, mỡ… Danh sách có "gelatin", nhưng luật khớp theo ranh giới từ nên không nhận "gelatine".
+  - Hạt nêm không ghi "chay" không rõ nguồn gốc (thường có chiết xuất thịt), nhưng luật coi là chay (dòng 37). Người kiểm vẫn chấm đúng vì nhãn nguyên liệu không đủ để kết luận.
+- **`season`:** luật gán "nóng" cho mọi món có chữ "trà" (và nước ép, sinh tố…) thuộc nhóm đồ uống, kể cả trà uống ấm (dòng 25, Trà Quế Hồng Táo, đúng là "lạnh"); chỉ "trà gừng" được tách sang "lạnh". Chỉ 27/100 món có mùa khác "không" (nóng 17, lạnh 7, tết 3), nên độ chính xác 99% của `season` có độ tin cậy thấp.
+- **`main_method` thấp nhất (79%)**, vì luật chỉ dựa vào tên món và nguyên liệu, không có các bước nấu.
+  - Trong 21 lỗi, 10 món đúng ra là "khác": món cuốn, nhúng, ngâm, làm lạnh, không nấu (luật gán luộc 4 lần, hấp 2 lần…);
+  - 4 món đúng ra là "chiên" (vd hành phi, bánh nhãn);
+  - 4 lỗi còn lại nhầm giữa hầm/nấu, luộc, kho/rim, pha/xay;
+  - 3 món đúng ra là "nướng" (pizza, cuốn lá lốt nướng, bánh trung thu).
+- **Bộ nhãn thiếu nhóm:** gia vị / xốt (vd Sa Tế Tỏi Ớt phải tạm xếp nhóm "lẩu", cách làm "pha/xay"), cuốn (sushi, gỏi cuốn → "khác"), ủ / ngâm (mắm tép đu đủ → "khác"). Người kiểm dùng nhãn có sẵn gần nhất, không thêm nhãn mới.
+- Các lỗi khác (ít): đạm chính chọn theo nguyên liệu phụ (trứng trong bột áo, trứng trong thịt kho); bánh trung thu nhân thập cẩm và kem trái cây bị xếp món mặn / món chính.

@@ -1,0 +1,511 @@
+{
+ "generated_at": "2026-10-26T22:24:38",
+ "note": "100 món chọn theo hash ở bước 03 (D11); máy = nhãn của luật 03, người kiểm tay ghi thuộc tính sai. Không sửa luật 03, không chạy lại pipeline (D19).",
+ "attributes": [
+  "main_protein",
+  "main_method",
+  "dish_category",
+  "dish_type_fixed",
+  "is_vegetarian",
+  "is_spicy",
+  "season"
+ ],
+ "final": {
+  "n_judged": 100,
+  "n_skipped_unresolved": 0,
+  "skipped_food_ids": [],
+  "per_attribute": {
+   "main_protein": {
+    "correct": 90,
+    "n": 100,
+    "accuracy_pct": 90.0,
+    "wrong_food_ids": [
+     5010,
+     885,
+     3905,
+     4620,
+     2544,
+     1563,
+     815,
+     3315,
+     1130,
+     2312
+    ]
+   },
+   "main_method": {
+    "correct": 79,
+    "n": 100,
+    "accuracy_pct": 79.0,
+    "wrong_food_ids": [
+     1110,
+     1585,
+     786,
+     1674,
+     101,
+     4386,
+     1519,
+     4213,
+     4633,
+     4056,
+     5279,
+     4843,
+     3515,
+     383,
+     1431,
+     4076,
+     2654,
+     3610,
+     3315,
+     1523,
+     1410
+    ]
+   },
+   "dish_category": {
+    "correct": 95,
+    "n": 100,
+    "accuracy_pct": 95.0,
+    "wrong_food_ids": [
+     5010,
+     1674,
+     4213,
+     3723,
+     5055
+    ]
+   },
+   "dish_type_fixed": {
+    "correct": 97,
+    "n": 100,
+    "accuracy_pct": 97.0,
+    "wrong_food_ids": [
+     5010,
+     1563,
+     2186
+    ]
+   },
+   "is_vegetarian": {
+    "correct": 90,
+    "n": 100,
+    "accuracy_pct": 90.0,
+    "wrong_food_ids": [
+     3144,
+     1385,
+     1674,
+     2335,
+     4633,
+     2757,
+     3723,
+     5031,
+     2186,
+     3179
+    ]
+   },
+   "is_spicy": {
+    "correct": 99,
+    "n": 100,
+    "accuracy_pct": 99.0,
+    "wrong_food_ids": [
+     92
+    ]
+   },
+   "season": {
+    "correct": 99,
+    "n": 100,
+    "accuracy_pct": 99.0,
+    "wrong_food_ids": [
+     1439
+    ]
+   }
+  },
+  "per_dish": {
+   "all_7_correct": 59,
+   "all_7_correct_pct": 59.0,
+   "pct_correct_6_of_7": {
+    "all_except_season": 60.0,
+    "all_except_is_spicy": 60.0
+   },
+   "n_wrong_attrs_hist": {
+    "0": 59,
+    "1": 33,
+    "2": 6,
+    "3": 2
+   }
+  },
+  "attr_accuracy_mean_pct": 92.7
+ },
+ "lan1": {
+  "n_judged": 90,
+  "n_skipped_unresolved": 10,
+  "skipped_food_ids": [
+   1701,
+   786,
+   3905,
+   3300,
+   1519,
+   5279,
+   3515,
+   2672,
+   2760,
+   815
+  ],
+  "per_attribute": {
+   "main_protein": {
+    "correct": 83,
+    "n": 90,
+    "accuracy_pct": 92.2,
+    "wrong_food_ids": [
+     5010,
+     885,
+     2544,
+     1563,
+     3315,
+     1130,
+     2312
+    ]
+   },
+   "main_method": {
+    "correct": 77,
+    "n": 90,
+    "accuracy_pct": 85.6,
+    "wrong_food_ids": [
+     1110,
+     1585,
+     101,
+     4386,
+     4633,
+     4056,
+     4843,
+     383,
+     1431,
+     4076,
+     3315,
+     1523,
+     1410
+    ]
+   },
+   "dish_category": {
+    "correct": 84,
+    "n": 90,
+    "accuracy_pct": 93.3,
+    "wrong_food_ids": [
+     5010,
+     1674,
+     4213,
+     4843,
+     3723,
+     5055
+    ]
+   },
+   "dish_type_fixed": {
+    "correct": 87,
+    "n": 90,
+    "accuracy_pct": 96.7,
+    "wrong_food_ids": [
+     5010,
+     1563,
+     2186
+    ]
+   },
+   "is_vegetarian": {
+    "correct": 80,
+    "n": 90,
+    "accuracy_pct": 88.9,
+    "wrong_food_ids": [
+     3144,
+     1385,
+     1674,
+     2335,
+     4633,
+     2757,
+     3723,
+     5031,
+     2186,
+     3179
+    ]
+   },
+   "is_spicy": {
+    "correct": 53,
+    "n": 90,
+    "accuracy_pct": 58.9,
+    "wrong_food_ids": [
+     806,
+     1110,
+     2360,
+     2539,
+     3873,
+     885,
+     856,
+     4620,
+     2478,
+     1014,
+     4481,
+     4056,
+     2378,
+     4074,
+     4177,
+     2162,
+     5321,
+     4086,
+     3576,
+     765,
+     2544,
+     1126,
+     3851,
+     2654,
+     3610,
+     4546,
+     3315,
+     1873,
+     3607,
+     1410,
+     5474,
+     4403,
+     5320,
+     1130,
+     4035,
+     714,
+     1371
+    ]
+   },
+   "season": {
+    "correct": 90,
+    "n": 90,
+    "accuracy_pct": 100.0,
+    "wrong_food_ids": []
+   }
+  },
+  "per_dish": {
+   "all_7_correct": 30,
+   "all_7_correct_pct": 33.3,
+   "pct_correct_6_of_7": {
+    "all_except_season": 33.3,
+    "all_except_is_spicy": 66.7
+   },
+   "n_wrong_attrs_hist": {
+    "0": 30,
+    "1": 46,
+    "2": 12,
+    "3": 2
+   }
+  },
+  "attr_accuracy_mean_pct": 87.9
+ },
+ "is_spicy_b": {
+  "definition": "cay nếu nguyen_lieu có ớt tươi ('ớt' đứng riêng, ớt băm, ớt sừng, ớt hiểm, ớt trái…), ớt khô, ớt bột, sa tế, kim chi; không tính ớt chuông, tương ớt, tiêu, mù tạt vàng",
+  "error_rule": "máy khác (b): máy false mà có ớt; máy true mà chỉ có ớt chuông; máy true mà không có nguyên liệu cay nào (chỉ mù tạt vàng)",
+  "estimate_note": "Ước tính tự đếm từ nguyen_lieu, chưa kiểm từng món",
+  "n": 100,
+  "errors": 16,
+  "accuracy_pct": 84.0,
+  "positives_b": 29,
+  "positives_machine": 17,
+  "errors_by_case": {
+   "máy false, có ớt / sa tế / kim chi": 14,
+   "máy true, chỉ có ớt chuông": 1,
+   "máy true, không có nguyên liệu cay": 1
+  },
+  "error_list": [
+   {
+    "csv_line": 2,
+    "food_id": 806,
+    "dish_name": "Bún thang",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 20,
+    "food_id": 856,
+    "dish_name": "Vịt rang tỏi",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt băm",
+     "ớt sừng"
+    ],
+    "bell_pepper": [],
+    "not_counted": [
+     "tương ớt chua ngọt"
+    ],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 37,
+    "food_id": 4056,
+    "dish_name": "Cuốn rong biển chay chấm xốt đậu phộng",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt băm"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 39,
+    "food_id": 2378,
+    "dish_name": "Cá Diêu Hồng Chiên Muối Tỏi",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 43,
+    "food_id": 2162,
+    "dish_name": "Bò Kho",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt băm"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 45,
+    "food_id": 4086,
+    "dish_name": "Gỏi ỔI Tai Heo",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt sừng",
+     "ớt băm"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 49,
+    "food_id": 3576,
+    "dish_name": "Gỏi Xoài Khô Bò",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 55,
+    "food_id": 2544,
+    "dish_name": "Thịt Kho Trứng Nước Dừa",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt băm"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 57,
+    "food_id": 1126,
+    "dish_name": "Chân giò nấu nước tương",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt trái đập dập"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 76,
+    "food_id": 4994,
+    "dish_name": "Vịt Xào Ớt Chuông",
+    "machine": true,
+    "hot_ingredients": [],
+    "bell_pepper": [
+     "ớt chuông"
+    ],
+    "not_counted": [],
+    "case": "máy true, chỉ có ớt chuông"
+   },
+   {
+    "csv_line": 81,
+    "food_id": 3607,
+    "dish_name": "Sườn Heo Xào Chua Ngọt Thơm Ngon",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt"
+    ],
+    "bell_pepper": [
+     "ớt chuông"
+    ],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 83,
+    "food_id": 1410,
+    "dish_name": "Trứng Chiên Rim Nước Mắm",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt sừng"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 89,
+    "food_id": 92,
+    "dish_name": "Salad cam tình yêu",
+    "machine": true,
+    "hot_ingredients": [],
+    "bell_pepper": [],
+    "not_counted": [
+     "mù tạt vàng"
+    ],
+    "case": "máy true, không có nguyên liệu cay"
+   },
+   {
+    "csv_line": 94,
+    "food_id": 5320,
+    "dish_name": "Tự Nấu Lẩu Đuôi Bò",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 95,
+    "food_id": 1130,
+    "dish_name": "Canh nấm rong biển",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   },
+   {
+    "csv_line": 97,
+    "food_id": 714,
+    "dish_name": "Gỏi rau mầm",
+    "machine": false,
+    "hot_ingredients": [
+     "ớt"
+    ],
+    "bell_pepper": [],
+    "not_counted": [],
+    "case": "máy false, có ớt / sa tế / kim chi"
+   }
+  ]
+ },
+ "season_non_default": {
+  "machine_not_khong": 27,
+  "n": 100
+ }
+}
