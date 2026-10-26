@@ -416,21 +416,21 @@
       "compression_ratio": 0.4
     },
     "reports": {
-      "docs": 12,
-      "expected": 12,
+      "docs": 17,
+      "expected": 17,
       "write_s": 0.0,
       "total_s": 0.0,
       "method": "collect + insert_many",
       "indexes": [
         "_id_"
       ],
-      "count": 12,
-      "size_bytes": 105995,
-      "avg_obj_bytes": 8832,
-      "storage_bytes": 57344,
+      "count": 17,
+      "size_bytes": 353508,
+      "avg_obj_bytes": 20794,
+      "storage_bytes": 122880,
       "total_index_bytes": 20480,
       "n_indexes": 1,
-      "compression_ratio": 1.85
+      "compression_ratio": 2.88
     },
     "overview": {
       "docs": 1,
@@ -450,26 +450,26 @@
       "compression_ratio": 0.07
     },
     "trending": {
-      "docs": 0,
-      "note": "chỉ tạo index, phần Structured Streaming ghi vào sau"
+      "docs": 280,
+      "note": "chỉ tạo index; luồng Structured Streaming (10_stream.py) ghi vào"
     },
     "perf": {
       "docs": 55,
       "expected": 55,
-      "write_s": 0.1,
-      "total_s": 0.1,
+      "write_s": 0.0,
+      "total_s": 0.0,
       "method": "collect + insert_many",
       "indexes": [
         "_id_",
         "kind_1_level_1_workers_1"
       ],
       "count": 55,
-      "size_bytes": 213379,
-      "avg_obj_bytes": 3879,
+      "size_bytes": 213521,
+      "avg_obj_bytes": 3882,
       "storage_bytes": 73728,
       "total_index_bytes": 40960,
       "n_indexes": 2,
-      "compression_ratio": 2.89
+      "compression_ratio": 2.9
     }
   },
   "checks": {
@@ -685,6 +685,18 @@
       "timings_s": {
         "checks": 13.3,
         "total": 32.1
+      }
+    },
+    {
+      "only": [
+        "perf",
+        "reports",
+        "trending"
+      ],
+      "at": "2026-10-26T06:32:15",
+      "timings_s": {
+        "checks": 11.2,
+        "total": 28.3
       }
     }
   ]

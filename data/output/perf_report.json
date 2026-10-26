@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T08:30:04",
+  "generated_at": "2026-10-26T12:22:49",
   "cluster": {
     "docker_cpus": 8,
     "docker_mem_gb": 18.9,
@@ -32,6 +32,9 @@
     "repeats_100pct": {
       "05": 3,
       "06b": 3
+    },
+    "repeats_50pct_1w": {
+      "04": 3
     },
     "levels": {
       "s010": 0.1,
@@ -3524,14 +3527,16 @@
       "level": "s050",
       "level_pct": 50,
       "workers": 1,
-      "n_runs": 1,
-      "n_ok": 1,
+      "n_runs": 3,
+      "n_ok": 3,
       "failed": [],
       "median_s": 604.0,
-      "min_s": 604.0,
-      "max_s": 604.0,
+      "min_s": 575.8,
+      "max_s": 631.8,
       "runs_s": [
-        604.0
+        575.8,
+        604.0,
+        631.8
       ],
       "wall_median_s": 609.3,
       "median_rep": 1,
@@ -3540,9 +3545,9 @@
         "dish_matrix": 7.0,
         "users_driver": 1.7,
         "generate_write": 546.7,
-        "users_write": 1.1,
-        "checks": 28.5,
-        "export_local": 12.4
+        "users_write": 1.2,
+        "checks": 28.8,
+        "export_local": 8.7
       },
       "spark": {
         "jobs": 74,
@@ -11907,7 +11912,7 @@
       "ratio_100_10": 2.26
     }
   ],
-  "runs_total": 62,
+  "runs_total": 64,
   "runs_failed": 0,
   "notes": [
     "Dữ liệu hành vi là MÔ PHỎNG (bước 04). Danh mục món là món thật.",
@@ -11915,7 +11920,7 @@
     "Mọi container chạy trên cùng một máy (máy ảo Docker): shuffle giữa 2 worker đi qua mạng ảo của Docker, không phải mạng thật; datanode là container riêng nên cả 1 lẫn 2 worker đều không có data locality.",
     "Mức 10% và 50% là dân số SINH MỚI bằng 04 --scale 0.1 / 0.5 (cùng seed, cùng phân bố), không phải tập con của bản 100%.",
     "06b, 06c, 06e, 06f, 06g chạy với --fixed: fit một lần với tham số đã chọn ở bản thật. 06b chỉ chạy view test; 06c bỏ so sánh MinHash; 06e chỉ fit k = 3, 8, 11; 06f chỉ view test, bỏ dò trọng số, explore_beyond và thí nghiệm món mới; 06g bỏ lưới tham số.",
-    "Thời gian là thời lượng ứng dụng theo Spark History Server (gồm khởi động SparkSession). Job chạy 1 lần thì số đo là lần duy nhất; 05 và 06b ở 100% chạy 3 lần mỗi cấu hình, lấy trung vị.",
+    "Thời gian là thời lượng ứng dụng theo Spark History Server (gồm khởi động SparkSession). Job chạy 1 lần thì số đo là lần duy nhất; 05 và 06b ở 100% chạy 3 lần mỗi cấu hình, lấy trung vị. 04 ở 50% / 1 worker chạy 3 lần (lần 1 chậm bất thường), lấy trung vị.",
     "speedup_by_scale: speedup = T(1 worker) ÷ T(2 worker) của cả chuỗi 04 → 06f và của 04, 05, 06b ở từng mức; ở 10% và 50% mỗi cấu hình chạy 1 lần.",
     "Không đo 07 (nút thắt là ghi MongoDB)."
   ]

@@ -1,0 +1,266 @@
+{
+  "variants": {
+    "loc_truoc_khu_trung": {
+      "filter_before_dedup": true,
+      "input_rows_f1": 6,
+      "watermark_after_f3": "2026-09-27T03:15:00.000Z",
+      "tick_advances_watermark": false,
+      "dropped_by_watermark_total": {
+        "stateStoreSave": 0,
+        "dedupeWithinWatermark": 2
+      },
+      "final_cooks_by_window_start": {
+        "09:15": 3,
+        "09:30": 7,
+        "09:45": 7,
+        "10:00": 8,
+        "10:15": 5,
+        "10:30": 2,
+        "10:45": 2,
+        "11:00": 1,
+        "11:15": 1
+      },
+      "batches": [
+        {
+          "after_file": "F1",
+          "batch": 0,
+          "input_rows": 6,
+          "watermark": "1970-01-01T00:00:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 5
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 6
+            }
+          ]
+        },
+        {
+          "after_file": "F1",
+          "batch": 1,
+          "input_rows": 0,
+          "watermark": "2026-09-27T03:15:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 4
+            }
+          ]
+        },
+        {
+          "after_file": "F2",
+          "batch": 2,
+          "input_rows": 4,
+          "watermark": "2026-09-27T03:15:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 2,
+              "state_rows": 5
+            }
+          ]
+        },
+        {
+          "after_file": "F3",
+          "batch": 3,
+          "input_rows": 0,
+          "watermark": "2026-09-27T03:15:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 5
+            }
+          ]
+        },
+        {
+          "after_file": "F4",
+          "batch": 4,
+          "input_rows": 2,
+          "watermark": "2026-09-27T03:15:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 8
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 7
+            }
+          ]
+        },
+        {
+          "after_file": "F4",
+          "batch": 5,
+          "input_rows": 0,
+          "watermark": "2026-09-27T04:15:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 1
+            }
+          ]
+        }
+      ]
+    },
+    "loc_sau_khu_trung": {
+      "filter_before_dedup": false,
+      "input_rows_f1": 7,
+      "watermark_after_f3": "2026-09-27T04:20:00.000Z",
+      "tick_advances_watermark": true,
+      "dropped_by_watermark_total": {
+        "stateStoreSave": 0,
+        "dedupeWithinWatermark": 3
+      },
+      "final_cooks_by_window_start": {
+        "09:15": 3,
+        "09:30": 7,
+        "09:45": 7,
+        "10:00": 7,
+        "10:15": 4,
+        "10:30": 1,
+        "10:45": 1,
+        "11:00": 1,
+        "11:15": 1
+      },
+      "batches": [
+        {
+          "after_file": "F1",
+          "batch": 0,
+          "input_rows": 7,
+          "watermark": "1970-01-01T00:00:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 5
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 7
+            }
+          ]
+        },
+        {
+          "after_file": "F1",
+          "batch": 1,
+          "input_rows": 0,
+          "watermark": "2026-09-27T03:20:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 4
+            }
+          ]
+        },
+        {
+          "after_file": "F2",
+          "batch": 2,
+          "input_rows": 4,
+          "watermark": "2026-09-27T03:20:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 2,
+              "state_rows": 5
+            }
+          ]
+        },
+        {
+          "after_file": "F3",
+          "batch": 3,
+          "input_rows": 1,
+          "watermark": "2026-09-27T03:20:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 6
+            }
+          ]
+        },
+        {
+          "after_file": "F3",
+          "batch": 4,
+          "input_rows": 0,
+          "watermark": "2026-09-27T04:20:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 0
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 0,
+              "state_rows": 1
+            }
+          ]
+        },
+        {
+          "after_file": "F4",
+          "batch": 5,
+          "input_rows": 2,
+          "watermark": "2026-09-27T04:20:00.000Z",
+          "operators": [
+            {
+              "operator": "stateStoreSave",
+              "dropped": 0,
+              "state_rows": 4
+            },
+            {
+              "operator": "dedupeWithinWatermark",
+              "dropped": 1,
+              "state_rows": 2
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

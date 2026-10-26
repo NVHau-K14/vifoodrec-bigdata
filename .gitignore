@@ -29,3 +29,6 @@ logs/
 
 # pytest (buoc 08)
 .pytest_cache/
+
+# Structured Streaming (buoc 10): file phat lai sinh lai bang 10a, nhat ky tung lan chay
+data/stream/

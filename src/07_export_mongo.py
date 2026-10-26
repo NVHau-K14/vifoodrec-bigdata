@@ -17,7 +17,7 @@ Collection (_id la khoa nghiep vu):
   metrics           bang do do cua 06f (cot JSON tach thanh document con)
   reports           cac file data/output/*report*.json va models_metrics.json
   overview          so lieu trang Tong quan: so mon, user, su kien theo loai, dung luong HDFS
-  trending          de trong, chi tao index (phan Structured Streaming ghi vao sau)
+  trending          chi tao index {window_end -1}, {scope, window_end -1}, trending_cells {ws}; 10_stream.py ghi (D18)
   perf              ket qua do hieu nang (data/output/perf_report.json cua scripts/09_perf.py, D17), neu co file
 
 Cach ghi (D14):
@@ -455,9 +455,12 @@ if want("overview"):
     export("overview", docs=[overview])
 
 if want("trending"):
-    db["trending"].create_index([("window_end", DESCENDING)])
+    # Luong 10_stream.py ghi trending / trending_cells / stream_status (D18); 07 chi tao index, khong dung den du lieu
+    db["trending"].create_index([("window_end", DESCENDING)])                        # E25: chuoi cua so, moi scope
+    db["trending"].create_index([("scope", ASCENDING), ("window_end", DESCENDING)])  # E25: cua so gan nhat cua 1 scope
+    db["trending_cells"].create_index([("ws", ASCENDING)])
     report["collections"]["trending"] = {"docs": db["trending"].count_documents({}),
-                                        "note": "chỉ tạo index, phần Structured Streaming ghi vào sau"}
+                                        "note": "chỉ tạo index; luồng Structured Streaming (10_stream.py) ghi vào"}
 
 # ===========================================================================
 # 8. KIEM TRA

@@ -61,7 +61,8 @@ def pipeline(ov):
         elif step == "08":
             status = "Đang làm"
         else:
-            status = "Đang làm" if n_trending else "Chưa"
+            # buoc 10: Xong khi da co ket qua kiem tra (stream_report, 10c); Dang lam khi luong da ghi trending
+            status = "Xong" if "stream_report" in rep else ("Đang làm" if n_trending else "Chưa")
         out.append({"step": step, "name": name, "status": status, "seconds": seconds})
     return out
 

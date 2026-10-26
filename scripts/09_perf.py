@@ -100,6 +100,8 @@ def build_plan(with_quick=False):
     for rep in (2, 3):                       # xen ke 2 worker -> 1 worker
         for w in (2, 1):
             add("s100", w, ["05", "06b"], rep)
+    for rep in (2, 3):                       # 04 o 50% / 1 worker cham bat thuong o lan 1 -> do them 2 lan (26/10)
+        add("s050", 1, ["04"], rep)
     if with_quick:
         for rep in (1, 2, 3):
             for w in (2, 1):
@@ -397,7 +399,8 @@ NOTES = [
     "so sánh MinHash; 06e chỉ fit k = 3, 8, 11; 06f chỉ view test, bỏ dò trọng số, explore_beyond và thí nghiệm món mới; "
     "06g bỏ lưới tham số.",
     "Thời gian là thời lượng ứng dụng theo Spark History Server (gồm khởi động SparkSession). Job chạy 1 lần thì số đo là "
-    "lần duy nhất; 05 và 06b ở 100% chạy 3 lần mỗi cấu hình, lấy trung vị.",
+    "lần duy nhất; 05 và 06b ở 100% chạy 3 lần mỗi cấu hình, lấy trung vị. 04 ở 50% / 1 worker chạy 3 lần (lần 1 chậm "
+    "bất thường), lấy trung vị.",
     "speedup_by_scale: speedup = T(1 worker) ÷ T(2 worker) của cả chuỗi 04 → 06f và của 04, 05, 06b ở từng mức; ở 10% và "
     "50% mỗi cấu hình chạy 1 lần.",
     "Không đo 07 (nút thắt là ghi MongoDB).",
@@ -531,7 +534,7 @@ def summarize():
         "cluster": {**host, "worker_cores": 2, "worker_memory": "3g", "executor_memory": "2g",
                     "driver_memory": "2g", "shuffle_partitions_default": 8,
                     "configs": {"1 worker": "1 executor × 2 core, 2 GB", "2 worker": "2 executor × 2 core, 2 GB mỗi executor"}},
-        "plan": {"chain": CHAIN, "catalog": CATALOG, "repeats_100pct": {"05": 3, "06b": 3},
+        "plan": {"chain": CHAIN, "catalog": CATALOG, "repeats_100pct": {"05": 3, "06b": 3}, "repeats_50pct_1w": {"04": 3},
                  "levels": {k: v for k, v in LEVELS.items()}},
         "data": level_data,
         "rows": rows, "speedup": speedup, "speedup_by_scale": by_scale, "chain_totals": chain, "scaling_2w": scaling,

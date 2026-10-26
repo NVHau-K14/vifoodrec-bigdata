@@ -17,6 +17,11 @@ Khi thêm hoặc đổi bảng, cập nhật file này. Kiểu cột ghi theo Sp
 /data/models/{als_implicit,als_explicit,content_pipeline,kmeans}   model Spark đã lưu (bước 06)
 /perf/{s010,s050,s100,catalog}/  gốc riêng của phép đo hiệu năng (D17): cùng cấu trúc curated/features/events/results/models
                                  (s010, s050, s100 = dữ liệu 10/50/100% sinh bằng 04 --scale; catalog = 02, 03, 06g)
+/data/stream/replay/<ngày>[_<n>d]/   đoạn phát lại cho Structured Streaming (bước 10a, D18): events của ngày + event_id
+/data/stream/truth/<ngày>_<HHMM>-<HHMM>/   đáp án batch theo cửa sổ × vùng × món (10a)
+/data/stream/{_staging,incoming,archive}/  file JSON Lines của replayer (10b): ghi vào _staging, RENAME sang incoming,
+                                 Spark đọc xong thì chuyển sang archive (cleanSource)
+/data/stream/checkpoint/         checkpoint của luồng (offset, commit, state store); checkpoint_conf.json: cấu hình đã dùng
 ```
 Chạy `--local` thì cùng cấu trúc đó nằm trong `data/hdfs_local/`. Các bản sao nhỏ để xem trên máy nằm trong `data/processed/`.
 
@@ -150,6 +155,17 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 | `recs_final` | 06f | `user_id, rank, food_id, score, source, reason_type, because_food_id, reason` | **Gợi ý cuối**: top 50 cho mọi user, lấy từ `hybrid_c2`. `source` ∈ als, rep, pop, content_slot. Vị trí content: `score` là null, `because_food_id` là món đã nấu giống nhất (không có thì là món đã xem). Bước 07 xuất bảng này |
 | `metrics` | 06f | `view, model, variant, group, metrics` (JSON) | Bảng độ đo tổng hợp |
 
+## Sự kiện luồng (bước 10, D18): file JSON Lines trong `/data/stream/incoming`
+| Cột | Kiểu | Ý nghĩa |
+|---|---|---|
+| `event_id` | long | Thứ tự theo `ts` trong đoạn phát lại (10a); khóa khử trùng. Tick có `event_id` âm |
+| `user_id`, `food_id`, `meal_slot`, `session_id`, `rating` | | Như bảng `events` (tick không có) |
+| `event_type` | string | view, favorite, cook, rate, hoặc `tick` (replayer phát cho phút mô phỏng trống và 1 tick cuối = giờ kết thúc + 75 phút) |
+| `ts` | timestamp | Giờ sự kiện mô phỏng, ISO 8601 `+07:00` |
+| `emit_ts` | timestamp | Giờ thật lúc replayer ghi file (đo độ trễ) |
+
+Mỗi lần chạy có thư mục `data/stream/runs/<run_id>/`: `replayer.json` (cấu hình, số đếm, danh sách sự kiện bị giữ quá watermark), `batches.jsonl` (mỗi batch: số dòng, thời gian collect / ghi Mongo, `latency_s`, `latency_bound_s`), `progress.jsonl` (StreamingQueryProgress của Spark), `DONE`. Không đưa lên Git.
+
 ## File trong `data/output/`
 | File | Nội dung |
 |---|---|
@@ -165,9 +181,13 @@ Hậu tố `_val`: lịch sử là train (10/2025–07/2026), đánh giá tháng
 | `model_split_report.json`, `model_als_report.json`, `model_content_report.json`, `model_hybrid_report.json`, `model_fpgrowth_report.json`, `model_kmeans_report.json`, `model_control_report.json` | Report từng file của bước 06 |
 | `models_metrics.json` | Bảng tổng hợp độ đo xếp hạng (chính, khám phá, ngoài độ chính xác) và khoảng tin cậy 95% |
 | `api_report.json` | Bước 08: `latency.<database>` (do `api/bench_latency.py` ghi: p50/p95/p99/max, req/s, `server_app_p95_ms`, `server_db_mean_ms` từng endpoint, mục tiêu p95 và `pass`, vòng E19 10 luồng × 100), `docker_stats_api`, `page_load_1440` (thời gian tải 7 trang), `screenshots` |
-| `perf_runs.jsonl` | Đo hiệu năng (D17, `scripts/09_perf.py`): mỗi dòng một lần chạy. `key` (`<job>_| `perf` | `"<job>|<mức>|w<số worker>"`, `"summary"` | 47 |_w<số worker>_r<lần>`), `level, workers, job, rep, args, app_name, app_id, git, started_at, exit_code, ok, wall_s` (thời gian lệnh docker exec), `duration_s` (thời lượng ứng dụng theo History Server), `docker_stats_peak {container: {mem_mib, cpu_pct}}`, `report {timings_s, total_seconds, users, events, …}`, `spark {jobs, stages, tasks, failed_*, executor_run_s, executor_cpu_s, cpu_ratio, gc_s, input_mb, output_mb, shuffle_read_mb, shuffle_remote_read_mb, shuffle_local_read_mb, shuffle_write_mb, shuffle_fetch_wait_s, spill_memory_mb, spill_disk_mb, by_group {giai đoạn: …}, executors […]}`, `error` (khi lỗi) |
+| `perf_runs.jsonl` | Đo hiệu năng (D17, `scripts/09_perf.py`): mỗi dòng một lần chạy. `key` (`<job>_<mức>_w<số worker>_r<lần>`), `level, workers, job, rep, args, app_name, app_id, git, started_at, exit_code, ok, wall_s` (thời gian lệnh docker exec), `duration_s` (thời lượng ứng dụng theo History Server), `docker_stats_peak {container: {mem_mib, cpu_pct}}`, `report {timings_s, total_seconds, users, events, …}`, `spark {jobs, stages, tasks, failed_*, executor_run_s, executor_cpu_s, cpu_ratio, gc_s, input_mb, output_mb, shuffle_read_mb, shuffle_remote_read_mb, shuffle_local_read_mb, shuffle_write_mb, shuffle_fetch_wait_s, spill_memory_mb, spill_disk_mb, by_group {giai đoạn: …}, executors […]}`, `error` (khi lỗi) |
 | `perf_report.json` | Tổng hợp từ `perf_runs.jsonl`: `cluster`, `plan`, `data {mức: users, events, hdfs}`, `rows` (job × mức × số worker: `median_s, min_s, max_s, runs_s, n_runs, n_ok, failed, timings_s` trung vị, số liệu Spark của lần gần trung vị, `docker_stats_peak`, `events_per_s` cho 04 và 05), `speedup [{level, job, t_1w_s, t_2w_s, speedup, efficiency}]`, `speedup_by_scale [{key, step, level, level_pct, t_1w_s, t_2w_s, speedup, efficiency}]` (`key` = `chain` cho cả chuỗi 04 → 06f, hoặc `04`, `05`, `06b`; 1 dòng mỗi mức 10/50/100%), `chain_totals` (tổng chuỗi 04 → 06f theo mức × số worker), `scaling_2w`, `notes` |
 | `perf/<lần chạy>/` | Report của từng lần đo (`VIFOOD_OUTPUT_DIR`). Thư mục con `processed/` và file CSV không đưa lên Git |
+| `stream_prep_report.json` | Bước 10a: `{đoạn: events, events_by_type, by_hour, replay_file, expected {cells, windows, peak_window, cooks_per_window}} (đáp án batch)` |
+| `stream_semantics_report.json` | Bài thử 10t (D18): 2 biến thể (lọc trước / sau khử trùng), mỗi batch: số dòng vào, watermark, `numRowsDroppedByWatermark` theo stateOperator; lượt nấu cuối cùng theo cửa sổ |
+| `stream_report.json` | Bước 10: `checks` (10c, 3 kịch bản: số ô / doc lệch, sự kiện trễ, bị giữ, gửi lặp, bị bỏ theo watermark, `pass`), `bench` (10d: độ trễ sự kiện → MongoDB / API, cận trên, thời gian batch, thông lượng 2 và 4 core) |
+| `stream/statestore_sample.txt` | Vài dòng state store (khử trùng, tổng hợp) đọc bằng `format("state-metadata")` / `format("statestore")` (10c) |
 | `export_report.json` | Bước 07: số doc, cách ghi, thời gian ghi, `collStats` (size, storageSize, index) từng collection, các kiểm tra (múi giờ, toàn vẹn tham chiếu, 5 user mẫu), `explain()` của 4 truy vấn tiêu biểu, nội dung `overview`. Chạy `--only` thì gộp vào report cũ cùng database và thêm `partial_runs [{only, at, timings_s}]`; kiểm tra `recs_because_cooked` đếm phần tử theo `source` và `because_cooked` |
 
 ## MongoDB – database `vifood` (bước 07, D14)
@@ -190,7 +210,9 @@ Ngày giờ lưu dạng chuỗi theo giờ Việt Nam (`"yyyy-MM-dd"`, `"yyyy-MM
 | `metrics` | ObjectId | 117 | `view, model, variant, group, metrics {n_users, p@5, r@5, ndcg@5, ap@5, p@10, …}` | `{view, variant, model}` |
 | `reports` | tên file (vd `model_als_report`) | 12 | `file, content` (nội dung JSON; dấu chấm trong tên trường đổi thành dấu phẩy, vd `"4,0"`) | – |
 | `overview` | `"overview"` | 1 | `n_dishes, n_users, n_events, events_by_type, event_months, n_recs_rows, hdfs {thư mục: bytes, bytes_with_replicas, files}, reference_date, exported_at, notes` | – |
-| `trending` | | 0 | Để dành cho Structured Streaming | `window_end -1` |
+| `trending` | `"<giờ bắt đầu cửa sổ, +07:00>\|<scope>"` | 4 / cửa sổ | Luồng `10_stream.py` ghi (D18), 1 doc / cửa sổ 60 phút trượt 15 phút × `scope` (`all`, `Bắc`, `Trung`, `Nam`): `window_start, window_end` (UTC), `meal_slot` (bữa chiếm đa số), `total_cooks, total_views, total_favorites, n_dishes`, `items` (top 20: `food_id, rank, cooks, views, favorites, prev_cooks`), `rising` (5 món tăng nhiều nhất so với [t−120, t−60): `food_id, cooks, prev_cooks, delta`), `batch_id, updated_at, replay {day, speed}` | `window_end -1`; `{scope, window_end -1}` |
+| `trending_cells` | `"<ws>\|<vùng>\|<food_id>"` | | Số đếm tuyệt đối của trạng thái luồng: `ws` (epoch giây bắt đầu cửa sổ), `region, food_id, cooks, views, favorites, n_slot0..3, last_emit_ms`. Nội bộ, API không đọc | `ws` |
+| `stream_status` | `"current"` | 1 | Heartbeat của luồng: `state, run_id, query_id, last_batch_id, data_batch_id, replay {day, days, from, to, speed, late}, trigger_s, conf, sim_now, watermark, newest_emit, latency_s {last, bound_last, p50, p95, max, n}, input_rows_per_s, processed_rows_per_s, batch_ms, dropped_by_watermark {operator: số dòng}, state_rows, n_batches, started_at, updated_at` | – |
 | `perf` | `"<job>\|<mức>\|w<số worker>"`, `"summary"` | 55 | Đo hiệu năng (D17), nạp từ `perf_report.json` bằng `07 --only perf`. `kind = "job"`: một dòng `rows` của report (`job, step, level, level_pct, workers, median_s, min_s, max_s, runs_s, timings_s, spark {…}, executors, docker_stats_peak, failed`). `kind = "summary"`: `speedup, speedup_by_scale, chain_totals, scaling_2w, cluster, data, plan, notes, runs_total, runs_failed` | `{kind, level, workers}` |
 
 ## API bước 08 (`api/`, D15)
@@ -202,7 +224,7 @@ Bộ lọc món **F** (query): `veg`, `quick`, `not_spicy` (bool), `meal` ∈ s�
 | # | Endpoint | Collection | Đợt |
 |---|---|---|---|
 | E0 | `GET /api/health` | `ping`, số doc `dishes/users/recs` | 1 |
-| E1 | `GET /api/overview` | `overview`, `reports` (tiến độ pipeline suy ra từ report), `perf` (bước 09 "Đo hiệu năng Spark"), `trending` (bước 10) | 1 |
+| E1 | `GET /api/overview` | `overview`, `reports` (tiến độ pipeline suy ra từ report), `perf` (bước 09 "Đo hiệu năng Spark"), bước 10: "Xong" khi có `reports.stream_report`, "Đang làm" khi `trending` có dữ liệu | 1 |
 | E2 | `GET /api/behavior/heatmap?metric=cooks\|views\|events` | `analysis_heatmap_hour_dow` | 1 |
 | E3 | `GET /api/behavior/monthly?region=` | `analysis_trend_month_category`, `analysis_season_month`, `reports.model_split_report` | 1 |
 | E6 | `GET /api/behavior/funnel` | `analysis_funnel_by_category`, `reports.analysis_report` | 1 |
@@ -225,6 +247,6 @@ Bộ lọc món **F** (query): `veg`, `quick`, `not_spicy` (bool), `meal` ∈ s�
 | E11 | `GET /api/ingredients/graph?variant=bỏ gia vị\|giữ gia vị&limit≤150` | `ingredient_edges` (index `variant, lift -1`) | 2 |
 | E15 | `GET /api/segments?k=3\|8\|11` | `clusters` (cache), `reports.model_kmeans_report`. Mỗi cụm: `features`, `z` (độ lệch giữa các cụm), `label`, `top_features`, `strategy` (luật D16), `persona_kiem_chung` + `verify_only` | 2 |
 | E16 | `GET /api/segments/8/{cluster}?sample≤12` | `users` (`$match cluster_k8` theo index + `$facet`), không có persona | 2 |
-| E25 | `GET /api/trending?limit&windows` | `trending` (index `window_end -1`); rỗng thì `status = "chưa chạy"` | 2 |
+| E25 | `GET /api/trending?scope=all\|Bắc\|Trung\|Nam&limit≤20&windows≤48` | `trending`, `stream_status` (không cache). `status` (đang chạy: heartbeat < 30 giây \| đã dừng \| chưa chạy), `stream {…, sim_now, watermark, data_batch_id, newest_emit}`, `current` (cửa sổ gần nhất có `window_end` ≤ `sim_now`; `sim_now` không vượt mốc kết thúc của đoạn phát lại): `final`, `items` (DishCard + `cooks, views, favorites, rank, prev_cooks, delta`), `rising`; `in_progress` (cửa sổ có `window_end` > `sim_now`); `series {windows, all, Bắc, Trung, Nam}` (tổng lượt nấu) | 2 |
 
 **RecItem** (E19, E20) = DishCard + `rank, rec_rank, source (als|content_slot|pop|fill|rep|content), dot (herb|chili|neutral), reason, because {food_id, dish_name}?, hit, n_cook_before`. `n_cook_before` (chỉ E19): số lần đã nấu trước 01/09/2026 nếu món nằm trong `users.history` (10 món nấu nhiều nhất), không thì null; dashboard hiện chip "Bạn đã nấu N lần". `summary {from_recs, from_fill, from_popular, hits, n_test_cooks}`.

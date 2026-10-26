@@ -162,6 +162,7 @@ services:
     ports:
       - "8888:8888"   # Jupyter Lab
       - "4040:4040"   # Spark Driver UI cua job dang chay
+      - "4041:4041"   # Spark UI cua luong Structured Streaming (10_stream.py, D18), chay song song job khac
     depends_on: [spark-master, namenode, mongodb]
     deploy:
       resources:

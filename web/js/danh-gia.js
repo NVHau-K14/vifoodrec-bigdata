@@ -166,8 +166,8 @@ load($('perf'), async (el) => {
           (khởi động, đọc danh mục, lập lịch task) chiếm phần lớn thời gian nên thêm worker không có lợi.</p></div>
       <div><h3>Speedup theo quy mô dữ liệu</h3><div class="chart chart-tall" id="perf-by-scale"></div>
         <p class="source">${esc(['04', '05', '06b'].map((k) => bs.find((b) => b.key === k)?.step || k).join(' · '))}.
-          T(1 worker) ÷ T(2 worker) ở từng mức; vạch đứt là mức lý tưởng 2. Ở 100%, 05 và 06b lấy trung vị
-          3 lần; còn lại 1 lần mỗi cấu hình, nên một lần chạy chậm bất thường cũng làm lệch cả điểm.</p></div>
+          T(1 worker) ÷ T(2 worker) ở từng mức; vạch đứt là mức lý tưởng 2. Trung vị 3 lần: 05 và 06b ở
+          100%, 04 ở 50% / 1 worker; còn lại 1 lần mỗi cấu hình.</p></div>
     </div>
     <p class="source">06b, 06c, 06e, 06f, 06g chạy --fixed (fit một lần với tham số đã chọn). Dữ liệu hành vi mô phỏng.
       ${failed.length ? `Lần lỗi: ${esc(failed.join('; '))}.` : ''}</p>`;

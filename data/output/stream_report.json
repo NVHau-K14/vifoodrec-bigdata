@@ -1,0 +1,565 @@
+{
+  "checks": {
+    "generated_at": "2026-10-26T06:05:21",
+    "day": "2026-09-27",
+    "from": "06:00",
+    "to": "24:00",
+    "speed": "300",
+    "scenarios": {
+      "s1": {
+        "desc": "không trễ, không gửi lặp",
+        "late": 0,
+        "truth_cells": 205920,
+        "stream_cells": 205920,
+        "cells_differ": 0,
+        "cells_extra": 0,
+        "cells_over_truth": 0,
+        "truth_docs": 280,
+        "stream_docs": 280,
+        "docs_differ": 0,
+        "events_replayed": 92302,
+        "late_within": 0,
+        "duplicates_sent": 0,
+        "held_beyond_watermark": 0,
+        "dropped_by_watermark": {
+          "stateStoreSave": 0,
+          "dedupeWithinWatermark": 0
+        },
+        "batches_written": 206,
+        "times_s": {
+          "stream_s": 222.6
+        },
+        "examples_differ": [],
+        "pass": true,
+        "rule": "khớp tuyệt đối từng ô và từng doc trending",
+        "accept_window_min": {
+          "n_batches": 199,
+          "p50": 15.0,
+          "max": 85.01666666666667,
+          "batches_ge_20": 12,
+          "batches_ge_30": 2
+        }
+      },
+      "s2": {
+        "desc": "3% trễ 1–8 phút, 0,2% gửi lặp",
+        "late": 1,
+        "truth_cells": 205920,
+        "stream_cells": 205920,
+        "cells_differ": 0,
+        "cells_extra": 0,
+        "cells_over_truth": 0,
+        "truth_docs": 280,
+        "stream_docs": 280,
+        "docs_differ": 0,
+        "events_replayed": 92302,
+        "late_within": 2757,
+        "duplicates_sent": 180,
+        "held_beyond_watermark": 0,
+        "dropped_by_watermark": {
+          "stateStoreSave": 0,
+          "dedupeWithinWatermark": 0
+        },
+        "batches_written": 209,
+        "times_s": {
+          "stream_s": 224.6
+        },
+        "examples_differ": [],
+        "pass": true,
+        "rule": "khớp tuyệt đối từng ô và từng doc trending",
+        "accept_window_min": {
+          "n_batches": 204,
+          "p50": 15.0,
+          "max": 85.01666666666667,
+          "batches_ge_20": 8,
+          "batches_ge_30": 3
+        }
+      },
+      "s3": {
+        "desc": "như s2, thêm 0,3% bị giữ 20–40 phút (quá watermark)",
+        "late": 2,
+        "truth_cells": 205920,
+        "stream_cells": 205576,
+        "cells_differ": 957,
+        "cells_extra": 0,
+        "cells_over_truth": 0,
+        "truth_docs": 280,
+        "stream_docs": 280,
+        "docs_differ": 254,
+        "events_replayed": 92302,
+        "late_within": 2795,
+        "duplicates_sent": 173,
+        "held_beyond_watermark": 264,
+        "dropped_by_watermark": {
+          "stateStoreSave": 0,
+          "dedupeWithinWatermark": 255
+        },
+        "batches_written": 211,
+        "times_s": {
+          "stream_s": 230.1
+        },
+        "examples_differ": [
+          [
+            1790464500,
+            "Bắc",
+            4194,
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            []
+          ],
+          [
+            1790463600,
+            "Bắc",
+            4194,
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            []
+          ],
+          [
+            1790462700,
+            "Bắc",
+            4194,
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            []
+          ]
+        ],
+        "missing_events_total": 960,
+        "held_counted_types": 249,
+        "held_window_slots": 996,
+        "held_emitted_after_end": 7,
+        "windows_missing_over_held": 0,
+        "pass": true,
+        "rule": "không ô nào vượt đáp án; phần thiếu của mỗi (cửa sổ, vùng) ≤ số sự kiện bị giữ > 10 phút rơi vào đó",
+        "accept_window_min": {
+          "n_batches": 205,
+          "p50": 15.0,
+          "max": 85.01666666666667,
+          "batches_ge_20": 11,
+          "batches_ge_30": 2
+        }
+      }
+    },
+    "all_pass": true,
+    "timings_s": {
+      "run_s1": 246.4,
+      "run_s2": 243.9,
+      "run_s3": 249.1,
+      "truth": 24.3,
+      "compare": 4.2,
+      "statestore": 4.9
+    },
+    "total_seconds": 773.0,
+    "statestore_batch_id": 180
+  },
+  "bench": {
+    "lat60": {
+      "args": [
+        "--day",
+        "2026-09-27",
+        "--from",
+        "16:00",
+        "--to",
+        "19:00",
+        "--speed",
+        "60",
+        "--late",
+        "1"
+      ],
+      "trigger_s": 5.0,
+      "times_s": {
+        "stream_s": 206.6
+      },
+      "events_replayed": 29831,
+      "files": 188,
+      "rows_written": 29890,
+      "replayer_behind_max_s": 0.0,
+      "batches_with_data": 38,
+      "batch_duration_s": {
+        "n": 38,
+        "p50": 1.278,
+        "p95": 1.587,
+        "max": 5.391,
+        "mean": 1.404
+      },
+      "batches_over_trigger": 1,
+      "input_rows_per_s": {
+        "n": 38,
+        "p50": 168.0,
+        "p95": 183.2,
+        "max": 189.0,
+        "mean": 157.326
+      },
+      "processed_rows_per_s": {
+        "n": 38,
+        "p50": 659.5,
+        "p95": 797.7,
+        "max": 841.8,
+        "mean": 613.097
+      },
+      "latency_event_to_mongo_s": {
+        "n": 38,
+        "p50": 2.249,
+        "p95": 2.528,
+        "max": 6.337,
+        "mean": 2.384
+      },
+      "latency_bound_s": {
+        "n": 38,
+        "p50": 8.249,
+        "p95": 8.528,
+        "max": 12.337,
+        "mean": 8.384
+      },
+      "latency_event_to_api_s": {
+        "n": 38,
+        "p50": 2.515,
+        "p95": 2.854,
+        "max": 6.542,
+        "mean": 2.647
+      },
+      "mongo_write_ms": {
+        "n": 38,
+        "p50": 326,
+        "p95": 448,
+        "max": 637,
+        "mean": 315.342
+      },
+      "sink_breakdown_s": {
+        "trigger_total": 53.4,
+        "collect": 26.9,
+        "mongo": 12.0,
+        "cells_written": 104146
+      }
+    },
+    "generated_at": "2026-10-26T06:26:34",
+    "notes": [
+      "Độ trễ = độ trễ của sự kiện MỚI NHẤT trong batch (lúc ghi MongoDB xong − emit_ts). Sự kiện cũ nhất trong batch chờ thêm tối đa 1 chu kỳ trigger + 1 giây (độ mịn của file) → cận trên latency_bound_s.",
+      "API → dashboard: trang Thời gian thực gọi lại E25 mỗi 5 giây, cộng thêm tối đa 5 giây (không đo ở đây).",
+      "Thông lượng: file ghi sẵn trước khi bật luồng, 2 file / trigger; mỗi lần chạy reset checkpoint vì Spark giữ số partition của state store trong checkpoint.",
+      "Dữ liệu hành vi là MÔ PHỎNG (phát lại sự kiện của bước 04)."
+    ],
+    "lat300": {
+      "args": [
+        "--day",
+        "2026-09-27",
+        "--from",
+        "16:00",
+        "--to",
+        "21:00",
+        "--speed",
+        "300",
+        "--late",
+        "1"
+      ],
+      "trigger_s": 1.0,
+      "times_s": {
+        "stream_s": 66.1
+      },
+      "events_replayed": 42476,
+      "files": 61,
+      "rows_written": 42558,
+      "replayer_behind_max_s": 0.0,
+      "batches_with_data": 33,
+      "batch_duration_s": {
+        "n": 33,
+        "p50": 1.815,
+        "p95": 2.675,
+        "max": 5.183,
+        "mean": 1.841
+      },
+      "batches_over_trigger": 31,
+      "input_rows_per_s": {
+        "n": 33,
+        "p50": 815.5,
+        "p95": 984.2,
+        "max": 1214.9,
+        "mean": 626.388
+      },
+      "processed_rows_per_s": {
+        "n": 33,
+        "p50": 854.4,
+        "p95": 1109.8,
+        "max": 1339.4,
+        "mean": 648.258
+      },
+      "latency_event_to_mongo_s": {
+        "n": 31,
+        "p50": 2.206,
+        "p95": 3.323,
+        "max": 5.616,
+        "mean": 2.348
+      },
+      "latency_bound_s": {
+        "n": 31,
+        "p50": 4.206,
+        "p95": 5.323,
+        "max": 7.616,
+        "mean": 4.348
+      },
+      "latency_event_to_api_s": {
+        "n": 31,
+        "p50": 3.002,
+        "p95": 3.893,
+        "max": 6.263,
+        "mean": 3.109
+      },
+      "mongo_write_ms": {
+        "n": 31,
+        "p50": 524,
+        "p95": 703,
+        "max": 751,
+        "mean": 458.548
+      },
+      "sink_breakdown_s": {
+        "trigger_total": 60.8,
+        "collect": 29.3,
+        "mongo": 14.2,
+        "cells_written": 134298
+      }
+    },
+    "lat1200": {
+      "args": [
+        "--day",
+        "2026-09-27",
+        "--from",
+        "06:00",
+        "--to",
+        "24:00",
+        "--speed",
+        "1200",
+        "--late",
+        "1"
+      ],
+      "trigger_s": 1.0,
+      "times_s": {
+        "stream_s": 68.6
+      },
+      "events_replayed": 92302,
+      "files": 56,
+      "rows_written": 92485,
+      "replayer_behind_max_s": 0.0,
+      "batches_with_data": 17,
+      "batch_duration_s": {
+        "n": 17,
+        "p50": 2.591,
+        "p95": 6.528,
+        "max": 11.226,
+        "mean": 3.397
+      },
+      "batches_over_trigger": 17,
+      "input_rows_per_s": {
+        "n": 17,
+        "p50": 1139.8,
+        "p95": 3476.3,
+        "max": 4703.7,
+        "mean": 1593.453
+      },
+      "processed_rows_per_s": {
+        "n": 17,
+        "p50": 1162.3,
+        "p95": 3442.0,
+        "max": 3499.8,
+        "mean": 1549.224
+      },
+      "latency_event_to_mongo_s": {
+        "n": 14,
+        "p50": 3.313,
+        "p95": 8.392,
+        "max": 11.839,
+        "mean": 4.502
+      },
+      "latency_bound_s": {
+        "n": 14,
+        "p50": 5.313,
+        "p95": 10.392,
+        "max": 13.839,
+        "mean": 6.502
+      },
+      "latency_event_to_api_s": {
+        "n": 14,
+        "p50": 3.869,
+        "p95": 8.75,
+        "max": 12.573,
+        "mean": 5.051
+      },
+      "mongo_write_ms": {
+        "n": 14,
+        "p50": 844,
+        "p95": 2012,
+        "max": 2772,
+        "mean": 1131.571
+      },
+      "sink_breakdown_s": {
+        "trigger_total": 57.8,
+        "collect": 25.0,
+        "mongo": 15.8,
+        "cells_written": 228462
+      }
+    },
+    "thr_c2": {
+      "args": [
+        "--day",
+        "2026-09-21",
+        "--days",
+        "7",
+        "--from",
+        "00:00",
+        "--to",
+        "24:00",
+        "--speed",
+        "max",
+        "--late",
+        "0",
+        "--max-files",
+        "2",
+        "--cores",
+        "2",
+        "--chunk-min",
+        "720"
+      ],
+      "trigger_s": 1.0,
+      "times_s": {
+        "replayer_s": 13.0,
+        "stream_s": 111.6
+      },
+      "events_replayed": 488741,
+      "files": 15,
+      "rows_written": 490570,
+      "replayer_behind_max_s": 0.0,
+      "batches_with_data": 8,
+      "batch_duration_s": {
+        "n": 8,
+        "p50": 14.409,
+        "p95": 20.141,
+        "max": 20.141,
+        "mean": 13.165
+      },
+      "batches_over_trigger": 8,
+      "input_rows_per_s": {
+        "n": 7,
+        "p50": 5049.1,
+        "p95": 6321.3,
+        "max": 6321.3,
+        "mean": 4199.971
+      },
+      "processed_rows_per_s": {
+        "n": 8,
+        "p50": 4196.7,
+        "p95": 6315.8,
+        "max": 6315.8,
+        "mean": 4202.125
+      },
+      "rows_in": 490570,
+      "data_seconds": 105.4,
+      "rows_per_s_overall": 4654,
+      "durations_ms_median": {
+        "addBatch": 14226.5,
+        "getBatch": 28.5,
+        "latestOffset": 29.0,
+        "queryPlanning": 120.5,
+        "walCommit": 39.5,
+        "commitOffsets": 33.0,
+        "triggerExecution": 14565.5
+      },
+      "sink_breakdown_s": {
+        "trigger_total": 105.3,
+        "collect": 30.0,
+        "mongo": 66.4,
+        "cells_written": 1159191
+      }
+    },
+    "thr_c4": {
+      "args": [
+        "--day",
+        "2026-09-21",
+        "--days",
+        "7",
+        "--from",
+        "00:00",
+        "--to",
+        "24:00",
+        "--speed",
+        "max",
+        "--late",
+        "0",
+        "--max-files",
+        "2",
+        "--cores",
+        "4",
+        "--chunk-min",
+        "720"
+      ],
+      "trigger_s": 1.0,
+      "times_s": {
+        "replayer_s": 10.6,
+        "stream_s": 113.5
+      },
+      "events_replayed": 488741,
+      "files": 15,
+      "rows_written": 490570,
+      "replayer_behind_max_s": 0.0,
+      "batches_with_data": 8,
+      "batch_duration_s": {
+        "n": 8,
+        "p50": 13.71,
+        "p95": 23.438,
+        "max": 23.438,
+        "mean": 13.489
+      },
+      "batches_over_trigger": 8,
+      "input_rows_per_s": {
+        "n": 7,
+        "p50": 4575.0,
+        "p95": 7384.6,
+        "max": 7384.6,
+        "mean": 4203.257
+      },
+      "processed_rows_per_s": {
+        "n": 8,
+        "p50": 4293.7,
+        "p95": 6788.8,
+        "max": 6788.8,
+        "mean": 4211.962
+      },
+      "rows_in": 490570,
+      "data_seconds": 108.0,
+      "rows_per_s_overall": 4543,
+      "durations_ms_median": {
+        "addBatch": 13467.5,
+        "getBatch": 32.0,
+        "latestOffset": 29.0,
+        "queryPlanning": 136.5,
+        "walCommit": 43.5,
+        "commitOffsets": 34.0,
+        "triggerExecution": 13710.5
+      },
+      "sink_breakdown_s": {
+        "trigger_total": 107.9,
+        "collect": 29.0,
+        "mongo": 70.0,
+        "cells_written": 1159191
+      }
+    }
+  }
+}

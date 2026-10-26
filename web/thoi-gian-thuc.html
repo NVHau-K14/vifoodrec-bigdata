@@ -22,21 +22,30 @@
       <div class="head-pills" id="head-pills"></div>
     </header>
 
+    <div class="kpis" id="kpis" aria-live="polite"></div>
     <section class="row">
-      <article class="card" style="flex:1 1 320px">
-        <div class="card-head"><h2>Trạng thái luồng</h2><span class="card-note">Spark Structured Streaming → MongoDB <code>trending</code></span></div>
-        <div class="card-body" id="status"></div>
-      </article>
       <article class="card" style="flex:2 1 520px">
-        <div class="card-head"><h2>Lượt nấu theo cửa sổ</h2><span class="card-note">các cửa sổ gần nhất</span></div>
+        <div class="card-head"><h2>Lượt nấu trong 1 giờ, theo cửa sổ</h2><span class="card-note">cửa sổ 60 phút, trượt 15 phút, giờ mô phỏng</span></div>
         <div class="card-body" id="windows"></div>
       </article>
+      <article class="card" style="flex:1 1 300px">
+        <div class="card-head"><h2>Luồng xử lý</h2><span class="card-note">Spark Structured Streaming → MongoDB</span></div>
+        <div class="card-body" id="status"></div>
+      </article>
     </section>
-
     <section class="row">
-      <article class="card" style="flex:1 1 100%">
-        <div class="card-head"><h2>Món thịnh hành</h2><span class="card-note" id="trend-note">cửa sổ gần nhất</span></div>
-        <div class="card-body" id="trending"></div>
+      <article class="card" style="flex:3 1 560px">
+        <div class="card-head"><h2>Món thịnh hành trong 1 giờ qua</h2><span class="card-note" id="trend-note">cửa sổ gần nhất đã kết thúc</span></div>
+        <div class="card-body">
+          <div class="rt-ctrl"><div id="scope"></div><span class="card-note" id="scope-note"></span></div>
+          <div id="trending"></div>
+        </div>
+      </article>
+      <article class="card" style="flex:1 1 280px">
+        <div class="card-head"><h2>Tăng nhanh</h2><span class="card-note">so với 1 giờ trước đó</span></div>
+        <div class="card-body" id="rising"></div>
+        <h3 class="sub-h">Cửa sổ đang cập nhật</h3>
+        <div id="progress"></div>
       </article>
     </section>
   </main>

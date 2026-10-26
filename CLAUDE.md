@@ -15,7 +15,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 ## Hạ tầng (Docker Desktop + WSL2, Windows 11, RAM 24GB)
 - HDFS: `namenode` (UI http://localhost:9870, RPC `hdfs://namenode:8020`), `datanode1`, `datanode2` (replication 2).
 - Spark 4.2.0 Standalone: `spark-master` (UI :8080), `spark-worker-1/2` (mỗi worker 2 core, 3GB).
-- `jupyter` (http://localhost:8888, token `bigdata`) là driver; Spark UI của job đang chạy ở :4040.
+- `jupyter` (http://localhost:8888, token `bigdata`) là driver; Spark UI của job đang chạy ở :4040, của luồng Structured Streaming ở :4041.
 - `spark-history` (http://localhost:18080): xem lại các job đã chạy xong. `get_spark()` ghi event log vào `logs/spark-events/` (đã có trong `.gitignore`).
 - `mongodb` (:27017, admin/admin123), database `vifood` (`vifood_local` khi chạy `--local`).
 - `mongo-express` (http://localhost:8090, tài khoản trong `.env`). Cổng 8081 trên máy là UI của `spark-worker-1`.
@@ -36,6 +36,7 @@ Dữ liệu: ViFoodRec, gồm món ăn thật (Cooky + Món Ngon Mỗi Ngày) v�
 | 07 Xuất MongoDB | `src/07_export_mongo.py` | kết quả 02–06 trên HDFS, `data/output/*report*.json` | MongoDB `vifood` (26 collection) | `export_report.json` |
 | 08 API + dashboard | `api/main.py` + `api/routers/*`, `web/` (skill `vifood-dashboard`), `scripts/08_fetch_vendor.sh`, `api/bench_latency.py` | MongoDB | – | pytest `api/tests/`, `api_report.json` |
 | 09 Đo hiệu năng | `scripts/09_perf.py` (chạy trên máy, D17) | `/data/{curated,features}` (chép sang gốc đo) | `/perf/{s010,s050,s100,catalog}` | `perf_runs.jsonl`, `perf_report.json`, `perf/<lần chạy>/` |
+| 10 Structured Streaming | `src/10a_stream_prep.py`, `10b_replayer.py`, `10_stream.py`, `10c_stream_check.py`, `10d_stream_bench.py`, `10t_stream_semantics.py`, dùng chung `src/stream_common.py`; bật/tắt bằng `scripts/10_stream.sh` (D18) | `/data/events`, `/data/stream/incoming` | `/data/stream/{replay,truth,checkpoint,archive}`; MongoDB `trending`, `trending_cells`, `stream_status` | `stream_prep_report.json`, `stream_semantics_report.json`, `stream_report.json` |
 
 Bản sao nhỏ để xem trên máy nằm ở `data/processed/`. Report và mẫu kiểm tra nằm ở `data/output/`.
 
@@ -50,6 +51,7 @@ docker exec -w /home/jovyan/work -e PYTHONPATH=/usr/local/spark/python/lib/py4j-
 ```
 Script nào cũng có `--local` (Spark local, ghi vào `data/hdfs_local/`). Bước sinh dữ liệu và các bước nặng có thêm `--scale`.
 Đo hiệu năng (D17): `python scripts/09_perf.py --plan` để xem kế hoạch, `python scripts/09_perf.py` để chạy (dừng giữa chừng thì chạy lại, lần đã có được bỏ qua), rồi `07 --only perf`.
+Structured Streaming (D18): `bash scripts/10_stream.sh reset`, rồi `bash scripts/10_stream.sh start --from 16:00 --speed 60` (dừng: `stop`, xem: `status`). Spark UI của luồng ở http://localhost:4041. Luồng giữ 2 core: không đo hiệu năng (09) khi luồng đang chạy. Kiểm tra / đo: `python src/10c_stream_check.py`, `python src/10d_stream_bench.py` (chạy trong container như các bước khác, mỗi lần đều reset luồng).
 Biến `VIFOOD_DATA_ROOT`, `VIFOOD_OUTPUT_DIR`, `VIFOOD_RUN_TAG` chỉ dùng cho phép đo; không đặt thì mọi script chạy như cũ. `--fixed` (06b, 06c, 06e, 06f, 06g) fit một lần với tham số đã chọn.
 
 ```bash
@@ -108,4 +110,6 @@ docker exec -w /home/jovyan/work api python -m api.bench_latency
 - Chrome headless `--window-size=390,...` vẫn dựng trang rộng hơn rồi cắt ảnh (bề rộng cửa sổ tối thiểu). Chụp ảnh mobile phải giả lập bằng DevTools Protocol (`Emulation.setDeviceMetricsOverride`, `mobile: true`), như lần chụp `docs/images/08_*`.
 - Lọc log bằng `grep "^..."` có thể trượt, vì dòng in ra bị dính sau thanh tiến trình của Spark (`\r`). Dùng `grep -ao "\[06\][^[]*"`.
 - Sửa file bằng Python trên máy (Windows) với `open(p, 'w')` sẽ đổi xuống dòng thành CRLF. Ghi bằng `newline=''` (đọc cũng `newline=''`), hoặc chạy `sed -i 's/\r$//' <file>` sau khi sửa.
+- Heredoc của Bash tool (Git Bash) làm hỏng dấu `\` trong chuỗi Python (vd `"\n"`), nên `assert old in s` trượt. Sửa file có dấu `\` thì dùng Edit, hoặc ghi script Python ra file rồi chạy.
+- `docker compose up -d jupyter` (vd sau khi thêm cổng) khởi động lại cả `spark-master` và `mongodb`. Dữ liệu vẫn còn; đợi khoảng 10 giây cho worker đăng ký lại với master.
 - History Server có lúc không coi ứng dụng là đã kết thúc dù job xong (event log còn file `appstatus_*`, gặp ở 03 với 1 worker). `scripts/09_perf.py --summarize` tra lại theo tên và lấy thời lượng từ job cuối (D17).

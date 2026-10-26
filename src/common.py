@@ -33,8 +33,9 @@ OUTPUT_DIR = os.getenv("VIFOOD_OUTPUT_DIR")             # thu muc report (tuong 
 RUN_TAG = os.getenv("VIFOOD_RUN_TAG")                   # gan vao ten ung dung, vd 06b_als|s100|w1|r2
 
 
-def get_spark(app_name: str, local: bool = False) -> SparkSession:
-    """local=True: chay Spark tren 1 may (de thu nhanh). Mac dinh: nop job len cum Docker."""
+def get_spark(app_name: str, local: bool = False, conf: dict = None) -> SparkSession:
+    """local=True: chay Spark tren 1 may (de thu nhanh). Mac dinh: nop job len cum Docker.
+    conf: ghi de cau hinh (vd luong Structured Streaming chi xin 2 core, driver 1g, D18)."""
     b = SparkSession.builder.appName(f"{app_name}|{RUN_TAG}" if RUN_TAG else app_name)
     if local:
         # local: driver kiem luon executor -> can nhieu bo nho hon (container jupyter gioi han 4g)
@@ -52,9 +53,11 @@ def get_spark(app_name: str, local: bool = False) -> SparkSession:
     os.makedirs(EVENT_LOG_DIR, exist_ok=True)
     b = (b.config("spark.eventLog.enabled", "true")
           .config("spark.eventLog.dir", "file://" + EVENT_LOG_DIR))
-    spark = (b.config("spark.sql.session.timeZone", "Asia/Ho_Chi_Minh")
-              .config("spark.sql.shuffle.partitions", "8")
-              .getOrCreate())
+    b = (b.config("spark.sql.session.timeZone", "Asia/Ho_Chi_Minh")
+          .config("spark.sql.shuffle.partitions", "8"))
+    for k, v in (conf or {}).items():
+        b = b.config(k, v)
+    spark = b.getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
     # Gui kem file nay cho cac worker: UDF dinh nghia o day can import duoc 'common' tren worker
     spark.sparkContext.addPyFile(os.path.abspath(__file__))

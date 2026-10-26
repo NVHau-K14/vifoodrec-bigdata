@@ -442,3 +442,79 @@ Bản đề xuất (LAST_RUN 26/10, mục A–I) được duyệt với 7 câu t
   - **04 ở 50% / 1 worker chậm bất thường:** giai đoạn sinh (stage mapInPandas) tốn 21,7 ms thời gian task mỗi user, so với 15,6 ms ở 100% / 1 worker, 17,9 và 18,5 ms ở 50% và 100% / 2 worker. Chỉ chạy 1 lần nên chưa tách được đây là nhiễu của máy hay thật. Bỏ 04 ra, speedup phần còn lại của chuỗi là 1,37 ở 50% và 1,23 ở 100%: vẫn cao hơn ở 50%, nhưng chênh ít hơn nhiều.
   - **Ở 100%, 2 worker tốn thêm nhiều thời gian task hơn:** 06b tổng thời gian task tăng 5,8% khi thêm worker ở 50% (910,4 → 963,1 giây) nhưng tăng 24,2% ở 100% (1.491,5 → 1.852,3 giây); GC 6,7 → 11,2 giây và đọc shuffle từ xa 1.815,5 MB ở 100%. Phần `test:als_implicit` có speedup 1,62 ở 50% và 1,39 ở 100%.
 - **Phát hiện phụ ở 04:** phần sinh sự kiện (mapInPandas) chạy **2 lần** trong mỗi lần chạy 04: stage 4 (lấy mẫu cho `repartitionByRange(12, "month")`) và stage 6 (sinh thật, ghi shuffle) có thời gian task gần bằng nhau (vd 100% / 2 worker: 926,2 và 923,4 giây). Chưa sửa: sửa sẽ làm số đo 04 không còn so được với các lần đã đo (chờ người dùng quyết định).
+- **Chạy lại 04 ở 50% / 1 worker thêm 2 lần (26/10 trưa, người dùng chọn):** 575,8 / 604,0 / 631,8 giây (lệch ±4,6%), trung vị vẫn là 604,0 nên speedup 04 ở 50% vẫn là 2,19. Phần sinh ở hai lần mới tốn 21,5 và 23,8 ms thời gian task mỗi user. **Lần đo ở 50% không phải nhiễu.** Điểm khác thường có thể là lần đo duy nhất ở 100% / 1 worker (15,6 ms/user, thấp nhất trong mọi cấu hình), nhưng chưa đo lại. `perf_report.json` ghi `plan.repeats_50pct_1w = {"04": 3}`; tổng 64 lần chạy.
+- **Câu 12 (04 chạy phần sinh 2 lần):** người dùng chọn chỉ ghi vào báo cáo như một phát hiện tối ưu, không sửa 04.
+
+## D18. Structured Streaming (bước 10): thiết kế đã chốt (26/10)
+Người dùng chọn phương án đề xuất cho 10 câu của bản thiết kế (LAST_RUN 26/10 sáng), kèm 12 sửa đổi. Câu 12 của LAST_RUN (04 chạy phần sinh 2 lần): **chỉ ghi vào báo cáo, không sửa**.
+
+**Thiết kế:**
+- **Nguồn:** phát lại sự kiện mô phỏng của Chủ nhật 27/09/2026 (bước 04). `src/10a_stream_prep.py` lọc ngày, gán `event_id` theo thứ tự thời gian, ghi `data/stream/replay_<ngày>.jsonl.gz` và bản Parquet `/data/stream/replay/<ngày>`, tính đáp án batch.
+- **Replayer:** `src/10b_replayer.py` là Python thường, không dùng Spark. Mỗi giây thật ghi 1 file JSON Lines vào `/data/stream/_staging` qua WebHDFS, rồi RENAME (nguyên tử) sang `/data/stream/incoming`. Mặc định tốc độ 60, chạy từ 16:00 khi demo; `--speed max` dùng để đo thông lượng.
+- **Đến trễ và gửi lặp:** `--late 0|1|2`: 3% trễ 1–8 phút, 0,2% gửi lặp, 0,3% bị giữ 20–40 phút (chỉ ở mức 2).
+- **Query:** `withWatermark("ts", 10 phút)` → `dropDuplicatesWithinWatermark(event_id)` → lọc cook/view/favorite → join broadcast `users` (lấy vùng) → `groupBy(window 60 phút trượt 15 phút, vùng, món)` → `update` → `foreachBatch`.
+- **Chiều nhóm:** vùng; bữa chỉ là nhãn của cửa sổ, lấy bữa chiếm đa số theo 4 cột đếm `n_slot*` trong cùng phép tổng hợp, không nhân trạng thái.
+- **Sink:** gom về driver, ghi bằng `pymongo`:
+  - `trending_cells`: số đếm tuyệt đối, `_id = ws|vùng|món`, upsert. Ghi lại cùng batch cho cùng giá trị, nên idempotent;
+  - `trending`: 1 doc / cửa sổ × phạm vi (toàn quốc, 3 vùng): top 20 và "tăng nhanh";
+  - `stream_status`: heartbeat, watermark, độ trễ, số dòng bị bỏ.
+- **Checkpoint và vận hành:**
+  - checkpoint ở `/data/stream/checkpoint`, state store mặc định (HDFS-backed);
+  - luồng xin `cores.max 2`, executor 1 GB, driver 1 GB, `shuffle.partitions 4`, Spark UI ở cổng 4041 (thêm vào compose);
+  - bật/tắt bằng `scripts/10_stream.sh start|stop|status|reset`. Dashboard không có nút bật/tắt.
+
+**12 sửa đổi của người dùng và cách làm:**
+1. **Tick:** replayer phát sự kiện `tick` cho mỗi phút mô phỏng không có sự kiện, và một tick cuối có ts = giờ kết thúc + 75 phút, để watermark vượt mọi cửa sổ và cửa sổ cuối được chốt. Phép lọc `event_type` đặt sau `withWatermark`. Bài thử (mục "Kết quả bài thử") cho thấy phải đặt **sau cả phép khử trùng**.
+2. **Bài thử `src/10t_stream_semantics.py`:** chạy local, dùng đúng `stream_query()`, đẩy 4 file nhỏ. Kết luận ở mục dưới; số liệu trong `data/output/stream_semantics_report.json`.
+3. **`src/10c_stream_check.py` chạy 3 kịch bản:**
+   - s1, `--late 0`: khớp tuyệt đối;
+   - s2, chỉ trễ 1–8 phút và gửi lặp: khớp tuyệt đối;
+   - s3, đủ cả trễ quá watermark: không ô nào vượt đáp án, và phần thiếu của mỗi (cửa sổ, vùng) ≤ số sự kiện bị giữ > 10 phút rơi vào đó.
+4. **Phạm vi đáp án:** đáp án của 10a và 10c chỉ tính ts trong [`--from`, `--to`), giống đoạn replayer phát.
+5. **`last_batch_id` lưu kèm `query.id`:** chạy lại từ checkpoint thì giữ nguyên id, nên bỏ qua batch đã ghi. Reset thì id mới, nên không bỏ qua batch nào.
+6. **"Tăng nhanh":** so [t−60, t) với [t−120, t−60), là cửa sổ bắt đầu sớm hơn 60 phút, không chồng lên nhau. Lấy từ `trending_cells` khi ghi doc. Doc của một cửa sổ được ghi lần cuối sau khi cửa sổ trước đã chốt, nên `prev_cooks` của doc đã chốt là chính xác.
+7. **Trigger là tham số:** 5 giây ở tốc độ ≤ 60, 1 giây ở tốc độ cao hơn. Bài đo thông lượng dùng 14 file, mỗi file 12 giờ, `maxFilesPerTrigger 2`, `maxBytesPerTrigger 256m`. Đổi số core, số partition hay định nghĩa cửa sổ mà checkpoint còn thì `10_stream.py` dừng và yêu cầu reset; cấu hình lưu ở `/data/stream/checkpoint_conf.json`, vì Spark giữ số partition của state store trong checkpoint.
+8. **Định nghĩa độ trễ:** là độ trễ của sự kiện **mới nhất** trong batch, tính từ lúc ghi MongoDB xong trừ `emit_ts`. Cận trên cho mọi sự kiện trong batch = độ trễ đó + 1 chu kỳ trigger + 1 giây (độ mịn của file).
+9. **"1 giờ qua" trên trang:** là cửa sổ gần nhất có `window_end` ≤ `sim_now` (sự kiện mới nhất đã xử lý). Cửa sổ có `window_end` > `sim_now` gắn nhãn "đang cập nhật". `final` = `window_end` ≤ watermark.
+10. **Cổng:** thêm cổng 4041:4041 cho `jupyter` trong compose.
+11. **Ảnh state store:** 10c đọc state store của kịch bản cuối bằng `spark.read.format("state-metadata")` và `format("statestore")` (khử trùng và tổng hợp), ở batch cuối − 30 (Spark chỉ giữ 100 phiên bản). Kết quả ghi vào `data/output/stream/statestore_sample.txt`.
+12. **Đường dẫn:** dùng `/data/stream` như kế hoạch.
+
+**Kết quả bài thử (`10t`, Spark 4.2 local):**
+- **Phép lọc `event_type` đặt ngay sau `withWatermark` bị optimizer đẩy xuống dưới `EventTimeWatermark`, tới tận nguồn JSON**, vì phép lọc không dùng cột `ts`. Bằng chứng:
+  - F1 chỉ đọc 6 dòng (tick bị loại ngay khi đọc);
+  - watermark sau F3 (chỉ có tick 11:30) vẫn là 10:15, chứ không lên 11:20.
+  
+  Hệ quả: tick vô dụng; giờ vắng thì watermark đứng yên; cửa sổ cuối không bao giờ được chốt. **Cách sửa:** lọc sau `dropDuplicatesWithinWatermark`, vì phép khử trùng có trạng thái nên chặn việc đẩy phép lọc xuống. Khi đó F1 đọc 7 dòng và watermark sau F3 là 11:20. Đổi lại, tick và sự kiện `rate` cũng vào trạng thái khử trùng (nhỏ: tối đa 1 tick mỗi phút, `rate` khoảng 3,4% sự kiện). `stream_query(filter_before_dedup=True)` giữ lại để tái hiện lỗi.
+- **`dropDuplicatesWithinWatermark` tự bỏ dòng có ts < watermark** và đếm vào `numRowsDroppedByWatermark` của chính nó (`dedupeWithinWatermark`). Ở bản lọc sau khử trùng, phép khử trùng bỏ 3 dòng: id 101 (10:15 < 10:20), bản lặp của id 1 (10:00), id 104 (10:50 < 11:20). Bản lặp của id 6 (10:25 ≥ watermark) bị khử như một dòng trùng, không tính là trễ.
+- **Phép tổng hợp (`stateStoreSave`) luôn bỏ 0 dòng,** vì dòng trễ đã bị lọc ở bước khử trùng.
+- **Hệ quả của việc khử trùng đứng trước:** một sự kiện quá watermark bị **bỏ hoàn toàn**, kể cả khi vài cửa sổ trượt chứa nó vẫn còn mở. Ví dụ id 104 ở 10:50: cửa sổ [10:30, 11:30) và [10:45, 11:45) chưa đóng nhưng vẫn không được tính.
+- **"Trễ" tính theo watermark của batch xử lý sự kiện, không theo lúc sự kiện đến.** Watermark của một batch tính từ batch trước, nên batch nhận được sự kiện trễ tới (ts lớn nhất trong batch − watermark). Ở 10c s3 (tốc độ 300, trigger 1 giây, mỗi file 5 phút mô phỏng), khoảng này có trung vị 15 phút. Khi một batch chạy quá 1 giây và gom 2 file, khoảng này lên ≥ 20 phút; sau mốc kết thúc thì hết tick nên watermark đứng yên. Vì vậy một phần sự kiện bị giữ 20–40 phút vẫn được đếm, và phần thiếu so với đáp án chỉ **nhỏ hơn hoặc bằng** số sự kiện bị giữ nhân với số cửa sổ chứa chúng (số liệu trong `stream_report.json` → `checks.scenarios.s3`).
+
+**Khi cài đặt và chạy (26/10):**
+- **Hàm dùng chung:** `stream_query()`, `aggregate()` và `window_docs()` nằm trong `src/stream_common.py`, dùng chung cho luồng, đáp án batch (10a, 10c) và bài thử 10t. Đáp án và luồng vì vậy cùng một định nghĩa cửa sổ và cùng cách xếp hạng.
+- **Giờ mô phỏng trên trang:** tick cuối (giờ kết thúc + 75 phút) đẩy ts lớn nhất vượt khỏi đoạn phát lại. E25 vì vậy chặn `sim_now` ở mốc kết thúc; nếu không, "1 giờ qua" sẽ là một cửa sổ chỉ có 15 phút dữ liệu.
+- **Độ trễ sự kiện → API:** `stream_status` có `data_batch_id` và `newest_emit`, chỉ đổi khi batch có dữ liệu. 10d đo độ trễ theo cặp này.
+- **Lỗi đọc state store:** executor phải gọi `StateStoreCoordinator` trên driver. Phiên Spark chưa từng chạy query luồng (như phiên của 10c) thì chưa có endpoint này, và `format("statestore")` báo `CANNOT_LOAD_STATE_STORE`. Gọi `spark.streams.active` trước khi đọc là hết lỗi.
+- **Tùy chọn của file source:** `maxBytesPerTrigger` là số byte nguyên và không đặt cùng `maxFilesPerTrigger` được. Bài đo thông lượng dùng `maxFilesPerTrigger 2`. Query lỗi thì `10_stream.py` thoát với mã 1, để 10c / 10d dừng ngay.
+- **Đổi tên:** `api/bench_stream.py` trong bản thiết kế được gộp vào `src/10d_stream_bench.py`; nó gọi E25 qua mạng Docker (`http://api:8000`). Khóa đáp án trong `stream_prep_report.json` là `expected`, không dùng `truth`, để khỏi lẫn với persona thật.
+
+**Kết quả chính** (dữ liệu hành vi mô phỏng; chi tiết trong `stream_report.json`):
+- **10c (tốc độ 300, trigger 1 giây, 06:00–24:00, 92.302 sự kiện, đáp án 205.920 ô): cả 3 kịch bản đạt.**
+  - s1: khớp tuyệt đối;
+  - s2: khớp tuyệt đối (2.757 sự kiện trễ 1–8 phút, 180 bản gửi lặp);
+  - s3: không ô nào vượt đáp án; thiếu 960 lượt (cửa sổ, sự kiện), ít hơn 996 lượt cửa sổ của 249 sự kiện bị giữ. Bước khử trùng bỏ 255 dòng, bước tổng hợp bỏ 0.
+- **Độ trễ (10d)** = sự kiện mới nhất trong batch:
+
+  | Lần đo | Sự kiện → MongoDB (p50 / p95) | Sự kiện → API (p50 / p95) | Batch vượt trigger |
+  |---|---|---|---|
+  | Tốc độ 60, trigger 5 giây | 2,25 / 2,53 giây | 2,52 / 2,85 giây | 1/38 |
+  | Tốc độ 300, trigger 1 giây | 2,21 / 3,32 giây | 3,00 / 3,89 giây | 31/33 |
+  | Tốc độ 1.200, trigger 1 giây | 3,31 / 8,39 giây | 3,87 / 8,75 giây | 17/17 |
+
+  Mục tiêu p95 sự kiện → API ≤ 15 giây ở tốc độ 60: đạt.
+- **Thông lượng (7 ngày, 490.570 dòng, ghi sẵn 15 file):** khoảng 4.600 dòng/giây, như nhau với 2 và 4 core (4.654 so với 4.543). Nút thắt là sink chạy trên driver:
+  - 1,16 triệu lượt upsert ô vào MongoDB mất 66,4 giây trên 105,3 giây;
+  - phần Spark tính và gom về driver (`collect`) mất 30,0 giây (khoảng 16.000 sự kiện/giây).
+  
+  Thêm core không giúp gì. Muốn nhanh hơn thì phải ghi song song từ executor (`foreachPartition`, như bước 07) hoặc chỉ ghi các ô có `cooks` > 0.

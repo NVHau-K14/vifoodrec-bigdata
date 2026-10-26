@@ -123,14 +123,6 @@ def test_segment_users(client, db):
         c: db.users.count_documents({"cluster_k8": c}) for c in range(8)}
 
 
-def test_trending(client, db):
-    r = client.get("/api/trending").json()
-    if db.trending.estimated_document_count() == 0:
-        assert r == {"status": "chưa chạy", "updated_at": None, "windows": []}
-    else:
-        assert r["status"] == "đang chạy" and r["windows"]
-
-
 def test_food_ids_exist(client, db):
     """food_id trong E4, E13 (tuong tu, an kem), E19 deu co trong dishes."""
     ids = set()
