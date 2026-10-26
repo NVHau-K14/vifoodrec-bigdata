@@ -1,0 +1,564 @@
+=== Pheu theo nhom mon (Spark SQL, ROLLUP + broadcast join) ===
+== Physical Plan ==
+AdaptiveSparkPlan (80)
++- Project (79)
+   +- SortMergeJoin Inner (78)
+      :- Sort (43)
+      :  +- Exchange (42)
+      :     +- HashAggregate (41)
+      :        +- Exchange (40)
+      :           +- HashAggregate (39)
+      :              +- Project (38)
+      :                 +- Expand (37)
+      :                    +- Project (36)
+      :                       +- BroadcastHashJoin Inner BuildRight (35)
+      :                          :- HashAggregate (27)
+      :                          :  +- Exchange (26)
+      :                          :     +- HashAggregate (25)
+      :                          :        +- Filter (24)
+      :                          :           +- InMemoryTableScan (1)
+      :                          :                 +- InMemoryRelation (2)
+      :                          :                       +- AdaptiveSparkPlan (23)
+                                                            +- == Final Plan ==
+                                                               ResultQueryStage (15)
+                                                               +- * Project (14)
+                                                                  +- * BroadcastHashJoin Inner BuildRight (13)
+                                                                     :- * Project (7)
+                                                                     :  +- * Project (6)
+                                                                     :     +- * Filter (5)
+                                                                     :        +- * ColumnarToRow (4)
+                                                                     :           +- Scan parquet  (3)
+                                                                     +- BroadcastQueryStage (12), Statistics(sizeInBytes=64.2 MiB, rowCount=2.50E+4)
+                                                                        +- BroadcastExchange (11)
+                                                                           +- * Filter (10)
+                                                                              +- * ColumnarToRow (9)
+                                                                                 +- Scan parquet  (8)
+                                                            +- == Initial Plan ==
+                                                               Project (22)
+                                                               +- BroadcastHashJoin Inner BuildRight (21)
+                                                                  :- Project (18)
+                                                                  :  +- Project (17)
+                                                                  :     +- Filter (16)
+                                                                  :        +- Scan parquet  (3)
+                                                                  +- BroadcastExchange (20)
+                                                                     +- Filter (19)
+                                                                        +- Scan parquet  (8)
+      :                          +- BroadcastExchange (34)
+      :                             +- Filter (33)
+      :                                +- InMemoryTableScan (28)
+      :                                      +- InMemoryRelation (29)
+      :                                            +- * Project (32)
+      :                                               +- * ColumnarToRow (31)
+      :                                                  +- Scan parquet  (30)
+      +- Sort (77)
+         +- Exchange (76)
+            +- HashAggregate (75)
+               +- Exchange (74)
+                  +- HashAggregate (73)
+                     +- Expand (72)
+                        +- InMemoryTableScan (44)
+                              +- InMemoryRelation (45)
+                                    +- AdaptiveSparkPlan (71)
+                                       +- == Final Plan ==
+                                          ResultQueryStage (62)
+                                          +- * Project (61)
+                                             +- * BroadcastHashJoin Inner BuildRight (60)
+                                                :- * HashAggregate (53)
+                                                :  +- ShuffleQueryStage (52), Statistics(sizeInBytes=16.6 MiB, rowCount=1.97E+5)
+                                                :     +- Exchange (51)
+                                                :        +- * HashAggregate (50)
+                                                :           +- * Filter (49)
+                                                :              +- TableCacheQueryStage (48), Statistics(sizeInBytes=1025.5 MiB, rowCount=1.18E+7)
+                                                :                 +- InMemoryTableScan (46)
+                                                :                       +- InMemoryRelation (47)
+                                                :                             +- AdaptiveSparkPlan (23)
+                                       +- == Final Plan ==
+                                          ResultQueryStage (15)
+                                          +- * Project (14)
+                                             +- * BroadcastHashJoin Inner BuildRight (13)
+                                                :- * Project (7)
+                                                :  +- * Project (6)
+                                                :     +- * Filter (5)
+                                                :        +- * ColumnarToRow (4)
+                                                :           +- Scan parquet  (3)
+                                                +- BroadcastQueryStage (12), Statistics(sizeInBytes=64.2 MiB, rowCount=2.50E+4)
+                                                   +- BroadcastExchange (11)
+                                                      +- * Filter (10)
+                                                         +- * ColumnarToRow (9)
+                                                            +- Scan parquet  (8)
+                                       +- == Initial Plan ==
+                                          Project (22)
+                                          +- BroadcastHashJoin Inner BuildRight (21)
+                                             :- Project (18)
+                                             :  +- Project (17)
+                                             :     +- Filter (16)
+                                             :        +- Scan parquet  (3)
+                                             +- BroadcastExchange (20)
+                                                +- Filter (19)
+                                                   +- Scan parquet  (8)
+                                                +- BroadcastQueryStage (59), Statistics(sizeInBytes=64.0 MiB, rowCount=5.50E+3)
+                                                   +- BroadcastExchange (58)
+                                                      +- * Filter (57)
+                                                         +- TableCacheQueryStage (56), Statistics(sizeInBytes=522.2 KiB, rowCount=5.50E+3)
+                                                            +- InMemoryTableScan (54)
+                                                                  +- InMemoryRelation (55)
+                                                                        +- * Project (32)
+                                                                           +- * ColumnarToRow (31)
+                                                                              +- Scan parquet  (30)
+                                       +- == Initial Plan ==
+                                          Project (70)
+                                          +- BroadcastHashJoin Inner BuildRight (69)
+                                             :- HashAggregate (66)
+                                             :  +- Exchange (65)
+                                             :     +- HashAggregate (64)
+                                             :        +- Filter (63)
+                                             :           +- InMemoryTableScan (46)
+                                             :                 +- InMemoryRelation (47)
+                                             :                       +- AdaptiveSparkPlan (23)
+                              +- == Final Plan ==
+                                 ResultQueryStage (15)
+                                 +- * Project (14)
+                                    +- * BroadcastHashJoin Inner BuildRight (13)
+                                       :- * Project (7)
+                                       :  +- * Project (6)
+                                       :     +- * Filter (5)
+                                       :        +- * ColumnarToRow (4)
+                                       :           +- Scan parquet  (3)
+                                       +- BroadcastQueryStage (12), Statistics(sizeInBytes=64.2 MiB, rowCount=2.50E+4)
+                                          +- BroadcastExchange (11)
+                                             +- * Filter (10)
+                                                +- * ColumnarToRow (9)
+                                                   +- Scan parquet  (8)
+                              +- == Initial Plan ==
+                                 Project (22)
+                                 +- BroadcastHashJoin Inner BuildRight (21)
+                                    :- Project (18)
+                                    :  +- Project (17)
+                                    :     +- Filter (16)
+                                    :        +- Scan parquet  (3)
+                                    +- BroadcastExchange (20)
+                                       +- Filter (19)
+                                          +- Scan parquet  (8)
+                                             +- BroadcastExchange (68)
+                                                +- Filter (67)
+                                                   +- InMemoryTableScan (54)
+                                                         +- InMemoryRelation (55)
+                                                               +- * Project (32)
+                                                                  +- * ColumnarToRow (31)
+                                                                     +- Scan parquet  (30)
+
+
+(1) InMemoryTableScan
+Output [3]: [user_id#98, food_id#99, event_type#100]
+Arguments: [user_id#98, food_id#99, event_type#100], [isnotnull(food_id#99)]
+
+(2) InMemoryRelation
+Arguments: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, region#92, age_group#93], StorageLevel(disk, memory, 1 replicas)
+
+(3) Scan parquet 
+Output [8]: [user_id#98, food_id#99, event_type#100, ts#101, meal_slot#102, session_id#103L, rating#104, month#105]
+Batched: true
+Location: InMemoryFileIndex [hdfs://namenode:8020/perf/s050/events/events]
+PushedFilters: [IsNotNull(user_id)]
+ReadSchema: struct<user_id:int,food_id:int,event_type:string,ts:timestamp,meal_slot:string,session_id:bigint,rating:float>
+
+(4) ColumnarToRow [codegen id : 2]
+Input [8]: [user_id#98, food_id#99, event_type#100, ts#101, meal_slot#102, session_id#103L, rating#104, month#105]
+
+(5) Filter [codegen id : 2]
+Input [8]: [user_id#98, food_id#99, event_type#100, ts#101, meal_slot#102, session_id#103L, rating#104, month#105]
+Condition : isnotnull(user_id#98)
+
+(6) Project [codegen id : 2]
+Output [9]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour(ts#101, Some(Asia/Ho_Chi_Minh)) AS hour#106, dayofweek(cast(ts#101 as date)) AS dow#107]
+Input [8]: [user_id#98, food_id#99, event_type#100, ts#101, meal_slot#102, session_id#103L, rating#104, month#105]
+
+(7) Project [codegen id : 2]
+Output [10]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, CASE WHEN dow#107 IN (1,7) THEN cuối tuần ELSE ngày thường END AS day_type#109]
+Input [9]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107]
+
+(8) Scan parquet 
+Output [3]: [user_id#91, region#92, age_group#93]
+Batched: true
+Location: InMemoryFileIndex [hdfs://namenode:8020/perf/s050/events/users]
+PushedFilters: [IsNotNull(user_id)]
+ReadSchema: struct<user_id:int,region:string,age_group:string>
+
+(9) ColumnarToRow [codegen id : 1]
+Input [3]: [user_id#91, region#92, age_group#93]
+
+(10) Filter [codegen id : 1]
+Input [3]: [user_id#91, region#92, age_group#93]
+Condition : isnotnull(user_id#91)
+
+(11) BroadcastExchange
+Input [3]: [user_id#91, region#92, age_group#93]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=76]
+
+(12) BroadcastQueryStage
+Output [3]: [user_id#91, region#92, age_group#93]
+Arguments: 0
+
+(13) BroadcastHashJoin [codegen id : 2]
+Left keys [1]: [user_id#98]
+Right keys [1]: [user_id#91]
+Join type: Inner
+Join condition: None
+
+(14) Project [codegen id : 2]
+Output [12]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, region#92, age_group#93]
+Input [13]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, user_id#91, region#92, age_group#93]
+
+(15) ResultQueryStage
+Output [12]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, region#92, age_group#93]
+Arguments: 1
+
+(16) Filter
+Input [8]: [user_id#98, food_id#99, event_type#100, ts#101, meal_slot#102, session_id#103L, rating#104, month#105]
+Condition : isnotnull(user_id#98)
+
+(17) Project
+Output [9]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour(ts#101, Some(Asia/Ho_Chi_Minh)) AS hour#106, dayofweek(cast(ts#101 as date)) AS dow#107]
+Input [8]: [user_id#98, food_id#99, event_type#100, ts#101, meal_slot#102, session_id#103L, rating#104, month#105]
+
+(18) Project
+Output [10]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, CASE WHEN dow#107 IN (1,7) THEN cuối tuần ELSE ngày thường END AS day_type#109]
+Input [9]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107]
+
+(19) Filter
+Input [3]: [user_id#91, region#92, age_group#93]
+Condition : isnotnull(user_id#91)
+
+(20) BroadcastExchange
+Input [3]: [user_id#91, region#92, age_group#93]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=41]
+
+(21) BroadcastHashJoin
+Left keys [1]: [user_id#98]
+Right keys [1]: [user_id#91]
+Join type: Inner
+Join condition: None
+
+(22) Project
+Output [12]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, region#92, age_group#93]
+Input [13]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, user_id#91, region#92, age_group#93]
+
+(23) AdaptiveSparkPlan
+Output [12]: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, region#92, age_group#93]
+Arguments: isFinalPlan=true
+
+(24) Filter
+Input [3]: [user_id#98, food_id#99, event_type#100]
+Condition : isnotnull(food_id#99)
+
+(25) HashAggregate
+Input [3]: [user_id#98, food_id#99, event_type#100]
+Keys [3]: [user_id#98, food_id#99, event_type#100]
+Functions: []
+Aggregate Attributes: []
+Results [3]: [user_id#98, food_id#99, event_type#100]
+
+(26) Exchange
+Input [3]: [user_id#98, food_id#99, event_type#100]
+Arguments: hashpartitioning(user_id#98, food_id#99, event_type#100, 8), ENSURE_REQUIREMENTS, [plan_id=85300]
+
+(27) HashAggregate
+Input [3]: [user_id#98, food_id#99, event_type#100]
+Keys [3]: [user_id#98, food_id#99, event_type#100]
+Functions: []
+Aggregate Attributes: []
+Results [2]: [food_id#99, event_type#100]
+
+(28) InMemoryTableScan
+Output [2]: [food_id#0, dish_category#7]
+Arguments: [food_id#0, dish_category#7], [isnotnull(food_id#0)]
+
+(29) InMemoryRelation
+Arguments: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(30) Scan parquet 
+Output [10]: [food_id#0, dish_name#1, main_protein#4, main_method#6, dish_category#7, dish_type_fixed#8, is_vegetarian#9, is_spicy#10, is_quick#13, season#14]
+Batched: true
+Location: InMemoryFileIndex [hdfs://namenode:8020/perf/s050/features/dish_features]
+ReadSchema: struct<food_id:int,dish_name:string,main_protein:string,main_method:string,dish_category:string,dish_type_fixed:string,is_vegetarian:boolean,is_spicy:boolean,is_quick:boolean,season:string>
+
+(31) ColumnarToRow [codegen id : 1]
+Input [10]: [food_id#0, dish_name#1, main_protein#4, main_method#6, dish_category#7, dish_type_fixed#8, is_vegetarian#9, is_spicy#10, is_quick#13, season#14]
+
+(32) Project [codegen id : 1]
+Output [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Input [10]: [food_id#0, dish_name#1, main_protein#4, main_method#6, dish_category#7, dish_type_fixed#8, is_vegetarian#9, is_spicy#10, is_quick#13, season#14]
+
+(33) Filter
+Input [2]: [food_id#0, dish_category#7]
+Condition : isnotnull(food_id#0)
+
+(34) BroadcastExchange
+Input [2]: [food_id#0, dish_category#7]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=85303]
+
+(35) BroadcastHashJoin
+Left keys [1]: [food_id#99]
+Right keys [1]: [food_id#0]
+Join type: Inner
+Join condition: None
+
+(36) Project
+Output [2]: [event_type#100, dish_category#7]
+Input [4]: [food_id#99, event_type#100, food_id#0, dish_category#7]
+
+(37) Expand
+Input [2]: [event_type#100, dish_category#7]
+Arguments: [[event_type#100, dish_category#7, 0], [event_type#100, null, 1]], [event_type#100, dish_category#43156, spark_grouping_id#43155L]
+
+(38) Project
+Output [6]: [dish_category#43156, spark_grouping_id#43155L, (event_type#100 = view) AS _common_expr_30#43600, (event_type#100 = favorite) AS _common_expr_31#43601, (event_type#100 = cook) AS _common_expr_32#43602, (event_type#100 = rate) AS _common_expr_33#43603]
+Input [3]: [event_type#100, dish_category#43156, spark_grouping_id#43155L]
+
+(39) HashAggregate
+Input [6]: [dish_category#43156, spark_grouping_id#43155L, _common_expr_30#43600, _common_expr_31#43601, _common_expr_32#43602, _common_expr_33#43603]
+Keys [2]: [dish_category#43156, spark_grouping_id#43155L]
+Functions [4]: [partial_count(if (NOT _common_expr_30#43600) null else _common_expr_30#43600), partial_count(if (NOT _common_expr_31#43601) null else _common_expr_31#43601), partial_count(if (NOT _common_expr_32#43602) null else _common_expr_32#43602), partial_count(if (NOT _common_expr_33#43603) null else _common_expr_33#43603)]
+Aggregate Attributes [4]: [count#43799L, count#43800L, count#43801L, count#43802L]
+Results [6]: [dish_category#43156, spark_grouping_id#43155L, count#43803L, count#43804L, count#43805L, count#43806L]
+
+(40) Exchange
+Input [6]: [dish_category#43156, spark_grouping_id#43155L, count#43803L, count#43804L, count#43805L, count#43806L]
+Arguments: hashpartitioning(dish_category#43156, spark_grouping_id#43155L, 8), ENSURE_REQUIREMENTS, [plan_id=85310]
+
+(41) HashAggregate
+Input [6]: [dish_category#43156, spark_grouping_id#43155L, count#43803L, count#43804L, count#43805L, count#43806L]
+Keys [2]: [dish_category#43156, spark_grouping_id#43155L]
+Functions [4]: [count(if (NOT _common_expr_30#43600) null else _common_expr_30#43600), count(if (NOT _common_expr_31#43601) null else _common_expr_31#43601), count(if (NOT _common_expr_32#43602) null else _common_expr_32#43602), count(if (NOT _common_expr_33#43603) null else _common_expr_33#43603)]
+Aggregate Attributes [4]: [count(if (NOT _common_expr_30#43600) null else _common_expr_30#43600)#43150L, count(if (NOT _common_expr_31#43601) null else _common_expr_31#43601)#43151L, count(if (NOT _common_expr_32#43602) null else _common_expr_32#43602)#43152L, count(if (NOT _common_expr_33#43603) null else _common_expr_33#43603)#43153L]
+Results [5]: [dish_category#43156, count(if (NOT _common_expr_30#43600) null else _common_expr_30#43600)#43150L AS view_pairs#43099L, count(if (NOT _common_expr_31#43601) null else _common_expr_31#43601)#43151L AS favorite_pairs#43100L, count(if (NOT _common_expr_32#43602) null else _common_expr_32#43602)#43152L AS cook_pairs#43101L, count(if (NOT _common_expr_33#43603) null else _common_expr_33#43603)#43153L AS rate_pairs#43102L]
+
+(42) Exchange
+Input [5]: [dish_category#43156, view_pairs#43099L, favorite_pairs#43100L, cook_pairs#43101L, rate_pairs#43102L]
+Arguments: hashpartitioning(coalesce(dish_category#43156, ), isnull(dish_category#43156), 8), ENSURE_REQUIREMENTS, [plan_id=85316]
+
+(43) Sort
+Input [5]: [dish_category#43156, view_pairs#43099L, favorite_pairs#43100L, cook_pairs#43101L, rate_pairs#43102L]
+Arguments: [coalesce(dish_category#43156, ) ASC NULLS FIRST, isnull(dish_category#43156) ASC NULLS FIRST], false, 0
+
+(44) InMemoryTableScan
+Output [6]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43132]
+Arguments: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43132]
+
+(45) InMemoryRelation
+Arguments: [food_id#43109, month#43115, region#43120, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_name#43126, dish_category#43132, dish_type_fixed#43133, main_protein#43129, main_method#43131, is_spicy#43135, is_quick#43138, is_vegetarian#43134, season#43139], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(46) InMemoryTableScan
+Output [5]: [food_id#99, event_type#100, rating#104, month#105, region#92]
+Arguments: [food_id#99, event_type#100, rating#104, month#105, region#92], [isnotnull(food_id#99)]
+
+(47) InMemoryRelation
+Arguments: [user_id#98, food_id#99, event_type#100, meal_slot#102, session_id#103L, rating#104, month#105, hour#106, dow#107, day_type#109, region#92, age_group#93], StorageLevel(disk, memory, 1 replicas)
+
+(48) TableCacheQueryStage
+Output [5]: [food_id#99, event_type#100, rating#104, month#105, region#92]
+Arguments: 0
+
+(49) Filter [codegen id : 1]
+Input [5]: [food_id#99, event_type#100, rating#104, month#105, region#92]
+Condition : isnotnull(food_id#99)
+
+(50) HashAggregate [codegen id : 1]
+Input [5]: [food_id#99, event_type#100, rating#104, month#105, region#92]
+Keys [3]: [month#105, region#92, food_id#99]
+Functions [5]: [partial_sum(cast((event_type#100 = view) as int)), partial_sum(cast((event_type#100 = favorite) as int)), partial_sum(cast((event_type#100 = cook) as int)), partial_sum(cast((event_type#100 = rate) as int)), partial_sum(rating#104)]
+Aggregate Attributes [5]: [sum#1623L, sum#1624L, sum#1625L, sum#1626L, sum#1627]
+Results [8]: [month#105, region#92, food_id#99, sum#1628L, sum#1629L, sum#1630L, sum#1631L, sum#1632]
+
+(51) Exchange
+Input [8]: [month#105, region#92, food_id#99, sum#1628L, sum#1629L, sum#1630L, sum#1631L, sum#1632]
+Arguments: hashpartitioning(month#105, region#92, food_id#99, 8), ENSURE_REQUIREMENTS, [plan_id=780]
+
+(52) ShuffleQueryStage
+Output [8]: [month#105, region#92, food_id#99, sum#1628L, sum#1629L, sum#1630L, sum#1631L, sum#1632]
+Arguments: 2
+
+(53) HashAggregate [codegen id : 3]
+Input [8]: [month#105, region#92, food_id#99, sum#1628L, sum#1629L, sum#1630L, sum#1631L, sum#1632]
+Keys [3]: [month#105, region#92, food_id#99]
+Functions [5]: [sum(cast((event_type#100 = view) as int)), sum(cast((event_type#100 = favorite) as int)), sum(cast((event_type#100 = cook) as int)), sum(cast((event_type#100 = rate) as int)), sum(rating#104)]
+Aggregate Attributes [5]: [sum(cast((event_type#100 = view) as int))#1238L, sum(cast((event_type#100 = favorite) as int))#1239L, sum(cast((event_type#100 = cook) as int))#1240L, sum(cast((event_type#100 = rate) as int))#1241L, sum(rating#104)#1242]
+Results [8]: [month#105, region#92, food_id#99, sum(cast((event_type#100 = view) as int))#1238L AS views#1221L, sum(cast((event_type#100 = favorite) as int))#1239L AS favorites#1222L, sum(cast((event_type#100 = cook) as int))#1240L AS cooks#1223L, sum(cast((event_type#100 = rate) as int))#1241L AS rates#1224L, sum(rating#104)#1242 AS rating_sum#1225]
+
+(54) InMemoryTableScan
+Output [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Arguments: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14], [isnotnull(food_id#0)]
+
+(55) InMemoryRelation
+Arguments: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(56) TableCacheQueryStage
+Output [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Arguments: 1
+
+(57) Filter [codegen id : 2]
+Input [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Condition : isnotnull(food_id#0)
+
+(58) BroadcastExchange
+Input [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=796]
+
+(59) BroadcastQueryStage
+Output [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Arguments: 3
+
+(60) BroadcastHashJoin [codegen id : 3]
+Left keys [1]: [food_id#99]
+Right keys [1]: [food_id#0]
+Join type: Inner
+Join condition: None
+
+(61) Project [codegen id : 3]
+Output [17]: [food_id#99, month#105, region#92, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Input [18]: [month#105, region#92, food_id#99, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+
+(62) ResultQueryStage
+Output [17]: [food_id#99, month#105, region#92, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Arguments: 4
+
+(63) Filter
+Input [5]: [food_id#99, event_type#100, rating#104, month#105, region#92]
+Condition : isnotnull(food_id#99)
+
+(64) HashAggregate
+Input [5]: [food_id#99, event_type#100, rating#104, month#105, region#92]
+Keys [3]: [month#105, region#92, food_id#99]
+Functions [5]: [partial_sum(cast((event_type#100 = view) as int)), partial_sum(cast((event_type#100 = favorite) as int)), partial_sum(cast((event_type#100 = cook) as int)), partial_sum(cast((event_type#100 = rate) as int)), partial_sum(rating#104)]
+Aggregate Attributes [5]: [sum#1623L, sum#1624L, sum#1625L, sum#1626L, sum#1627]
+Results [8]: [month#105, region#92, food_id#99, sum#1628L, sum#1629L, sum#1630L, sum#1631L, sum#1632]
+
+(65) Exchange
+Input [8]: [month#105, region#92, food_id#99, sum#1628L, sum#1629L, sum#1630L, sum#1631L, sum#1632]
+Arguments: hashpartitioning(month#105, region#92, food_id#99, 8), ENSURE_REQUIREMENTS, [plan_id=261]
+
+(66) HashAggregate
+Input [8]: [month#105, region#92, food_id#99, sum#1628L, sum#1629L, sum#1630L, sum#1631L, sum#1632]
+Keys [3]: [month#105, region#92, food_id#99]
+Functions [5]: [sum(cast((event_type#100 = view) as int)), sum(cast((event_type#100 = favorite) as int)), sum(cast((event_type#100 = cook) as int)), sum(cast((event_type#100 = rate) as int)), sum(rating#104)]
+Aggregate Attributes [5]: [sum(cast((event_type#100 = view) as int))#1238L, sum(cast((event_type#100 = favorite) as int))#1239L, sum(cast((event_type#100 = cook) as int))#1240L, sum(cast((event_type#100 = rate) as int))#1241L, sum(rating#104)#1242]
+Results [8]: [month#105, region#92, food_id#99, sum(cast((event_type#100 = view) as int))#1238L AS views#1221L, sum(cast((event_type#100 = favorite) as int))#1239L AS favorites#1222L, sum(cast((event_type#100 = cook) as int))#1240L AS cooks#1223L, sum(cast((event_type#100 = rate) as int))#1241L AS rates#1224L, sum(rating#104)#1242 AS rating_sum#1225]
+
+(67) Filter
+Input [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Condition : isnotnull(food_id#0)
+
+(68) BroadcastExchange
+Input [10]: [food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=264]
+
+(69) BroadcastHashJoin
+Left keys [1]: [food_id#99]
+Right keys [1]: [food_id#0]
+Join type: Inner
+Join condition: None
+
+(70) Project
+Output [17]: [food_id#99, month#105, region#92, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Input [18]: [month#105, region#92, food_id#99, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, food_id#0, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+
+(71) AdaptiveSparkPlan
+Output [17]: [food_id#99, month#105, region#92, views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_name#1, dish_category#7, dish_type_fixed#8, main_protein#4, main_method#6, is_spicy#10, is_quick#13, is_vegetarian#9, season#14]
+Arguments: isFinalPlan=true
+
+(72) Expand
+Input [6]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43132]
+Arguments: [[views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43132, 0], [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, null, 1]], [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43159, spark_grouping_id#43158L]
+
+(73) HashAggregate
+Input [7]: [views#1221L, favorites#1222L, cooks#1223L, rates#1224L, rating_sum#1225, dish_category#43159, spark_grouping_id#43158L]
+Keys [2]: [dish_category#43159, spark_grouping_id#43158L]
+Functions [5]: [partial_sum(views#1221L), partial_sum(favorites#1222L), partial_sum(cooks#1223L), partial_sum(rates#1224L), partial_sum(rating_sum#1225)]
+Aggregate Attributes [5]: [sum#43807L, sum#43808L, sum#43809L, sum#43810L, sum#43811]
+Results [7]: [dish_category#43159, spark_grouping_id#43158L, sum#43812L, sum#43813L, sum#43814L, sum#43815L, sum#43816]
+
+(74) Exchange
+Input [7]: [dish_category#43159, spark_grouping_id#43158L, sum#43812L, sum#43813L, sum#43814L, sum#43815L, sum#43816]
+Arguments: hashpartitioning(dish_category#43159, spark_grouping_id#43158L, 8), ENSURE_REQUIREMENTS, [plan_id=85312]
+
+(75) HashAggregate
+Input [7]: [dish_category#43159, spark_grouping_id#43158L, sum#43812L, sum#43813L, sum#43814L, sum#43815L, sum#43816]
+Keys [2]: [dish_category#43159, spark_grouping_id#43158L]
+Functions [5]: [sum(views#1221L), sum(favorites#1222L), sum(cooks#1223L), sum(rates#1224L), sum(rating_sum#1225)]
+Aggregate Attributes [5]: [sum(views#1221L)#43141L, sum(favorites#1222L)#43142L, sum(cooks#1223L)#43143L, sum(rates#1224L)#43144L, sum(rating_sum#1225)#43145]
+Results [6]: [dish_category#43159, sum(views#1221L)#43141L AS view_events#43103L, sum(favorites#1222L)#43142L AS favorite_events#43104L, sum(cooks#1223L)#43143L AS cook_events#43105L, sum(rates#1224L)#43144L AS rate_events#43106L, round((sum(rating_sum#1225)#43145 / cast(sum(rates#1224L)#43144L as double)), 3) AS avg_rating#43107]
+
+(76) Exchange
+Input [6]: [dish_category#43159, view_events#43103L, favorite_events#43104L, cook_events#43105L, rate_events#43106L, avg_rating#43107]
+Arguments: hashpartitioning(coalesce(dish_category#43159, ), isnull(dish_category#43159), 8), ENSURE_REQUIREMENTS, [plan_id=85317]
+
+(77) Sort
+Input [6]: [dish_category#43159, view_events#43103L, favorite_events#43104L, cook_events#43105L, rate_events#43106L, avg_rating#43107]
+Arguments: [coalesce(dish_category#43159, ) ASC NULLS FIRST, isnull(dish_category#43159) ASC NULLS FIRST], false, 0
+
+(78) SortMergeJoin
+Left keys [2]: [coalesce(dish_category#43156, ), isnull(dish_category#43156)]
+Right keys [2]: [coalesce(dish_category#43159, ), isnull(dish_category#43159)]
+Join type: Inner
+Join condition: None
+
+(79) Project
+Output [13]: [coalesce(dish_category#43156, Tất cả) AS dish_category#43095, view_events#43103L, favorite_events#43104L, cook_events#43105L, rate_events#43106L, view_pairs#43099L, favorite_pairs#43100L, cook_pairs#43101L, rate_pairs#43102L, round((cast((favorite_pairs#43100L * 100) as double) / cast(view_pairs#43099L as double)), 2) AS favorite_per_view_pct#43096, round((cast((cook_pairs#43101L * 100) as double) / cast(view_pairs#43099L as double)), 2) AS cook_per_view_pct#43097, round((cast((rate_pairs#43102L * 100) as double) / cast(cook_pairs#43101L as double)), 2) AS rate_per_cook_pct#43098, avg_rating#43107]
+Input [11]: [dish_category#43156, view_pairs#43099L, favorite_pairs#43100L, cook_pairs#43101L, rate_pairs#43102L, dish_category#43159, view_events#43103L, favorite_events#43104L, cook_events#43105L, rate_events#43106L, avg_rating#43107]
+
+(80) AdaptiveSparkPlan
+Output [13]: [dish_category#43095, view_events#43103L, favorite_events#43104L, cook_events#43105L, rate_events#43106L, view_pairs#43099L, favorite_pairs#43100L, cook_pairs#43101L, rate_pairs#43102L, favorite_per_view_pct#43096, cook_per_view_pct#43097, rate_per_cook_pct#43098, avg_rating#43107]
+Arguments: isFinalPlan=false
+
+
+
+=== Loc theo thang (partition pruning: chi doc thu muc month=2026-09) ===
+== Physical Plan ==
+AdaptiveSparkPlan (7)
++- HashAggregate (6)
+   +- Exchange (5)
+      +- HashAggregate (4)
+         +- Project (3)
+            +- Filter (2)
+               +- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [3]: [food_id#99, event_type#100, month#105]
+Batched: true
+Location: InMemoryFileIndex [hdfs://namenode:8020/perf/s050/events/events]
+PartitionFilters: [isnotnull(month#105), (month#105 = 2026-09)]
+PushedFilters: [IsNotNull(event_type), EqualTo(event_type,cook)]
+ReadSchema: struct<food_id:int,event_type:string>
+
+(2) Filter
+Input [3]: [food_id#99, event_type#100, month#105]
+Condition : (isnotnull(event_type#100) AND (event_type#100 = cook))
+
+(3) Project
+Output [1]: [food_id#99]
+Input [3]: [food_id#99, event_type#100, month#105]
+
+(4) HashAggregate
+Input [1]: [food_id#99]
+Keys [1]: [food_id#99]
+Functions [1]: [partial_count(1)]
+Aggregate Attributes [1]: [count#43827L]
+Results [2]: [food_id#99, count#43828L]
+
+(5) Exchange
+Input [2]: [food_id#99, count#43828L]
+Arguments: hashpartitioning(food_id#99, 8), ENSURE_REQUIREMENTS, [plan_id=85337]
+
+(6) HashAggregate
+Input [2]: [food_id#99, count#43828L]
+Keys [1]: [food_id#99]
+Functions [1]: [count(1)]
+Aggregate Attributes [1]: [count(1)#43826L]
+Results [2]: [food_id#99, count(1)#43826L AS count#43817L]
+
+(7) AdaptiveSparkPlan
+Output [2]: [food_id#99, count#43817L]
+Arguments: isFinalPlan=false
+
+

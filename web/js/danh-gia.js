@@ -124,9 +124,10 @@ load($('timings'), async (el) => {
     '<p class="source">Lần chạy thật, có dò tham số. So sánh 1 và 2 worker (chỉ fit một lần) ở thẻ Hiệu năng Spark.</p>';
 });
 
-// ---------- Hieu nang Spark (D17): 3 bieu do tu E24.perf ----------
+// ---------- Hieu nang Spark (D17): 4 bieu do tu E24.perf ----------
 const CHAIN = ['04', '05', '06a', '06b', '06c', '06d', '06e', '06f'];
 const LEVEL = { s010: '10%', s050: '50%', s100: '100%' };
+const levelsAll = ['s010', 's050', 's100'];
 const minutes = (s) => (s == null ? null : Math.round((s / 60) * 10) / 10);
 
 load($('perf'), async (el) => {
@@ -144,35 +145,50 @@ load($('perf'), async (el) => {
     .map((r) => `${r.job} ở ${LEVEL[r.level] || 'danh mục'}, ${r.workers} worker (${r.failed} lần lỗi)`);
   const sp = [...p.speedup.filter((s) => s.level === 's100'), ...p.speedup.filter((s) => s.level === 'catalog')];
   const sp10 = (job) => p.speedup.find((s) => s.level === 's010' && s.job === job)?.speedup ?? null;
+  const bs = p.speedup_by_scale || [];
+  const bsAt = (key, level) => bs.find((b) => b.key === key && b.level === level)?.speedup ?? null;
+  const bsChain = levelsAll.map((l) => bsAt('chain', l));
   el.dataset.state = 'ready';
   el.innerHTML = `<p class="lead">${c1 && c2 ? `Ở 100% dữ liệu, chuỗi 04 → 06f mất ${fmtSeconds(c2.total_s)} với 2 worker và
       ${fmtSeconds(c1.total_s)} với 1 worker (speedup ${fmtFixed(c1.total_s / c2.total_s, 2)}, lý tưởng là 2).` : ''}
       1 worker giảm cả số core (4 → 2) lẫn bộ nhớ executor (4 → 2 GB). Mọi container chạy trên cùng một máy, nên shuffle giữa
-      2 worker đi qua mạng ảo của Docker.</p>
+      2 worker đi qua mạng ảo của Docker.${bsChain.every((v) => v != null) ? ` Speedup của cả chuỗi theo mức dữ liệu:
+      ${bsChain.map((v, i) => `${fmtFixed(v, 2)} ở ${LEVEL[levelsAll[i]]}`).join(', ')}.` : ''}</p>
     <div class="mini-grid">
       <div><h3>Thời gian từng job ở 100%</h3><div class="chart" id="perf-jobs"></div>
         <p class="source">Phút, theo Spark History Server. 05 và 06b: trung vị 3 lần; job khác: 1 lần.</p></div>
       <div><h3>Tổng chuỗi 04 → 06f theo quy mô dữ liệu</h3><div class="chart" id="perf-scale"></div>
-        <p class="source">10% và 50% là dân số sinh mới (04 --scale), không phải tập con. 1 worker không đo ở 50%.</p></div>
+        <p class="source">10% và 50% là dân số sinh mới (04 --scale), không phải tập con của bản 100%.</p></div>
     </div>
-    <h3 class="sub-h">Speedup: 2 worker so với 1 worker</h3><div class="chart chart-tall" id="perf-speedup"></div>
-    <p class="source">T(1 worker) ÷ T(2 worker); vạch đứt là mức lý tưởng 2, dưới 1 là 1 worker nhanh hơn. Ở 10%, phần cố định
-      (khởi động, đọc danh mục, lập lịch task) chiếm phần lớn thời gian nên thêm worker không có lợi.</p>
+    <div class="mini-grid">
+      <div><h3>Speedup từng job: 2 worker so với 1 worker</h3><div class="chart chart-tall" id="perf-speedup"></div>
+        <p class="source">T(1 worker) ÷ T(2 worker); vạch đứt là mức lý tưởng 2, dưới 1 là 1 worker nhanh hơn. Ở 10%, phần cố định
+          (khởi động, đọc danh mục, lập lịch task) chiếm phần lớn thời gian nên thêm worker không có lợi.</p></div>
+      <div><h3>Speedup theo quy mô dữ liệu</h3><div class="chart chart-tall" id="perf-by-scale"></div>
+        <p class="source">${esc(['04', '05', '06b'].map((k) => bs.find((b) => b.key === k)?.step || k).join(' · '))}.
+          T(1 worker) ÷ T(2 worker) ở từng mức; vạch đứt là mức lý tưởng 2. Ở 100%, 05 và 06b lấy trung vị
+          3 lần; còn lại 1 lần mỗi cấu hình, nên một lần chạy chậm bất thường cũng làm lệch cả điểm.</p></div>
+    </div>
     <p class="source">06b, 06c, 06e, 06f, 06g chạy --fixed (fit một lần với tham số đã chọn). Dữ liệu hành vi mô phỏng.
       ${failed.length ? `Lần lỗi: ${esc(failed.join('; '))}.` : ''}</p>`;
   const stepOf = (j) => at('s100', 2, j)?.step || at('s100', 1, j)?.step || j;
   groupedBars($('perf-jobs'), jobs, [
     { name: '1 worker', data: jobs.map((j) => minutes(at('s100', 1, j)?.median_s)), color: C.slate },
     { name: '2 worker', data: jobs.map((j) => minutes(at('s100', 2, j)?.median_s)), color: C.herb },
-  ], { yFmt: (v) => fmtNum(v, 1) }).setOption({ xAxis: { axisLabel: { interval: 0 } }, tooltip: { formatter: (ps) => `${esc(stepOf(ps[0].name))}<br>` +
+  ], { yFmt: (v) => fmtNum(v, 1), labelMinWidth: 520 }).setOption({ xAxis: { axisLabel: { interval: 0 } }, tooltip: { formatter: (ps) => `${esc(stepOf(ps[0].name))}<br>` +
     ps.map((x) => `${x.marker}${x.seriesName}: ${x.value == null ? 'lỗi / không đo' : `${fmtNum(x.value, 1)} phút`}`).join('<br>') } });
-  const levels = ['s010', 's050', 's100'];
-  lines($('perf-scale'), levels.map((l) => LEVEL[l]), [
-    { name: '1 worker', data: levels.map((l) => minutes(chain(l, 1)?.complete ? chain(l, 1).total_s : null)), color: C.slate, connectNulls: true },
-    { name: '2 worker', data: levels.map((l) => minutes(chain(l, 2)?.complete ? chain(l, 2).total_s : null)), color: C.herb },
+  lines($('perf-scale'), levelsAll.map((l) => LEVEL[l]), [
+    { name: '1 worker', data: levelsAll.map((l) => minutes(chain(l, 1)?.complete ? chain(l, 1).total_s : null)), color: C.slate },
+    { name: '2 worker', data: levelsAll.map((l) => minutes(chain(l, 2)?.complete ? chain(l, 2).total_s : null)), color: C.herb },
   ], { yMin: 0, yFmt: (v) => `${fmtNum(v, 1)} ph` });
   hGroupedBars($('perf-speedup'), sp.map((s) => (s.level === 'catalog' ? `${s.step} (danh mục)` : s.step)), [
     { name: '100% / danh mục', data: sp.map((s) => s.speedup), color: C.herb },
     { name: '10%', data: sp.map((s) => (s.level === 's100' ? sp10(s.job) : null)), color: C.herbMid },
   ], { xFmt: (v) => fmtFixed(v, 2), markX: [2] });
+  // ten series ngan (ma job) de chu giai nam tren 1 dong o 375px; ten day du nam trong dong chu thich
+  lines($('perf-by-scale'), levelsAll.map((l) => LEVEL[l]), [
+    { name: 'Chuỗi 04 → 06f', data: bsChain, color: C.herb, width: 3 },
+    ...['04', '05', '06b'].map((k, i) => ({ name: k, data: levelsAll.map((l) => bsAt(k, l)),
+                                             color: [C.chili, C.slate, C.herbMid][i] })),
+  ], { yMin: 0, yFmt: (v) => fmtFixed(v, 2), markY: [2] });
 }, 280);

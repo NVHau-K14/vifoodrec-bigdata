@@ -1,0 +1,158 @@
+{
+  "mode": "cluster",
+  "fixed": true,
+  "items": 5499,
+  "vocab_size": 2862,
+  "vocab_by_kind": {
+    "âm tiết": 992,
+    "nl:": 1829,
+    "cat=": 10,
+    "protein=": 11,
+    "method=": 10,
+    "type=": 4,
+    "season=": 3,
+    "tag=": 3
+  },
+  "tokens_per_item_avg": 15.57,
+  "items_without_tokens": 0,
+  "pairs_before_groupby": 23786883.0,
+  "pairs_nonzero": 10927793,
+  "exact_seconds": 47.4,
+  "check_tfidf_sql_vs_pipeline_max_abs_diff": 1.1102230246251565e-16,
+  "examples_top5_similar": {
+    "Canh chua cá lóc": [
+      "Canh Chua Cá Lóc Nam Bộ (0.64)",
+      "Canh chua gà bông so đũa (0.54)",
+      "Canh Riêu Cá Lóc (0.50)",
+      "Canh Chua Ăn Chay (0.49)",
+      "Canh Nghêu Nấu Chua (0.47)"
+    ],
+    "Thịt kho trứng": [
+      "Thịt Kho Trứng (0.51)",
+      "Thịt Kho Trứng Nước Dừa (0.42)",
+      "Thịt Kho Trứng Phô Mai (0.39)",
+      "Thịt Kho Tàu (0.39)",
+      "Thịt Heo Kho Ớt (0.33)"
+    ],
+    "Chè đậu xanh": [
+      "Gỏi Rong Biển (0.54)",
+      "Chè Đậu Xanh Bột Khoai (0.50)",
+      "Chè Đậu Xanh Mì Nui (0.50)",
+      "Kem Đậu Xanh (0.49)",
+      "Chè Đậu Xanh (0.48)"
+    ]
+  },
+  "val": {
+    "ranking": [
+      {
+        "group": "tất cả",
+        "n_users": 19376,
+        "p@5": 0.0076,
+        "r@5": 0.0066,
+        "ndcg@5": 0.0086,
+        "ap@5": 0.0044,
+        "p@10": 0.0073,
+        "r@10": 0.0131,
+        "ndcg@10": 0.0107,
+        "ap@10": 0.0044
+      },
+      {
+        "group": "ấm",
+        "n_users": 18420,
+        "p@5": 0.0079,
+        "r@5": 0.0069,
+        "ndcg@5": 0.0089,
+        "ap@5": 0.0046,
+        "p@10": 0.0076,
+        "r@10": 0.0135,
+        "ndcg@10": 0.0111,
+        "ap@10": 0.0045
+      },
+      {
+        "group": "ít",
+        "n_users": 352,
+        "p@5": 0.0028,
+        "r@5": 0.0027,
+        "ndcg@5": 0.0034,
+        "ap@5": 0.0018,
+        "p@10": 0.0034,
+        "r@10": 0.0113,
+        "ndcg@10": 0.0064,
+        "ap@10": 0.0027
+      },
+      {
+        "group": "lạnh",
+        "n_users": 604,
+        "p@5": 0.0,
+        "r@5": 0.0,
+        "ndcg@5": 0.0,
+        "ap@5": 0.0,
+        "p@10": 0.0,
+        "r@10": 0.0,
+        "ndcg@10": 0.0,
+        "ap@10": 0.0
+      }
+    ],
+    "users_with_recs": 18772
+  },
+  "test": {
+    "ranking": [
+      {
+        "group": "tất cả",
+        "n_users": 19550,
+        "p@5": 0.0069,
+        "r@5": 0.0062,
+        "ndcg@5": 0.0078,
+        "ap@5": 0.004,
+        "p@10": 0.0066,
+        "r@10": 0.012,
+        "ndcg@10": 0.0096,
+        "ap@10": 0.0038
+      },
+      {
+        "group": "ấm",
+        "n_users": 18557,
+        "p@5": 0.0073,
+        "r@5": 0.0065,
+        "ndcg@5": 0.0082,
+        "ap@5": 0.0042,
+        "p@10": 0.0069,
+        "r@10": 0.0126,
+        "ndcg@10": 0.01,
+        "ap@10": 0.004
+      },
+      {
+        "group": "ít",
+        "n_users": 342,
+        "p@5": 0.0012,
+        "r@5": 0.0011,
+        "ndcg@5": 0.0011,
+        "ap@5": 0.0004,
+        "p@10": 0.002,
+        "r@10": 0.0036,
+        "ndcg@10": 0.0023,
+        "ap@10": 0.0007
+      },
+      {
+        "group": "lạnh",
+        "n_users": 651,
+        "p@5": 0.0,
+        "r@5": 0.0,
+        "ndcg@5": 0.0,
+        "ap@5": 0.0,
+        "p@10": 0.0,
+        "r@10": 0.0,
+        "ndcg@10": 0.0,
+        "ap@10": 0.0
+      }
+    ],
+    "users_with_recs": 24078
+  },
+  "timings_s": {
+    "tokens": 22.6,
+    "exact_similarity": 48.8,
+    "val:recs": 32.4,
+    "test:recs": 41.6
+  },
+  "total_seconds": 147.8
+}

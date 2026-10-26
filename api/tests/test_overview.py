@@ -64,3 +64,12 @@ def test_perf_matches_collection(client, db):
         t1 = db.perf.find_one({"_id": f"{s['job']}|{s['level']}|w1"})["median_s"]
         t2 = db.perf.find_one({"_id": f"{s['job']}|{s['level']}|w2"})["median_s"]
         assert s["t_1w_s"] == t1 and s["t_2w_s"] == t2 and abs(s["speedup"] - t1 / t2) < 0.006
+    # speedup theo muc: chuoi lay tu chain_totals, job lay tu rows; du 3 muc cho chuoi va 04, 05, 06b
+    chain = {(c["level"], c["workers"]): c["total_s"] for c in p["chain_totals"] if c["complete"]}
+    med = {(r["level"], r["workers"], r["job"]): r["median_s"] for r in p["rows"]}
+    bs = p["speedup_by_scale"]
+    assert {(b["key"], b["level"]) for b in bs} == {(k, lv) for k in ("chain", "04", "05", "06b")
+                                                     for lv in ("s010", "s050", "s100")}
+    for b in bs:
+        t1, t2 = ((chain[(b["level"], w)] if b["key"] == "chain" else med[(b["level"], w, b["key"])]) for w in (1, 2))
+        assert b["t_1w_s"] == t1 and b["t_2w_s"] == t2 and abs(b["speedup"] - t1 / t2) < 0.006

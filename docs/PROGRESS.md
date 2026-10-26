@@ -1,6 +1,6 @@
 # Tiến độ đồ án
 
-> Cập nhật lần cuối: **26/10/2026**, sau khi đo hiệu năng Spark (D17): 54 lần chạy, 1/2 worker × 10/50/100%, collection `perf`, thẻ "Hiệu năng Spark".
+> Cập nhật lần cuối: **26/10/2026 (sáng)**, sau khi đo thêm 50% / 1 worker (62 lần chạy), thêm `speedup_by_scale` và biểu đồ (d), viết bản thiết kế Structured Streaming (chờ duyệt).
 > File này là nguồn chính về tiến độ. Mỗi cuối phiên cập nhật bằng `/handoff`.
 
 ## Trạng thái các bước
@@ -16,8 +16,8 @@
 | 06 Mô hình + đánh giá | ✅ Xong | Trên test (39.012 user), NDCG@10: hybrid **0,1588**, hybrid + content 2 vị trí 0,1495 (dùng cho `recs_final`), ALS implicit 0,1539 (alpha 1, rank 128), nấu lại 0,1317. RMSE: ALS 0,684, bias 0,737. Dashboard dùng k = 8. D12, D13 |
 | 07 Xuất MongoDB | ✅ Xong | Database `vifood`: 26 collection (25 có dữ liệu, `trending` để trống). Size 290,5 MB, storage 85,2 MB (nén 3,41 lần), index 4,1 MB. `recs` 50.000 doc, 204,3 MB sau khi thêm `because_cooked` (D15). Chạy trên cụm 66,1 giây. Mọi kiểm tra đạt. D14 |
 | 08 FastAPI + dashboard | ✅ Xong (2 đợt) | Service `api` (:8000) phục vụ 25 endpoint E0–E26 và 7 trang đầy đủ. pytest 61/61 đạt trên `vifood` (58 đạt + 3 bỏ qua trên `vifood_local`). Độ trễ p95 (`api_report.json`, `vifood`): endpoint cache 1,3–3,5 ms; E12 14,2; E13 4,2; E18 2,9; E19 5,5; E20 9,1 ms, mọi mục tiêu đạt ở cả 2 database; E19 10 luồng p95 37,2 ms, 344,5 req/s. RAM 59,2 MiB / 512 MiB. Ảnh 7 trang ở `docs/images/08_*`. D15, D16 |
-| 09 Đo hiệu năng (1 vs 2 worker, 10/50/100%) | ✅ Xong | `scripts/09_perf.py`, 54/54 lần OK (2,71 giờ). 100%: chuỗi 04 → 06f 1.702,9 giây (2 worker) so với 2.309,2 giây (1 worker), **speedup 1,36**; 04 1,64, 06b 1,32. 10%: speedup 0,88 (2 worker chậm hơn). `perf_report.json`, collection `perf` (47 doc), thẻ ở trang Đánh giá. D17 |
-| 10 Nâng cao: Structured Streaming | ⬜ Chưa | |
+| 09 Đo hiệu năng (1 vs 2 worker, 10/50/100%) | ✅ Xong | `scripts/09_perf.py`, 62/62 lần OK (đủ 1 và 2 worker ở cả 3 mức). Speedup cả chuỗi 04 → 06f: **0,88 / 1,59 / 1,36** ở 10/50/100% (100%: 2.309,2 → 1.702,9 giây). 04 1,03 / 2,19 / 1,64; 06b 1,01 / 1,56 / 1,32. 04 ở 50% / 1 worker chậm bất thường (1 lần). `perf_report.json` (`speedup_by_scale`), collection `perf` (55 doc), thẻ 4 biểu đồ ở trang Đánh giá. D17 |
+| 10 Nâng cao: Structured Streaming | 🟡 Thiết kế xong, chờ duyệt | Bản thiết kế trong LAST_RUN 26/10 (sáng): phát lại CN 27/09/2026 qua file JSONL trên HDFS (WebHDFS), cửa sổ 60/15 phút, watermark 10 phút, join `users`, `foreachBatch` ghi `trending` idempotent, `scripts/10_stream.sh`. 10 câu hỏi chờ trả lời |
 | Báo cáo Word + slide | ⬜ Chưa | |
 
 ### Số liệu bước 06 (cụm, chạy lại 25/10; chi tiết trong `data/output/models_metrics.json` và `model_*_report.json`)
@@ -79,14 +79,14 @@
 - Chạy thử 10% ở local (bản **trước** 24/10, cần chạy lại ở bước 06): ALS explicit RMSE 0,771, tốt hơn baseline bias (0,801) và trung bình chung (1,078). ALS implicit P@10 0,024, gấp khoảng 2,5 lần popularity (0,009).
 
 ## Việc tiếp theo (theo thứ tự)
-1. **Chờ người dùng trả lời 4 câu trong LAST_RUN 26/10:** chụp ảnh History Server ngay hay cuối dự án; giữ hay xóa `/perf` (2,5 GB tính cả bản sao); có đo thêm 50% / 1 worker (khoảng 20 phút: thêm `add("s050", 1, CHAIN)` vào `build_plan` của `scripts/09_perf.py`, chạy `python scripts/09_perf.py`, rồi `07 --only perf`); đồng ý làm Structured Streaming.
-2. **Structured Streaming (bước 10, nâng cao):** viết bản thiết kế vào LAST_RUN trước khi code: nguồn sự kiện (phát lại `events` theo thời gian hay sinh mới), cửa sổ, watermark, ghi `trending` (index `window_end -1`). E25 hiện đọc dạng `{window_start, window_end, total_cooks, items: [{food_id, cooks}]}`; tiến độ ở Tổng quan là bước "10".
+1. **Chờ người dùng trả lời 12 câu trong LAST_RUN 26/10 (sáng):** câu 1 chạy lại 04 ở 50% / 1 worker thêm 2 lần; câu 2–11 chốt thiết kế Structured Streaming; câu 12 có sửa 04 (phần sinh chạy 2 lần) hay không.
+2. **Structured Streaming (bước 10):** sau khi chốt thì ghi D18, rồi làm theo thứ tự: `10a_stream_prep.py` (đoạn phát lại + đáp án) → `10b_replayer.py` → `10_stream.py` (`get_spark()` thêm tham số `conf`) → `scripts/10_stream.sh` → E25, `stream_status`, trang Thời gian thực → `10c_stream_check.py`, `bench_stream.py`, `stream_report.json`. Sửa 07 (index `trending` thành `{scope, window_end -1}`), E1 bước 10.
 3. **Kiểm tra `scripts/01_ingest.sh`:** đọc lại script, chưa cần chạy.
 
 ## Việc còn treo
 - [ ] Kiểm tra tay 100 món trong `data/output/features_check_sample.csv`, điền cột `kiem_tra`, rồi tính độ chính xác cho báo cáo. **Mẫu đã chốt theo hash (24/10), có thể bắt đầu điền.** Chạy lại 03 vẫn ra đúng 100 món này, nhưng file sẽ bị ghi đè nên cần sao lưu cột đã điền trước khi chạy.
 - [x] Ratings gốc: đã làm thí nghiệm đối chứng 06g (ALS kém hơn trung bình chung 6%).
-- [ ] Ảnh chụp UI cho báo cáo: **để cuối dự án** (đo hiệu năng đã xong, chờ người dùng chọn chụp ngay hay để cuối). Thêm: History Server Timeline + Executors của 06b ở 1 và 2 worker (`06b_als|s100|w1|r1`, `06b_als|s100|w2|r1`), thẻ "Hiệu năng Spark". Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
+- [ ] Ảnh chụp UI cho báo cáo: **để cuối dự án** (người dùng đã chọn 26/10, gồm cả ảnh History Server). Thêm: History Server Timeline + Executors của 06b ở 1 và 2 worker (`06b_als|s100|w1|r1`, `06b_als|s100|w2|r1`), thẻ "Hiệu năng Spark". Lấy từ History Server http://localhost:18080 (các app 02–06; với 05 thì chụp thêm tab Storage và tab SQL) và HDFS UI (`/data/curated`, `/data/events`, `/data/results/analysis`). `docs/images/` đang trống.
 - [x] Chốt mẫu kiểm tra tay theo hash: đã chạy lại 03 trên cụm (24/10).
 - [x] HDFS replication: `get_spark()` ghi 2 bản sao, đã `setrep -R 2 /data`, fsck HEALTHY (D12).
 - [x] Đã xóa `/data/events/events_csv` (bản cũ). Sinh lại bằng `04 --csv` khi đo hiệu năng.
@@ -104,9 +104,10 @@
 - [ ] Database `vifood_local` (bản 10%, 22,8 MB) giữ lại để phát triển API; xóa khi không cần nữa.
 - [ ] Ảnh chụp cho báo cáo: thêm `mongo-express` và các `explain()` trong `export_report.json`.
 - [ ] `README.md`, `requirements.txt`, `data/sample/`: làm lúc nộp bài.
-- [ ] `/perf` trên HDFS (1,3 GB, 2,5 GB tính cả bản sao): giữ đến khi viết xong báo cáo, xóa bằng `hdfs dfs -rm -r /perf` khi không cần.
+- [ ] `/perf` trên HDFS (1,3 GB, 2,5 GB tính cả bản sao): **giữ đến khi viết xong báo cáo** (người dùng chốt 26/10), sau đó xóa bằng `hdfs dfs -rm -r /perf`.
 - [ ] Lần 03 / danh mục / 1 worker để lại event log không đóng (2 lần liên tiếp, chưa rõ nguyên nhân); thời lượng lấy từ job cuối (D17).
-- [ ] Biểu đồ (a) thẻ Hiệu năng ở 375px: nhãn số trên cột nhỏ chồng nhau (chưa sửa).
+- [x] Biểu đồ (a) thẻ Hiệu năng: nhãn số trên cột ẩn khi thẻ hẹp hơn 520px (26/10).
+- [ ] 04 chạy phần sinh sự kiện 2 lần (`repartitionByRange` lấy mẫu chạy lại mapInPandas): chờ quyết định sửa hay chỉ ghi vào báo cáo.
 
 ## Khác với kế hoạch ban đầu (cần nêu trong báo cáo)
 - Mã nguồn để phẳng `src/NN_ten.py` thay vì chia `src/ingest`, `src/etl`…
@@ -143,4 +144,5 @@
 - **25/10 (đêm):** sửa sau khi xem đợt 1: biểu đồ theo tháng (bỏ series rỗng), bố cục trang Gợi ý (hàng đầu gọn, hồ sơ cột phải), ảnh thay thế theo nhóm món, chip "Bạn đã nấu N lần" (`n_cook_before`).
 - **25/10 (đêm, tiếp):** đợt 2 bước 08 (D16): 9 endpoint, 4 trang Hành vi, Món ăn, Phân khúc, Thời gian thực, nhãn và đề xuất cụm theo luật, `test_consistency`, `bench_latency.py` (mọi mục tiêu đạt), 14 ảnh chụp.
 - **26/10 (tiếp):** chốt đo hiệu năng (D17). `Paths` theo `VIFOOD_DATA_ROOT` / `VIFOOD_OUTPUT_DIR`, `common.Timer` gắn job group, `--fixed` cho 06b/c/e/f/g, `scripts/09_perf.py`. Bản thường ra 28/28 report giống hệt mốc. Chạy 54 lần (2,71 giờ, đều OK): speedup chuỗi 1,36 ở 100%, 0,88 ở 10%; 06b 1 worker không hết bộ nhớ. `07 --only perf`, thẻ "Hiệu năng Spark", pytest 62/62.
+- **26/10 (sáng):** đo thêm chuỗi 50% / 1 worker (8/8 OK, report giống hệt bản 2 worker). `speedup_by_scale`: chuỗi 0,88 / 1,59 / 1,36; speedup cao nhất ở 50%, một phần do 04 ở 50% / 1 worker chậm bất thường (21,7 ms/user so với 15,6–18,5 ms). Phát hiện 04 chạy phần sinh 2 lần. Biểu đồ (d), ẩn nhãn cột (a) khi thẻ < 520px, pytest 62/62. Viết bản thiết kế Structured Streaming vào LAST_RUN.
 - **26/10:** mỗi cụm 1 đề xuất đặc trưng nhất, không trùng giữa các cụm; `cook_per_view` cao là "hay nấu sau khi xem". Khảo sát và viết bản đề xuất đo hiệu năng Spark (1/2 worker × 10/50/100%, `--fixed`, History Server REST), chờ duyệt.

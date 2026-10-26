@@ -10,12 +10,12 @@ Chay TREN MAY (Python chuan, khong can thu vien them), dieu khien cum Docker ban
   - doc History Server REST (http://localhost:18080/api/v1): thoi luong, stage, job group, executor
   - lay mau `docker stats` trong luc chay (dinh RAM, CPU cua worker va jupyter)
 
-Ke hoach (D17): chuoi 04 -> 06f o 100% (1 va 2 worker), 50% (2 worker), 10% (1 va 2 worker), 1 lan;
+Ke hoach (D17): chuoi 04 -> 06f o 100%, 50%, 10% (1 va 2 worker), 1 lan;
   05 va 06b o 100% chay them 2 lan moi cau hinh (tong 3, lay trung vi); danh muc 02, 03, 06g o 1 va 2 worker.
   06b, 06c, 06e, 06f, 06g chay voi --fixed (fit 1 lan voi tham so da chon).
 
 Dau ra : data/output/perf_runs.jsonl   moi dong 1 lan chay (chay lai thi bo qua lan da co -> dung giua chung duoc)
-         data/output/perf_report.json  tong hop: trung vi, min-max, speedup, efficiency, shuffle, spill
+         data/output/perf_report.json  tong hop: trung vi, min-max, speedup (theo job, theo muc), shuffle, spill
          data/output/perf/<lan chay>/  report cua tung lan chay (VIFOOD_OUTPUT_DIR)
          logs/perf/<lan chay>.log      stdout/stderr cua job
 
@@ -70,6 +70,7 @@ JOBS = {
 }
 CHAIN = ["04", "05", "06a", "06b", "06c", "06d", "06e", "06f"]
 CATALOG = ["02", "03", "06g"]
+SCALE_JOBS = ["04", "05", "06b"]  # job nang, dung cho speedup_by_scale
 LEVELS = {"s010": 0.1, "s050": 0.5, "s100": 1.0, "catalog": None}
 # Thoi gian o 10% / 2 worker do duoc khi chay thu (26/10); muc khac noi suy tuyen tinh theo ti le du lieu
 EST_10 = {"04": 97, "05": 69, "06a": 48, "06b": 120, "06c": 84, "06d": 35, "06e": 36, "06f": 48, "06bq": 100}
@@ -93,6 +94,7 @@ def build_plan(with_quick=False):
     add("s010", 2, CHAIN)
     add("s010", 1, CHAIN)
     add("s050", 2, CHAIN)
+    add("s050", 1, CHAIN)                    # them sau (26/10) de duong 1 worker du 3 muc
     add("s100", 2, CHAIN)
     add("s100", 1, CHAIN)
     for rep in (2, 3):                       # xen ke 2 worker -> 1 worker
@@ -396,6 +398,8 @@ NOTES = [
     "06g bỏ lưới tham số.",
     "Thời gian là thời lượng ứng dụng theo Spark History Server (gồm khởi động SparkSession). Job chạy 1 lần thì số đo là "
     "lần duy nhất; 05 và 06b ở 100% chạy 3 lần mỗi cấu hình, lấy trung vị.",
+    "speedup_by_scale: speedup = T(1 worker) ÷ T(2 worker) của cả chuỗi 04 → 06f và của 04, 05, 06b ở từng mức; ở 10% và "
+    "50% mỗi cấu hình chạy 1 lần.",
     "Không đo 07 (nút thắt là ghi MongoDB).",
 ]
 
@@ -502,6 +506,19 @@ def summarize():
                             "t_100_s": med.get(("s100", 2, job)),
                             "ratio_50_10": round(med[("s050", 2, job)] / t10, 2) if med.get(("s050", 2, job)) else None,
                             "ratio_100_10": round(med[("s100", 2, job)] / t10, 2) if med.get(("s100", 2, job)) else None})
+    # Speedup theo muc du lieu: ca chuoi va cac job nang (04, 05, 06b), moi muc mot dong
+    by_scale = []
+    for key in ["chain"] + SCALE_JOBS:
+        for level in ("s010", "s050", "s100"):
+            if key == "chain":
+                t1, t2 = (next((c["total_s"] for c in chain if c["level"] == level and c["workers"] == w
+                                and c["complete"]), None) for w in (1, 2))
+            else:
+                t1, t2 = med.get((level, 1, key)), med.get((level, 2, key))
+            if t1 and t2:
+                by_scale.append({"key": key, "step": "Chuỗi 04 → 06f" if key == "chain" else JOBS[key][4],
+                                 "level": level, "level_pct": int(LEVELS[level] * 100), "t_1w_s": t1, "t_2w_s": t2,
+                                 "speedup": round(t1 / t2, 2), "efficiency": round(t1 / t2 / 2, 2)})
     for level in level_data:
         level_data[level]["hdfs"] = hdfs_sizes(level)
     try:
@@ -517,7 +534,7 @@ def summarize():
         "plan": {"chain": CHAIN, "catalog": CATALOG, "repeats_100pct": {"05": 3, "06b": 3},
                  "levels": {k: v for k, v in LEVELS.items()}},
         "data": level_data,
-        "rows": rows, "speedup": speedup, "chain_totals": chain, "scaling_2w": scaling,
+        "rows": rows, "speedup": speedup, "speedup_by_scale": by_scale, "chain_totals": chain, "scaling_2w": scaling,
         "runs_total": len(runs), "runs_failed": sum(not r.get("ok") for r in runs.values()),
         "notes": NOTES,
     }

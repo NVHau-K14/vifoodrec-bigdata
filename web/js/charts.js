@@ -89,7 +89,7 @@ export function monthlyBars(el, months, tetMonth) {
 }
 
 // Duong don gian: xs, [{name, data, color}]
-export function lines(el, xs, series, { yName = '', yFmt = (v) => nfmt(v, 3), xName = '', yMin, yMax, markX } = {}) {
+export function lines(el, xs, series, { yName = '', yFmt = (v) => nfmt(v, 3), xName = '', yMin, yMax, markX, markY } = {}) {
   const ch = initChart(el);
   ch.setOption({
     grid: { left: 8, right: 16, top: 30, bottom: xName ? 24 : 8, containLabel: true },
@@ -98,18 +98,24 @@ export function lines(el, xs, series, { yName = '', yFmt = (v) => nfmt(v, 3), xN
     xAxis: { type: 'category', data: xs, name: xName, nameLocation: 'middle', nameGap: 26,
              nameTextStyle: { color: C.muted, fontSize: 11 } },
     yAxis: { type: 'value', name: yName, nameTextStyle: { color: C.muted, fontSize: 11 }, scale: yMin == null,
-             min: yMin, max: yMax, axisLabel: { formatter: yFmt } },
-    // markX: cac gia tri tren truc x can danh dau bang duong doc (vd k = 3, 8, 11)
+             // co markY thi truc keo toi it nhat gia tri vach (de vach luon nam trong truc), lam tron len boi so 0,5
+             min: yMin, max: markY ? (v) => Math.ceil(Math.max(v.max, ...markY) * 2) / 2 : yMax, axisLabel: { formatter: yFmt } },
+    // markX: cac gia tri tren truc x can danh dau bang duong doc (vd k = 3, 8, 11); markY: duong ngang (vd speedup ly tuong 2)
     series: series.map((s, i) => ({ name: s.name, type: 'line', data: s.data, symbol: 'circle', symbolSize: 7, connectNulls: !!s.connectNulls,
-                                  itemStyle: { color: s.color || C.herb }, lineStyle: { color: s.color || C.herb },
-                                  markLine: i === 0 && markX ? { symbol: 'none', silent: true, label: { color: C.muted, fontSize: 11, formatter: (p) => p.value },
-                                    lineStyle: { color: C.line2, type: 'dashed' }, data: markX.map((x) => ({ xAxis: x })) } : undefined })),
+                                  itemStyle: { color: s.color || C.herb }, lineStyle: { color: s.color || C.herb, width: s.width || 2 },
+                                  markLine: i === 0 && (markX || markY) ? { symbol: 'none', silent: true,
+                                    // vach ngang trung voi duong luoi: dung mau neutral, nhan nam trong vung ve (khong bi cat)
+                                    label: { color: C.muted, fontSize: 11, position: markY ? 'insideEndTop' : 'end',
+                                             formatter: (p) => (markY ? `lý tưởng ${yFmt(p.value)}` : p.value) },
+                                    lineStyle: { color: markY ? C.neutral : C.line2, type: 'dashed' },
+                                    data: [...(markX || []).map((x) => ({ xAxis: x })), ...(markY || []).map((y) => ({ yAxis: y }))] } : undefined })),
   }, true);
   return ch;
 }
 
 // Cot nhom: cats, [{name, data, color}]
-export function groupedBars(el, cats, series, { yFmt = (v) => nfmt(v, 3), yName = '' } = {}) {
+// labelMinWidth: an nhan so tren cot khi the chua bieu do hep hon so px nay (nhan cot nho chong nhau)
+export function groupedBars(el, cats, series, { yFmt = (v) => nfmt(v, 3), yName = '', labelMinWidth = 0 } = {}) {
   const ch = initChart(el);
   ch.setOption({
     grid: { left: 8, right: 8, top: 36, bottom: 8, containLabel: true },
@@ -122,6 +128,15 @@ export function groupedBars(el, cats, series, { yFmt = (v) => nfmt(v, 3), yName 
                                   itemStyle: { color: s.color }, label: { show: true, position: 'top',
                                   fontSize: 11, color: C.muted, formatter: (p) => yFmt(p.value) } })),
   });
+  if (labelMinWidth) {
+    const box = el.closest('.card') || el;
+    const sync = () => ch.setOption({ series: series.map(() => ({ label: { show: box.clientWidth >= labelMinWidth } })) });
+    sync();
+    if (!el.dataset.labelWatch) {
+      el.dataset.labelWatch = '1';
+      new ResizeObserver(sync).observe(box);
+    }
+  }
   return ch;
 }
 
@@ -195,7 +210,7 @@ export function hGroupedBars(el, cats, series, { xFmt = (v) => `${nfmt(v, 1)}%`,
     legend: { top: 0, left: 0 },
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: xFmt },
     // co markX thi truc keo toi it nhat gia tri vach (de vach luon nam trong truc)
-    xAxis: { type: 'value', min: 0, max: markX ? (v) => Math.max(v.max, ...markX) : undefined, axisLabel: { formatter: xFmt } },
+    xAxis: { type: 'value', min: 0, max: markX ? (v) => Math.max(v.max, ...markX) : undefined, axisLabel: { formatter: xFmt, hideOverlap: true } },
     yAxis: { type: 'category', data: cats, inverse: true, axisLabel: { fontSize: 11, margin: 10 } },
     series: series.map((s, i) => ({ name: s.name, type: 'bar', barMaxWidth: 12, barGap: '20%', data: s.data,
                                  itemStyle: { color: s.color, borderRadius: [0, 4, 4, 0] },

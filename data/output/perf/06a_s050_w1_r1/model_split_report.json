@@ -1,0 +1,81 @@
+{
+  "mode": "cluster",
+  "warm_min_events": 20,
+  "tune_users": 10000,
+  "views": {
+    "val": {
+      "history": "2025-10 -> 2026-07",
+      "eval_month": "2026-08",
+      "eval_users": 19376,
+      "eval_users_by_group": {
+        "lạnh": 604,
+        "ít": 352,
+        "ấm": 18420
+      },
+      "tune_users": 10000,
+      "truth_items_per_user_avg": 5.53,
+      "eval_rate_rows": 35023,
+      "history_events": 9680722,
+      "history_users": 23312,
+      "implicit_pairs": 5349164,
+      "history_rate_rows": 337794,
+      "users_by_group_all": {
+        "lạnh": 1688,
+        "ít": 482,
+        "ấm": 22830
+      },
+      "pop_rows": {
+        "chung": 100,
+        "2 tháng cuối": 100,
+        "vùng-tuổi": 1200
+      },
+      "user_features_rows": 23312
+    },
+    "test": {
+      "history": "2025-10 -> 2026-08",
+      "eval_month": "2026-09",
+      "eval_users": 19550,
+      "eval_users_by_group": {
+        "lạnh": 651,
+        "ít": 342,
+        "ấm": 18557
+      },
+      "tune_users": 10000,
+      "truth_items_per_user_avg": 5.22,
+      "eval_rate_rows": 33302,
+      "history_events": 10753963,
+      "history_users": 24078,
+      "implicit_pairs": 5844238,
+      "history_rate_rows": 372817,
+      "users_by_group_all": {
+        "lạnh": 922,
+        "ít": 513,
+        "ấm": 23565
+      },
+      "pop_rows": {
+        "chung": 100,
+        "2 tháng cuối": 100,
+        "vùng-tuổi": 1200
+      },
+      "user_features_rows": 24078
+    }
+  },
+  "events": 11783628,
+  "users": 25000,
+  "check_cold_test_users": {
+    "theo train+val (dung)": 651,
+    "theo train (cach tinh cu)": 1303
+  },
+  "timings_s": {
+    "load": 19.9,
+    "val:history": 19.8,
+    "val:truth": 6.0,
+    "val:popularity": 6.5,
+    "val:user_features": 8.4,
+    "test:history": 14.6,
+    "test:truth": 4.1,
+    "test:popularity": 5.3,
+    "test:user_features": 7.5
+  },
+  "total_seconds": 92.6
+}

@@ -1,0 +1,376 @@
+{
+  "CFG": {
+    "sub_weight": 0.5,
+    "w_noise": 0.35,
+    "latent_k": 8,
+    "latent_w": 0.7,
+    "zipf": 0.45,
+    "zipf_offset": 30,
+    "quality_sel": 0.3,
+    "quality_clip": 2.5,
+    "temp": 1.0,
+    "sessions_median": 95,
+    "sessions_sigma": 0.75,
+    "views_mean": 2.6,
+    "max_views": 12,
+    "recook": 0.25,
+    "companion": 0.5,
+    "new_user_share": 0.28,
+    "churn_share": 0.12
+  },
+  "PERSONAS": {
+    "ăn chay": 0.08,
+    "tập gym": 0.1,
+    "ăn kiêng": 0.1,
+    "mê hải sản": 0.1,
+    "bận rộn": 0.18,
+    "hảo ngọt": 0.12,
+    "gia đình truyền thống": 0.2,
+    "thích cay/nhậu": 0.12
+  },
+  "PERSONA_W": {
+    "ăn chay": {
+      "veg": 2.5,
+      "t:Món chay": 1.5,
+      "p:đậu hũ/chay": 1.0,
+      "p:rau củ": 0.6,
+      "animal": -4.0
+    },
+    "tập gym": {
+      "p:gà": 1.2,
+      "p:bò": 1.0,
+      "p:trứng": 0.8,
+      "p:cá": 0.6,
+      "m:luộc": 0.6,
+      "m:hấp": 0.5,
+      "m:nướng": 0.4,
+      "c:gỏi/salad": 0.4,
+      "m:pha/xay": 0.3,
+      "t:Món ngọt": -1.2,
+      "m:chiên": -0.8
+    },
+    "ăn kiêng": {
+      "c:gỏi/salad": 1.4,
+      "m:hấp": 0.8,
+      "m:luộc": 0.8,
+      "p:rau củ": 0.8,
+      "c:canh/súp": 0.6,
+      "veg": 0.3,
+      "t:Đồ uống": 0.3,
+      "t:Món ngọt": -1.5,
+      "m:chiên": -1.2,
+      "c:bánh": -0.6,
+      "complex": -0.2
+    },
+    "mê hải sản": {
+      "p:hải sản": 2.2,
+      "p:cá": 0.9,
+      "m:nướng": 0.4,
+      "m:hấp": 0.4,
+      "c:lẩu": 0.6
+    },
+    "bận rộn": {
+      "quick": 1.8,
+      "complex": -0.8,
+      "m:xào": 0.5,
+      "m:chiên": 0.4,
+      "p:trứng": 0.6,
+      "c:bún/phở/mì/miến": 0.5,
+      "c:cơm/xôi/cháo": 0.4,
+      "c:lẩu": -1.0,
+      "m:hầm/nấu": -0.4,
+      "c:bánh": -0.5
+    },
+    "hảo ngọt": {
+      "t:Món ngọt": 2.0,
+      "c:chè/tráng miệng": 1.2,
+      "c:bánh": 0.8,
+      "t:Đồ uống": 1.0,
+      "c:ăn vặt": 0.4
+    },
+    "gia đình truyền thống": {
+      "c:món chính": 1.0,
+      "c:canh/súp": 1.2,
+      "m:kho/rim": 1.0,
+      "p:heo": 0.6,
+      "p:cá": 0.6,
+      "p:rau củ": 0.4,
+      "m:xào": 0.4,
+      "foreign": -1.2,
+      "t:Đồ uống": -0.6,
+      "c:bánh": -0.4
+    },
+    "thích cay/nhậu": {
+      "spicy": 1.6,
+      "m:nướng": 1.0,
+      "c:lẩu": 1.0,
+      "c:ăn vặt": 0.6,
+      "c:gỏi/salad": 0.5,
+      "p:bò": 0.5,
+      "p:thịt khác": 0.8,
+      "p:hải sản": 0.5,
+      "t:Món ngọt": -0.8
+    }
+  },
+  "REGION_W": {
+    "Bắc": {
+      "r:bắc": 0.8,
+      "r:nam": -0.2,
+      "c:canh/súp": 0.2,
+      "m:luộc": 0.2
+    },
+    "Trung": {
+      "r:trung": 0.8,
+      "spicy": 0.5
+    },
+    "Nam": {
+      "r:nam": 0.8,
+      "r:bắc": -0.2,
+      "t:Món ngọt": 0.25
+    }
+  },
+  "AGE_W": {
+    "18-24": {
+      "foreign": 0.6,
+      "c:ăn vặt": 0.4,
+      "t:Đồ uống": 0.4,
+      "complex": -0.3
+    },
+    "25-34": {
+      "foreign": 0.3,
+      "quick": 0.2
+    },
+    "35-44": {
+      "c:món chính": 0.2
+    },
+    "45+": {
+      "foreign": -0.6,
+      "c:canh/súp": 0.3,
+      "complex": 0.2
+    }
+  },
+  "SLOT_P": {
+    "ăn chay": [
+      0.22,
+      0.28,
+      0.42,
+      0.08
+    ],
+    "tập gym": [
+      0.3,
+      0.27,
+      0.35,
+      0.08
+    ],
+    "ăn kiêng": [
+      0.22,
+      0.3,
+      0.4,
+      0.08
+    ],
+    "mê hải sản": [
+      0.15,
+      0.27,
+      0.45,
+      0.13
+    ],
+    "bận rộn": [
+      0.1,
+      0.2,
+      0.6,
+      0.1
+    ],
+    "hảo ngọt": [
+      0.2,
+      0.22,
+      0.38,
+      0.2
+    ],
+    "gia đình truyền thống": [
+      0.13,
+      0.32,
+      0.5,
+      0.05
+    ],
+    "thích cay/nhậu": [
+      0.1,
+      0.2,
+      0.4,
+      0.3
+    ]
+  },
+  "COOK_P": {
+    "ăn chay": 0.4,
+    "tập gym": 0.4,
+    "ăn kiêng": 0.38,
+    "mê hải sản": 0.38,
+    "bận rộn": 0.25,
+    "hảo ngọt": 0.3,
+    "gia đình truyền thống": 0.5,
+    "thích cay/nhậu": 0.3
+  },
+  "MAM_P": {
+    "ăn chay": 0.35,
+    "tập gym": 0.2,
+    "ăn kiêng": 0.3,
+    "mê hải sản": 0.3,
+    "bận rộn": 0.1,
+    "hảo ngọt": 0.15,
+    "gia đình truyền thống": 0.6,
+    "thích cay/nhậu": 0.2
+  },
+  "AGE_P": {
+    "ăn chay": [
+      0.15,
+      0.25,
+      0.25,
+      0.35
+    ],
+    "tập gym": [
+      0.4,
+      0.4,
+      0.15,
+      0.05
+    ],
+    "ăn kiêng": [
+      0.3,
+      0.4,
+      0.2,
+      0.1
+    ],
+    "mê hải sản": [
+      0.2,
+      0.35,
+      0.25,
+      0.2
+    ],
+    "bận rộn": [
+      0.2,
+      0.5,
+      0.25,
+      0.05
+    ],
+    "hảo ngọt": [
+      0.45,
+      0.3,
+      0.15,
+      0.1
+    ],
+    "gia đình truyền thống": [
+      0.05,
+      0.25,
+      0.35,
+      0.35
+    ],
+    "thích cay/nhậu": [
+      0.2,
+      0.4,
+      0.3,
+      0.1
+    ]
+  },
+  "MALE_P": {
+    "ăn chay": 0.45,
+    "tập gym": 0.6,
+    "ăn kiêng": 0.25,
+    "mê hải sản": 0.5,
+    "bận rộn": 0.5,
+    "hảo ngọt": 0.3,
+    "gia đình truyền thống": 0.3,
+    "thích cay/nhậu": 0.7
+  },
+  "REGIONS": {
+    "Bắc": 0.35,
+    "Trung": 0.2,
+    "Nam": 0.45
+  },
+  "COLD_MONTHS": {
+    "Bắc": [
+      1,
+      2,
+      11,
+      12
+    ],
+    "Trung": [
+      1,
+      11,
+      12
+    ],
+    "Nam": [
+      1,
+      12
+    ]
+  },
+  "HOT_MONTHS": {
+    "Bắc": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "Trung": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "Nam": [
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "TET": "2026-02-17",
+  "TET_WINDOW": [
+    "2026-01-27",
+    "2026-02-23"
+  ],
+  "FEATURES": [
+    "p:bò",
+    "p:cá",
+    "p:gà",
+    "p:heo",
+    "p:hải sản",
+    "p:không",
+    "p:rau củ",
+    "p:thịt khác",
+    "p:trứng",
+    "p:vịt",
+    "p:đậu hũ/chay",
+    "m:chiên",
+    "m:hấp",
+    "m:hầm/nấu",
+    "m:kho/rim",
+    "m:khác",
+    "m:luộc",
+    "m:nướng",
+    "m:pha/xay",
+    "m:trộn/gỏi",
+    "m:xào",
+    "c:bánh",
+    "c:bún/phở/mì/miến",
+    "c:canh/súp",
+    "c:chè/tráng miệng",
+    "c:cơm/xôi/cháo",
+    "c:gỏi/salad",
+    "c:lẩu",
+    "c:món chính",
+    "c:ăn vặt",
+    "c:đồ uống",
+    "t:Món chay",
+    "t:Món mặn",
+    "t:Món ngọt",
+    "t:Đồ uống",
+    "veg",
+    "animal",
+    "spicy",
+    "quick",
+    "complex",
+    "r:bắc",
+    "r:trung",
+    "r:nam",
+    "foreign"
+  ]
+}

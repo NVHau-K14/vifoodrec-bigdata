@@ -1,0 +1,52 @@
+[
+ {
+  "rating": 0.5,
+  "count": 3691,
+  "share_pct": 0.91
+ },
+ {
+  "rating": 1.0,
+  "count": 5577,
+  "share_pct": 1.37
+ },
+ {
+  "rating": 1.5,
+  "count": 11681,
+  "share_pct": 2.88
+ },
+ {
+  "rating": 2.0,
+  "count": 21562,
+  "share_pct": 5.31
+ },
+ {
+  "rating": 2.5,
+  "count": 34895,
+  "share_pct": 8.59
+ },
+ {
+  "rating": 3.0,
+  "count": 50795,
+  "share_pct": 12.51
+ },
+ {
+  "rating": 3.5,
+  "count": 63870,
+  "share_pct": 15.73
+ },
+ {
+  "rating": 4.0,
+  "count": 67907,
+  "share_pct": 16.72
+ },
+ {
+  "rating": 4.5,
+  "count": 60255,
+  "share_pct": 14.84
+ },
+ {
+  "rating": 5.0,
+  "count": 85886,
+  "share_pct": 21.15
+ }
+]

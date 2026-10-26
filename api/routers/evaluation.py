@@ -39,7 +39,7 @@ PERF_SPARK_KEYS = ("shuffle_read_mb", "shuffle_remote_read_mb", "shuffle_write_m
 
 
 def perf_block():
-    """Do hieu nang Spark (D17): thoi gian theo job x muc du lieu x so worker, speedup, tong chuoi theo muc."""
+    """Do hieu nang Spark (D17): thoi gian theo job x muc du lieu x so worker, speedup (theo job, theo muc), tong chuoi theo muc."""
     docs = perf_docs()
     summary = next((d for d in docs if d["_id"] == "summary"), None)
     if not summary:
@@ -53,7 +53,7 @@ def perf_block():
         row["spark"] = {k: (d.get("spark") or {}).get(k) for k in PERF_SPARK_KEYS}
         rows.append(row)
     return {"available": True, "rows": rows,
-            **{k: summary.get(k) for k in ("speedup", "chain_totals", "scaling_2w", "cluster", "data", "notes",
+            **{k: summary.get(k) for k in ("speedup", "speedup_by_scale", "chain_totals", "scaling_2w", "cluster", "data", "notes",
                                            "runs_total", "runs_failed", "generated_at")}}
 
 
