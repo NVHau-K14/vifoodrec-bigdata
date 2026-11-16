@@ -111,7 +111,7 @@ ghi mật khẩu MongoDB mặc định (`MONGO_INITDB_ROOT_PASSWORD`). Trước 
 
 ## 6. Dữ liệu và giấy phép
 
-- Dữ liệu món ăn: bộ ViFoodRec (Cooky, Món Ngon Mỗi Ngày). Đặt 4 file `food_dataset_cookyweb.csv`,
+- Dữ liệu món ăn: bộ ViFoodRec: https://github.com/QuocAn55/A-New-Dataset-and-Empirical-Evaluation-for-Vietnamese-Food-Recommendation-System (Cooky, Món Ngon Mỗi Ngày). Đặt 4 file `food_dataset_cookyweb.csv`,
   `food_dataset_mnmnweb.csv`, `foods.csv`, `ratings.csv` vào `data/raw/` trước bước 01. Không sửa `data/raw/`.
 - Dinh dưỡng và `cooking_time` trong dữ liệu gốc là số ngẫu nhiên: không dùng để rút ra kết luận.
 - Font Be Vietnam Pro (giấy phép OFL, `web/fonts/OFL.txt`), ECharts 5.5.1 (Apache 2.0) nằm sẵn trong `web/`.
